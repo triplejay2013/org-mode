@@ -1,0 +1,19 @@
+#+TITLE: BSU
+#+AUTHOR: Justin Johnson
+
+* Accelerated Masters Application
+DEADLINE: <2018-12-08 Sat>
+** TODO Print off application
+** TODO Look at graduate Catalog
+** TODO Contact and meet with falculty
+  - [ ] Ask them what projects I might participate in that field of study
+  - [ ] what courses I should take if I pursue their emphasis
+** TODO Spring Semester Planning
+
+* Math307
+* CS230
+* CS253
+* ECE330
+** Lecture
+** Lab
+* CS310

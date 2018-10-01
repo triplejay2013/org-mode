@@ -2,54 +2,66 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Oct  1 17:01:26 2018
+;; Created Mon Oct  1 17:47:01 2018
 ;; Desktop file format version 208
 ;; Emacs version 25.2.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23474 42822 438826 680000) (desktop . "208") "triplejay2013@Misha" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (tool-bar-lines . 1) (menu-bar-lines . 1) (font . "tty") (height . 39) (width . 83) (modeline . t) (unsplittable) (frameset--id . "FB4B-34F0-FA4C-8E76") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 83) (pixel-height . 38) (total-width . 83) (total-height . 38) (normal-height . 1.0) (normal-width . 1.0) (buffer "orgTutorial.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 198) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23474 45557 578234 732000) (desktop . "208") "triplejay2013@Misha" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (tool-bar-lines . 1) (menu-bar-lines . 1) (font . "tty") (height . 39) (width . 83) (modeline . t) (unsplittable) (frameset--id . "CC30-B391-2C38-303D") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 83) (pixel-height . 38) (total-width . 83) (total-height . 38) (normal-height . 1.0) (normal-width . 1.0) (buffer "Personal.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 60) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring nil)
+(setq regexp-search-ring '("[" "[*]"))
 (setq register-alist '((48 . "     - [ ] Peter\n")))
 (setq file-name-history '("~/.emacs.d/superman_cluster.gif"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/triplejay2013/.emacs.d/orgTutorial.org"
-  "orgTutorial.org"
+  "/home/triplejay2013/.emacs.d/Notebooks/Personal.org"
+  "Personal.org"
   'org-mode
   '(global-auto-revert-mode)
-  198
-  '(198 nil)
+  60
+  '(106 nil)
   nil
   nil
-  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (8544 1))))
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (58))))
 
 (desktop-create-buffer 208
-  "/home/triplejay2013/.emacs.d/superman_cluster.gif"
-  "superman_cluster.gif"
-  'html-mode
-  '(global-auto-revert-mode image-minor-mode)
-  318
-  '(nil nil)
+  "/home/triplejay2013/.emacs.d/Notebooks/BSU.org"
+  "BSU.org"
+  'org-mode
+  '(global-auto-revert-mode)
+  40
+  '(101 nil)
   nil
   nil
-  '((buffer-file-coding-system . no-conversion) (overwrite-mode))
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (101 73 433 1))))
+
+(desktop-create-buffer 208
+  "/home/triplejay2013/.emacs.d/Notebooks/Church.org"
+  "Church.org"
+  'org-mode
+  '(global-auto-revert-mode)
+  124
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/home/triplejay2013/.emacs.d/tutorial.org"
-  "tutorial.org"
+  "/home/triplejay2013/.emacs.d/tutorial/orgTutorial.org"
+  "orgTutorial.org"
   'org-mode
   '(global-auto-revert-mode)
-  415
-  '(415 nil)
+  6090
+  '(7209 nil)
   nil
   nil
   '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (1))))
+  '((mark-ring (7209 7209 7208 7190 7189 7188 7187 4885 4884 4883 4882 4456 4455 4454 4453 4452))))
 
