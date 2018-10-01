@@ -1,0 +1,24 @@
+* Top level headline
+** Second level
+*** 3rd level
+    some text
+*** 3rd level
+    more text
+* Another top level headline
+* Examples of Checkboxes
+** TODO Organize party [2/4]
+   To Check the boxes below, use C-c C-c
+   - [-] call people [1/3]
+     - [ ] Peter
+     - [X] Sarah
+     - [ ] Sam
+   - [X] order food
+   - [ ] think about what music to play
+   - [X] talk to the neighbors
+
+C-c C-t to cycle todo lists
+* TODO Blocked until (two) is done
+** DONE one
+** TODO two
+* Some quick editing features
+** M-RET :: this inserts a org-heading
