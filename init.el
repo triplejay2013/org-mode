@@ -42,6 +42,12 @@
 	("DONE"		:foreground "#7BE52C" :weight bold)	; green
 	("TODO"		:foreground "#5A19D6" :weight bold))) 	; blue
 
+;; Set maximum indentation for description lists
+(setq org-list-description-max-indent 5)
+
+;; prevent demoting heading also shifting text inside sections
+(setq org-adapt-indentation nil)
+
 ;;;; config ideas from https://gist.github.com/ivan/c280d6eb402b83058542ddecae4cd9f6
 
 ; Reopen the files that were open in the previous session
@@ -68,7 +74,7 @@
 
 ; Open URLs in Chrome
 (setq browse-url-browser-function 'browse-url-generic)
-(setq browse-url-generic-program "google-chrome")
+(setq browse-url-generic-program "chromium-browser")
 
 ;;; fonts and colors
 
@@ -86,3 +92,12 @@
 ; values first and then require it
 ; https://github.com/syl20bnr/spacemacs/issues/8334#issuecomment-298291766
 (require 'org)
+
+
+;;;REF: http://pragmaticemacs.com/installing-and-setting-up-emacs/
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; display options                                                        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;enable tool and menu bars - good for beginners
+(tool-bar-mode 1)
+(menu-bar-mode 1)
