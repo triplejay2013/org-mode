@@ -1,4 +1,4 @@
-# vimSetup
+# vimSetup - also Include .emacs config file
 setup for vim on my devices
 # TODO
 Find a starter vimrc file for config
