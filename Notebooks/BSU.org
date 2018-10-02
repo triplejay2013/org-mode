@@ -14,15 +14,6 @@
 ** TODO Spring Semester Planning
 * Fall 2018
 ** Math307
-*** Assignments
-**** TODO Homework 4 [0/1]
-     DEADLINE: <2018-10-03 Wed 11:16>
-
-	 - [ ] part 1
-       - Describe how I found my solutions. Place answers in document
-	 - [ ] part 2
-       - Place code for solving the two parts here
-
 *** Lecture
 **** RSA
 ***** Note
@@ -107,7 +98,7 @@ Using CRT we can solve
 		
     Solution: x=b1*N1*x1 + b2*N2*x2+...+bk*Nk*xk mod N
     where Ni=N/ni and xi=(1/Ni) mod ni
-******* COMMON MODULUS ATTACK
+******* COMMON MODULUS ATTACK (Directory Attack?)
 
 | Alice    | Bob      |
 |----------+----------|
@@ -121,6 +112,52 @@ If gcd(n1,n2) = d > 1
 	then d is one of the primes of n1 *and* n2
 
 ***** Examples
+****** Attacks:COMMON MODULUS ATTACK (Directory ATTACK?)
+From Sage:
+#+BEGIN_SRC python
+
+# an example of rsa common modulos attack
+# (1) Choose three large primes
+p=next_prime(16718273096520398462809571209865120938651029871098236409287109865983649721650123640975210352)
+q1=next_prime(1092836510928346091832650987120398470239861059836018923750892136509812349086230985709128349)
+q2=next_prime(1230519283509213864092710983561209836590218364921836509827340892370561029309871423498021350)
+# (2) Compute n1=p*q1
+#             n2=p*q2
+n1=p*q1
+n2=p*q2
+# (3) Computer phi1=(p-1)*(q1-1)
+#              phi2=(p-1)*(q2-1)
+phi1=(p-1)*(q1-1)
+phi2=(p-1)*(q2-1)
+# (4) Choose two random numbers t1, t2 such that:
+#                 gcd(t1,phi1)?=1
+#                 gcd(t2,phi2)?=1
+t1,t2=31,next_prime(1024)
+while(gcd(t1,phi1)!=1):
+    ++t1
+while(gcd(t2,phi1)!=1):
+    ++t2
+# (5) Compute:
+#      t1^-1 mod phi1
+#      t2^-1 mod phi2
+d1=inverse_mod(t1, phi1)
+d2=inverse_mod(t2,phi2)
+
+#Directory Attack:
+x=xgcd(n1,n2)
+print(x[0]) #Calculated prime gcd(n1,n2)=p
+print(p)    #Original prime
+
+#+END_SRC
+*** Assignments
+**** TODO Homework 4 [0/1]
+     DEADLINE: <2018-10-03 Wed 11:16>
+
+	 - [ ] part 1
+       - Describe how I found my solutions. Place answers in document
+	 - [ ] part 2
+       - Place code for solving the two parts here
+
 ** CS230
 
    - [ ] update journal entries
