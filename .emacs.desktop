@@ -2,18 +2,18 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Oct  2 11:45:00 2018
+;; Created Tue Oct  2 14:17:49 2018
 ;; Desktop file format version 208
 ;; Emacs version 25.2.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23475 44700 636539 306000) (desktop . "208") "triplejay2013@Misha" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (font . "tty") (height . 17) (width . 83) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "9B80-321E-AC6B-9D99") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 83) (pixel-height . 16) (total-width . 83) (total-height . 16) (normal-height . 1.0) (normal-width . 1.0) (buffer "BSU.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 415) (start . 40))))])
+(setq desktop-saved-frameset [frameset 1 (23475 53869 93445 853000) (desktop . "208") "triplejay2013@Misha" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (font . "tty") (height . 39) (width . 83) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "CBCE-A295-FF9C-291D") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 83) (pixel-height . 38) (total-width . 83) (total-height . 38) (normal-height . 1.0) (normal-width . 1.0) (buffer "BSU.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 9487) (start . 9273))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
 (setq regexp-search-ring '("[" "[*]"))
-(setq register-alist '((48 . "\n| Alice    | Bob      |\n|----------+----------|\n| n_1, e_1 | n_2, e_2 |\n| t_1      | t_2      |\n")))
+(setq register-alist '((48 . " - And\n   | M | B | F |\n   |---+---+---|\n   | 0 | 0 |   |\n   | 0 | 1 |   |\n   | 1 | 0 |   |\n   | 1 | 1 |   |\n")))
 (setq file-name-history '("~/.emacs.d/superman_cluster.gif"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
@@ -22,12 +22,24 @@
   "BSU.org"
   'org-mode
   '(global-auto-revert-mode)
-  415
-  '(3638 nil)
+  9487
+  '(9560 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (case-fold-search . t) (truncate-lines . t))
-  '((mark-ring (3742 3986 2614 1498 827 379 4905 39 4849 4849 5201 5249 5279 4737 4642 385))))
+  '((mark-ring (6106 6425 8881 5814 7526 6039 3638 3742 3986 2614 1498 827 379 4905 39 4849))))
+
+(desktop-create-buffer 208
+  "/home/triplejay2013/.emacs.d/Notebooks/BitManipulationAbstractions"
+  "BitManipulationAbstractions"
+  'fundamental-mode
+  '(global-auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((overwrite-mode))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/home/triplejay2013/.emacs.d/Notebooks/orgTutorial.org"

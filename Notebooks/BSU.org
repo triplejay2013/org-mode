@@ -243,13 +243,105 @@ print(p)    #Original prime
  #+END_SRC
 
 ** ECE330
-*** Lecture
-**** TODO Lesson 13 - Ch. 12 Problems (all)
+*** Assignments
+**** DONE Lesson 13 - Ch. 12 Problems (all)
      DEADLINE: <2018-10-02 Tue>
-
+**** TODO Quiz - Ch. 12 OpenNote OpenBook
+	 DEADLINE: <2018-10-02 Tue 18:00>
 **** TODO Lesson 15 - Ch. 14 Problems (all)
      DEADLINE: <2018-10-09 Tue>
 
+*** Lecture
+**** Bit Manipulation
+***** Notes
+****** Abstractions
+ *These abstractions can be implemented with simple Bitwise operations*
+ 1. Test Bit
+	find what bit (?) is in a location
+ 2. Set Bit
+	makes a bit a '1'
+ 3. Clear Bit
+	makes a bit a '0'
+ 4. Toggle Bit
+	1->0, 0->1
+ 5. Get Bit(s)
+ 6. Put Bit(s)
+
+****** Register Represenation and truth tables
+******* Mask Register
+	 					        															 - BOI (bit of interest, SIZE =1
+																							 V
+ |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+ |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+ |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
+ |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+																										 *OFFSET (from bits 0-12)*
+
+******* Truth Tables
+  - And (Effectively 'Test Bit' & 'Clear Bit')
+	| M | B | F |
+	|---+---+---|
+	| 0 | 0 | 0 |---|_ Clear Bit
+	| 0 | 1 | 0 |---|
+	| 1 | 0 | 0 |---|_ Test Bit
+	| 1 | 1 | 1 |---|
+
+  - OR (Effectively 'Set Bit')
+	| M | B | F |
+	|---+---+---|
+	| 0 | 0 | 0 |
+	| 0 | 1 | 1 |
+	| 1 | 0 | 1 |---|_ Set Bit
+	| 1 | 1 | 1 |---|
+
+  - EOR (Effectively 'Toggle Bit')
+	| M | B | F |
+	|---+---+---|
+	| 0 | 0 | 0 |
+	| 0 | 1 | 1 |
+	| 1 | 0 | 1 |---|_ Toggle Bit
+	| 1 | 1 | 0 |---|
+   
+******* Expr and Instr
+ |                             | and | or   | eor | not | shift-left | shift-right |              |
+ |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+ | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
+ |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+ | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
+****** Mask/Inverse Mask
+ - A mask is a filter that allows us to focus on BOI (Bit of Interest)
+ - Values from some register we want to retrieve bits from, are copied into a mask register
+ - Represent bits (example from book)
+   - ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
+   - ldr r4, =0x00400000 //a little intuitive
+   - ldr r4, =4194304 //unclear, don't use
+   - ldr r4, =(1<<22) //intuitive which bit we are considering
+ - *Mask* - all bits but the BOI are '0'
+ - *Inverse mask* = all bits but the BOI are '1'
+****** Normalize
+ Get Bit(s) - AND mask can get the BOIs
+ Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
+
+****** De-Normalize
+***** Examples
+****** Bit Manipulation Abstractions
+#+BEGIN_EXAMPLE
+# testbit(boi=14)
+ldr r4,=0x12345678		//0x12345678 - target
+ldr r2,=(1<<14)			//r2: 0x00004000 - mask
+and r2,r4,r2			//r2: 0x12345678 - apply mask
+
+#setbit(boi=15)
+ldr r4, =0x12345678		//r4: 0x12345678
+ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
+orr r2,r4,r2			//r2: 0x12345678 - apply mask
+.
+.
+.
+Check Blackboard for more examples pdf file in this directory
+#+END_EXAMPLE
+[[file:BitManipulationAbstractions.pdf][More Examples Here]]
 *** Lab
 **** TODO Pre-Lab 6: Device Memory
      DEADLINE: <2018-10-03 Wed 14:00>
