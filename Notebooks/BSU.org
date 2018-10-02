@@ -310,20 +310,20 @@ print(p)    #Original prime
  |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
  | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
 ****** Mask/Inverse Mask
- - A mask is a filter that allows us to focus on BOI (Bit of Interest)
- - Values from some register we want to retrieve bits from, are copied into a mask register
- - Represent bits (example from book)
-   - ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
-   - ldr r4, =0x00400000 //a little intuitive
-   - ldr r4, =4194304 //unclear, don't use
-   - ldr r4, =(1<<22) //intuitive which bit we are considering
- - *Mask* - all bits but the BOI are '0'
- - *Inverse mask* = all bits but the BOI are '1'
-****** Normalize
- Get Bit(s) - AND mask can get the BOIs
- Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
-
-****** De-Normalize
+		- A mask is a filter that allows us to focus on BOI (Bit of Interest)
+		- Values from some register we want to retrieve bits from, are copied into a mask register
+		- Represent bits (example from book)
+			- ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
+			- ldr r4, =0x00400000 //a little intuitive
+			- ldr r4, =4194304 //unclear, don't use
+			- ldr r4, =(1<<22) //intuitive which bit we are considering
+		- *Mask* - all bits but the BOI are '0'
+		- *Inverse mask* = all bits but the BOI are '1'
+****** Put and Get Bit
+		+ Get Bit(s) - AND mask can get the BOIs
+		+ Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
+******* Normalize
+******* De-Normalize
 ***** Examples
 ****** Bit Manipulation Abstractions
 #+BEGIN_EXAMPLE
@@ -341,7 +341,7 @@ orr r2,r4,r2			//r2: 0x12345678 - apply mask
 .
 Check Blackboard for more examples pdf file in this directory
 #+END_EXAMPLE
-[[file:BitManipulationAbstractions.pdf][More Examples Here]]
+[[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
 *** Lab
 **** TODO Pre-Lab 6: Device Memory
      DEADLINE: <2018-10-03 Wed 14:00>
