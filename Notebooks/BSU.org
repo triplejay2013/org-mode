@@ -2,44 +2,219 @@
 #+AUTHOR: Justin Johnson
 
 * Accelerated Masters Application
-DEADLINE: <2018-12-08 Sat>
+  DEADLINE: <2018-12-08 Sat>
+
 ** TODO Print off application
 ** TODO Look at graduate Catalog
 ** TODO Contact and meet with falculty
-  - [ ] Ask them what projects I might participate in that field of study
-  - [ ] what courses I should take if I pursue their emphasis
-** TODO Spring Semester Planning
 
-* Math307
-** TODO Homework 4 [0/1]
-   - [ ] part 1
-     - Describe how I found my solutions. Place answers in document
-   - [ ] part 2
-     - Place code for solving the two parts here
-* ECE330
-** Lecture
+- [ ] Ask them what projects I might participate in that field of study
+- [ ] what courses I should take if I pursue their emphasis
+
+** TODO Spring Semester Planning
+* Fall 2018
+** Math307
 *** Assignments
-**** INPROGRESS Lesson 13 - Ch. 12 Problems (all)
-    DEADLINE: <2018-10-02 Tue>
-**** TODO Read Pre-Lecture
-DEADLINE: <2018-10-02 Tue>
+**** TODO Homework 4 [0/1]
+     DEADLINE: <2018-10-03 Wed 11:16>
+
+	 - [ ] part 1
+       - Describe how I found my solutions. Place answers in document
+	 - [ ] part 2
+       - Place code for solving the two parts here
+
+*** Lecture
+**** RSA
+***** Note
+****** Key Generation
+Key Generation
+ 1. Choose two primes p,q and compute:
+    n=p*q
+    phi(n)=(p-1)*(q-1)
+ 2. Choose a 'random' number t such taht gcd(x,phi(n))=1
+ 3. Compute e=t^-1 mod phi(n)
+	
+Public Key:		(n,e)
+Private Key:	(t, phi(n))
+
+*RSA ENCRYPTION*
+E=M^e mod n
+E=ciphertext of M
+
+*RSA DECRYPTION*
+M=E^t mod n
+
+*MISC*
+e=t^{-1} mod phi(n)
+t=e^{-1} mod phi(n)
+e is public
+phi(n) is private
+
+*FACTORING PROBLEM*
+Given n that is a product of two primes, find its primes
+****** Attacks
+******* COMMON MODULUS ATTACK
+Suppose that same message M < n is sent to two different parties whose
+encryption exponents respectiveily are e_1 and e_2 and suppose that gcd(e1,e2)=1
+
+ - Assume gcd(e1,e2) = 1
+ - gcd(a,b) = a*x + b*y
+   for some x,y belonging to Z
+ - Using the extendid Euclidean algorithm one can find x and y such that:
+   1 = gcd(e1,e2)=e_1 * x + e_2 * y
+ - The original message can be found by:
+   E^x * F^y mod n 
+   = ((M^{e_1} mod n)^x * (M^{e_2} mod n)^y) mod n
+   = (M^{e_1})^x * (M^{e_2})^y mod n
+   = M^{e_1 * x + e_2 * y} mod n 
+   = M^1 mod n 
+   = M
+
+| Alice    | Bob      |
+|----------+----------|
+| n_1, e_1 | n_2, e_2 |
+| t_1      | t_2      |
+
+The encrypted messages are: 
+E=M^{e_1} mod n  	(Alice)
+ and 
+F=M^{e_2} mod n		(Bob)
+
+******* COMMON ENCRYPTION EXPONENT
+/assume same people and messages as above/
+Assume that gcd(n_1,n_2)=1
+Plaintext:	M < n1,n2
+E_1=M^e mod n_1	(Alice)
+E_2=M^e mod n_2	(Bob)
+
+Using CRT we can solve 
+	E_1=M^e mod n_1	
+	E_2=M^e mod n_2	
+ for M.
+ 
+ M is the unique solution of 
+	E_1=M^e mod n_1	
+	E_2=M^e mod n_2	
+ modulo n1*n2
+ 	M mod n1*n2 = M because M <n1,n2
+
+	*CHINESE REMAINDER THEOREM (CRT)*
+	let n1, n2, ... , nk be natural numbers such that for i,j distinct incices one
+	has gcd(ni,nj)=1
+
+	then the system of linear congruences has a solution which is unique modulo:
+		N=n1*n2*..*nk
+		
+    Solution: x=b1*N1*x1 + b2*N2*x2+...+bk*Nk*xk mod N
+    where Ni=N/ni and xi=(1/Ni) mod ni
+******* COMMON MODULUS ATTACK
+
+| Alice    | Bob      |
+|----------+----------|
+| n_1, e_1 | n_2, e_2 |
+| t_1      | t_2      |
+
+n1 != n2
+
+If gcd(n1,n2) = d > 1
+	this means that n1 and n2 share more than 1 factor (other than 1|N)
+	then d is one of the primes of n1 *and* n2
+
+***** Examples
+** CS230
+
+   - [ ] update journal entries
+
+** CS253
+*** Assignments
+**** INPROGRESS P4 - Smash Simplified Shell Assignment
+     DEADLINE: <2018-10-14 Sun>
+
+*** Lecture
+**** Structs
+***** Notes
+
+ A struct is a /class/ without any /methods/ (it only has /attributes/)
+
+ There is more to structs than the above statement, we'll investigate this more.
+
+ *KEY SIMILIARITIES*
+  - A ~struct~ is a user-definied datatype (primitive c type
+  - others...
+
+ *KEY DIFFERENCES*
+  - Syntax syntax syntax!
+  - A ~struct~ has no methods
+  - A ~struct~ has no constructors
+  - A ~struct~ cannot inherit members from another ~struct~
+  - Memory Management is different
+
+	**UNFINISHED**
+ | C                | Java |
+ | //A Place struct |      |
+ | struct Place {   |      |
+ | int x;           |      |
+ | int y;           |      |
+ | }                |      |
+
+ malloc returns (void *)
+ /this/ returns a reference to itself
+
+***** Examples
+
+ #+BEGIN_SRC C
+ struct Place {
+  int x;             //X-coodr of this Place
+  int y;             //Y-coodr of this Place
+  struct Place* next;//Address of next palce
+ };
+ .
+ .
+ .
+
+ //Define a function to construct/initialize a new Place
+ struct Place* newPlace(int xp, int yp){
+     struct Place *p = malloc(sizeof(struct Place));
+     //malloc - memory allocation
+     p->x = xp;
+     p->y = yp
+     return p;
+ }
+ #+END_SRC
+
+**** Malloc and Free
+***** Notes
+
+ C lacks java's garbage collection service. you must explicitly /free/ everything
+ you alllocate with /malloc/
+
+ If you don't, you *will* /leak/ memory
+
+***** Examples
+
+ #+BEGIN_SRC C
+ //Define a struct Place datatype
+ struct Place{...};
+ .
+ .
+ //Build an instance of a Place in memory
+ struct Place* p = malloc(sizeof(struct Place));
+ .
+ .
+ //Recycle the memory in the Place referenced by p
+ free(p);
+ #+END_SRC
+
+** ECE330
+*** Lecture
+**** TODO Lesson 13 - Ch. 12 Problems (all)
+     DEADLINE: <2018-10-02 Tue>
 
 **** TODO Lesson 15 - Ch. 14 Problems (all)
-    DEADLINE: <2018-10-09 Tue>
+     DEADLINE: <2018-10-09 Tue>
 
-*** Notes
-**** start
-** Lab
-*** TODO Pre-Lab 6: Device Memory
-    DEADLINE: <2018-10-03 Wed>
+*** Lab
+**** TODO Pre-Lab 6: Device Memory
+     DEADLINE: <2018-10-03 Wed 14:00>
 
-* CS230
-  - [ ] update journal entries
-* CS253
-** TODO Compare ECE330 assignment with Tyler
-DEADLINE: <2018-10-02 Tue>
-
-** INPROGRESS P4 - Smash Simplified Shell Assignment
-    DEADLINE: <2018-10-14 Sun>
-  
-* CS310
+** CS310

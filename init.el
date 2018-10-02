@@ -6,6 +6,22 @@
 (require 'evil)
 (evil-mode 1)
 
+; Allows use of tab as a space character
+; REF: http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
+;; make tab key always call a indent command
+;(setq-default tab-always-indent t)
+;; make tab key call indent command or insert tab character,
+;; depending on cursor position
+(setq-default tab-always-indent nil)
+;; make tab key do indent first then completion
+;(setq-default tab-always-indent 'complete)
+
+;; set default tab char's display width to 4 spaces (default is 8)
+(setq-default tab-width 4)
+
+;; set current bufer's tab char's display width to 4 spaces
+(setq tab-width 4)
+
 ; Makes a prettier indentation format showing less stars
 (setq org-hide-leading-stars t)
 
@@ -27,7 +43,7 @@
 ; (add-hook 'org-mode-hook 'turn-on-font-lock)
 
 ; avoid invisible edits
-(setq-default org-catch-invisibile-edits 'smart)
+; (setq-default org-catch-invisibile-edits 'smart)
 
 ; Fast access to TODO states
 ; REF: https://orgmode.org/manual/Fast-access-to-TODO-states.html#Fast-access-to-TODO-states
@@ -52,10 +68,10 @@
 	("NEEDHELP"		:foreground "#CEF93D" :weight bold))) 	; yellow
 
 ;; Set maximum indentation for description lists
-(setq org-list-description-max-indent 5)
+; (setq org-list-description-max-indent 5)
 
 ;; prevent demoting heading also shifting text inside sections
-(setq org-adapt-indentation nil)
+; (setq org-adapt-indentation nil)
 
 ;;;; config ideas from https://gist.github.com/ivan/c280d6eb402b83058542ddecae4cd9f6
 
@@ -108,5 +124,5 @@
 ;; display options                                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;enable tool and menu bars - good for beginners
-(tool-bar-mode 1)
-(menu-bar-mode 1)
+; (tool-bar-mode 1)
+; (menu-bar-mode 1)
