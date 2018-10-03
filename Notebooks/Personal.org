@@ -2,3 +2,19 @@
 * Figure out how to use orgzly with vim [2/2]
   - [X] find a way to sync files on phone with linux/windows
   - [X] learn how to use org mode
+* Productivity Planning (Modifiy this often)::Planning the next few days of tasks to get done
+** Today/Tonight
+   DEADLINE: <2018-10-02 Tue>
+*** TODO PreLab ECE330
+** Tomorrow
+   DEADLINE: <2018-10-03 Wed>
+*** TODO ECE330 Quiz 3
+*** TODO CS230 journal update
+*** TODO Finalize and Print off Math307 work
+** Soon
+   DEADLINE: <2018-10-06 Sat>
+*** TODO Plan time to make schedules and appointements for AM (Accelerated Masters)
+*** TODO Plan Time for spring schedule planning
+*** TODO Fix jeans (on sunday?)
+*** TODO CS-HU310 assignments
+
