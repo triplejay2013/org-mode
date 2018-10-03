@@ -159,44 +159,9 @@ print(p)    #Original prime
        - Place code for solving the two parts here
 
 ** CS230
-*** Intellectual Property
-**** Closed Source
-***** Software Licenses
-****** Proprietary LIcense (E.g. Microsoft
-	   - Manufactuer reserves all rights /not expressly granted/
-**** Open Source
-***** Notes
-	- Is open source software free?
-	- This isn't necessarily the case
-	- what do you pay for in buying /free/ software?
-		- Technical support
-		- Testing
-		- proprietary aps enhancing the distro
-***** Software Licenses
-****** Permissive License(s) (E.g. MIT)
- A /permissive license/ imposes minimal restrictions on the 
- distribution of the software
 
- - Berkeley Systems Division (BSD) License
- - Apache LIcense
- - MIT License
-  
- Permits the software to be incorporated into proprietary products
-****** Protective ("copy-left license)
- - A /copyleft license/ offers the author of a /derivative work/
-   - The right to use the licensed software
-	 - So long as the /derivative work/ is also distributed with the /copyleft license/
- - Copyleft software cannot be incorporated into a proprietary product (or even a permissive open source product)
- - Copyleft software can be incorporated into another copyleft product
- - GNU general Public License is an example of this
+   - [ ] update journal entries
 
-**** Public Domain
-*** Assignments
-**** TODO Update Journal entry
-	 DEADLINE: <2018-10-02 Tue>
-	 - [ ] include link to license webpage as a plus
-	 - [ ] look up something related to licensing
-	 - [ ] include personal notes into the file
 ** CS253
 *** Assignments
 **** INPROGRESS P4 - Smash Simplified Shell Assignment
