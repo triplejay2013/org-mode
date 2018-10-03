@@ -1,10 +1,10 @@
-# vimSetup - also Include .emacs config file
-setup for vim on my devices
-# TODO
-Find a starter vimrc file for config
-
-# PLUGINS
-Manage plugins, search for method of installing plugins in vim
+# Set up for org mode
+I followed the tutorial found in the original org-mode full manual.
+After that I found other packages that suited my needs
 
 # POWERLINE
 install Powerline
+
+# EVIL
+
+# Syncthing
