@@ -4,19 +4,27 @@
 * Accelerated Masters Application
   DEADLINE: <2018-12-08 Sat>
 
+  [[http://coen.boisestate.edu/cs/undergraduates/accelerated-ms-cs/][Program Info]]
+
 ** TODO Print off application
 ** TODO Look at graduate Catalog
 ** TODO Contact and meet with falculty
 	- [ ] Ask them what projects I might participate in that field of study
 	- [ ] what courses I should take if I pursue their emphasis
 *** Research areas of interest (in decsending order of interest)
+	*REF:* [[http://coen.boisestate.edu/cs/researchareas/][Research areas of interest]]
 	- *Software engineering*?
 	  - Jim Buffenbarger
+		- [[https://jimbuffenbarger.youcanbook.me/][book]]
+		- email first? Then book meeting
 	- *Bioinformatics*
 	  - No falculty advisor
 	- *Artificial Intelligence*
 	  - Casey Kennington
+		- [[https://caseykennington.youcanbook.me/][book]]
+		- email first, then book?
 	  - Tim Andersen (Artificial Neural Networks)
+		- [[https://timandersen.youcanbook.me/][book]]
 	- *Machine Learning*
 	  - Casey Kennington
 	  - Tim Andersen
