@@ -1,4 +1,0 @@
-#+TITLE: Personal
-* Figure out how to use orgzly with vim [2/2]
-  - [X] find a way to sync files on phone with linux/windows
-  - [X] learn how to use org mode

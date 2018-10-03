@@ -1,5 +1,0 @@
-#+TITLE: Church
-* TODO Update ministering google sheets
-* TODO Tithing
-  - [ ] pay tithing
-  - [ ] set up tithing settlement

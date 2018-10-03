@@ -1,3 +1,6 @@
 evil/
-.stfolder/
+.stfolder
 .emacs.desktop
+.git/
+*.pdf
+*.gif
