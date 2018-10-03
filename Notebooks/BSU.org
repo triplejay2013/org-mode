@@ -382,3 +382,46 @@ Check Blackboard for more examples pdf file in this directory
      DEADLINE: <2018-10-03 Wed 14:00>
 
 ** CS310
+*** Lecture
+**** Review
+**** Predicates
+***** WHERE
+		Returns three options
+		1. TRUE
+		2. FALSE
+		3. UNKNOWN
+***** Logical Operators
+	  + AND
+		ex: 
+#+BEGIN_SRC sql
+SELECT * FROM Student
+WHERE FIRSTNAME = 'Hope' OR LastName = 'Geller';
+#+END_SRC
+	  + OR
+	  + NOT
+***** Compariosn Operators
+	  Used to check for comparative sameness between two expressions
+	  (=,!=, <, >,<=,>=, LIKE)
+***** LIKE
+	   - The 'wildcard' in SQL is '%'
+	   - Different than 'equality'. Checks for partial equality
+	   - ex:
+#+BEGIN_SRC sql
+SELECT * FROM Student WHERE LastName LIKE 'S%';
+#+END_SRC
+***** ORDER BY
+	  - orders information by (date, name, id, etc...)
+#+BEGIN_SRC sql
+SELECT *
+FROM Class
+ORDER BY Name ASC;	 
+-- ORDER BY MaximumStudents, Name
+-- ASC means ascending
+-- DESC means descending
+#+END_SRC
+*** Assignments
+Assignments will build off of eachother,
+use only one database for all assignments
+**** Final Project
+	 I can start the final project now
+**** Homwk 3

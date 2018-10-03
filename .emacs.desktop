@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Oct  2 16:14:03 2018
+;; Created Wed Oct  3 14:11:53 2018
 ;; Desktop file format version 208
 ;; Emacs version 25.2.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23475 60843 777544 227000) (desktop . "208") "triplejay2013@Misha" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (powerline-cache . "Unprintable entity") (font . "tty") (height . 39) (width . 83) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "7081-B936-A60D-97E3") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 83) (pixel-height . 38) (total-width . 83) (total-height . 38) (normal-height . 1.0) (normal-width . 1.0) (buffer "BSU.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 7161) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23477 8841 952590 200000) (desktop . "208") "triplejay2013@kostya" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (powerline-cache . "Unprintable entity") (font . "tty") (height . 27) (width . 111) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "18F5-1FFB-1466-6FF5") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 111) (pixel-height . 26) (total-width . 111) (total-height . 26) (normal-height . 1.0) (normal-width . 1.0) (buffer "Personal.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 31) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,16 +18,16 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/triplejay2013/.emacs.d/Notebooks/BSU.org"
-  "BSU.org"
+  "/home/triplejay2013/.emacs.d/Notebooks/Personal.org"
+  "Personal.org"
   'org-mode
   '(global-auto-revert-mode)
-  7161
-  '(7161 nil)
+  31
+  '(166 nil)
   nil
   nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (case-fold-search . t) (truncate-lines . t))
-  '((mark-ring (7161 7161 11072 5534 5534 50 4032 4416 5408 4022 4022 4263 4022 4022 4022 4022))))
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (324 502 301 696 697 60 106 58))))
 
 (desktop-create-buffer 208
   "/home/triplejay2013/.emacs.d/Notebooks/orgTutorial.org"
@@ -40,18 +40,6 @@
   nil
   '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
   '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/triplejay2013/.emacs.d/Notebooks/Personal.org"
-  "Personal.org"
-  'org-mode
-  '(global-auto-revert-mode)
-  60
-  '(106 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (58))))
 
 (desktop-create-buffer 208
   "/home/triplejay2013/.emacs.d/Notebooks/Church.org"

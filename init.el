@@ -33,6 +33,9 @@
 ;(load-user-file "powerline.el")
 ;;; END
 
+;; hot key issue fixes (FOR WINDOWS)
+;(w32-register-hot-key t)
+
 ; Evil Mode setup
 ; this can be found at:
 ; 	https://github.com/emacs-evil/evil
