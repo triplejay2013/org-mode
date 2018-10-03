@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Oct  3 14:11:53 2018
+;; Created Wed Oct  3 14:16:47 2018
 ;; Desktop file format version 208
 ;; Emacs version 25.2.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23477 8841 952590 200000) (desktop . "208") "triplejay2013@kostya" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (powerline-cache . "Unprintable entity") (font . "tty") (height . 27) (width . 111) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "18F5-1FFB-1466-6FF5") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 111) (pixel-height . 26) (total-width . 111) (total-height . 26) (normal-height . 1.0) (normal-width . 1.0) (buffer "Personal.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 31) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23477 9135 983744 900000) (desktop . "208") "triplejay2013@kostya" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (cursor-color . "white") (background-color . "#000000") (powerline-cache . "Unprintable entity") (font . "tty") (height . 27) (width . 111) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "FD55-0BA3-0552-D527") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 111) (pixel-height . 26) (total-width . 111) (total-height . 26) (normal-height . 1.0) (normal-width . 1.0) (buffer "Personal.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 31) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
