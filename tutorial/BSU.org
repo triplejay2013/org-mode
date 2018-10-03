@@ -159,9 +159,44 @@ print(p)    #Original prime
        - Place code for solving the two parts here
 
 ** CS230
+*** Intellectual Property
+**** Closed Source
+***** Software Licenses
+****** Proprietary LIcense (E.g. Microsoft
+	   - Manufactuer reserves all rights /not expressly granted/
+**** Open Source
+***** Notes
+	- Is open source software free?
+	- This isn't necessarily the case
+	- what do you pay for in buying /free/ software?
+		- Technical support
+		- Testing
+		- proprietary aps enhancing the distro
+***** Software Licenses
+****** Permissive License(s) (E.g. MIT)
+ A /permissive license/ imposes minimal restrictions on the 
+ distribution of the software
 
-   - [ ] update journal entries
+ - Berkeley Systems Division (BSD) License
+ - Apache LIcense
+ - MIT License
+  
+ Permits the software to be incorporated into proprietary products
+****** Protective ("copy-left license)
+ - A /copyleft license/ offers the author of a /derivative work/
+   - The right to use the licensed software
+	 - So long as the /derivative work/ is also distributed with the /copyleft license/
+ - Copyleft software cannot be incorporated into a proprietary product (or even a permissive open source product)
+ - Copyleft software can be incorporated into another copyleft product
+ - GNU general Public License is an example of this
 
+**** Public Domain
+*** Assignments
+**** TODO Update Journal entry
+	 DEADLINE: <2018-10-02 Tue>
+	 - [ ] include link to license webpage as a plus
+	 - [ ] look up something related to licensing
+	 - [ ] include personal notes into the file
 ** CS253
 *** Assignments
 **** INPROGRESS P4 - Smash Simplified Shell Assignment
@@ -347,3 +382,46 @@ Check Blackboard for more examples pdf file in this directory
      DEADLINE: <2018-10-03 Wed 14:00>
 
 ** CS310
+*** Lecture
+**** Review
+**** Predicates
+***** WHERE
+		Returns three options
+		1. TRUE
+		2. FALSE
+		3. UNKNOWN
+***** Logical Operators
+	  + AND
+		ex: 
+#+BEGIN_SRC sql
+SELECT * FROM Student
+WHERE FIRSTNAME = 'Hope' OR LastName = 'Geller';
+#+END_SRC
+	  + OR
+	  + NOT
+***** Compariosn Operators
+	  Used to check for comparative sameness between two expressions
+	  (=,!=, <, >,<=,>=, LIKE)
+***** LIKE
+	   - The 'wildcard' in SQL is '%'
+	   - Different than 'equality'. Checks for partial equality
+	   - ex:
+#+BEGIN_SRC sql
+SELECT * FROM Student WHERE LastName LIKE 'S%';
+#+END_SRC
+***** ORDER BY
+	  - orders information by (date, name, id, etc...)
+#+BEGIN_SRC sql
+SELECT *
+FROM Class
+ORDER BY Name ASC;	 
+-- ORDER BY MaximumStudents, Name
+-- ASC means ascending
+-- DESC means descending
+#+END_SRC
+*** Assignments
+Assignments will build off of eachother,
+use only one database for all assignments
+**** Final Project
+	 I can start the final project now
+**** Homwk 3
