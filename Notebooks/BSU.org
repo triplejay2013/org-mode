@@ -7,9 +7,20 @@
 ** TODO Print off application
 ** TODO Look at graduate Catalog
 ** TODO Contact and meet with falculty
-
-- [ ] Ask them what projects I might participate in that field of study
-- [ ] what courses I should take if I pursue their emphasis
+	- [ ] Ask them what projects I might participate in that field of study
+	- [ ] what courses I should take if I pursue their emphasis
+*** Research areas of interest (in decsending order of interest)
+	- *Software engineering*?
+	  - Jim Buffenbarger
+	- *Bioinformatics*
+	  - No falculty advisor
+	- *Artificial Intelligence*
+	  - Casey Kennington
+	  - Tim Andersen (Artificial Neural Networks)
+	- *Machine Learning*
+	  - Casey Kennington
+	  - Tim Andersen
+		- Contact Casey first, then tim?
 
 ** TODO Spring Semester Planning
 * Fall 2018
