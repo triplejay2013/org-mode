@@ -1,6 +1,11 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
 
+C-x C-q to disable read-only buffer
+C-c C-e to export selected (whole file default) to certain format
+C-c s - auto insert source block
+C-x C-c to exit file
+
 * Accelerated Masters Application
   DEADLINE: <2018-12-08 Sat>
 
@@ -35,7 +40,7 @@
 ** Math307
 *** Lecture
 **** RSA
-***** Note
+***** Notes
 ****** Key Generation
 Key Generation
  1. Choose two primes p,q and compute:
@@ -129,7 +134,25 @@ n1 != n2
 If gcd(n1,n2) = d > 1
 	this means that n1 and n2 share more than 1 factor (other than 1|N)
 	then d is one of the primes of n1 *and* n2
+****** Signatures
+	   - Confidentiality
+	   - Data integrity
+	   - Authentication
+	   - [[https://searchsecurity.techtarget.com/definition/nonrepudiation][Non-repudiation]]
+		 - is the assurance that someone cannot deny something.
+******* Define ownership of an RSA Key
+		terse: signed with private key, verified with public key
 
+		1. The key owner chooses twwo prime numbers, /p/ and /q/
+		2. The key owner compute ~n=p*q~ and ~phi(n)=(p-1)*(q-1)~
+		3. The key owner chooses an /e/ with ~gcd(e/phi(n))=1~
+		   1. Compute ~e=t^-1 mod phi(n)~
+		4. The key owner computes ~t=1/e mod phi(n)~
+		
+		[[./img/PhiEx.jpg][Whiteboard example]]
+		
+		The public signature key is ~(n,e)~ 
+		The private signature key is ~t~
 ***** Examples
 ****** Attacks:COMMON MODULUS ATTACK (Directory ATTACK?)
 From Sage:
@@ -211,23 +234,21 @@ print(p)    #Original prime
 
 **** Public Domain
 *** Assignments
-**** TODO Update Journal entry
+**** DONE Update Journal entry
 	 DEADLINE: <2018-10-02 Tue>
-	 - [ ] include link to license webpage as a plus
-	 - [ ] look up something related to licensing
-	 - [ ] include personal notes into the file
+	 - [X] include link to license webpage as a plus
+	 - [X] look up something related to licensing
+	 - [X] include personal notes into the file
 ** CS253
-*** Assignments
-**** INPROGRESS P4 - Smash Simplified Shell Assignment
-     DEADLINE: <2018-10-14 Sun>
-
 *** Lecture
 **** Structs
 ***** Notes
+****** introduction
 
  A struct is a /class/ without any /methods/ (it only has /attributes/)
 
  There is more to structs than the above statement, we'll investigate this more.
+****** Java comparison
 
  *KEY SIMILIARITIES*
   - A ~struct~ is a user-definied datatype (primitive c type
@@ -240,17 +261,48 @@ print(p)    #Original prime
   - A ~struct~ cannot inherit members from another ~struct~
   - Memory Management is different
 
-	**UNFINISHED**
- | C                | Java |
- | //A Place struct |      |
- | struct Place {   |      |
- | int x;           |      |
- | int y;           |      |
- | }                |      |
+****** Accessing Member Variables in a Struct
 
- malloc returns (void *)
- /this/ returns a reference to itself
+| Using a struct variable | Using a pointer vairable |
+|-------------------------+--------------------------|
+| purple.r = 255;         | pColor->r = 255;         |
+| purple.g = 0;           | pColor->g = 0;           |
+| purple.b = 255;         | pColor->b = 255;         |
 
+****** Defining struct variables
+
+#+BEGIN_SRC C
+struct Color {
+	unsigned char r;	//Red 0...255
+	unsigned char g;	//Green 0...255
+	unsigned char b;	//Blue 0...255
+} purple, pink;			//Variables!!!
+#+END_SRC
+The above example defines a new data type, Color, and also defines two /uniinitialized/ 
+color variables, purple and pink
+****** Initializing a struct Variable
+
+#+BEGIN_SRC C
+struct Color {
+	unsigned char r;	//Red 0...255
+	unsigned char g;	//Green 0...255
+	unsigned char b;	//Blue 0...255
+} purple, pink;			//Variables!!!
+struct Color purple = {255,0,255};
+#+END_SRC
+****** Struct Variable operators
+	   - Assignment with "=" operator: purple = pink;
+	   - Retrieve its address with "&": pColor = &purple;
+	   - Accessing members with "." operator: int r = purple.r;
+	   - Comparisons (e.g. "==") are *NOT* supported
+****** Structs and Functions
+	   - Struct variables (and everything in C) are /pass by value/
+	    - ~struct Color chosenColor = selectColor(purple);
+	   - Passses a _copy_ of the value of the struct purple to the selectColor func
+****** Arrays of Structs
+	   
+struct Color primaries[8]; //An array of 8 Colors
+primaries[0] = purple
 ***** Examples
 
  #+BEGIN_SRC C
@@ -276,6 +328,9 @@ print(p)    #Original prime
 **** Malloc and Free
 ***** Notes
 
+ malloc returns (void *)
+ /this/ returns a reference to itself
+
  C lacks java's garbage collection service. you must explicitly /free/ everything
  you alllocate with /malloc/
 
@@ -295,6 +350,19 @@ print(p)    #Original prime
  //Recycle the memory in the Place referenced by p
  free(p);
  #+END_SRC
+
+**** Typedef
+***** Notes
+	  Basically just an alias to a datatype
+***** Examples
+	  ~typedef unsigned char unsbyte;~
+	  ~typedef struct Color* pColor;~
+	  the above definss unsbyte to be an alias for unsigned char
+	  typedef does NOT define a new data type
+	  this helps to write more readable code
+*** Assignments
+**** INPROGRESS P4 - Smash Simplified Shell Assignment
+     DEADLINE: <2018-10-14 Sun>
 
 ** ECE330
 *** Assignments
@@ -444,4 +512,3 @@ use only one database for all assignments
 **** Final Project
 	 I can start the final project now
 **** Homwk 3
-	 

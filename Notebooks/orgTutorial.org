@@ -1,20 +1,26 @@
 #+TITLE:  What is Org Mode? :: Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system.
 #+AUTHOR: Justin Johnson
+
 * Map for Learning Org Mode for Emacs :: [[http://sachachua.com/blog/wp-content/uploads/2014/01/2014-01-07-Map-for-learning-Org-Mode-for-Emacs.png][Org Map]]
 
   The Link can be followed with C-c C-o
+
 * Notes for how I am learning Org Mode :: Org shorcuts and tricks
+
   - M-RET enters heading on same level as cursor
- 
+
 * Tutorial :: [[http://pragmaticemacs.com/org-mode-tutorials/][Org Tutorial]]
 ** org-mode structure
+
     Text in org is structured by headings, denoted by lines starting with
     one or more * so we are currently in a section!
 
 **** A subheading
+
     Starts with an extra * and so on
 
 **** navigation
+
     Headings can be expanded or collapsed by moving to the (sub)heading
     and pressing TAB. S-TAB cycles all headings. You can jump to next and
     previous headings with C-c C-n and C-c C-p respectively.
@@ -26,6 +32,7 @@
 
 **** lists
 ***** bullet lists
+
 	- bullet lists can be created like this (start a line with one or
 	more space and a -
 	- pressing M-RET gives you a new bullet
@@ -39,6 +46,7 @@
 	- you can change bullet style using S-left and S-right
 
 ***** numbered lists
+
 	1) numbered lists are also possible
 	2) M-RET gives me a new number
 
@@ -56,7 +64,9 @@
     - definition lists :: these are useful sometimes
     - item 2 :: M-RET again gives another item, and long lines wrap in a
 	tidy way underneath the definition
+
 **** Tables
+
 Hopefully you can see straight away that the simple structure provided
 by org-mode gives a nice way to keep an electronic note book.
 
@@ -89,6 +99,7 @@ Now, you can move rows and columns around using M-arrow and insert or
 delete rows and columns using M-S-arrow. Try this out now.
 
 ***** Creating and exporting tables
+
 You can create an empty table using C-c | to run the command
 org-table-create-or-convert-from-region, which will prompt for table
 dimensions if no region is selected.
@@ -113,6 +124,7 @@ to see the available options (e.g. orgtbl-to-csv will convert to csv
 in the output file).
 
 ***** Formulae
+
 You can use formulae to do arithmetic on tables, and use them like a
 spreadsheet. This is something I keep meaning to use more often, but
 don't generally find I need it. One useful command is C-c + which runs
@@ -123,6 +135,7 @@ added a link in our org-mode file - this is a teaser for what we will
 cover next!
 
 **** Links and images
+
 Org mode supports links to files, URLs, and to other points in the org
 file. In this example let's use an image from my website. First copy
 it to the current directory. You can do this within emacs but for now
@@ -179,8 +192,10 @@ Finally, we can add a caption and a name to our image like this
 
 which means we can refer to our image later with a link like this one
 [[fig.super]]
+
 **** Formatting text
 ***** Simple formatting
+
 You can apply simple formatting to your text by enclosing words in
 special characters. These include
  - /italicised text/
@@ -188,7 +203,9 @@ special characters. These include
  - _underlines_
  - =literal text=
  - ~code~ (generally appears the same as literal text)
+
 ****** Formatted blocks of text
+
 For longer pieces of text you can enclose the text in blocks marking
 it as a specific sort of text. I commonly use these ones
 
@@ -208,7 +225,9 @@ You can save time typing out the block wrapper by using shortcuts. Go
 to the start of a new line and type <e and press TAB and it will
 expand to an example block. The same works for <q for quote and <c for
 centre.
+
 ****** Source code blocks
+
 It is also handy to include source code in your notes - on a new line
 type <s and TAB to create a source block. You can tell org what type
 of code is contained - in this case we'll put in some simple shell
@@ -234,6 +253,7 @@ language you have specified. Type some code in, and then type C-c '
 again to come back to this buffer.
 
 ******* Executing source code blocks
+
 Org-mode can execute your source code blocks and add the output to
 your file. This part of org-mode is called babel. I'll write more
 about this later, but it is too cool not to mention here.
@@ -276,4 +296,4 @@ something like the following to your [[http://pragmaticemacs.com/emacs/editing-y
    ))
 #+END_SRC
 
-* To export your org file to a web page, type C-c C-e to start the exporter 
+* To export your org file to a web page, type C-c C-e to start the exporter

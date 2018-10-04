@@ -56,3 +56,8 @@
 ; values first and then require it
 ; https://github.com/syl20bnr/spacemacs/issues/8334#issuecomment-298291766
 (require 'org)
+
+;; Quick insert src blocks
+;; must be defined after (require 'org)
+(define-key org-mode-map "\C-cs"
+	    (lambda()(interactive)(insert "#+BEGIN_SRC C\n#+END_SRC")))
