@@ -1,6 +1,9 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
 
+C-x C-q to disable read-only buffer
+C-c C-e to export selected (whole file default) to certain format
+
 * Accelerated Masters Application
   DEADLINE: <2018-12-08 Sat>
 
@@ -211,11 +214,11 @@ print(p)    #Original prime
 
 **** Public Domain
 *** Assignments
-**** TODO Update Journal entry
+**** DONE Update Journal entry
 	 DEADLINE: <2018-10-02 Tue>
-	 - [ ] include link to license webpage as a plus
-	 - [ ] look up something related to licensing
-	 - [ ] include personal notes into the file
+	 - [X] include link to license webpage as a plus
+	 - [X] look up something related to licensing
+	 - [X] include personal notes into the file
 ** CS253
 *** Assignments
 **** INPROGRESS P4 - Smash Simplified Shell Assignment
