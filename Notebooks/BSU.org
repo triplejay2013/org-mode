@@ -1,10 +1,27 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
 
-C-x C-q to disable read-only buffer
-C-c C-e to export selected (whole file default) to certain format
-C-c s - auto insert source block
-C-x C-c to exit file
+* Need to know commands for emacs
+** Quick Commands
+	- C-x C-q to disable read-only buffer
+	- C-c C-e to export selected (whole file default) to certain format
+	- C-c s - auto insert source block
+	- C-x C-c to exit file
+	- *S-right or S-left - cycle list type or TODO header types*
+** Agendas
+   -C-c a (t)
+   	- opens up agenda view, compiles todo list with t option
+	  - press t again to cycle TODOs
+	  - "N r" means "1 r" to recompile list with specific keywords
+	- (n)ext (p)revious
+	- RET go to location of item and delete other windows
+	- TAB go to location but keep current windows open
+	- (f)orward or (b)ackward in time
+	- '.' today
+	- (j)ump prompt for date and go there
+	- and more! Start practicing!
+
+[[http://sachachua.com/blog/2007/12/emacs-getting-things-done-with-org-basic/][Agenda tips]]
 
 * Accelerated Masters Application
   DEADLINE: <2018-12-08 Sat>
@@ -134,6 +151,34 @@ n1 != n2
 If gcd(n1,n2) = d > 1
 	this means that n1 and n2 share more than 1 factor (other than 1|N)
 	then d is one of the primes of n1 *and* n2
+<<<<<<< HEAD
+=======
+******* DOUBLE DUTY ATTACK
+		- Assume that /Alice/ uses the same RSA key for encryption AND signature
+		- Knowing the same key is used for encryption and signature, we can decrypt the ciphertext E
+		  1. Choose a random number /b/
+		  2. Compute ~x=b^e * E mod n~
+		  3. request /Alice? to sign x
+		  4. Let /y/ be the signature on /x/. Compute ~y/b mod n~
+		  5. claim y/b mod n = M
+
+Proof of claim (5)
+REMEMBER:
+~e=t^-1 mod phi(n)~
+~e*t = t*t^-1 mod phi(n)~
+~e*t = 1 mod phi(n)~
+~e*t mod phi(n) = 1~
+
+~y/b mod n = (x^t)/b mod n~
+		  ~= (b^e * E)/b mod n~
+		  ~= ((b^{e*t})/b) * E^t mod n~
+		  ~= ((b^{e*t mod phi(n))}/b) * E^t mod n~
+		  see REMEMBER above
+		  ~= (b^1)/b * E^t mod n~
+		  ~= 1 * E^t mod n~
+		  ~= E^t mod n = M~
+
+>>>>>>> Preparing to merge
 ****** Signatures
 	   - Confidentiality
 	   - Data integrity
@@ -153,6 +198,15 @@ If gcd(n1,n2) = d > 1
 		
 		The public signature key is ~(n,e)~ 
 		The private signature key is ~t~
+<<<<<<< HEAD
+=======
+
+******* Verfy Ownership
+		- ~S=M^t mod n~
+		  - S is a signature on M
+		- ~k=S^e mod n~
+		- If k=M, then the signature is valid
+>>>>>>> Preparing to merge
 ***** Examples
 ****** Attacks:COMMON MODULUS ATTACK (Directory ATTACK?)
 From Sage:
@@ -192,7 +246,7 @@ print(p)    #Original prime
 
 #+END_SRC
 *** Assignments
-**** TODO Homework 4 [0/1]
+**** DONE Homework 4 [0/1]
      DEADLINE: <2018-10-03 Wed 11:16>
 
 	 - [ ] part 1
@@ -201,38 +255,94 @@ print(p)    #Original prime
        - Place code for solving the two parts here
 
 ** CS230
-*** Intellectual Property
-**** Closed Source
-***** Software Licenses
-****** Proprietary LIcense (E.g. Microsoft
-	   - Manufactuer reserves all rights /not expressly granted/
-**** Open Source
-***** Notes
-	- Is open source software free?
-	- This isn't necessarily the case
-	- what do you pay for in buying /free/ software?
-		- Technical support
-		- Testing
-		- proprietary aps enhancing the distro
-***** Software Licenses
-****** Permissive License(s) (E.g. MIT)
- A /permissive license/ imposes minimal restrictions on the 
- distribution of the software
+*** Lecture
+**** Intellectual Property
+***** Closed Source
+****** Software Licenses
+******* Proprietary LIcense (E.g. Microsoft
+		- Manufactuer reserves all rights /not expressly granted/
+***** Open Source
+****** Notes
+	 - Is open source software free?
+	 - This isn't necessarily the case
+	 - what do you pay for in buying /free/ software?
+		 - Technical support
+		 - Testing
+		 - proprietary aps enhancing the distro
+****** Software Licenses
+******* Permissive License(s) (E.g. MIT)
+  A /permissive license/ imposes minimal restrictions on the 
+  distribution of the software
 
- - Berkeley Systems Division (BSD) License
- - Apache LIcense
- - MIT License
+  - Berkeley Systems Division (BSD) License
+  - Apache LIcense
+  - MIT License
   
- Permits the software to be incorporated into proprietary products
-****** Protective ("copy-left license)
- - A /copyleft license/ offers the author of a /derivative work/
-   - The right to use the licensed software
-	 - So long as the /derivative work/ is also distributed with the /copyleft license/
- - Copyleft software cannot be incorporated into a proprietary product (or even a permissive open source product)
- - Copyleft software can be incorporated into another copyleft product
- - GNU general Public License is an example of this
+  Permits the software to be incorporated into proprietary products
+******* Protective ("copy-left license)
+  - A /copyleft license/ offers the author of a /derivative work/
+	- The right to use the licensed software
+	  - So long as the /derivative work/ is also distributed with the /copyleft license/
+  - Copyleft software cannot be incorporated into a proprietary product (or even a permissive open source product)
+  - Copyleft software can be incorporated into another copyleft product
+  - GNU general Public License is an example of this
 
-**** Public Domain
+***** Public Domain
+***** Software Patents
+****** Patent laws
+	   - vary country to country
+	   - We will focus on US software patents
+	   - Obtaining a US patent does *NOT* guerentee protection globally
+	   - Treaties (eg World Trade Organization's Agreement) have tried to change this
+		 
+****** What does a Patent do?
+	   - provides certain rights to a patent holder
+	   - In exchange for the complete disclosure of the invention
+	   - No one may build, use, sell or import/export without patent holder permis.
+	   - Term limited (20 years has been typical)
+****** Patent Requirements
+	   - Processes, machines, articles of manufacture and compositions of matter
+		 - Exceptions (CANNOT be patented)
+		   - Abstract ideas
+		   - laws of nature
+		   - natural phenomenon
+	   - Novel - unique, can't be easily determined
+	   - Useful
+	   - Non-Obvious
+****** Copyright vs. Patent
+	   - A computer program is an expression of a method, an implementation, and can be copyrighted
+	   - A patent protects a program's underlying methodolgy, not the implmenatation.
+	   - But...
+		 - US supreme court ruled that a numerical algorithm (abstract idea) cannot be patented
+	   - Patents protect methodolgy, not an algorithm
+	   - The supreme cour ruling itself still has some exceptions
+	   - [[https://www.bitlaw.com][bitlaw - software law resource]]
+****** Software Patent Take-Aways
+	   - Patents are expensive and time-consuming
+	   - Patents may not be the best way to protect your software
+	   - Preferred methods include:
+		 - Trade Secrets
+		 - Copyrights
+		 - Public Domain (may block others from patenting it!!!)
+	   - Patents look cool on your resume
+***** Trademarks
+****** What is a trademark?
+	  - Sign, symbol or logo
+	  - Word, Phrase or name
+	  - Design or an image
+	  - (r)
+****** About Tradmarks
+	   - Another form of intellectual property
+	   - are 'recognizable" like a signature
+	   - protects brand names, logos, etc
+	   - [[https://www.uspto.gov/trademark][Register a trademark]]
+****** Symbols for trademarks
+	   - (r) is for registered tradmarks
+	   - ^TM is for unregistered trademarks
+****** Trademarks for Developers
+	   - Even open-source projects may have trademarks!
+	   - We encounter trademarks when we implement user interfaces displaying our company's trademark
+	   - Most company's have policies rgulating the use and protection of tehir trademark
 *** Assignments
 **** DONE Update Journal entry
 	 DEADLINE: <2018-10-02 Tue>
@@ -268,9 +378,15 @@ print(p)    #Original prime
 | purple.r = 255;         | pColor->r = 255;         |
 | purple.g = 0;           | pColor->g = 0;           |
 | purple.b = 255;         | pColor->b = 255;         |
+<<<<<<< HEAD
 
 ****** Defining struct variables
 
+=======
+
+****** Defining struct variables
+
+>>>>>>> Preparing to merge
 #+BEGIN_SRC C
 struct Color {
 	unsigned char r;	//Red 0...255
@@ -361,18 +477,22 @@ primaries[0] = purple
 	  typedef does NOT define a new data type
 	  this helps to write more readable code
 *** Assignments
+<<<<<<< HEAD
 **** INPROGRESS P4 - Smash Simplified Shell Assignment
+=======
+**** DONE P4 - Smash Simplified Shell Assignment
+>>>>>>> Preparing to merge
      DEADLINE: <2018-10-14 Sun>
 
 ** ECE330
 *** Assignments
 **** DONE Lesson 13 - Ch. 12 Problems (all)
      DEADLINE: <2018-10-02 Tue>
-**** TODO Quiz - Ch. 12 OpenNote OpenBook
+**** DONE Quiz - Ch. 12 OpenNote OpenBook
 	 DEADLINE: <2018-10-02 Tue 18:00>
 **** TODO Lesson 15 - Ch. 14 Problems (all)
-     DEADLINE: <2018-10-09 Tue>
-
+	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
+	 
 *** Lecture
 **** Bit Manipulation
 ***** Notes
@@ -441,11 +561,28 @@ primaries[0] = purple
 			- ldr r4, =(1<<22) //intuitive which bit we are considering
 		- *Mask* - all bits but the BOI are '0'
 		- *Inverse mask* = all bits but the BOI are '1'
+#+BEGIN_EXAMPLE 
+1 << 12
+12: acts like the 'offset' for the data
+0b111 << 12: sets bits 12, 13, and 14 to 1
+
+~0 << 3: 11111000
+
+Normalize-Denormalize
+Static mask
+~(~0 << 3) << 12
+		|      |_
+		V	     V
+    sizeInBits  offset
+#+END_EXAMPLE
 ****** Put and Get Bit
 		+ Get Bit(s) - AND mask can get the BOIs
 		+ Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
 ******* Normalize
 ******* De-Normalize
+****** Normalize/Denormalize
+	   Normalize - Shift bits /aligned right/
+	   Denormalize - Shift bits to desired location
 ***** Examples
 ****** Bit Manipulation Abstractions
 #+BEGIN_EXAMPLE
@@ -464,10 +601,21 @@ orr r2,r4,r2			//r2: 0x12345678 - apply mask
 Check Blackboard for more examples pdf file in this directory
 #+END_EXAMPLE
 [[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
+**** Mutator and Accessor
+***** Definitions
+| get | Accessor | function that retrieves a value from a private member variable                                                                |   |
+|-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
+| set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
+
+*IMPORTANT* Accessors do not change an object's data, so they
+should be marked ~const~ (getLength and getWidth)
+
 *** Lab
-**** TODO Pre-Lab 6: Device Memory
+**** SUBMITTED Pre-Lab 6: Device Memory
      DEADLINE: <2018-10-03 Wed 14:00>
 
+**** TODO Pre-Lab 7: General Purpose I/O Devices
+	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-10 Wed>
 ** CS310
 *** Lecture
 **** Review
@@ -506,9 +654,86 @@ ORDER BY Name ASC;
 -- ASC means ascending
 -- DESC means descending
 #+END_SRC
+**** ALTER TABLE & FOREIGN KEY
+***** Syntax
+#+BEGIN_SRC sql
+ALTER TABLE <tablename> ADD FOREIGN KEY (<columnname>)
+REFERENCES <anothertable> (<columnname>)
+#+END_SRC
+**** Scalar Function
+A function that takes zero or more parameters. It evaluates inputs and reutrns a result
+ - Will return one value per record that it evaluates
+ - Never changes stored data itself
+ - Can be found in SELECT,INSERT, UPDATE,and DELETE queries
+
+examples: CONCAT DATE_ADD LENGTH SUBSTRING NOW()
+
+AS: creates an alias
+SELECT CONCAT(FirstName, ' ', LastName) AS FullName, BirthDate
+FROM Student
+**** Procedure
+***** Notes
+	 - A database structure or construct that contains one or more sql queries
+	 - Unlike functions, procedures can change data
+***** Benefits
+	  - Avoid duplicating database code
+	  - Easier to tweak performance or behaviour in the database
+	  - Can provide more security by limiting user access
+	  - Encourages encapsulation
+***** Examples
+		
+#+BEGIN_SRC sql
+Delimiter $$
+Create Procedure GetShortNameStudents()
+BEGIN
+	SELECT FirstName, LastName
+	FROM Student
+	WHERE LENGTH(FirstName) <= 5;
+END;
+$$
+
+/*
+	Use with:
+CALL GetShortNameStudents();
+*/
+
+-- Another example
+Delimiter $$
+-- here I defined an input variable maxLength of type INT
+Create Procedure GetSHortNameStudents2(IN maxLength INT)
+BEGIN
+	SELECT FirstName, LastName
+	FROM Student
+	WHERE LENGTH(FirstName) <= 5;
+END;
+$$
+/*
+	Use with:
+CALL GetShortNameStudents2(6);
+*/
+#+END_SRC
 *** Assignments
 Assignments will build off of eachother,
 use only one database for all assignments
 **** Final Project
 	 I can start the final project now
 **** Homwk 3
+<<<<<<< HEAD
+=======
+	 
+#+BEGIN_SRC python
+def hello():
+	print("Hello World")
+
+hello()
+#+END_SRC
+
+#+BEGIN_SRC python
+def hello():
+	return "Hello World"
+print(hello())
+#+END_SRC
+
+#+RESULTS:
+: None
+>>>>>>> Preparing to merge
