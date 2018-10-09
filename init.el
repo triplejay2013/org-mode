@@ -95,3 +95,25 @@
 
 (define-key org-mode-map "\C-ce"
 	    (lambda()(interactive)(insert "#+BEGIN_EXAMPLE \n#+END_EXAMPLE")))
+
+; Exporting Config
+; REF: https://orgmode.org/manual/Project-alist.html
+; REF: https://stackoverflow.com/a/9560430
+(setq org-publish-project-alist
+      '(("html"
+	 :base-directory "~/.emacs.d/Notebooks/"
+	 :base-extension "org"
+	 :publishing-directory "~/.emacs.d/Notebooks/exports"
+	 :publishing-function org-publish-org-to-html)
+	("pdf"
+	 :base-directory "~/.emacs.d/Notebooks/"
+	 :base-extension "org"
+	 :publishing-directory "~/.emacs.d/Notebooks/exports/"
+	 :publishing-function org-publish-org-to-pdf)
+	("all" :components ("html" "pdf"))))
+
+; Tell org mode to use chrome
+; REF: http://ergoemacs.org/emacs/emacs_set_default_browser.html
+(setq browse-url-browser-function 'browse-url-chromium)
+; REF: https://lists.gnu.org/archive/html/emacs-orgmode/2010-07/msg00879.html
+(setq browse-url-generic-program "chromium-browser")

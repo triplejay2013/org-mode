@@ -428,12 +428,66 @@ print(p)    #Original prime
 	   - Even open-source projects may have trademarks!
 	   - We encounter trademarks when we implement user interfaces displaying our company's trademark
 	   - Most company's have policies rgulating the use and protection of tehir trademark
-*** Assignments
-**** DONE Update Journal entry
-	 DEADLINE: <2018-10-02 Tue>
-	 - [X] include link to license webpage as a plus
-	 - [X] look up something related to licensing
-	 - [X] include personal notes into the file
+**** Privacy
+***** Notes
+	 - Aspects of privacy (as per CS23)
+	   - Confidentiality
+	   - Integrity
+	   - Right to be let alone
+	 - privacy expectations vary amongst cultures
+
+***** Definitions
+	  - Authentication
+		- Protection of confidential information requires us to:
+		  - Identify who wnats to access the data
+		  - Identify who owns the data
+		- /Authentication/ associates an /identity/ with a subject activity
+		- Factors
+		  - Enables a system to identify users
+		  - Multi-factor authentication
+	  - Authorization
+		- determines what rights a subject has to a datum
+		  - ex: triplejay2013 is authorize to read but not write file, foo.txt
+	  - Confidentiality Policy
+		+ defines who is allowed specific rights to what data
+		+ Confidentiality: What can be access
+		  1. The credit card number you used on-line
+		  2. your phone number
+		  3. your eMail address
+		  4. residential address
+		  5. shopping history (what and where)
+		  6. current location
+		  7. health history
+		  8. browser history
+		  9. texting history
+		  10. DNA
+		  11. Password
+	    + Confidentiality: Who can access
+		  1. Family
+		  2. real-world friends
+		  3. people on social media
+		  4. retailers
+		  5. employwer
+		  6. political party
+		  7. police
+		  8. federal government
+		+ Confidentiality: Data in Transit
+		  - Symmetric-key cryptography
+			- Believed to provide strong security
+			- Both sender and reciever must know secret key
+			- /Key distribution problem/: how to share the secret key
+		  - Asymmetric-key cryptography (public-key)
+		+ Confidentiality: Data at rest
+		  - Hash values are an example of a one-way function (easy one way, hard the other)
+		  - Hash values are stored, not the actual passwords
+		  - Cookies Example
+			- Cookies store state information in clients (browsers
+**** Assignments
+***** TODO Update Journal entry
+	  DEADLINE: <2018-10-10 Tue>
+	  - [ ] include link to license webpage as a plus
+	  - [ ] look up something related to privacy/cookies/confidentiality
+	  - [ ] include personal notes into the file
 ** CS253
 *** Lecture
 **** Structs
@@ -735,6 +789,16 @@ C	.short	0x11111111
 PC:	.word	C	# This is a pointer to C
 #+END_SRC
 ***** Arrays
+#+NAME: Array example
+#+BEGIN_SRC asm
+.data
+ARRAY1: 	.word	1,2,3,4,5,6,7,8
+ARRAY_END: 	.word	1,2,3,4,5,6,7,8
+
+.equ ARRAY_SIZE,
+	(ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
+							//The size in bytes divided by 4 bytes gives us the size
+#+END_SRC
 *** Lab
 **** SUBMITTED Pre-Lab 6: Device Memory
      DEADLINE: <2018-10-03 Wed 14:00>
