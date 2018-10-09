@@ -1,10 +1,13 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
-
+	
+* Quick Commands
 C-x C-q to disable read-only buffer
 C-c C-e to export selected (whole file default) to certain format
 C-c s - auto insert source block
 C-x C-c to exit file
+[[https://justin.abrah.ms/emacs/literate_programming.html][Literate Programming]]
+	- C-c C-v C-t  Tangle a code src block 
 
 * Accelerated Masters Application
   DEADLINE: <2018-12-08 Sat>
@@ -360,6 +363,20 @@ primaries[0] = purple
 	  the above definss unsbyte to be an alias for unsigned char
 	  typedef does NOT define a new data type
 	  this helps to write more readable code
+**** Function Pointers
+***** Notes
+	  *I accidently deleted stuff...missing notes and files*
+#+NAME: Function Pointers
+#+HEADER: :dir ./src/c
+#+HEADER: :file functionPointers.txt
+#+HEADER: :tangle ./src/c/functionPointers.c
+#+BEGIN_SRC C :includes '(<stdio.h> <stdlib.h>)
+printf("Hello World");
+#+END_SRC
+
+#+RESULTS: Function Pointers
+[[file:src/c/functionPointers.txt]]
+
 *** Assignments
 **** INPROGRESS P4 - Smash Simplified Shell Assignment
      DEADLINE: <2018-10-14 Sun>

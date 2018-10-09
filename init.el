@@ -30,6 +30,7 @@
 (load-user-file "formatting.el")
 (load-user-file "gist.el")
 (load-user-file "todo.el")
+(load-user-file "python.el")
 ;(load-user-file "powerline.el")
 ;;; END
 
@@ -61,3 +62,35 @@
 ;; must be defined after (require 'org)
 (define-key org-mode-map "\C-cs"
 	    (lambda()(interactive)(insert "#+BEGIN_SRC C\n#+END_SRC")))
+
+;; Define Babel languages
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((python . t)
+    (C . t)
+    (sh . t)
+    (shell . t)
+    (java . t)))
+
+;; REF: http://cachestocaches.com/2018/6/org-literate-programming/
+; Syntax highlight in #+BEGIN_SRC blocks
+(setq org-src-fonitify-natively t)
+; Don't prompt before running code in org
+(setq org-confirm-babel-evaluate nil)
+
+; REF: https://stackoverflow.com/questions/18011098/emacs-org-mode-todo-list-missing-items
+; Tell org mode where to find agenda files
+; This fixes global TODO's not knowing where to find TODO's
+(defvar dir-where-you-store-org-files "~/.emacs.d/Notebooks/")
+(setq 
+  org-agenda-files 
+  (mapcar (lambda (x) (concat dir-where-you-store-org-files x))
+	  ; Add org files to TRACK here
+	  '("BSU.org" 
+	  "Personal.org" 
+	  "LA.org"
+	  "srcBlocks.org"
+	  "Church.org")))
+
+(define-key org-mode-map "\C-ce"
+	    (lambda()(interactive)(insert "#+BEGIN_EXAMPLE \n#+END_EXAMPLE")))
