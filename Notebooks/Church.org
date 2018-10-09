@@ -1,5 +1,1 @@
-#+TITLE: Church
-* TODO Update ministering google sheets
-* TODO Tithing
-  - [ ] pay tithing
-  - [ ] set up tithing settlement
+* TODO Google Spreadsheet (ministering). Like Roster with notes

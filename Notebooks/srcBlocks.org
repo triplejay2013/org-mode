@@ -1,0 +1,82 @@
+* [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html#org8d46df4][Python Support Babel]]
+
+** Session Mode
+similar to interpreter shell mode
+#+BEGIN_SRC python :session python3
+def foo(x):
+	if x>0:
+		return x+1
+	else:
+		return x-1
+foo(1)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+** Non-session mode
+#+BEGIN_SRC python
+def foo(x):
+	if x>0:
+		return x+1
+	else:
+		return x-1
+return foo(1) #This return is required in non-session mode
+#+END_SRC
+
+** Results
+[[https://orgmode.org/manual/results.html][Result types]]
+#+BEGIN_SRC python :results value
+def foo(x):
+	if x>0:
+		return x+1
+	else:
+		return x-1
+return foo(1) #This return is required in non-session mode
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+Sets output as default result
+#+BEGIN_SRC python :results output
+def foo(x):
+	if x>0:
+		return x+1
+	else:
+		return x-1
+print(foo(1)) #Not in session mode...but return is NOT requried here
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.html#orgd681706][C support babel]]
+[[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.org][REF]]
+"
+If a =main= method is not present in a code block then the entire
+block is wrapped in a trivial =main= function call."
+[[https://caiorss.github.io/Emacs-Elisp-Programming/Org-mode-recipes.html][REF Solution found here]] - problems with :includes
+
+headers are used with ':var' to create 'global' variables
+#+NAME: test.cpp
+#+HEADER: :var mystring="Sunday" :var myint=145 :var mydouble=3.14
+#+HEADER: :exports both :tangle test.cpp
+#+BEGIN_SRC C :includes (list "<stdio.h>")
+int i = 1;
+int b = 2;
+printf("%d\n",i+b);
+printf("Hello World\n");
+printf("mystring %s\n", mystring);
+printf("myint	 %d\n", myint);
+printf("mydouble %g\n", mydouble);
+#+END_SRC
+
+#+RESULTS: test.cpp
+| 3        |        |
+| Hello    |  World |
+| mystring | Sunday |
+| myint    |    145 |
+| mydouble |   3.14 |
+
+* [[https://orgmode.org/worg/org-contrib/babel/languages.html][Other langs]]

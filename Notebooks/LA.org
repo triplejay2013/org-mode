@@ -49,4 +49,13 @@
 ***** Anti-derivatives
   Anti derivatives of higher order derivatives generate an unknwon constant which cannot be determined without an initial condition
 
+**** Abstract Functions Functions
+	 - example
+x(t)^2 + y(t)^2 
+
+(think of chain rule)
+outside is u^2 -> Derivative is 2u
+inside is x(t) -> Derivative is dx/dt
+
+df/dt = 2x dx/dt + 2y dy/dt
 *** Examples
