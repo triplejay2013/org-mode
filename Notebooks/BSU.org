@@ -1,6 +1,9 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
 
+* Misc Items
+** TODO update src and exmp insertion to have more infor like headers and names when hot-keyed
+
 * Need to know commands for emacs
 ** Quick Commands
 	- C-x C-q to disable read-only buffer
@@ -177,6 +180,93 @@ REMEMBER:
 		  ~= (b^1)/b * E^t mod n~
 		  ~= 1 * E^t mod n~
 		  ~= E^t mod n = M~
+******* Chosen Ciphertext Attack(Signature Forging)
+		- This attack can be used to forge a signature on a message
+******** M-coded message
+		- Compute factorization of:
+		M= p1^{m1} * p2^{m2}*...*pk^{mk}
+		- Requests that bob sign p1,p2,p3,....,pk
+		- Assume that Q1,Q2,Q3,...,Qk are corresponding signatures..
+		CLAIM: Q1^{m1}*Q2^{m2}*....*Qk^{mk} is Bob's signature on M
+
+		(n,e) - Bob's public signature key
+		Q1=P1^t mod n (Q1 is a signature on p1)
+		Q2=p2^t mod n
+		.
+		.
+		.
+		Qk=pk^t mod n : where t is Bob's private signature key
+
+******** RSA verification:
+			____SIGNATURE_____
+		(Q1^{m1}*Q2^{m2}*....*Qk^{mk})^e mod n = M
+		(Q1^{m1})^e *(Q2^{m2})^e *....* (Qk^{mk})^e mod n = M
+		((P1^t mod n)^{m1*e}) *((P2^t mod n)^{m2*e}) *....* ((pk^t mod n){mk*e}) mod n = M
+		(p1^{t*e})^m1 * (p2^{t*e}})^m2 *...* (pk^{t*e})^mk mod n
+		REMEMBER: t=e^-1 mod phi(n) --> t*e= 1 mod phi(n)
+		(p1^{t*e mod phi(n)})^m1 * (p2^{t*e mod phi(n)}})^m2 *...* (pk^{t*e mod phi(n)})^mk mod n
+		(p1^1)^m1 * (p2^1)^m2 * ... * (pk^1)^mk = M
+		^
+		This shows that Q1^m1 * Q2^m2 *....*Qk^mk is a valid signature on M
+#+NAME: CipherText worked out
+#+BEGIN_EXAMPLE 
+#+END_EXAMPLE
+******** Example
+#+BEGIN_EXAMPLE 
+M=12=2^2 * 3
+Bob's public signature key (n=15,e=7)
+
+15=3*5, phi(15)=(3-1)(5-1)=12
+t=7
+e= t^-1 mod 8
+e= 7^-1 mod 8
+e=7
+
+1. We will show how Eve can forge Bob's signature on M=12
+2. Eve asks Bob to sign p1=2 and p2=3
+3. Bob signs p1=2: 2^7 mod 15 = 8
+4. Bob signs p2=3: 3^7 mod 15 = 12
+   - 8 is Bob's signature on 2
+   - 12 is Bob's signature on 3
+5. Eve computes the following:
+   - 8^2 * 12^1 mod 15 = 3
+   - We claim that 3 is a valid signature on M
+6. Too show this we need to use RSA verifiction algorithm
+   - S = 3; a valid signature
+   - if S^e mod n = M, S is a valid signature on M
+   - Compute 3^7 mod 15 = 12 *Verified!
+
+
+#+END_EXAMPLE
+******* Fermat's Factoring Method
+******** Attack
+		- Theorem (Fermat) Every odd integer (positive)
+		  can be represented as difference of squares
+		  - n=X^2-y^2 = (x-y)(x+y)
+		- Fermat's attack is a deterministic factoring method
+		  - not probabilistic?
+		- Assume that n is RSA modlus. This means
+		  - p=x-y and q=x+y
+		  - p+q = 2x -> x=(p+q)/2
+		  - q-p = 2y -> y=(q-p)/2
+		  - n = x^2 - y^2 -> y^2=x^2 -n
+			- y^2 >= 0 implies x^2 >= n  implies x >= sqrt(n)
+		- Method
+		  1. x= floor(sqrt(n))
+		  2. check floor(x)^2 - n is a perfect square
+			 1. if yes, we are done
+				1. sqrt(floor(x)^2 -n)) = y
+				2. floor(sqrt(n))=x
+			 2. if not x->x+1
+				1. x=floor(sqrt(n))+1
+				2. Check whether floor(x)^2 - n is a perfect square
+				   1. If yes we are done.
+				   2. Otherwise x->x+1 and repeat
+******** Defence
+		 - find p*q=n such that Fermat's factoring method is computationally difficult
+********* Example
+		  1. Assumee that after k many iterations we find
+			 1. x=sqrt(n) +k and y=sqrt(x^2 -n)
 ****** Signatures
 	   - Confidentiality
 	   - Data integrity
@@ -186,7 +276,7 @@ REMEMBER:
 ******* Define ownership of an RSA Key
 		terse: signed with private key, verified with public key
 
-		1. The key owner chooses twwo prime numbers, /p/ and /q/
+		1. The key owner chooses two prime numbers, /p/ and /q/
 		2. The key owner compute ~n=p*q~ and ~phi(n)=(p-1)*(q-1)~
 		3. The key owner chooses an /e/ with ~gcd(e/phi(n))=1~
 		   1. Compute ~e=t^-1 mod phi(n)~
@@ -197,7 +287,7 @@ REMEMBER:
 		The public signature key is ~(n,e)~ 
 		The private signature key is ~t~
 
-******* Verfy Ownership
+******* Verify Ownership
 		- ~S=M^t mod n~
 		  - S is a signature on M
 		- ~k=S^e mod n~
@@ -493,6 +583,9 @@ printf("Hello World");
 	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
 	 
 *** Lecture
+**** Directives
+	 - .org ###
+	   - Use up ### bytes of memory. 'Skips' ### for the location counter
 **** Bit Manipulation
 ***** Notes
 ****** Abstractions
@@ -609,6 +702,39 @@ Check Blackboard for more examples pdf file in this directory
 *IMPORTANT* Accessors do not change an object's data, so they
 should be marked ~const~ (getLength and getWidth)
 
+**** Pointers and Arrays in Assembly
+***** Pointers
+
+[[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
+#+NAME: Pointer Example
+#+BEGIN_SRC asm
+.text
+// DEREFERENCING DATA
+ldr r0,=A //est. addr. to var. A in r0
+ldr r1,[r0,#0] // dereference data here
+
+// DEREFERENCING POINTERS (3-step process)
+ldr r0,=PA	// Load pointer
+ldr r1,[r0] // Load address the pointer contains
+ldr r2,[r1]	// use value at address referenced by PA
+//===========
+ldr r0,=PB
+ldr r1,[r0]
+ldrb r2,[r1]
+//===========
+ldr r0,=PC
+ldr r1,[r0]
+ldrb r2,[r1]
+
+.data
+A	.word	0x11111111
+PA:	.word	A	# This is a pointer to A
+B	.byte	0x11111111
+PB:	.word	B	# This is a pointer to B
+C	.short	0x11111111
+PC:	.word	C	# This is a pointer to C
+#+END_SRC
+***** Arrays
 *** Lab
 **** SUBMITTED Pre-Lab 6: Device Memory
      DEADLINE: <2018-10-03 Wed 14:00>

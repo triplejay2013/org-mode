@@ -70,6 +70,7 @@
     (C . t)
     (sh . t)
     (shell . t)
+    ; (asm-mode . t) ; Assembly not supported?
     (java . t)))
 
 ;; REF: http://cachestocaches.com/2018/6/org-literate-programming/
