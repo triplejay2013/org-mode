@@ -58,4 +58,5 @@ outside is u^2 -> Derivative is 2u
 inside is x(t) -> Derivative is dx/dt
 
 df/dt = 2x dx/dt + 2y dy/dt
+**** Related Rates
 *** Examples

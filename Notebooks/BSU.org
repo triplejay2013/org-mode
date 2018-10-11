@@ -621,8 +621,49 @@ printf("Hello World");
 #+END_SRC
 
 #+RESULTS: Function Pointers
-[[file:src/c/functionPointers.txt]]
+: DEBUG: Entering a string/function foo!
 
+**** Debugging, valgrind
+***** Defining Macros 
+	  - A macro is 'preprocessed'. C can expand functionality using these macros
+***** Debug macro
+#+NAME: Function Pointers
+#+HEADER: :main no :dir ./src/c
+#+HEADER: :tangle ./src/c/debug.c
+#+BEGIN_SRC C :includes '(<stdio.h> <stdlib.h>)
+//in makefile
+//use debug target
+/*
+	CFLAGS = -Wall -std=c99
+	EXE=foo
+
+	all: $(EXE)
+
+	debug: CFLAGS += -DDEBUG -g -Og
+	debug: $(EXE)
+	
+	$(EXE): foo.o
+		gcc $^ -o $@
+*/
+
+//uncomment if in debug.h
+//#ifdef DEBUG
+#define DPRINT(s) printf("DEBUG: %s\n", s)
+//#else
+//#define DPRINT(s)
+//#endif
+
+int main(){
+	//Example usage
+	DPRINT("Entering a string/function foo!");
+	//This is expanded into printf("DEBUG: %s\n", "Enetering a string/function foo!")
+}
+#+END_SRC
+
+***** Valgrind
+	  - Toolkit popular for memory issues (leaks, bad pointers)
+	  - Valgrind is a virtual machine executing your program
+	  - See /CS253 class resources/ for examples
 *** Assignments
 **** DONE P4 - Smash Simplified Shell Assignment
      DEADLINE: <2018-10-14 Sun>
@@ -901,6 +942,15 @@ $$
 CALL GetShortNameStudents2(6);
 */
 #+END_SRC
+**** Joining Tables
+***** JOIN clause
+	  - allows you to connect different sets of data
+	  - you can have more than one JOIN clause and connect multiple sets together
+	  - you can use LEFT or RIGHT joins, (INNER is an optional keyword and is
+		default if no other keywords are present)
+	  - Joining tables is often accomplished using a foreign key column that connects 
+		to a primary key column in another table
+	  - To connect Key columns you will use the ON clause after the JOIN clause
 *** Assignments
 Assignments will build off of eachother,
 use only one database for all assignments

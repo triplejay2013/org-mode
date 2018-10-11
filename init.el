@@ -1,5 +1,12 @@
 ; Org Mode set up (as per manual instructions)
 ; https://orgmode.org/manual/Installation.html#Installation
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (add-to-list 'load-path "~/.src/org-mode/lisp")
 
 ; adds contributed libraries not included in Emacs
@@ -63,12 +70,17 @@
 (define-key org-mode-map "\C-cs"
 	    (lambda()(interactive)(insert "#+BEGIN_SRC C\n#+END_SRC")))
 
+;; Quick insert of example blocks
+(define-key org-mode-map "\C-ce"
+	    (lambda()(interactive)(insert "#+BEGIN_EXAMPLE \n#+END_EXAMPLE")))
+
 ;; Define Babel languages
 (org-babel-do-load-languages
   'org-babel-load-languages
   '((python . t)
     (C . t)
     (sh . t)
+    (latex . t)
     (shell . t)
     ; (asm-mode . t) ; Assembly not supported?
     (java . t)))
@@ -93,9 +105,6 @@
 	  "srcBlocks.org"
 	  "Church.org")))
 
-(define-key org-mode-map "\C-ce"
-	    (lambda()(interactive)(insert "#+BEGIN_EXAMPLE \n#+END_EXAMPLE")))
-
 ; Exporting Config
 ; REF: https://orgmode.org/manual/Project-alist.html
 ; REF: https://stackoverflow.com/a/9560430
@@ -117,3 +126,25 @@
 (setq browse-url-browser-function 'browse-url-chromium)
 ; REF: https://lists.gnu.org/archive/html/emacs-orgmode/2010-07/msg00879.html
 (setq browse-url-generic-program "chromium-browser")
+
+; LaTeX setup
+; Sets up embedded latex fragments
+; REF: https://orgmode.org/worg/org-tutorials/org-latex-preview.html
+(setq org-latex-create-formula-image-program 'dvipng)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   (quote
+	("~/.emacs.d/Notebooks/LA.org" "~/.emacs.d/Notebooks/BSU.org" "~/.emacs.d/Notebooks/Personal.org" "~/.emacs.d/Notebooks/srcBlocks.org" "~/.emacs.d/Notebooks/Church.org")))
+ '(package-selected-packages (quote (auctex))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background "#000000"))))
+ '(org-hide ((t (:foreground "#000000")))))
