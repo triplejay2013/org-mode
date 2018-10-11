@@ -79,4 +79,24 @@ printf("mydouble %g\n", mydouble);
 | myint    |    145 |
 | mydouble |   3.14 |
 
+* [[https://github.com/stakemori/ob-sagemath/blob/master/example.org][Sage Support Babel]]
+** Session
+#+BEGIN_SRC sage :session foo
+	print("This code will be evaluated in the process buffer *Sage<foo>*.")
+#+END_SRC
+
+#+RESULTS:
+: This code will be evaluated in the process buffer *Sage<foo>*.
+
+** Images
+#+BEGIN_SRC sage :file sin.png
+	# You can change the size of the image by providing the figsize argument
+	plot(sin,[0,2*pi],figsize=4)
+#+END_SRC
+
+#+RESULTS:
+[[file:sin.png]]
+
+** Basic Math
+
 * [[https://orgmode.org/worg/org-contrib/babel/languages.html][Other langs]]

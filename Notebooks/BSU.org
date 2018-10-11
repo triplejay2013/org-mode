@@ -239,6 +239,7 @@ e=7
 
 #+END_EXAMPLE
 ******* Fermat's Factoring Method
+******** See Sage:fermatAttack.sagews for example
 ******** Attack
 		- Theorem (Fermat) Every odd integer (positive)
 		  can be represented as difference of squares
@@ -263,10 +264,38 @@ e=7
 				   1. If yes we are done.
 				   2. Otherwise x->x+1 and repeat
 ******** Defence
-		 - find p*q=n such that Fermat's factoring method is computationally difficult
+		- find p*q=n such that Fermat's factoring method is computationally difficult
+		- Misc
+		  - x=sqrt(n) +1
+		  - x^2 - n = y^2
+		  - (sqrt(n) + 1)^2 -n = y^2 (?)
+		  - .
+		  - .
+		  - .
+		  - (sqrt(n) + m)^2 - n = y^2
+
+		- Defence against
+		  1. If we have {p=x-y; q=x+y}, x=(p+q)/2, y=(q-p)/2
+		  2. Using simple algebra...we get
+			 - m=(sqrt(p) - sqrt(q))^2 /4
+		  3. m is "small" if p~=q
+		  4. DEFENSE: Choose p and q such that m is "large"
+		
 ********* Example
+********** TODO SAGE procedure on blackboard shows this defence
+********** Misc
 		  1. Assumee that after k many iterations we find
 			 1. x=sqrt(n) +k and y=sqrt(x^2 -n)
+******* Initial Segment Factoring Method
+******** See Sage:ISattack.sagews for example
+******** Defence:
+		 1. Check whether n is weak against Fermat Attack
+			- n i sresistant against Fermat Attack
+		 2. Choose primes p and q such that p has some number of
+			consecutive zeroes and choose q such that #q is alrger than
+			the number of zeroes in p
+		 3. Compute N=p*q
+		 4. Apply IsAttack on N and Fermat Attack on N
 ****** Signatures
 	   - Confidentiality
 	   - Data integrity
@@ -840,6 +869,18 @@ ARRAY_END: 	.word	1,2,3,4,5,6,7,8
 	(ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
 							//The size in bytes divided by 4 bytes gives us the size
 #+END_SRC
+
+#+NAME: Array examples ASCII
+#+BEGIN_SRC asm
+ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
+ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
+ARRAY3: 	.ascii	"broncos"
+ARRAY4: 	.string	"broncos" 						//makes a string
+ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
+#+END_SRC
+***** ASCII
+	  - ASCII - American Standard Coding Information Interchange
+****** TODO Put Ascii table on notecard for exam 2
 *** Lab
 **** SUBMITTED Pre-Lab 6: Device Memory
      DEADLINE: <2018-10-03 Wed 14:00>
