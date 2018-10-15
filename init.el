@@ -18,6 +18,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
+(global-set-key "\C-cgt" 'evil-next-buffer)
+(global-set-key "\C-cgT" 'evil-prev-buffer)
 
 ; Load other .el files
 ; https://stackoverflow.com/a/2079146
@@ -42,9 +44,6 @@
 ;(load-user-file "powerline.el")
 ;;; END
 
-;; hot key issue fixes (FOR WINDOWS)
-;(w32-register-hot-key t)
-
 ; Evil Mode setup
 ; this can be found at:
 ; 	https://github.com/emacs-evil/evil
@@ -68,8 +67,14 @@
 
 ;; Quick insert src blocks
 ;; must be defined after (require 'org)
+; don't use exports with dir as per manual
+; REF: https://orgmode.org/manual/dir.html#dir
 (define-key org-mode-map "\C-cs"
-	    (lambda()(interactive)(insert "#+BEGIN_SRC C\n#+END_SRC")))
+	    (lambda()(interactive)(insert 
+"#+NAME: 
+#+HEADER: :dir ./src/ :file example.txt
+#+HEADER: :tangle ./src/
+#+BEGIN_SRC C\n#+END_SRC")))
 
 ;; Quick insert of example blocks
 (define-key org-mode-map "\C-ce"
@@ -163,3 +168,12 @@
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
+
+; Disable MenuBar
+; REF: https://www.emacswiki.org/emacs/MenuBar
+(menu-bar-mode -1)
+
+; Auto-kill active process
+; REF: https://stackoverflow.com/a/2708042
+(add-hook 'comint-exec-hook 
+      (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))

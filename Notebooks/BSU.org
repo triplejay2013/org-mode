@@ -3,7 +3,7 @@
 
 * Misc Items
 ** TODO update src and exmp insertion to have more infor like headers and names when hot-keyed
-
+** TODO Syncthing f**d things up....so missing most of my homework and recent updates
 * Need to know commands for emacs
 ** Quick Commands
 	- C-x C-q to disable read-only buffer
@@ -59,6 +59,201 @@
 
 ** TODO Spring Semester Planning
 * Fall 2018
+** ECE330
+*** Assignments
+**** SUBMITTED Lesson 13 - Ch. 12 Problems (all)
+     DEADLINE: <2018-10-02 Tue>
+**** SUBMITTED Quiz - Ch. 12 OpenNote OpenBook
+	 DEADLINE: <2018-10-02 Tue 18:00>
+**** SUBMITTED Lesson 15 - Ch. 14 Problems (all)
+	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
+**** TODO Lesson 17 - Ch. 15, 16 Problems (all)
+	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
+**** TODO Prelecture read and review
+	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
+*** Lecture
+**** Directives
+	 - .org ###
+	   - Use up ### bytes of memory. 'Skips' ### for the location counter
+**** Bit Manipulation
+***** Notes
+****** Abstractions
+ *These abstractions can be implemented with simple Bitwise operations*
+ 1. Test Bit
+	find what bit (?) is in a location
+ 2. Set Bit
+	makes a bit a '1'
+ 3. Clear Bit
+	makes a bit a '0'
+ 4. Toggle Bit
+	1->0, 0->1
+ 5. Get Bit(s)
+ 6. Put Bit(s)
+
+****** Register Represenation and truth tables
+******* Mask Register
+	 					        															 - BOI (bit of interest, SIZE =1
+																							 V
+ |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+ |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+ |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
+ |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+																										 *OFFSET (from bits 0-12)*
+
+******* Truth Tables
+  - And (Effectively 'Test Bit' & 'Clear Bit')
+	| M | B | F |
+	|---+---+---|
+	| 0 | 0 | 0 |---|_ Clear Bit
+	| 0 | 1 | 0 |---|
+	| 1 | 0 | 0 |---|_ Test Bit
+	| 1 | 1 | 1 |---|
+
+  - OR (Effectively 'Set Bit')
+	| M | B | F |
+	|---+---+---|
+	| 0 | 0 | 0 |
+	| 0 | 1 | 1 |
+	| 1 | 0 | 1 |---|_ Set Bit
+	| 1 | 1 | 1 |---|
+
+  - EOR (Effectively 'Toggle Bit')
+	| M | B | F |
+	|---+---+---|
+	| 0 | 0 | 0 |
+	| 0 | 1 | 1 |
+	| 1 | 0 | 1 |---|_ Toggle Bit
+	| 1 | 1 | 0 |---|
+   
+******* Expr and Instr
+ |                             | and | or   | eor | not | shift-left | shift-right |              |
+ |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+ | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
+ |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+ | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
+****** Mask/Inverse Mask
+		- A mask is a filter that allows us to focus on BOI (Bit of Interest)
+		- Values from some register we want to retrieve bits from, are copied into a mask register
+		- Represent bits (example from book)
+			- ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
+			- ldr r4, =0x00400000 //a little intuitive
+			- ldr r4, =4194304 //unclear, don't use
+			- ldr r4, =(1<<22) //intuitive which bit we are considering
+		- *Mask* - all bits but the BOI are '0'
+		- *Inverse mask* = all bits but the BOI are '1'
+#+BEGIN_EXAMPLE 
+1 << 12
+12: acts like the 'offset' for the data
+0b111 << 12: sets bits 12, 13, and 14 to 1
+
+~0 << 3: 11111000
+
+Normalize-Denormalize
+Static mask
+~(~0 << 3) << 12
+		|      |_
+		V	     V
+    sizeInBits  offset
+#+END_EXAMPLE
+****** Put and Get Bit
+		+ Get Bit(s) - AND mask can get the BOIs
+		+ Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
+******* Normalize
+******* De-Normalize
+****** Normalize/Denormalize
+	   Normalize - Shift bits /aligned right/
+	   Denormalize - Shift bits to desired location
+***** Examples
+****** Bit Manipulation Abstractions
+#+BEGIN_EXAMPLE
+# testbit(boi=14)
+ldr r4,=0x12345678		//0x12345678 - target
+ldr r2,=(1<<14)			//r2: 0x00004000 - mask
+and r2,r4,r2			//r2: 0x12345678 - apply mask
+
+#setbit(boi=15)
+ldr r4, =0x12345678		//r4: 0x12345678
+ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
+orr r2,r4,r2			//r2: 0x12345678 - apply mask
+.
+.
+.
+Check Blackboard for more examples pdf file in this directory
+#+END_EXAMPLE
+[[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
+**** Mutator and Accessor
+***** Definitions
+| get | Accessor | function that retrieves a value from a private member variable                                                                |   |
+|-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
+| set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
+
+*IMPORTANT* Accessors do not change an object's data, so they
+should be marked ~const~ (getLength and getWidth)
+
+**** Pointers and Arrays in Assembly
+***** Pointers
+
+[[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
+#+NAME: Pointer Example
+#+BEGIN_SRC asm
+.text
+// DEREFERENCING DATA
+ldr r0,=A //est. addr. to var. A in r0
+ldr r1,[r0,#0] // dereference data here
+
+// DEREFERENCING POINTERS (3-step process)
+ldr r0,=PA	// Load pointer
+ldr r1,[r0] // Load address the pointer contains
+ldr r2,[r1]	// use value at address referenced by PA
+//===========
+ldr r0,=PB
+ldr r1,[r0]
+ldrb r2,[r1]
+//===========
+ldr r0,=PC
+ldr r1,[r0]
+ldrb r2,[r1]
+
+.data
+A	.word	0x11111111
+PA:	.word	A	# This is a pointer to A
+B	.byte	0x11111111
+PB:	.word	B	# This is a pointer to B
+C	.short	0x11111111
+PC:	.word	C	# This is a pointer to C
+#+END_SRC
+***** Arrays
+#+NAME: Array example
+#+BEGIN_SRC asm
+.data
+ARRAY1: 	.word	1,2,3,4,5,6,7,8
+ARRAY_END: 	.word	1,2,3,4,5,6,7,8
+
+.equ ARRAY_SIZE,
+	(ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
+							//The size in bytes divided by 4 bytes gives us the size
+#+END_SRC
+
+#+NAME: Array examples ASCII
+#+BEGIN_SRC asm
+ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
+ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
+ARRAY3: 	.ascii	"broncos"
+ARRAY4: 	.string	"broncos" 						//makes a string
+ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
+#+END_SRC
+***** ASCII
+	  - ASCII - American Standard Coding Information Interchange
+****** TODO Put Ascii table on notecard for exam 2
+*** Lab
+**** SUBMITTED Pre-Lab 6: Device Memory
+     DEADLINE: <2018-10-03 Wed 14:00>
+
+**** TODO Pre-Lab 7: General Purpose I/O Devices
+	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-10 Wed>
+**** TODO Pre-Lab 8: Seven Segment Display
+	 DEADLINE: <2018-10-17 Wed> SCHEDULED: <2018-10-15 Mon>
 ** Math307
 *** Lecture
 **** RSA
@@ -368,155 +563,89 @@ print(p)    #Original prime
 	 - [ ] part 2
        - Place code for solving the two parts here
 
-** CS230
-*** Lecture
-**** Intellectual Property
-***** Closed Source
-****** Software Licenses
-******* Proprietary LIcense (E.g. Microsoft
-		- Manufactuer reserves all rights /not expressly granted/
-***** Open Source
-****** Notes
-	 - Is open source software free?
-	 - This isn't necessarily the case
-	 - what do you pay for in buying /free/ software?
-		 - Technical support
-		 - Testing
-		 - proprietary aps enhancing the distro
-****** Software Licenses
-******* Permissive License(s) (E.g. MIT)
-  A /permissive license/ imposes minimal restrictions on the 
-  distribution of the software
+**** TODO Homework 6
+	 DEADLINE: <2018-10-18 Thu> SCHEDULED: <2018-10-15 Mon>
+***** TODO Print off assignment
+	  SCHEDULED: <2018-10-17 Wed> DEADLINE: <2018-10-18 Thu>
+***** Solution
+#+NAME: Assignment 6: Fermat Attack
+#+HEADER: :file ./src/sage/part1.txt 
+#+HEADER: :tangle ./src/sage/part2.sage
+#+BEGIN_SRC sage :exports results
+# Function Definitions
+# REF: Blackboard Software (rsadecrypt)
+def ASCIIDepad(Number):
+    n = Number.ndigits() % 3;
+    if (n > 0):
+        print("This is not a padded ASCII string\n");
+    else:
+        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+        N = "";
+        for i in range(Number.ndigits()/3):
+            N = chr(L[i]) + N;
+        return(N)
 
-  - Berkeley Systems Division (BSD) License
-  - Apache LIcense
-  - MIT License
-  
-  Permits the software to be incorporated into proprietary products
-******* Protective ("copy-left license)
-  - A /copyleft license/ offers the author of a /derivative work/
-	- The right to use the licensed software
-	  - So long as the /derivative work/ is also distributed with the /copyleft license/
-  - Copyleft software cannot be incorporated into a proprietary product (or even a permissive open source product)
-  - Copyleft software can be incorporated into another copyleft product
-  - GNU general Public License is an example of this
+def rsadecrypt(encr,decrexp,encrmod):
+    D = power_mod(encr,decrexp,encrmod);
+    N = ASCIIDepad(D);
+    return(N);
 
-***** Public Domain
-***** Software Patents
-****** Patent laws
-	   - vary country to country
-	   - We will focus on US software patents
-	   - Obtaining a US patent does *NOT* guerentee protection globally
-	   - Treaties (eg World Trade Organization's Agreement) have tried to change this
-		 
-****** What does a Patent do?
-	   - provides certain rights to a patent holder
-	   - In exchange for the complete disclosure of the invention
-	   - No one may build, use, sell or import/export without patent holder permis.
-	   - Term limited (20 years has been typical)
-****** Patent Requirements
-	   - Processes, machines, articles of manufacture and compositions of matter
-		 - Exceptions (CANNOT be patented)
-		   - Abstract ideas
-		   - laws of nature
-		   - natural phenomenon
-	   - Novel - unique, can't be easily determined
-	   - Useful
-	   - Non-Obvious
-****** Copyright vs. Patent
-	   - A computer program is an expression of a method, an implementation, and can be copyrighted
-	   - A patent protects a program's underlying methodolgy, not the implmenatation.
-	   - But...
-		 - US supreme court ruled that a numerical algorithm (abstract idea) cannot be patented
-	   - Patents protect methodolgy, not an algorithm
-	   - The supreme cour ruling itself still has some exceptions
-	   - [[https://www.bitlaw.com][bitlaw - software law resource]]
-****** Software Patent Take-Aways
-	   - Patents are expensive and time-consuming
-	   - Patents may not be the best way to protect your software
-	   - Preferred methods include:
-		 - Trade Secrets
-		 - Copyrights
-		 - Public Domain (may block others from patenting it!!!)
-	   - Patents look cool on your resume
-***** Trademarks
-****** What is a trademark?
-	  - Sign, symbol or logo
-	  - Word, Phrase or name
-	  - Design or an image
-	  - (r)
-****** About Tradmarks
-	   - Another form of intellectual property
-	   - are 'recognizable" like a signature
-	   - protects brand names, logos, etc
-	   - [[https://www.uspto.gov/trademark][Register a trademark]]
-****** Symbols for trademarks
-	   - (r) is for registered tradmarks
-	   - ^TM is for unregistered trademarks
-****** Trademarks for Developers
-	   - Even open-source projects may have trademarks!
-	   - We encounter trademarks when we implement user interfaces displaying our company's trademark
-	   - Most company's have policies rgulating the use and protection of tehir trademark
-**** Privacy
-***** Notes
-	 - Aspects of privacy (as per CS23)
-	   - Confidentiality
-	   - Integrity
-	   - Right to be let alone
-	 - privacy expectations vary amongst cultures
 
-***** Definitions
-	  - Authentication
-		- Protection of confidential information requires us to:
-		  - Identify who wnats to access the data
-		  - Identify who owns the data
-		- /Authentication/ associates an /identity/ with a subject activity
-		- Factors
-		  - Enables a system to identify users
-		  - Multi-factor authentication
-	  - Authorization
-		- determines what rights a subject has to a datum
-		  - ex: triplejay2013 is authorize to read but not write file, foo.txt
-	  - Confidentiality Policy
-		+ defines who is allowed specific rights to what data
-		+ Confidentiality: What can be access
-		  1. The credit card number you used on-line
-		  2. your phone number
-		  3. your eMail address
-		  4. residential address
-		  5. shopping history (what and where)
-		  6. current location
-		  7. health history
-		  8. browser history
-		  9. texting history
-		  10. DNA
-		  11. Password
-	    + Confidentiality: Who can access
-		  1. Family
-		  2. real-world friends
-		  3. people on social media
-		  4. retailers
-		  5. employwer
-		  6. political party
-		  7. police
-		  8. federal government
-		+ Confidentiality: Data in Transit
-		  - Symmetric-key cryptography
-			- Believed to provide strong security
-			- Both sender and reciever must know secret key
-			- /Key distribution problem/: how to share the secret key
-		  - Asymmetric-key cryptography (public-key)
-		+ Confidentiality: Data at rest
-		  - Hash values are an example of a one-way function (easy one way, hard the other)
-		  - Hash values are stored, not the actual passwords
-		  - Cookies Example
-			- Cookies store state information in clients (browsers
-**** Assignments
-***** TODO Update Journal entry
-	  DEADLINE: <2018-10-10 Tue>
-	  - [ ] include link to license webpage as a plus
-	  - [ ] look up something related to privacy/cookies/confidentiality
-	  - [ ] include personal notes into the file
+# From Blackboard Software Sources (Fermat Attack)
+def isqrt(n):
+    return int(floor(sqrt(n)))
+
+def usqrt (n):
+    ur = isqrt(n)
+    if ur ** 2 < n:
+        ur = ur + 1
+    return(ur)
+
+def FermatAttack (n, rounds):
+    st = usqrt(n)
+    for x in range(st, st + rounds + 1):
+        #print (x-st)
+        sq = x ** 2 - n
+        y = isqrt(sq)
+        if y ** 2 == sq:
+            print "Factor found in round {0}".format(x-st+1)
+            return(x + y)
+    print "No factor found in {0} rounds".format(rounds)
+
+# Define Problem information into code
+# aliceKey=(R/n,e) where R or n is the modulos
+aliceKey=(3200909051105364201164693808053590029074088922158723491051061550603549823737458227601881401901569257978004143012923593331603179164497963879113975835000986070024699519343049991253001543465847139349037243656109687211847515003135028132545450689475582835433024130454351048493271288284326740872991312817737068756145723348616748658487242931184584005382638341 ,45938274932874982748938989492800101)
+n=aliceKey[0]
+e=aliceKey[1]
+bobM=1646965299225077453528764533325484870128106736546137408200095456059067040313170132659677309326733627254170824177278689792967869683703210102631692715251241388457103568881887427174337319839702934337074114069079964028787201219122008132800911350242389943062437915595376659222211331548822861710469042657218207369516502014847384607200570429591504554077212313
+
+# Try a Fermat Attack on bob's message
+p=FermatAttack(n,10)
+p
+# Find the prime factors of n
+q=aliceKey[0]/p
+phi=(p-1)*(q-1)
+
+# compute private key
+t=inverse_mod(e,phi)
+t
+	
+# Attempt to decrypt the message
+D=rsadecrypt(bobM, t, n)
+D
+
+print("The message is {}".format(D))
+print("The private key is {}".format(t))
+print("The value of phi(R) is {}".format(phi))
+print("Factors of R are {} and {}".format(p,q))
+
+#+END_SRC
+
+#+RESULTS: Assignment 6: Fermat Attack
+[[file:./src/sage/part1.txt]]
+
+**** TODO Homework 7
+	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-22 Mon>
 ** CS253
 *** Lecture
 **** Structs
@@ -697,196 +826,161 @@ int main(){
 **** DONE P4 - Smash Simplified Shell Assignment
      DEADLINE: <2018-10-14 Sun>
 
-** ECE330
+** CS230
 *** Assignments
-**** DONE Lesson 13 - Ch. 12 Problems (all)
-     DEADLINE: <2018-10-02 Tue>
-**** DONE Quiz - Ch. 12 OpenNote OpenBook
-	 DEADLINE: <2018-10-02 Tue 18:00>
-**** TODO Lesson 15 - Ch. 14 Problems (all)
-	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
-	 
+**** TODO Sign up for exam2
+	 SCHEDULED: <2018-10-16 Tue>
+**** TODO Take IP-Quiz
+**** TODO update journal
+	 SCHEDULED: <2018-10-16 Tue>
 *** Lecture
-**** Directives
-	 - .org ###
-	   - Use up ### bytes of memory. 'Skips' ### for the location counter
-**** Bit Manipulation
+**** Intellectual Property
+***** Closed Source
+****** Software Licenses
+******* Proprietary LIcense (E.g. Microsoft
+		- Manufactuer reserves all rights /not expressly granted/
+***** Open Source
+****** Notes
+	 - Is open source software free?
+	 - This isn't necessarily the case
+	 - what do you pay for in buying /free/ software?
+		 - Technical support
+		 - Testing
+		 - proprietary aps enhancing the distro
+****** Software Licenses
+******* Permissive License(s) (E.g. MIT)
+  A /permissive license/ imposes minimal restrictions on the 
+  distribution of the software
+
+  - Berkeley Systems Division (BSD) License
+  - Apache LIcense
+  - MIT License
+  
+  Permits the software to be incorporated into proprietary products
+******* Protective ("copy-left license)
+  - A /copyleft license/ offers the author of a /derivative work/
+	- The right to use the licensed software
+	  - So long as the /derivative work/ is also distributed with the /copyleft license/
+  - Copyleft software cannot be incorporated into a proprietary product (or even a permissive open source product)
+  - Copyleft software can be incorporated into another copyleft product
+  - GNU general Public License is an example of this
+
+***** Public Domain
+***** Software Patents
+****** Patent laws
+	   - vary country to country
+	   - We will focus on US software patents
+	   - Obtaining a US patent does *NOT* guerentee protection globally
+	   - Treaties (eg World Trade Organization's Agreement) have tried to change this
+		 
+****** What does a Patent do?
+	   - provides certain rights to a patent holder
+	   - In exchange for the complete disclosure of the invention
+	   - No one may build, use, sell or import/export without patent holder permis.
+	   - Term limited (20 years has been typical)
+****** Patent Requirements
+	   - Processes, machines, articles of manufacture and compositions of matter
+		 - Exceptions (CANNOT be patented)
+		   - Abstract ideas
+		   - laws of nature
+		   - natural phenomenon
+	   - Novel - unique, can't be easily determined
+	   - Useful
+	   - Non-Obvious
+****** Copyright vs. Patent
+	   - A computer program is an expression of a method, an implementation, and can be copyrighted
+	   - A patent protects a program's underlying methodolgy, not the implmenatation.
+	   - But...
+		 - US supreme court ruled that a numerical algorithm (abstract idea) cannot be patented
+	   - Patents protect methodolgy, not an algorithm
+	   - The supreme cour ruling itself still has some exceptions
+	   - [[https://www.bitlaw.com][bitlaw - software law resource]]
+****** Software Patent Take-Aways
+	   - Patents are expensive and time-consuming
+	   - Patents may not be the best way to protect your software
+	   - Preferred methods include:
+		 - Trade Secrets
+		 - Copyrights
+		 - Public Domain (may block others from patenting it!!!)
+	   - Patents look cool on your resume
+***** Trademarks
+****** What is a trademark?
+	  - Sign, symbol or logo
+	  - Word, Phrase or name
+	  - Design or an image
+	  - (r)
+****** About Tradmarks
+	   - Another form of intellectual property
+	   - are 'recognizable" like a signature
+	   - protects brand names, logos, etc
+	   - [[https://www.uspto.gov/trademark][Register a trademark]]
+****** Symbols for trademarks
+	   - (r) is for registered tradmarks
+	   - ^TM is for unregistered trademarks
+****** Trademarks for Developers
+	   - Even open-source projects may have trademarks!
+	   - We encounter trademarks when we implement user interfaces displaying our company's trademark
+	   - Most company's have policies rgulating the use and protection of tehir trademark
+**** Privacy
 ***** Notes
-****** Abstractions
- *These abstractions can be implemented with simple Bitwise operations*
- 1. Test Bit
-	find what bit (?) is in a location
- 2. Set Bit
-	makes a bit a '1'
- 3. Clear Bit
-	makes a bit a '0'
- 4. Toggle Bit
-	1->0, 0->1
- 5. Get Bit(s)
- 6. Put Bit(s)
+	 - Aspects of privacy (as per CS23)
+	   - Confidentiality
+	   - Integrity
+	   - Right to be let alone
+	 - privacy expectations vary amongst cultures
 
-****** Register Represenation and truth tables
-******* Mask Register
-	 					        															 - BOI (bit of interest, SIZE =1
-																							 V
- |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
- | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
- |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
- |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
- |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
-																										 *OFFSET (from bits 0-12)*
-
-******* Truth Tables
-  - And (Effectively 'Test Bit' & 'Clear Bit')
-	| M | B | F |
-	|---+---+---|
-	| 0 | 0 | 0 |---|_ Clear Bit
-	| 0 | 1 | 0 |---|
-	| 1 | 0 | 0 |---|_ Test Bit
-	| 1 | 1 | 1 |---|
-
-  - OR (Effectively 'Set Bit')
-	| M | B | F |
-	|---+---+---|
-	| 0 | 0 | 0 |
-	| 0 | 1 | 1 |
-	| 1 | 0 | 1 |---|_ Set Bit
-	| 1 | 1 | 1 |---|
-
-  - EOR (Effectively 'Toggle Bit')
-	| M | B | F |
-	|---+---+---|
-	| 0 | 0 | 0 |
-	| 0 | 1 | 1 |
-	| 1 | 0 | 1 |---|_ Toggle Bit
-	| 1 | 1 | 0 |---|
-   
-******* Expr and Instr
- |                             | and | or   | eor | not | shift-left | shift-right |              |
- |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
- | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
- |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
- | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
-****** Mask/Inverse Mask
-		- A mask is a filter that allows us to focus on BOI (Bit of Interest)
-		- Values from some register we want to retrieve bits from, are copied into a mask register
-		- Represent bits (example from book)
-			- ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
-			- ldr r4, =0x00400000 //a little intuitive
-			- ldr r4, =4194304 //unclear, don't use
-			- ldr r4, =(1<<22) //intuitive which bit we are considering
-		- *Mask* - all bits but the BOI are '0'
-		- *Inverse mask* = all bits but the BOI are '1'
-#+BEGIN_EXAMPLE 
-1 << 12
-12: acts like the 'offset' for the data
-0b111 << 12: sets bits 12, 13, and 14 to 1
-
-~0 << 3: 11111000
-
-Normalize-Denormalize
-Static mask
-~(~0 << 3) << 12
-		|      |_
-		V	     V
-    sizeInBits  offset
-#+END_EXAMPLE
-****** Put and Get Bit
-		+ Get Bit(s) - AND mask can get the BOIs
-		+ Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
-******* Normalize
-******* De-Normalize
-****** Normalize/Denormalize
-	   Normalize - Shift bits /aligned right/
-	   Denormalize - Shift bits to desired location
-***** Examples
-****** Bit Manipulation Abstractions
-#+BEGIN_EXAMPLE
-# testbit(boi=14)
-ldr r4,=0x12345678		//0x12345678 - target
-ldr r2,=(1<<14)			//r2: 0x00004000 - mask
-and r2,r4,r2			//r2: 0x12345678 - apply mask
-
-#setbit(boi=15)
-ldr r4, =0x12345678		//r4: 0x12345678
-ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
-orr r2,r4,r2			//r2: 0x12345678 - apply mask
-.
-.
-.
-Check Blackboard for more examples pdf file in this directory
-#+END_EXAMPLE
-[[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
-**** Mutator and Accessor
 ***** Definitions
-| get | Accessor | function that retrieves a value from a private member variable                                                                |   |
-|-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
-| set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
-
-*IMPORTANT* Accessors do not change an object's data, so they
-should be marked ~const~ (getLength and getWidth)
-
-**** Pointers and Arrays in Assembly
-***** Pointers
-
-[[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
-#+NAME: Pointer Example
-#+BEGIN_SRC asm
-.text
-// DEREFERENCING DATA
-ldr r0,=A //est. addr. to var. A in r0
-ldr r1,[r0,#0] // dereference data here
-
-// DEREFERENCING POINTERS (3-step process)
-ldr r0,=PA	// Load pointer
-ldr r1,[r0] // Load address the pointer contains
-ldr r2,[r1]	// use value at address referenced by PA
-//===========
-ldr r0,=PB
-ldr r1,[r0]
-ldrb r2,[r1]
-//===========
-ldr r0,=PC
-ldr r1,[r0]
-ldrb r2,[r1]
-
-.data
-A	.word	0x11111111
-PA:	.word	A	# This is a pointer to A
-B	.byte	0x11111111
-PB:	.word	B	# This is a pointer to B
-C	.short	0x11111111
-PC:	.word	C	# This is a pointer to C
-#+END_SRC
-***** Arrays
-#+NAME: Array example
-#+BEGIN_SRC asm
-.data
-ARRAY1: 	.word	1,2,3,4,5,6,7,8
-ARRAY_END: 	.word	1,2,3,4,5,6,7,8
-
-.equ ARRAY_SIZE,
-	(ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
-							//The size in bytes divided by 4 bytes gives us the size
-#+END_SRC
-
-#+NAME: Array examples ASCII
-#+BEGIN_SRC asm
-ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
-ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
-ARRAY3: 	.ascii	"broncos"
-ARRAY4: 	.string	"broncos" 						//makes a string
-ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
-#+END_SRC
-***** ASCII
-	  - ASCII - American Standard Coding Information Interchange
-****** TODO Put Ascii table on notecard for exam 2
-*** Lab
-**** SUBMITTED Pre-Lab 6: Device Memory
-     DEADLINE: <2018-10-03 Wed 14:00>
-
-**** TODO Pre-Lab 7: General Purpose I/O Devices
-	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-10 Wed>
+	  - Authentication
+		- Protection of confidential information requires us to:
+		  - Identify who wnats to access the data
+		  - Identify who owns the data
+		- /Authentication/ associates an /identity/ with a subject activity
+		- Factors
+		  - Enables a system to identify users
+		  - Multi-factor authentication
+	  - Authorization
+		- determines what rights a subject has to a datum
+		  - ex: triplejay2013 is authorize to read but not write file, foo.txt
+	  - Confidentiality Policy
+		+ defines who is allowed specific rights to what data
+		+ Confidentiality: What can be access
+		  1. The credit card number you used on-line
+		  2. your phone number
+		  3. your eMail address
+		  4. residential address
+		  5. shopping history (what and where)
+		  6. current location
+		  7. health history
+		  8. browser history
+		  9. texting history
+		  10. DNA
+		  11. Password
+	    + Confidentiality: Who can access
+		  1. Family
+		  2. real-world friends
+		  3. people on social media
+		  4. retailers
+		  5. employwer
+		  6. political party
+		  7. police
+		  8. federal government
+		+ Confidentiality: Data in Transit
+		  - Symmetric-key cryptography
+			- Believed to provide strong security
+			- Both sender and reciever must know secret key
+			- /Key distribution problem/: how to share the secret key
+		  - Asymmetric-key cryptography (public-key)
+		+ Confidentiality: Data at rest
+		  - Hash values are an example of a one-way function (easy one way, hard the other)
+		  - Hash values are stored, not the actual passwords
+		  - Cookies Example
+			- Cookies store state information in clients (browsers
+**** Assignments
+***** TODO Update Journal entry
+	  DEADLINE: <2018-10-10 Tue>
+	  - [ ] include link to license webpage as a plus
+	  - [ ] look up something related to privacy/cookies/confidentiality
+	  - [ ] include personal notes into the file
 ** CS310
 *** Lecture
 **** Review
@@ -993,8 +1087,6 @@ CALL GetShortNameStudents2(6);
 		to a primary key column in another table
 	  - To connect Key columns you will use the ON clause after the JOIN clause
 *** Assignments
-Assignments will build off of eachother,
-use only one database for all assignments
 **** Final Project
 	 I can start the final project now
 **** Homwk 3
@@ -1014,3 +1106,7 @@ print(hello())
 
 #+RESULTS:
 : None
+**** TODO Homework 6-Pair
+	 DEADLINE: <2018-10-17 Wed>
+**** TODO Study for quiz
+	 DEADLINE: <2018-10-16 Tue>

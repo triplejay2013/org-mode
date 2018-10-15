@@ -20,12 +20,13 @@
 	$(EXE): foo.o
 		gcc $^ -o $@
 */
-#ifdef DEBUG
-#include <stdio.h>
+
+//uncomment if in debug.h
+//#ifdef DEBUG
 #define DPRINT(s) printf("DEBUG: %s\n", s)
-#else
-#define DPRINT(s)
-#endif
+//#else
+//#define DPRINT(s)
+//#endif
 
 int main(){
 	//Example usage
