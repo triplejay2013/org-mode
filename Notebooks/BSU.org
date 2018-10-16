@@ -273,14 +273,27 @@ ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
 ***** ASCII
 	  - ASCII - American Standard Coding Information Interchange
 ****** TODO Put Ascii table on notecard for exam 2
-*** Lab
-**** SUBMITTED Pre-Lab 6: Device Memory
-     DEADLINE: <2018-10-03 Wed 14:00>
-
-**** TODO Pre-Lab 7: General Purpose I/O Devices
-	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-10 Wed>
-**** TODO Pre-Lab 8: Seven Segment Display
-	 DEADLINE: <2018-10-17 Wed> SCHEDULED: <2018-10-15 Mon>
+**** ADC (Analog to Digital Converter, also see DAC)
+***** TODO Read Prelecture slides
+	  DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-16 Tue>
+***** Notes
+****** SAR (Successive Approximation Register)
+	   - Fast ADC implmentation
+		 - Uses binary search ( O(logn))
+****** Graunularity/Resolution
+	   - Number of bits to represent input/output
+****** Equations (Memorize, or know when to use)
+	   - Vres = (Vref)/2^n = Vlsb
+		 - Vref (aka range: bits 0 to 4)
+		 - n = num bits
+		 - Voltage of least sig. bit
+	   - ADC = floor((Vin * 2^n)/Vref) = floor(Vin/Vres)
+		 - Vin is the input voltage (2.4v)
+		 - outputs a count (in binary, ex: 2 is 010)
+		   - This coun represents volume magnitutde (level)
+	   - Vadc = ADC * Vres 
+		 - Vin (analog input)
+	   - Noise = Vin - Vadc 
 ** Math307
 *** Lecture
 **** RSA
@@ -573,6 +586,17 @@ for some j, gcd(R,xj) = q
 			the number of zeroes in p
 		 3. Compute N=p*q
 		 4. Apply IsAttack on N and Fermat Attack on N
+******* One Line Factoring and partial Key Exposure Attack (Similar to Fermat)
+******** Method
+		1. Compute s= ceil(sqrt(n))
+		2. Compute m = s^2 mod n
+		3. Check whether m is a perfect sqaure
+		   - If yes, compute t= sqrt(n). then gcd(s-t,n)=p
+		   - if not increase i and go to step 1
+******** Analysis
+		 - Assume that n=p*q has prim factors n^1/3 < p, q < n^2/3
+		 - view Slides on own time to see the proof
+		 - O(cube_root(n)) with probability greater than .5
 ***** Examples
 ****** Attacks:COMMON MODULUS ATTACK (Directory ATTACK?)
 From Sage:
@@ -672,6 +696,38 @@ p
 : 196327349823794238791247612374689213649218736623
 : 196327349823794238791247612375150040954342600855043086369924757982661461133718474657040466537331025478920476913721120235676232217
 : nonefound
+
+*** In-Class Examples/Practice
+#+NAME: Iterated Encryption
+#+BEGIN_SRC sage
+
+# RSA - Encryption Procedures=========
+def rsaencrypt(Message, encrexp, encrmod, rounds):
+    if (rounds <= 0): return Message
+    A=Message
+    E = power_mod(A,encrexp,encrmod);
+    return rsaencrypt(E,encrexp,encrmod, rounds-1)
+#=====================================
+
+# Blackboard:LectureNotes:Lecture11:Example
+# REMEMBER: E1=M^e mod n
+# Where M-plaintext and E-ciphertext
+# ^^ 1st encryption vv 2nd encryption
+# E2=E1^e mod n
+
+# Encryption Modulus:
+n=315562173921131111550753275258954314886929684614433857059068225329589007516900986203500713113234143069878550293
+# Encryption Exponent:
+e=1835588100642725811278316299646156385857628660058608776628872255463681001129596115865795858135978837517124882698892069345209251312769967638417909171551219459094621692202465346003400944724101186482909006146466321559204641
+# Ciphertext:
+E=150598315159426420417362370315760759643687452249127260593893330249875774660837569082216166241764228321707042114
+
+E=rsaencrypt(E,e,n,10)
+E
+#+END_SRC
+
+#+RESULTS: Iterated Encryption
+: 150598315159426420417362370315760759643687452249127260593893330249875774660837569082216166241764228321707042114
 
 *** Assignments
 **** DONE Homework 4 [2/2]
