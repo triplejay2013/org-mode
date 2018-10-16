@@ -1,6 +1,30 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
 
+* Spring2019 Registration Prep
+** Required Courses
+| UF 200 | CS 361 | CS 441  | CS 453 | CS 471 |
+|--------+--------+---------+--------+--------|
+| CS 481 | CS 488 | CS 421? |        |        |
+** Spring 2019 Plan
+*** INPROGRESS Consult Advisor to finalize Spring schedule
+	SCHEDULED: <2018-10-22 Mon 10:00>
+| Course      | Description                         | Credits |
+|-------------+-------------------------------------+---------|
+| UF 200      | Foundations of Ethics and Diversity |       3 |
+| CS 361      | Intro to Theory of Comp             |       3 |
+| CS 441      | Computer Architecture               |       3 |
+| CS 453      | Operating Systems                   |       3 |
+| CS ELECTIVE | Mobile Dev?                         |       3 |
+| ^           | Total:                              |      15 |
+#+TBLFM: $3=vsum(@2..@-1)
+** Fall 2019 Plan
+| Course | Description          | Credit |
+|--------+----------------------+--------|
+| CS 471 | Software Engineering |      3 |
+| CS 421 | Algorithms           |      3 | **Covered by transfer?
+|        |                      |        | **Accel. Masters Courses?
+
 * Misc Items
 ** TODO update src and exmp insertion to have more infor like headers and names when hot-keyed
 ** TODO Syncthing f**d things up....so missing most of my homework and recent updates
@@ -29,13 +53,15 @@
 [[http://sachachua.com/blog/2007/12/emacs-getting-things-done-with-org-basic/][Agenda tips]]
 
 * Accelerated Masters Application
-  DEADLINE: <2018-12-08 Sat>
+  SCHEDULED: <2018-10-20 Sat> DEADLINE: <2018-12-08 Sat>
 
   [[http://coen.boisestate.edu/cs/undergraduates/accelerated-ms-cs/][Program Info]]
 
 ** TODO Print off application
-** TODO Look at graduate Catalog
+   SCHEDULED: <2018-10-20 Sat>
+** DONE Look at graduate Catalog
 ** TODO Contact and meet with falculty
+   SCHEDULED: <2018-10-18 Thu>
 	- [ ] Ask them what projects I might participate in that field of study
 	- [ ] what courses I should take if I pursue their emphasis
 *** Research areas of interest (in decsending order of interest)
@@ -58,6 +84,7 @@
 		- Contact Casey first, then tim?
 
 ** TODO Spring Semester Planning
+   SCHEDULED: <2018-10-20 Sat>
 * Fall 2018
 ** ECE330
 *** Assignments
@@ -569,9 +596,9 @@ print(p)    #Original prime
 	  SCHEDULED: <2018-10-17 Wed> DEADLINE: <2018-10-18 Thu>
 ***** Solution
 #+NAME: Assignment 6: Fermat Attack
-#+HEADER: :file ./src/sage/part1.txt 
 #+HEADER: :tangle ./src/sage/part2.sage
-#+BEGIN_SRC sage :exports results
+#+HEADER: :exports results
+#+BEGIN_SRC sage 
 # Function Definitions
 # REF: Blackboard Software (rsadecrypt)
 def ASCIIDepad(Number):
@@ -642,7 +669,14 @@ print("Factors of R are {} and {}".format(p,q))
 #+END_SRC
 
 #+RESULTS: Assignment 6: Fermat Attack
-[[file:./src/sage/part1.txt]]
+: Factor found in round 1
+: 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237L
+: 3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
+: 'Identity Based Cryptosystems'
+: The message is Identity Based Cryptosystems
+: The private key is 3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
+: The value of phi(R) is 3200909051105364201164693808053590029074088922158723491051061550603549823737458227601881401901569257978004143012923593331603179164497963879113975835000986070024699519343049991139848389712089763995525908747040987536659859137383061580577931923957008360297248154492533050917697753153035831806144466131249975602991969588856988898729867579653294934514074112
+: Factors of R are 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237 and 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434276993
 
 **** TODO Homework 7
 	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-22 Mon>
@@ -822,6 +856,23 @@ int main(){
 	  - Toolkit popular for memory issues (leaks, bad pointers)
 	  - Valgrind is a virtual machine executing your program
 	  - See /CS253 class resources/ for examples
+**** I/O
+***** Terminology
+****** Processes
+	   - Process id
+	   - user id
+	   - address space
+		 - text: A segment of memory containing executable code
+		 - heap: A segment of memory for data
+	   - File Descriptors
+****** Thread States
+	   - RUNNABLE: awaiting a processor to execute it
+	   - EXECUTING: A processor is executing your thread
+	   - BLOCKED: Awaiting I/O
+****** File Descriptors
+	   - Each process has a File Descriptor Table
+	   - Each active file descriptor is bound to a file
+*** In-Class Exercises
 *** Assignments
 **** DONE P4 - Smash Simplified Shell Assignment
      DEADLINE: <2018-10-14 Sun>
