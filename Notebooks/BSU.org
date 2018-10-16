@@ -3,20 +3,20 @@
 
 * Spring2019 Registration Prep
 ** Required Courses
-| UF 200 | CS 361 | CS 441  | CS 453 | CS 471 |
-|--------+--------+---------+--------+--------|
-| CS 481 | CS 488 | CS 421? |        |        |
+| UF 200 | CS 361 | CS 441  | CS 453    | CS 471 |
+|--------+--------+---------+-----------+--------|
+| CS 481 | CS 488 | CS 421? | CS-HU 271 |        |
 ** Spring 2019 Plan
 *** INPROGRESS Consult Advisor to finalize Spring schedule
 	SCHEDULED: <2018-10-22 Mon 10:00>
-| Course      | Description                         | Credits |
-|-------------+-------------------------------------+---------|
-| UF 200      | Foundations of Ethics and Diversity |       3 |
-| CS 361      | Intro to Theory of Comp             |       3 |
-| CS 441      | Computer Architecture               |       3 |
-| CS 453      | Operating Systems                   |       3 |
-| CS ELECTIVE | Mobile Dev?                         |       3 |
-| ^           | Total:                              |      15 |
+| Course      | Description                         | Credits | Instructors            |
+|-------------+-------------------------------------+---------+------------------------|
+| UF 200      | Foundations of Ethics and Diversity |       3 |                        |
+| CS 361      | Intro to Theory of Comp             |       3 |                        |
+| CS 441      | Computer Architecture               |       3 |                        |
+| CS 453      | Operating Systems                   |       3 | Shane Panter/Amit jain |
+| CS ELECTIVE | Mobile Dev?                         |       3 |                        |
+| ^           | Total:                              |      15 |                        |
 #+TBLFM: $3=vsum(@2..@-1)
 ** Fall 2019 Plan
 | Course | Description          | Credit |
@@ -291,7 +291,7 @@ Key Generation
     n=p*q
     phi(n)=(p-1)*(q-1)
  2. Choose a 'random' number t such taht gcd(x,phi(n))=1
- 3. Compute e=t^-1 mod phi(n)
+ 3. Compute e=t^-1 mod phi(n) (t=e^-1 mod phi(n))
 	
 Public Key:		(n,e)
 Private Key:	(t, phi(n))
@@ -311,6 +311,31 @@ phi(n) is private
 
 *FACTORING PROBLEM*
 Given n that is a product of two primes, find its primes
+****** Signatures
+	   - Confidentiality
+	   - Data integrity
+	   - Authentication
+	   - [[https://searchsecurity.techtarget.com/definition/nonrepudiation][Non-repudiation]]
+		 - is the assurance that someone cannot deny something.
+******* Define ownership of an RSA Key
+		terse: signed with private key, verified with public key
+
+		1. The key owner chooses two prime numbers, /p/ and /q/
+		2. The key owner compute ~n=p*q~ and ~phi(n)=(p-1)*(q-1)~
+		3. The key owner chooses an /e/ with ~gcd(e/phi(n))=1~
+		   1. Compute ~e=t^-1 mod phi(n)~
+		4. The key owner computes ~t=1/e mod phi(n)~
+		
+		[[./img/PhiEx.jpg][Whiteboard example]]
+		
+		The public signature key is ~(n,e)~ 
+		The private signature key is ~t~
+
+******* Verify Ownership
+		- ~S=M^t mod n~
+		  - S is a signature on M
+		- ~k=S^e mod n~
+		- If k=M, then the signature is valid
 ****** Attacks
 ******* COMMON MODULUS ATTACK
 Suppose that same message M < n is sent to two different parties whose
@@ -509,7 +534,37 @@ e=7
 		  1. Assumee that after k many iterations we find
 			 1. x=sqrt(n) +k and y=sqrt(x^2 -n)
 ******* Initial Segment Factoring Method
-******** See Sage:ISattack.sagews for example
+******** IS attack explained
+		 - R - RSA modulus
+		 - R has n digits
+		 - Consider: ~x_j = (R-(Rmod 10^j))/10^j for j < n~
+#+NAME: IS attack (proof)
+#+BEGIN_EXAMPLE 
+R=12351 //Number to find factors of
+n=5 //Number of iterations
+
+j=1 : x1 = (12351-(12351 mod 10))/10
+REMEMBER: 12351 = 1*10^0 + 5*10^1 + 3*10^2 + 2*10^3 + 1*10^4
+12351 mod 10 	= (1*10^0 + 5*10^1 + 3*10^2 + 2*10^3 + 1*10^4) mod 10
+12351 mod 10 	= 1*10^0 mod 10 + 5*10^1 mod 10 
+					+ 3*10^2 mod 10 + 2*10^3 mod 10 + 1*10^4 mod 10 
+				= 1 + 0 + 0 + 0+ 0 = 1
+x1				= (12351-1)/10 = 12350/10 = 1235
+x1 is the first four digits of R
+
+j=2 : x2 = (12351-(12351 mod 10^2))/10^2
+REMEMBER: 12351 = 1*10^0 + 5*10^1 + 3*10^2 + 2*10^3 + 1*10^4
+12351 mod 10 	= (1*10^0 + 5*10^1 + 3*10^2 + 2*10^3 + 1*10^4) mod 100
+12351 mod 10 	= 1*10^0 mod 100 + 5*10^1 mod 100 
+					+ 3*10^2 mod 100 + 2*10^3 mod 100 + 1*10^4 mod 100
+				= 1 + 50 + 0 + 0+ 0 = 1
+x2				= (12351-51)/10 = 12300/10 = 123
+x2 is the first three digits of R
+
+xj is the first n-j digits of R
+Because R is the product of 2 primes, the first gcd > 1 will be a prime factor
+for some j, gcd(R,xj) = q
+#+END_EXAMPLE
 ******** Defence:
 		 1. Check whether n is weak against Fermat Attack
 			- n i sresistant against Fermat Attack
@@ -518,31 +573,6 @@ e=7
 			the number of zeroes in p
 		 3. Compute N=p*q
 		 4. Apply IsAttack on N and Fermat Attack on N
-****** Signatures
-	   - Confidentiality
-	   - Data integrity
-	   - Authentication
-	   - [[https://searchsecurity.techtarget.com/definition/nonrepudiation][Non-repudiation]]
-		 - is the assurance that someone cannot deny something.
-******* Define ownership of an RSA Key
-		terse: signed with private key, verified with public key
-
-		1. The key owner chooses two prime numbers, /p/ and /q/
-		2. The key owner compute ~n=p*q~ and ~phi(n)=(p-1)*(q-1)~
-		3. The key owner chooses an /e/ with ~gcd(e/phi(n))=1~
-		   1. Compute ~e=t^-1 mod phi(n)~
-		4. The key owner computes ~t=1/e mod phi(n)~
-		
-		[[./img/PhiEx.jpg][Whiteboard example]]
-		
-		The public signature key is ~(n,e)~ 
-		The private signature key is ~t~
-
-******* Verify Ownership
-		- ~S=M^t mod n~
-		  - S is a signature on M
-		- ~k=S^e mod n~
-		- If k=M, then the signature is valid
 ***** Examples
 ****** Attacks:COMMON MODULUS ATTACK (Directory ATTACK?)
 From Sage:
@@ -581,16 +611,78 @@ print(x[0]) #Calculated prime gcd(n1,n2)=p
 print(p)    #Original prime
 
 #+END_SRC
+****** ATTACKS: ISATTACK
+#+NAME: InitialSegment Attack Small q
+#+BEGIN_SRC sage
+def ISAttack (R):
+    n = R.ndigits()
+    #n = len(R)
+    for j in range(1, n + 1):
+        x=(R-(R % 10^j))/10^j
+        p = gcd(x, R)
+        if ((1 < p)and (p<R)):
+            return(p)
+    print "nonefound"
+
+# Choose large prime with many consecutive zeros
+p=next_prime(1213000000000000000000000000000000000000000000000000000000000000124)
+p
+# Choose prime with less digits than p has zeros
+q=next_prime(1234567890)
+q
+# COmputer n=p*q
+n=p*q
+n
+# Apply ISAttack
+p=ISAttack(n)
+p
+#+END_SRC
+#+RESULTS: InitialSegment Attack
+: 1213000000000000000000000000000000000000000000000000000000000000291
+: 1234567891
+: 1497530851783000000000000000000000000000000000000000000000000000359259256281
+: 1234567891
+
+#+NAME: InitialSegment Large q
+#+BEGIN_SRC sage
+def ISAttack (R):
+    n = R.ndigits()
+    #n = len(R)
+    for j in range(1, n + 1):
+        x=(R-(R % 10^j))/10^j
+        p = gcd(x, R)
+        if ((1 < p)and (p<R)):
+            return(p)
+    print "nonefound"
+
+# Choose large prime p with many consecutive zeros
+p=next_prime(1000000000000000000000000000002347239472938749237492837498237984237987237498792831)
+p
+# Choose large q
+q=next_prime(196327349823794238791247612374689213649218736498)
+q
+# Compute n=p*q
+n=p*q
+n
+p=ISAttack(n)
+p
+#+END_SRC
+#+RESULTS: InitialSegment Large q
+: 1000000000000000000000000000002347239472938749237492837498237984237987237498793079
+: 196327349823794238791247612374689213649218736623
+: 196327349823794238791247612375150040954342600855043086369924757982661461133718474657040466537331025478920476913721120235676232217
+: nonefound
+
 *** Assignments
-**** DONE Homework 4 [0/1]
+**** DONE Homework 4 [2/2]
      DEADLINE: <2018-10-03 Wed 11:16>
 
-	 - [ ] part 1
+	 - [X] part 1
        - Describe how I found my solutions. Place answers in document
-	 - [ ] part 2
+	 - [X] part 2
        - Place code for solving the two parts here
 
-**** TODO Homework 6
+**** INPROGRESS Homework 6
 	 DEADLINE: <2018-10-18 Thu> SCHEDULED: <2018-10-15 Mon>
 ***** TODO Print off assignment
 	  SCHEDULED: <2018-10-17 Wed> DEADLINE: <2018-10-18 Thu>
@@ -661,25 +753,40 @@ t
 D=rsadecrypt(bobM, t, n)
 D
 
-print("The message is {}".format(D))
-print("The private key is {}".format(t))
-print("The value of phi(R) is {}".format(phi))
-print("Factors of R are {} and {}".format(p,q))
+print("\nSolutions:\n")
+print("The message is {}\n".format(D))
+print("The private key is {}\n".format(t))
+print("The value of phi(R) is {}\n".format(phi))
+print("Factors of R are {} and {}\n".format(p,q))
 
 #+END_SRC
 
 #+RESULTS: Assignment 6: Fermat Attack
-: Factor found in round 1
-: 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237L
-: 3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
-: 'Identity Based Cryptosystems'
-: The message is Identity Based Cryptosystems
-: The private key is 3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
-: The value of phi(R) is 3200909051105364201164693808053590029074088922158723491051061550603549823737458227601881401901569257978004143012923593331603179164497963879113975835000986070024699519343049991139848389712089763995525908747040987536659859137383061580577931923957008360297248154492533050917697753153035831806144466131249975602991969588856988898729867579653294934514074112
-: Factors of R are 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237 and 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434276993
+#+begin_example
+Factor found in round 1
+56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237L
+3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
+'Identity Based Cryptosystems'
 
+Solutions:
+
+The message is Identity Based Cryptosystems
+
+The private key is 3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
+
+The value of phi(R) is 3200909051105364201164693808053590029074088922158723491051061550603549823737458227601881401901569257978004143012923593331603179164497963879113975835000986070024699519343049991139848389712089763995525908747040987536659859137383061580577931923957008360297248154492533050917697753153035831806144466131249975602991969588856988898729867579653294934514074112
+
+Factors of R are 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237 and 56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434276993
+#+end_example
+**** TODO Study for Quiz 2
+	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-23 Tue>
 **** TODO Homework 7
-	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-22 Mon>
+	 DEADLINE: <2018-11-01 Thu> SCHEDULED: <2018-10-29 Mon>
+#+NAME: Homework 7 - Part 2
+#+HEADER: :tangle ./src/sage/hmwk7/part2.sage
+#+BEGIN_SRC sage
+
+#+END_SRC
 ** CS253
 *** Lecture
 **** Structs
