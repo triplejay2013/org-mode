@@ -41,6 +41,9 @@
 (load-user-file "todo.el")
 (load-user-file "sage.el")
 (load-user-file "python.el")
+; requires installation: sudo apt install emacs-goodies-el
+; (load-user-file "./themes/themes.el") ; unstable, needs more config
+
 ;(load-user-file "powerline.el")
 ;;; END
 
@@ -177,3 +180,7 @@
 ; REF: https://stackoverflow.com/a/2708042
 (add-hook 'comint-exec-hook 
       (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
+
+; Hides emphasis markers (*,/,~, etc) used for formatting text
+; REF: https://www.reddit.com/r/emacs/comments/6pxh92/how_to_change_font_colorcharacteristics_in_org/
+(setq org-hide-emphasis-markers t)

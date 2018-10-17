@@ -1,6 +1,12 @@
 #+TITLE: BSU
 #+AUTHOR: Justin Johnson
 
+*BOLD*
+_UNDERLINE_
+=VERBATIM=
+~CODE~
+/ITALIC/
+
 * Spring2019 Registration Prep
 ** Required Courses
 | UF 200 | CS 361 | CS 441  | CS 453    | CS 471 |
@@ -9,14 +15,14 @@
 ** Spring 2019 Plan
 *** INPROGRESS Consult Advisor to finalize Spring schedule
 	SCHEDULED: <2018-10-22 Mon 10:00>
-| Course      | Description                         | Credits | Instructors            |
-|-------------+-------------------------------------+---------+------------------------|
-| UF 200      | Foundations of Ethics and Diversity |       3 |                        |
-| CS 361      | Intro to Theory of Comp             |       3 |                        |
-| CS 441      | Computer Architecture               |       3 |                        |
-| CS 453      | Operating Systems                   |       3 | Shane Panter/Amit jain |
-| CS ELECTIVE | Mobile Dev?                         |       3 |                        |
-| ^           | Total:                              |      15 |                        |
+| Course    | Description                         | Credits | Instructors            |
+|-----------+-------------------------------------+---------+------------------------|
+| UF 200    | Foundations of Ethics and Diversity |       3 |                        |
+| CS 361    | Intro to Theory of Comp             |       3 |                        |
+| CS 441    | Computer Architecture               |       3 |                        |
+| CS 453    | Operating Systems                   |       3 | Shane Panter/Amit jain |
+| CS-HU 271 | Agile Developement                  |       1 |                        |
+| ^         | Total:                              |      13 |                        |
 #+TBLFM: $3=vsum(@2..@-1)
 ** Fall 2019 Plan
 | Course | Description          | Credit |
