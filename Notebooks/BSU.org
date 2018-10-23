@@ -105,6 +105,8 @@ _UNDERLINE_
 	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
 **** CANCELED Prelecture read and review
 	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
+**** TODO Take Home QUIZ (ADC, interrupts)
+	 DEADLINE: <2018-10-24 Wed> SCHEDULED: <2018-10-23 Tue>
 **** TODO Study for exam 2
 	 SCHEDULED: <2018-10-24 Wed>
 	 - [0/6] Create Note Sheet with the following information
@@ -115,7 +117,7 @@ _UNDERLINE_
 	   - [ ] Read through chapter summaries
 	   - [ ] ADC calculations
 	   - [ ] Include relevant notes from prior exam notesheet
-*** TODO Lecture
+*** Lecture
 **** Directives
 	 - .org ###
 	   - Use up ### bytes of memory. 'Skips' ### for the location counter
