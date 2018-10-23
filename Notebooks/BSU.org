@@ -101,11 +101,21 @@ _UNDERLINE_
 	 DEADLINE: <2018-10-02 Tue 18:00>
 **** SUBMITTED Lesson 15 - Ch. 14 Problems (all)
 	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
-**** TODO Lesson 17 - Ch. 15, 16 Problems (all)
+**** SUBMITTED Lesson 17 - Ch. 15, 16 Problems (all)
 	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
-**** TODO Prelecture read and review
+**** CANCELED Prelecture read and review
 	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
-*** Lecture
+**** TODO Study for exam 2
+	 SCHEDULED: <2018-10-24 Wed>
+	 - [0/6] Create Note Sheet with the following information
+	   - [ ] Reef polling review
+	   - [ ] Look through lecture (you should understand) bullets
+	   - [ ] Bit manipulation (putbit, getbit)
+		 - [ ] See notes on topic for comprehensive overview
+	   - [ ] Read through chapter summaries
+	   - [ ] ADC calculations
+	   - [ ] Include relevant notes from prior exam notesheet
+*** TODO Lecture
 **** Directives
 	 - .org ###
 	   - Use up ### bytes of memory. 'Skips' ### for the location counter
