@@ -1309,6 +1309,11 @@ int main(){
 **** TODO Take IP-Quiz
 **** TODO update journal
 	 SCHEDULED: <2018-10-16 Tue>
+**** TODO Update Journal entry
+	 DEADLINE: <2018-10-10 Tue>
+	 - [ ] include link to license webpage as a plus
+	 - [ ] look up something related to privacy/cookies/confidentiality
+	 - [ ] include personal notes into the file
 *** Lecture
 **** Intellectual Property
 ***** Closed Source
@@ -1451,12 +1456,22 @@ int main(){
 		  - Hash values are stored, not the actual passwords
 		  - Cookies Example
 			- Cookies store state information in clients (browsers
-**** Assignments
-***** TODO Update Journal entry
-	  DEADLINE: <2018-10-10 Tue>
-	  - [ ] include link to license webpage as a plus
-	  - [ ] look up something related to privacy/cookies/confidentiality
-	  - [ ] include personal notes into the file
+*** TODO Exam Review
+	SCHEDULED: <2018-10-24 Wed>
+	- Derivative Work (GPL License is example, gzip)
+	  - Something that uses software in its implementation
+	- Permissive License (MIT, BSD, Apache)
+	- Copy-left license (GPLv2)
+	  - derivative works are required to license their software under the same license
+	- Trade Secret Definition
+	  - Vulnerabilities of Trade Secret
+		- Guessable?
+	- Copyrights
+	  - Automatic - no action is required
+	  - However some action can be taken to ensure the copyright
+	  - What are your rights with CopyRight?
+	- NO ETHICAL CODE REVIEW
+
 ** CS310
 *** Lecture
 **** Review

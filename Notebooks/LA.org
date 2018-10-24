@@ -59,4 +59,27 @@ inside is x(t) -> Derivative is dx/dt
 
 df/dt = 2x dx/dt + 2y dy/dt
 **** Related Rates
+**** Optimization
+	 - Objective Function - What is being optimized?
+	   - Maximum
+	   - Minimum
+	   - Any superlative
 *** Examples
+
+#+NAME: Steve's Problem
+#+BEGIN_EXAMPLE 
+Steve has 60 feet of fencing to build a rectangular dog kennel.
+An existing fence will serve as one side of the kennel. If steve
+wants to build the largest kennel possible using only the material he has,
+what dimensions shoudl he use?
+
+Objective Function: Area of kennel
+	A=xy
+Constraint: 60 feet of fencing
+	60=2x+y => 60-2x=y
+
+A(x)=xy
+A(x)=x(60-2x)=60x-2x^2
+A'(x)=60-4x
+60-4x=0; x=15
+#+END_EXAMPLE

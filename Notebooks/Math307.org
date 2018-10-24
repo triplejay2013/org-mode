@@ -1,0 +1,246 @@
+#+TITLE: Sage work for Math307 - Quizzes and exams
+#+AUTHOR: Justin Johnson
+
+#+NAME: RSA Functions
+#+HEADER: :tangle ./src/sage/rsa.sage
+#+BEGIN_SRC sage
+
+# Global Variables
+_p=0 # prime factor
+_q=0 # prime factor
+_n=0 # rsa modulos
+_phi=0 # euler's totient for p and q
+_e=0		# encryption exponent
+_t=0		# private key
+_M=""	# message
+_E=""	# ciphertext
+
+# ASCII PAD METHODS
+# BEGIN
+# Pads an iterable object into an integer with specifications
+def ASCIIPad(Message):
+    K = (map(ord,reversed(Message)));
+    le= len(K);
+    x = [100+K[i] for i in range(le)];
+    x = ZZ(x,1000);
+    return(x);
+	
+# Converts padded integer into string message
+def ASCIIDepad(Number):
+    n = Number.ndigits() % 3;
+    if (n > 0):
+        print("This is not a padded ASCII string\n");
+    else:
+        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+        N = "";
+        for i in range(Number.ndigits()/3):
+            N = chr(L[i]) + N;
+    return(N);
+
+def isASCIIPadded(Number):
+    N = ""
+    n = Number.ndigits() % 3;
+    if (n > 0):
+        return False;
+    L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+    for i in range(Number.ndigits()/3):
+        if L[i] < 0:
+            return False
+        if L[i] > 255:
+            return False
+    return True
+# END
+	
+# RSA METHODS
+# BEGIN
+comment="""
+Key Generation
+ 1. Choose two primes p,q and compute:
+    n=p*q
+    phi(n)=(p-1)*(q-1)
+ 2. Choose a 'random' number t such taht gcd(x,phi(n))=1
+ 3. Compute e=t^-1 mod phi(n) (t=e^-1 mod phi(n))
+	
+Public Key:		(n,e)
+Private Key:	(t, phi(n))
+
+*RSA ENCRYPTION*
+E=M^e mod n
+E=ciphertext of M
+
+*RSA DECRYPTION*
+M=E^t mod n
+
+*MISC*
+e=t^{-1} mod phi(n)
+t=e^{-1} mod phi(n)
+e is public
+phi(n) is private
+"""
+	
+comment="""
+1. Choose two primes p,q and compute:
+    n=p*q
+    phi(n)=(p-1)*(q-1)
+ 2. Choose a 'random' number t such taht gcd(x,phi(n))=1
+ 3. Compute e=t^-1 mod phi(n) (t=e^-1 mod phi(n))
+"""
+# Public Key:		(n,e)
+def createPublicKey(p,q,e):
+	_p=p
+	_q=q
+	_e=e
+	_n=p*q
+	return "Public Key Generated ({},{})".format(_n,_e)
+	
+comment="""
+    phi(n)=(p-1)*(q-1)
+ 2. Choose a 'random' number t such taht gcd(x,phi(n))=1
+ 3. Compute e=t^-1 mod phi(n) (t=e^-1 mod phi(n))
+ """
+# Private Key:	(t, phi(n))
+def createPrivateKey():
+	if _p = 0: return "Generate Public Key First"
+	_phi=(_p-1)*(_q-1)
+	_e=17
+	while gcd(_phi,_e)!=1: _e+=1
+	_t=inverse_mode(_e,_phi)
+	return "Private Key Generated ({},{})".format(_t,_phi)
+	
+# Encrypts message using E = M^e mod n
+def rsaencrypt(Message, encrexp, encrmod):
+    A = ASCIIPad(Message);
+    E = power_mod(A,encrexp,encrmod);
+    return(E);
+	
+# Decrypts message using M = E^t mod n
+def rsadecrypt(encr,decrexp,encrmod):
+    D = power_mod(encr,decrexp,encrmod);
+    N = ASCIIDepad(D);
+    return(N);
+comment="""
+Define ownership of an RSA Key
+		1. The key owner chooses two prime numbers, /p/ and /q/
+		2. The key owner compute ~n=p*q~ and ~phi(n)=(p-1)*(q-1)~
+		3. The key owner chooses an /e/ with ~gcd(e/phi(n))=1~
+		   1. Compute ~e=t^-1 mod phi(n)~
+		4. The key owner computes ~t=1/e mod phi(n)~
+		
+		The public signature key is ~(n,e)~ 
+		The private signature key is ~t~
+
+Verify Ownership
+		- ~S=M^t mod n~
+		  - S is a signature on M
+		- ~k=S^e mod n~
+		- If k=M, then the signature is valid
+"""
+
+# Param
+# 	M - (M)essage
+# 	t - priva(t)e key
+# 	n - rsa modulos
+def sign(M,t,n):
+	S=power_mod(M,t,n)
+	return S
+
+# Param
+#     M - (M)essage
+#     S - Signature on M
+# 	n - rsa modulos
+# 	e - (e)ncryption exponent
+# FROM LECTURE NOTES: "the challenger computes S^e mod n to see if the answe    r is M"
+def verifySignature(M,S,e,n):
+    return M==power_mod(S,e,n)
+# END
+	
+# RSA Attack Methods
+# BEGIN
+##############################################################################################
+# isquare detectes weither a number is a perfect square or not                               #
+##############################################################################################
+def isquare (n):
+    if isqrt(n) ** 2 == n:
+        return(True)
+    return(False)
+
+##############################################################################################
+# isqrt takes in an integer as input and produces the floor of the square root of the number#
+##############################################################################################
+def isqrt(n):
+    return int(floor(sqrt(n)))
+
+##############################################################################################
+# usqrt takes in a number and produces the celing of the square root of the number           #
+##############################################################################################
+def usqrt (n):
+    ur = isqrt(n)
+    if ur ** 2 < n:
+        ur = ur + 1
+    return(ur)
+
+##############################################################################################
+# OneLine will take in a composite nubmer and a round limit and attempt to compute one of the# 
+#prime factors. If unable the function will print out that no factors have been found        #
+##############################################################################################
+def OneLine (n, iter):
+    for x in range(1, iter + 1):
+        sq = usqrt(x * n)
+        y = sq ** 2 % n
+        if isquare(y) == True:
+            t = isqrt(y)
+            u = gcd(n, sq - t)
+            print("Factor found in round {0} rounds".format(x))
+            return(u)
+    print("No factors found")
+
+########################################################################################
+# The function takes in the requested inputs and computes a decryption key             #
+# If there are not enough digits in the input the function will tell you so            #
+########################################################################################
+
+def partial (R, s, partd):
+    m = 1000
+    E = m.powermod(s,R)#&^(m, s) % R
+    for k in range(1, s + 1):
+        Dk = math.floor((k * (R - 2 * isqrt(R) + 1) + 1) / s)
+        l=(partd).ndigits()
+        Dk=Dk-(Dk % 10^l)+partd
+        mm = E.powermod(Dk,R)#E&^Dk mod R:
+        if m == mm:
+            return(Dk)
+    print("not enough digits to discover d")
+	
+# Initial Segment attack
+def ISAttack (R):
+    n = R.ndigits()
+    #n = len(R)
+    for j in range(1, n + 1):
+        x=(R-(R % 10^j))/10^j
+        p = gcd(x, R)
+        if ((1 < p)and (p<R)):
+            return(p)
+    print "nonefound"
+
+# Fermat Factoring Method
+def FermatAttack (n, rounds):
+    st = usqrt(n)
+    for x in range(st, st + rounds + 1):
+        #print (x-st)
+        sq = x ** 2 - n
+        y = isqrt(sq)
+        if y ** 2 == sq:
+            print "Factor found in round {0}".format(x-st+1)
+            return(x + y)
+    print "No factor found in {0} rounds".format(rounds)
+
+print("Hello World")
+
+
+# Signature Attack
+
+# END
+#+END_SRC
+
+#+RESULTS: RSA Functions
+: Hello World
