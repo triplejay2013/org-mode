@@ -9,7 +9,8 @@
       '(("CANCELED" 		:foreground "#CD424C" :weight bold) 	; red
 	("WAIT"			:foreground "#CEF93D" :weight bold) 	; yellow
 	("DONE"			:foreground "#7BE52C" :weight bold)	; green
-	("TODO"			:foreground "#5A19D6" :weight bold) 	; blue
+	("FIXED"		:foreground "#7BE52C" :weight bold)	; green
+	("TODO"			:foreground "#7BE52C" :weight bold) 	; green
 	("INPROGRESS"		:foreground "#7BE52C" :weight bold) 	; green
 	("SUBMIITED"		:foreground "#5A19D6" :weight bold) 	; blue
 	("HELP"		:foreground "#CEF93D" :weight bold))) 	; yellow

@@ -33,8 +33,8 @@ _UNDERLINE_
    |        |                      |        | **Accel. Masters Courses?
 
 * Misc Items
-** TODO update src and exmp insertion to have more infor like headers and names when hot-keyed
-** TODO Syncthing f**d things up....so missing most of my homework and recent updates
+** INPROGRESS update src and exmp insertion to have more infor like headers and names when hot-keyed
+** FIXED Syncthing f**d things up....so missing most of my homework and recent updates
 * Need to know commands for emacs
 ** Quick Commands
 	- C-x C-q to disable read-only buffer
@@ -568,7 +568,7 @@ e=7
 		  4. DEFENSE: Choose p and q such that m is "large"
 		
 ********* Example
-********** TODO SAGE procedure on blackboard shows this defence
+********** SAGE procedure on blackboard shows this defence
 ********** Misc
 		  1. Assumee that after k many iterations we find
 			 1. x=sqrt(n) +k and y=sqrt(x^2 -n)
@@ -1257,6 +1257,34 @@ int main(){
 	  - COMMAND - executing program and arguments if available
 
 ****** fflush(stdout); - flushes a stream
+**** Fork and Wait
+	 - fork creates a new process
+	   - Kernel copies parent's (process) memory into the child
+	   - parent resumes executing following fork
+	   - the child begins executing within fork
+	   - both code execute the same code
+	   - variable changes by one process are not seen by the other
+	 - wait awaits the exit of any child process
+**** Execute Processes
+#+NAME: execve
+#+HEADER: :include '(<unistd.h>, <stdio.h>,<stdlib.h>)
+#+BEGIN_SRC C
+char* fileName="ls";
+char *newargv[] = {fileName,"hello", "world",NULL};
+//convention is to have last element be NULL, and first be argv[0]
+char *newenviron[]={NULL};
+execve(newargv[0], newargv[1], newenviron);
+//execve does not return, unless an error occurs (returns -1)
+//result = execve(fileName, argv[], envp[]);
+//char *fileName: name of an executable program
+//char *argv[]: array of arguments for the new program
+//char *envp[]: Array of environment variables for new program
+#+END_SRC
+**** Enviornment variables
+	 - set: display all environ vars
+	 - export FOO=value: export environ var FOO having value to all subsequent cmd
+	 - unset FOO: Remove definition of environ var
+	 - echo $FOO: Display value of enviornment variable FOO
 *** In-Class Exercises
 #+NAME: Fork and Wait
 #+HEADER: :dir ./src/c/ :file forkAndWait.txt
@@ -1598,7 +1626,6 @@ print(hello())
 #+END_SRC
 
 #+RESULTS:
-: None
 **** TODO Homework 6-Pair
 	 DEADLINE: <2018-10-17 Wed>
 **** TODO Study for quiz

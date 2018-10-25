@@ -35,7 +35,7 @@ def ASCIIDepad(Number):
         N = "";
         for i in range(Number.ndigits()/3):
             N = chr(L[i]) + N;
-    return(N);
+	return(N);
 
 def isASCIIPadded(Number):
     N = ""
@@ -86,38 +86,58 @@ comment="""
  3. Compute e=t^-1 mod phi(n) (t=e^-1 mod phi(n))
 """
 # Public Key:		(n,e)
-def createPublicKey(p,q,e):
-	_p=p
-	_q=q
-	_e=e
-	_n=p*q
-	return "Public Key Generated ({},{})".format(_n,_e)
-	
-comment="""
-    phi(n)=(p-1)*(q-1)
- 2. Choose a 'random' number t such taht gcd(x,phi(n))=1
- 3. Compute e=t^-1 mod phi(n) (t=e^-1 mod phi(n))
- """
 # Private Key:	(t, phi(n))
-def createPrivateKey():
-	if _p = 0: return "Generate Public Key First"
+def createKeys(p,q):
+	global _p
+	_p=p
+	global _q
+	_q=q
+	global _n
+	_n=p*q
+	global _phi
 	_phi=(_p-1)*(_q-1)
+	global _e
 	_e=17
 	while gcd(_phi,_e)!=1: _e+=1
-	_t=inverse_mode(_e,_phi)
-	return "Private Key Generated ({},{})".format(_t,_phi)
+	print("Public Key Generated ({},{})".format(_n,_e))
+	global _t
+	_t=inverse_mod(_e,_phi)
+	print("Private Key Generated ({},{})".format(_t,_phi))
+
+def resetKeys():
+	global _p
+	_p=0 # prime factor
+	global _q
+	_q=0 # prime factor
+	global _n
+	_n=0 # rsa modulos
+	global _phi
+	_phi=0 # euler's totient for p and q
+	global _e
+	_e=0		# encryption exponent
+	global _t
+	_t=0		# private key
+	global _M
+	_M=""	# message
+	global _E
+	_E=""	# ciphertext
+	print("Public/Private Key values have been reset")
 	
 # Encrypts message using E = M^e mod n
 def rsaencrypt(Message, encrexp, encrmod):
     A = ASCIIPad(Message);
     E = power_mod(A,encrexp,encrmod);
     return(E);
-	
+
 # Decrypts message using M = E^t mod n
-def rsadecrypt(encr,decrexp,encrmod):
+def rsadecryptS(encr,decrexp,encrmod):
     D = power_mod(encr,decrexp,encrmod);
     N = ASCIIDepad(D);
     return(N);
+	
+# Decrypts message using M = E^t mod n
+def rsadecrypt(encr,decrexp,encrmod):
+    return power_mod(encr,decrexp,encrmod);
 comment="""
 Define ownership of an RSA Key
 		1. The key owner chooses two prime numbers, /p/ and /q/
@@ -142,6 +162,8 @@ Verify Ownership
 # 	n - rsa modulos
 def sign(M,t,n):
 	S=power_mod(M,t,n)
+	M
+	print(power_mod(S,_e,n))
 	return S
 
 # Param
@@ -151,7 +173,7 @@ def sign(M,t,n):
 # 	e - (e)ncryption exponent
 # FROM LECTURE NOTES: "the challenger computes S^e mod n to see if the answe    r is M"
 def verifySignature(M,S,e,n):
-    return M==power_mod(S,e,n)
+	return M==power_mod(S,e,n)
 # END
 	
 # RSA Attack Methods
@@ -185,14 +207,14 @@ def usqrt (n):
 ##############################################################################################
 def OneLine (n, iter):
     for x in range(1, iter + 1):
-        sq = usqrt(x * n)
-        y = sq ** 2 % n
-        if isquare(y) == True:
-            t = isqrt(y)
-            u = gcd(n, sq - t)
-            print("Factor found in round {0} rounds".format(x))
-            return(u)
-    print("No factors found")
+		sq = usqrt(x * n)
+		y = sq ** 2 % n
+		if isquare(y) == True:
+			t = isqrt(y)
+			u = gcd(n, sq - t)
+			print("Factor found in round {0} rounds".format(x))
+			return(u)
+		print("No factors found")
 
 ########################################################################################
 # The function takes in the requested inputs and computes a decryption key             #
@@ -223,6 +245,7 @@ def ISAttack (R):
     print "nonefound"
 
 # Fermat Factoring Method
+# Used if p and q have a small difference
 def FermatAttack (n, rounds):
     st = usqrt(n)
     for x in range(st, st + rounds + 1):
@@ -232,15 +255,63 @@ def FermatAttack (n, rounds):
         if y ** 2 == sq:
             print "Factor found in round {0}".format(x-st+1)
             return(x + y)
-    print "No factor found in {0} rounds".format(rounds)
-
-print("Hello World")
-
-
-# Signature Attack
-
+    return "No factor found in {0} rounds".format(rounds)
 # END
+
+showExamples=False
+if showExamples:
+	print("Show Regular Key Generation")
+	p=next_prime(32848237498234982374293)
+	q=next_prime(230572130857128375128375092183750921730523170398570921837509127350981027)
+	createKeys(p,q)
+	resetKeys()
+	
+	print("\nShow how to sign and verify a message")
+	M="Hello World"
+	M=ASCIIPad(M)
+	p=next_prime(123213123239875983528972359825398721)
+	q=next_prime(1212312837129837982732198125125125)
+	createKeys(p,q)
+	S=sign(M,_t,_n)
+	if verifySignature(M,S,_e,_n): print("Valid Signature!")
+	else: print("Invalid Signature!")
+	print("{} is a signature on {}".format(S, M))
+	resetKeys()
+
+	print("\nShow Fermat Attack Method")
+	p=next_prime(2141726497126947126496128946182964981264987164987126489712694871269487196)
+	q=next_prime(2141726497126947126496128946182964981264987164987126489712312312321312311)
+	createKeys(p,q)
+	_p=FermatAttack(_n,100)
+	if not isinstance(_p, str): 
+		_q=_n/_p
+		if (_p*_q)==_n: print("Success")
+	else:
+		print("Failed")
+	resetKeys()
+	
+# Encrypted then signed OR signed then Encrypted
+E1=192673410575232178904649776915190700998989853537815830553230611421742385992522416989509275862058211339709950929
+E2=11086722953882983852431944511576952516550372827816915921973944718976810268666675210351469628970964240272091459974947601880432783056689928327962090547865754927288993076429
+E3=1834496602541743526158189555689903156371898111774868041164889421551770983263334034443653217840819146984865628720631961622548297373876065576
+
+#key=(0,1,2  ,3)
+#key=(n,e,phi,t)
+keyA=(76658177305027745952631719056705996813842536289251500683261184543556255161304991640490427342739196690985988361653741113103098879695402379917606571643825715761882994534703,324382479328749283092183091832019840198400001)
+keyB=(305305799846472299868002515458930157177903223108162710252913053729390747860737704417309741537399438511250989442729880781658025831833386498939,349874928174912837921492180000001)
+keyD=(61823435968160437417469491157734955693190192084429162238180686630269127581382430522764865425365025843237298546732978005917453969903,3843243287434824441111878911001,61823435968160437417469491157734955693190192084429162238180686622392533899929241536658509172593305085911230229647058820648322486488)
+t=inverse_mod(keyD[1],keyD[2])
+keyD+=(t,)
+
+#Alice Signs
+E=power_mod(E2,keyA[1],keyA[0])
+M=rsadecryptS(E,keyD[3],keyD[0])
+print("ALICE: {}".format(M))
+
+#ALICE
+E=power_mod(E1,keyA[1],keyA[0])
 #+END_SRC
 
 #+RESULTS: RSA Functions
-: Hello World
+: ALICE: Who will win the World Series?
+: 'No factor found in 10000 rounds'
