@@ -33,8 +33,8 @@ _UNDERLINE_
    |        |                      |        | **Accel. Masters Courses?
 
 * Misc Items
-** INPROGRESS update src and exmp insertion to have more infor like headers and names when hot-keyed
-** FIXED Syncthing f**d things up....so missing most of my homework and recent updates
+** TODO update src and exmp insertion to have more infor like headers and names when hot-keyed
+** TODO Syncthing f**d things up....so missing most of my homework and recent updates
 * Need to know commands for emacs
 ** Quick Commands
 	- C-x C-q to disable read-only buffer
@@ -94,232 +94,238 @@ _UNDERLINE_
    SCHEDULED: <2018-10-20 Sat>
 * Fall 2018
 ** ECE330
-*** Assignments
-**** SUBMITTED Lesson 13 - Ch. 12 Problems (all)
-     DEADLINE: <2018-10-02 Tue>
-**** SUBMITTED Quiz - Ch. 12 OpenNote OpenBook
-	 DEADLINE: <2018-10-02 Tue 18:00>
-**** SUBMITTED Lesson 15 - Ch. 14 Problems (all)
-	 SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
-**** SUBMITTED Lesson 17 - Ch. 15, 16 Problems (all)
-	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
-**** CANCELED Prelecture read and review
-	 DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
-**** TODO Take Home QUIZ (ADC, interrupts)
-	 DEADLINE: <2018-10-24 Wed> SCHEDULED: <2018-10-23 Tue>
-**** TODO Study for exam 2
-	 SCHEDULED: <2018-10-24 Wed>
-	 - [0/6] Create Note Sheet with the following information
-	   - [ ] Reef polling review
-	   - [ ] Look through lecture (you should understand) bullets
-	   - [ ] Bit manipulation (putbit, getbit)
-		 - [ ] See notes on topic for comprehensive overview
-	   - [ ] Read through chapter summaries
-	   - [ ] ADC calculations
-	   - [ ] Include relevant notes from prior exam notesheet
 *** Lecture
-**** Directives
-	 - .org ###
-	   - Use up ### bytes of memory. 'Skips' ### for the location counter
-**** Bit Manipulation
-***** Notes
-****** Abstractions
- *These abstractions can be implemented with simple Bitwise operations*
- 1. Test Bit
-	find what bit (?) is in a location
- 2. Set Bit
-	makes a bit a '1'
- 3. Clear Bit
-	makes a bit a '0'
- 4. Toggle Bit
-	1->0, 0->1
- 5. Get Bit(s)
- 6. Put Bit(s)
+**** Notes
+***** Directives
+	  - .org ###
+		- Use up ### bytes of memory. 'Skips' ### for the location counter
+***** Bit Manipulation
+****** Notes
+******* Abstractions
+  *These abstractions can be implemented with simple Bitwise operations*
+  1. Test Bit
+	 find what bit (?) is in a location
+  2. Set Bit
+	 makes a bit a '1'
+  3. Clear Bit
+	 makes a bit a '0'
+  4. Toggle Bit
+	 1->0, 0->1
+  5. Get Bit(s)
+  6. Put Bit(s)
 
-****** Register Represenation and truth tables
-******* Mask Register
-	 					        															 - BOI (bit of interest, SIZE =1
-																							 V
- |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
- | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
- |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
- |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
- |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
-																										 *OFFSET (from bits 0-12)*
+******* Register Represenation and truth tables
+******** Mask Register
+	 					        															  - BOI (bit of interest, SIZE =1
+																							  V
+  |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+  | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+  |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+  |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
+  |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+																										  *OFFSET (from bits 0-12)*
 
-******* Truth Tables
-  - And (Effectively 'Test Bit' & 'Clear Bit')
-	| M | B | F |
-	|---+---+---|
-	| 0 | 0 | 0 |---|_ Clear Bit
-	| 0 | 1 | 0 |---|
-	| 1 | 0 | 0 |---|_ Test Bit
-	| 1 | 1 | 1 |---|
+******** Truth Tables
+   - And (Effectively 'Test Bit' & 'Clear Bit')
+	 | M | B | F |
+	 |---+---+---|
+	 | 0 | 0 | 0 |---|_ Clear Bit
+	 | 0 | 1 | 0 |---|
+	 | 1 | 0 | 0 |---|_ Test Bit
+	 | 1 | 1 | 1 |---|
 
-  - OR (Effectively 'Set Bit')
-	| M | B | F |
-	|---+---+---|
-	| 0 | 0 | 0 |
-	| 0 | 1 | 1 |
-	| 1 | 0 | 1 |---|_ Set Bit
-	| 1 | 1 | 1 |---|
+   - OR (Effectively 'Set Bit')
+	 | M | B | F |
+	 |---+---+---|
+	 | 0 | 0 | 0 |
+	 | 0 | 1 | 1 |
+	 | 1 | 0 | 1 |---|_ Set Bit
+	 | 1 | 1 | 1 |---|
 
-  - EOR (Effectively 'Toggle Bit')
-	| M | B | F |
-	|---+---+---|
-	| 0 | 0 | 0 |
-	| 0 | 1 | 1 |
-	| 1 | 0 | 1 |---|_ Toggle Bit
-	| 1 | 1 | 0 |---|
+   - EOR (Effectively 'Toggle Bit')
+	 | M | B | F |
+	 |---+---+---|
+	 | 0 | 0 | 0 |
+	 | 0 | 1 | 1 |
+	 | 1 | 0 | 1 |---|_ Toggle Bit
+	 | 1 | 1 | 0 |---|
    
-******* Expr and Instr
- |                             | and | or   | eor | not | shift-left | shift-right |              |
- |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
- | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
- |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
- | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
-****** Mask/Inverse Mask
-		- A mask is a filter that allows us to focus on BOI (Bit of Interest)
-		- Values from some register we want to retrieve bits from, are copied into a mask register
-		- Represent bits (example from book)
-			- ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
-			- ldr r4, =0x00400000 //a little intuitive
-			- ldr r4, =4194304 //unclear, don't use
-			- ldr r4, =(1<<22) //intuitive which bit we are considering
-		- *Mask* - all bits but the BOI are '0'
-		- *Inverse mask* = all bits but the BOI are '1'
-#+BEGIN_EXAMPLE 
-1 << 12
-12: acts like the 'offset' for the data
-0b111 << 12: sets bits 12, 13, and 14 to 1
+******** Expr and Instr
+  |                             | and | or   | eor | not | shift-left | shift-right |              |
+  |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+  | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
+  |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+  | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
+******* Mask/Inverse Mask
+		 - A mask is a filter that allows us to focus on BOI (Bit of Interest)
+		 - Values from some register we want to retrieve bits from, are copied into a mask register
+		 - Represent bits (example from book)
+			 - ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
+			 - ldr r4, =0x00400000 //a little intuitive
+			 - ldr r4, =4194304 //unclear, don't use
+			 - ldr r4, =(1<<22) //intuitive which bit we are considering
+		 - *Mask* - all bits but the BOI are '0'
+		 - *Inverse mask* = all bits but the BOI are '1'
+ #+BEGIN_EXAMPLE 
+ 1 << 12
+ 12: acts like the 'offset' for the data
+ 0b111 << 12: sets bits 12, 13, and 14 to 1
 
-~0 << 3: 11111000
+ ~0 << 3: 11111000
 
-Normalize-Denormalize
-Static mask
-~(~0 << 3) << 12
-		|      |_
-		V	     V
-    sizeInBits  offset
-#+END_EXAMPLE
-****** Put and Get Bit
-		+ Get Bit(s) - AND mask can get the BOIs
-		+ Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
-******* Normalize
-******* De-Normalize
-****** Normalize/Denormalize
-	   Normalize - Shift bits /aligned right/
-	   Denormalize - Shift bits to desired location
-***** Examples
-****** Bit Manipulation Abstractions
-#+BEGIN_EXAMPLE
-# testbit(boi=14)
-ldr r4,=0x12345678		//0x12345678 - target
-ldr r2,=(1<<14)			//r2: 0x00004000 - mask
-and r2,r4,r2			//r2: 0x12345678 - apply mask
+ Normalize-Denormalize
+ Static mask
+ ~(~0 << 3) << 12
+		 |      |_
+		 V	     V
+     sizeInBits  offset
+ #+END_EXAMPLE
+******* Put and Get Bit
+		 + Get Bit(s) - AND mask can get the BOIs
+		 + Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
+******** Normalize
+******** De-Normalize
+******* Normalize/Denormalize
+		Normalize - Shift bits /aligned right/
+		Denormalize - Shift bits to desired location
+****** Examples
+******* Bit Manipulation Abstractions
+ #+BEGIN_EXAMPLE
+ # testbit(boi=14)
+ ldr r4,=0x12345678		//0x12345678 - target
+ ldr r2,=(1<<14)			//r2: 0x00004000 - mask
+ and r2,r4,r2			//r2: 0x12345678 - apply mask
 
-#setbit(boi=15)
-ldr r4, =0x12345678		//r4: 0x12345678
-ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
-orr r2,r4,r2			//r2: 0x12345678 - apply mask
-.
-.
-.
-Check Blackboard for more examples pdf file in this directory
-#+END_EXAMPLE
-[[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
-**** Mutator and Accessor
-***** Definitions
-| get | Accessor | function that retrieves a value from a private member variable                                                                |   |
-|-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
-| set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
+ #setbit(boi=15)
+ ldr r4, =0x12345678		//r4: 0x12345678
+ ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
+ orr r2,r4,r2			//r2: 0x12345678 - apply mask
+ .
+ .
+ .
+ Check Blackboard for more examples pdf file in this directory
+ #+END_EXAMPLE
+ [[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
+***** Mutator and Accessor
+****** Definitions
+ | get | Accessor | function that retrieves a value from a private member variable                                                                |   |
+ |-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
+ | set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
 
-*IMPORTANT* Accessors do not change an object's data, so they
-should be marked ~const~ (getLength and getWidth)
+ *IMPORTANT* Accessors do not change an object's data, so they
+ should be marked ~const~ (getLength and getWidth)
 
-**** Pointers and Arrays in Assembly
-***** Pointers
+***** Pointers and Arrays in Assembly
+****** Pointers
 
-[[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
-#+NAME: Pointer Example
-#+BEGIN_SRC asm
-.text
-// DEREFERENCING DATA
-ldr r0,=A //est. addr. to var. A in r0
-ldr r1,[r0,#0] // dereference data here
+ [[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
+ #+NAME: Pointer Example
+ #+BEGIN_SRC asm
+ .text
+ // DEREFERENCING DATA
+ ldr r0,=A //est. addr. to var. A in r0
+ ldr r1,[r0,#0] // dereference data here
 
-// DEREFERENCING POINTERS (3-step process)
-ldr r0,=PA	// Load pointer
-ldr r1,[r0] // Load address the pointer contains
-ldr r2,[r1]	// use value at address referenced by PA
-//===========
-ldr r0,=PB
-ldr r1,[r0]
-ldrb r2,[r1]
-//===========
-ldr r0,=PC
-ldr r1,[r0]
-ldrb r2,[r1]
+ // DEREFERENCING POINTERS (3-step process)
+ ldr r0,=PA	// Load pointer
+ ldr r1,[r0] // Load address the pointer contains
+ ldr r2,[r1]	// use value at address referenced by PA
+ //===========
+ ldr r0,=PB
+ ldr r1,[r0]
+ ldrb r2,[r1]
+ //===========
+ ldr r0,=PC
+ ldr r1,[r0]
+ ldrb r2,[r1]
 
-.data
-A	.word	0x11111111
-PA:	.word	A	# This is a pointer to A
-B	.byte	0x11111111
-PB:	.word	B	# This is a pointer to B
-C	.short	0x11111111
-PC:	.word	C	# This is a pointer to C
-#+END_SRC
-***** Arrays
-#+NAME: Array example
-#+BEGIN_SRC asm
-.data
-ARRAY1: 	.word	1,2,3,4,5,6,7,8
-ARRAY_END: 	.word	1,2,3,4,5,6,7,8
+ .data
+ A	.word	0x11111111
+ PA:	.word	A	# This is a pointer to A
+ B	.byte	0x11111111
+ PB:	.word	B	# This is a pointer to B
+ C	.short	0x11111111
+ PC:	.word	C	# This is a pointer to C
+ #+END_SRC
+****** Arrays
+ #+NAME: Array example
+ #+BEGIN_SRC asm
+ .data
+ ARRAY1: 	.word	1,2,3,4,5,6,7,8
+ ARRAY_END: 	.word	1,2,3,4,5,6,7,8
 
-.equ ARRAY_SIZE,
-	(ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
-							//The size in bytes divided by 4 bytes gives us the size
-#+END_SRC
+ .equ ARRAY_SIZE,
+	 (ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
+							 //The size in bytes divided by 4 bytes gives us the size
+ #+END_SRC
 
-#+NAME: Array examples ASCII
-#+BEGIN_SRC asm
-ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
-ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
-ARRAY3: 	.ascii	"broncos"
-ARRAY4: 	.string	"broncos" 						//makes a string
-ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
-#+END_SRC
-***** ASCII
-	  - ASCII - American Standard Coding Information Interchange
-****** TODO Put Ascii table on notecard for exam 2
-**** ADC (Analog to Digital Converter, also see DAC)
-***** TODO Read Prelecture slides
-	  DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-16 Tue>
-***** Notes
-****** SAR (Successive Approximation Register)
-	   - Fast ADC implmentation
-		 - Uses binary search ( O(logn))
-****** Graunularity/Resolution
-	   - Number of bits to represent input/output
-****** Equations (Memorize, or know when to use)
-	   - Vres = (Vref)/2^n = Vlsb
-		 - Vref (aka range: bits 0 to 4)
-		 - n = num bits
-		 - Voltage of least sig. bit
-	   - ADC = floor((Vin * 2^n)/Vref) = floor(Vin/Vres)
-		 - Vin is the input voltage (2.4v)
-		 - outputs a count (in binary, ex: 2 is 010)
-		   - This coun represents volume magnitutde (level)
-	   - Vadc = ADC * Vres 
-		 - Vin (analog input)
-	   - Noise = Vin - Vadc 
-**** Interrupts - Enabler for the Modern Computer (Operating System)
-***** Exceptions
-****** Interrupts
-******* Hardware Interrupts
-******* Software Interrupts
-****** Faults
-	   - Computer (program) crashes
+ #+NAME: Array examples ASCII
+ #+BEGIN_SRC asm
+ ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
+ ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
+ ARRAY3: 	.ascii	"broncos"
+ ARRAY4: 	.string	"broncos" 						//makes a string
+ ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
+ #+END_SRC
+****** ASCII
+	   - ASCII - American Standard Coding Information Interchange
+******* DONE Put Ascii table on notecard for exam 2
+***** ADC (Analog to Digital Converter, also see DAC)
+****** DONE Read Prelecture slides
+	   DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-16 Tue>
+****** Notes
+******* SAR (Successive Approximation Register)
+		- Fast ADC implmentation
+		  - Uses binary search ( O(logn))
+******* Graunularity/Resolution
+		- Number of bits to represent input/output
+******* Equations (Memorize, or know when to use)
+		- Vres = (Vref)/2^n = Vlsb
+		  - Vref (aka range: bits 0 to 4)
+		  - n = num bits
+		  - Voltage of least sig. bit
+		- ADC = floor((Vin * 2^n)/Vref) = floor(Vin/Vres)
+		  - Vin is the input voltage (2.4v)
+		  - outputs a count (in binary, ex: 2 is 010)
+			- This coun represents volume magnitutde (level)
+		- Vadc = ADC * Vres 
+		  - Vin (analog input)
+		- Noise = Vin - Vadc 
+***** Interrupts - Enabler for the Modern Computer (Operating System)
+****** Exceptions
+******* Interrupts
+******** Hardware Interrupts
+******** Software Interrupts
+******* Faults
+		- Computer (program) crashes
+**** Assignments
+***** SUBMITTED Lesson 13 - Ch. 12 Problems (all)
+      DEADLINE: <2018-10-02 Tue>
+***** SUBMITTED Quiz - Ch. 12 OpenNote OpenBook
+	  DEADLINE: <2018-10-02 Tue 18:00>
+***** SUBMITTED Lesson 15 - Ch. 14 Problems (all)
+	  SCHEDULED: <2018-10-08 Mon> DEADLINE: <2018-10-09 Tue>
+***** SUBMITTED Lesson 17 - Ch. 15, 16 Problems (all)
+	  DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
+***** CANCELED Prelecture read and review
+	  DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-15 Mon>
+***** SUBMITTED Take Home QUIZ (ADC, interrupts)
+	  DEADLINE: <2018-10-24 Wed> SCHEDULED: <2018-10-23 Tue>
+***** SUBMITTED Study for exam 2
+	  SCHEDULED: <2018-10-24 Wed>
+	  - [0/6] Create Note Sheet with the following information
+		- [ ] Reef polling review
+		- [ ] Look through lecture (you should understand) bullets
+		- [ ] Bit manipulation (putbit, getbit)
+		  - [ ] See notes on topic for comprehensive overview
+		- [ ] Read through chapter summaries
+		- [ ] ADC calculations
+		- [ ] Include relevant notes from prior exam notesheet
+*** Lab
+**** Notes
+**** Assignments
+***** Lab9 writeup
+	  SCHEDULED: <2018-10-29 Mon> DEADLINE: <2018-10-31 Wed>
 ** Math307
 *** Lecture
 **** RSA
@@ -568,7 +574,7 @@ e=7
 		  4. DEFENSE: Choose p and q such that m is "large"
 		
 ********* Example
-********** SAGE procedure on blackboard shows this defence
+********** TODO SAGE procedure on blackboard shows this defence
 ********** Misc
 		  1. Assumee that after k many iterations we find
 			 1. x=sqrt(n) +k and y=sqrt(x^2 -n)
@@ -1015,7 +1021,7 @@ and
 75765644535434276993
 #+end_example
 
-**** TODO Study for Quiz 2
+**** DONE Study for Quiz 2
 	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-23 Tue>
 	 *STUDY THESE TOPICS*
 ****** TODO Place notes under topic outlines below for quick access on quiz
@@ -1257,34 +1263,6 @@ int main(){
 	  - COMMAND - executing program and arguments if available
 
 ****** fflush(stdout); - flushes a stream
-**** Fork and Wait
-	 - fork creates a new process
-	   - Kernel copies parent's (process) memory into the child
-	   - parent resumes executing following fork
-	   - the child begins executing within fork
-	   - both code execute the same code
-	   - variable changes by one process are not seen by the other
-	 - wait awaits the exit of any child process
-**** Execute Processes
-#+NAME: execve
-#+HEADER: :include '(<unistd.h>, <stdio.h>,<stdlib.h>)
-#+BEGIN_SRC C
-char* fileName="ls";
-char *newargv[] = {fileName,"hello", "world",NULL};
-//convention is to have last element be NULL, and first be argv[0]
-char *newenviron[]={NULL};
-execve(newargv[0], newargv[1], newenviron);
-//execve does not return, unless an error occurs (returns -1)
-//result = execve(fileName, argv[], envp[]);
-//char *fileName: name of an executable program
-//char *argv[]: array of arguments for the new program
-//char *envp[]: Array of environment variables for new program
-#+END_SRC
-**** Enviornment variables
-	 - set: display all environ vars
-	 - export FOO=value: export environ var FOO having value to all subsequent cmd
-	 - unset FOO: Remove definition of environ var
-	 - echo $FOO: Display value of enviornment variable FOO
 *** In-Class Exercises
 #+NAME: Fork and Wait
 #+HEADER: :dir ./src/c/ :file forkAndWait.txt
@@ -1332,16 +1310,32 @@ int main(){
 	 DEADLINE: <2018-11-04 Sun>
 ** CS230
 *** Assignments
-**** TODO Sign up for exam2
+**** DONE Sign up for exam2
 	 SCHEDULED: <2018-10-16 Tue>
-**** TODO Take IP-Quiz
-**** TODO update journal
+**** DONE Take IP-Quiz
+**** DONE update journal
 	 SCHEDULED: <2018-10-16 Tue>
-**** TODO Update Journal entry
+**** DONE Update Journal entry
 	 DEADLINE: <2018-10-10 Tue>
-	 - [ ] include link to license webpage as a plus
-	 - [ ] look up something related to privacy/cookies/confidentiality
-	 - [ ] include personal notes into the file
+	 - [X] include link to license webpage as a plus
+	 - [X] look up something related to privacy/cookies/confidentiality
+	 - [X] include personal notes into the file
+**** DONE Exam Review
+	 SCHEDULED: <2018-10-24 Wed>
+	 - Derivative Work (GPL License is example, gzip)
+	   - Something that uses software in its implementation
+	 - Permissive License (MIT, BSD, Apache)
+	 - Copy-left license (GPLv2)
+	   - derivative works are required to license their software under the same license
+	 - Trade Secret Definition
+	   - Vulnerabilities of Trade Secret
+		 - Guessable?
+	 - Copyrights
+	   - Automatic - no action is required
+	   - However some action can be taken to ensure the copyright
+	   - What are your rights with CopyRight?
+	 - NO ETHICAL CODE REVIEW
+
 *** Lecture
 **** Intellectual Property
 ***** Closed Source
@@ -1484,22 +1478,6 @@ int main(){
 		  - Hash values are stored, not the actual passwords
 		  - Cookies Example
 			- Cookies store state information in clients (browsers
-*** TODO Exam Review
-	SCHEDULED: <2018-10-24 Wed>
-	- Derivative Work (GPL License is example, gzip)
-	  - Something that uses software in its implementation
-	- Permissive License (MIT, BSD, Apache)
-	- Copy-left license (GPLv2)
-	  - derivative works are required to license their software under the same license
-	- Trade Secret Definition
-	  - Vulnerabilities of Trade Secret
-		- Guessable?
-	- Copyrights
-	  - Automatic - no action is required
-	  - However some action can be taken to ensure the copyright
-	  - What are your rights with CopyRight?
-	- NO ETHICAL CODE REVIEW
-
 ** CS310
 *** Lecture
 **** Review
@@ -1626,7 +1604,8 @@ print(hello())
 #+END_SRC
 
 #+RESULTS:
-**** TODO Homework 6-Pair
+: None
+**** DONE Homework 6-Pair
 	 DEADLINE: <2018-10-17 Wed>
-**** TODO Study for quiz
+**** DONE Study for quiz
 	 DEADLINE: <2018-10-16 Tue>

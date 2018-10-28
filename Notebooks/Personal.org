@@ -26,3 +26,13 @@
 *** TODO Fix jeans (on sunday?)
 	 DEADLINE: <2018-10-07 Sun>
 *** TODO look up cost of mladenetz (v techeneeye bremenaya, ee poslye)
+
+* Personal Life Todo Items:
+** TODO Email Sister Rachel!
+   DEADLINE: <2018-11-05 Mon ++1w>
+*** TODO Send pictures
+** TODO Update Home computer Journal entry (stayed at parents)
+** TODO Backup files on git, hard drive, google drive
+** TODO Clean and organize home folders
+** TODO Clean and organize (backup) onyx
+** TODO Clean up Google bookmarks
