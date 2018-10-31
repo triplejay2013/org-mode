@@ -96,208 +96,231 @@ _UNDERLINE_
 ** ECE330
 *** Lecture
 **** Notes
-***** Directives
-	  - .org ###
-		- Use up ### bytes of memory. 'Skips' ### for the location counter
-***** Bit Manipulation
-****** Notes
-******* Abstractions
-  *These abstractions can be implemented with simple Bitwise operations*
-  1. Test Bit
-	 find what bit (?) is in a location
-  2. Set Bit
-	 makes a bit a '1'
-  3. Clear Bit
-	 makes a bit a '0'
-  4. Toggle Bit
-	 1->0, 0->1
-  5. Get Bit(s)
-  6. Put Bit(s)
+***** Assembly
+****** Directives
+	   - .org ###
+		 - Use up ### bytes of memory. 'Skips' ### for the location counter
+****** Bit Manipulation
+******* Notes
+******** Abstractions
+   *These abstractions can be implemented with simple Bitwise operations*
+   1. Test Bit
+	  find what bit (?) is in a location
+   2. Set Bit
+	  makes a bit a '1'
+   3. Clear Bit
+	  makes a bit a '0'
+   4. Toggle Bit
+	  1->0, 0->1
+   5. Get Bit(s)
+   6. Put Bit(s)
 
-******* Register Represenation and truth tables
-******** Mask Register
-	 					        															  - BOI (bit of interest, SIZE =1
-																							  V
-  |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
-  | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-  |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
-  |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
-  |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
-																										  *OFFSET (from bits 0-12)*
+******** Register Represenation and truth tables
+********* Mask Register
+	 					        															   - BOI (bit of interest, SIZE =1
+																							   V
+   |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+   | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+   |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+   |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |  B |    |    |    |   |   |   |   |   |   |   |   |   |   |
+   |----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+---|
+																										   *OFFSET (from bits 0-12)*
 
-******** Truth Tables
-   - And (Effectively 'Test Bit' & 'Clear Bit')
-	 | M | B | F |
-	 |---+---+---|
-	 | 0 | 0 | 0 |---|_ Clear Bit
-	 | 0 | 1 | 0 |---|
-	 | 1 | 0 | 0 |---|_ Test Bit
-	 | 1 | 1 | 1 |---|
+********* Truth Tables
+	- And (Effectively 'Test Bit' & 'Clear Bit')
+	  | M | B | F |
+	  |---+---+---|
+	  | 0 | 0 | 0 |---|_ Clear Bit
+	  | 0 | 1 | 0 |---|
+	  | 1 | 0 | 0 |---|_ Test Bit
+	  | 1 | 1 | 1 |---|
 
-   - OR (Effectively 'Set Bit')
-	 | M | B | F |
-	 |---+---+---|
-	 | 0 | 0 | 0 |
-	 | 0 | 1 | 1 |
-	 | 1 | 0 | 1 |---|_ Set Bit
-	 | 1 | 1 | 1 |---|
+	- OR (Effectively 'Set Bit')
+	  | M | B | F |
+	  |---+---+---|
+	  | 0 | 0 | 0 |
+	  | 0 | 1 | 1 |
+	  | 1 | 0 | 1 |---|_ Set Bit
+	  | 1 | 1 | 1 |---|
 
-   - EOR (Effectively 'Toggle Bit')
-	 | M | B | F |
-	 |---+---+---|
-	 | 0 | 0 | 0 |
-	 | 0 | 1 | 1 |
-	 | 1 | 0 | 1 |---|_ Toggle Bit
-	 | 1 | 1 | 0 |---|
+	- EOR (Effectively 'Toggle Bit')
+	  | M | B | F |
+	  |---+---+---|
+	  | 0 | 0 | 0 |
+	  | 0 | 1 | 1 |
+	  | 1 | 0 | 1 |---|_ Toggle Bit
+	  | 1 | 1 | 0 |---|
    
-******** Expr and Instr
-  |                             | and | or   | eor | not | shift-left | shift-right |              |
-  |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
-  | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
-  |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
-  | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
-******* Mask/Inverse Mask
-		 - A mask is a filter that allows us to focus on BOI (Bit of Interest)
-		 - Values from some register we want to retrieve bits from, are copied into a mask register
-		 - Represent bits (example from book)
-			 - ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
-			 - ldr r4, =0x00400000 //a little intuitive
-			 - ldr r4, =4194304 //unclear, don't use
-			 - ldr r4, =(1<<22) //intuitive which bit we are considering
-		 - *Mask* - all bits but the BOI are '0'
-		 - *Inverse mask* = all bits but the BOI are '1'
- #+BEGIN_EXAMPLE 
- 1 << 12
- 12: acts like the 'offset' for the data
- 0b111 << 12: sets bits 12, 13, and 14 to 1
+********* Expr and Instr
+   |                             | and | or   | eor | not | shift-left | shift-right |              |
+   |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+   | assembly time mask          | &   | pipe | ^   | ~   | <<         | >>          | expressioins |
+   |-----------------------------+-----+------+-----+-----+------------+-------------+--------------|
+   | Target operation (run time) | and | orr  | eor | mvn | lsl        | lsr         | instructions |
+******** Mask/Inverse Mask
+		  - A mask is a filter that allows us to focus on BOI (Bit of Interest)
+		  - Values from some register we want to retrieve bits from, are copied into a mask register
+		  - Represent bits (example from book)
+			  - ldr r4, =0b00000000000000100000000000000000000 (not counted) //too lengthy
+			  - ldr r4, =0x00400000 //a little intuitive
+			  - ldr r4, =4194304 //unclear, don't use
+			  - ldr r4, =(1<<22) //intuitive which bit we are considering
+		  - *Mask* - all bits but the BOI are '0'
+		  - *Inverse mask* = all bits but the BOI are '1'
+  #+BEGIN_EXAMPLE 
+  1 << 12
+  12: acts like the 'offset' for the data
+  0b111 << 12: sets bits 12, 13, and 14 to 1
 
- ~0 << 3: 11111000
+  ~0 << 3: 11111000
 
- Normalize-Denormalize
- Static mask
- ~(~0 << 3) << 12
-		 |      |_
-		 V	     V
-     sizeInBits  offset
- #+END_EXAMPLE
-******* Put and Get Bit
-		 + Get Bit(s) - AND mask can get the BOIs
-		 + Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
-******** Normalize
-******** De-Normalize
-******* Normalize/Denormalize
-		Normalize - Shift bits /aligned right/
-		Denormalize - Shift bits to desired location
-****** Examples
-******* Bit Manipulation Abstractions
- #+BEGIN_EXAMPLE
- # testbit(boi=14)
- ldr r4,=0x12345678		//0x12345678 - target
- ldr r2,=(1<<14)			//r2: 0x00004000 - mask
- and r2,r4,r2			//r2: 0x12345678 - apply mask
+  Normalize-Denormalize
+  Static mask
+  ~(~0 << 3) << 12
+		  |      |_
+		  V	     V
+      sizeInBits  offset
+  #+END_EXAMPLE
+******** Put and Get Bit
+		  + Get Bit(s) - AND mask can get the BOIs
+		  + Put Bit(s) - takes as input, a bit value (0 or 1). Takes value at runtime and puts into position
+********* Normalize
+********* De-Normalize
+******** Normalize/Denormalize
+		 Normalize - Shift bits /aligned right/
+		 Denormalize - Shift bits to desired location
+******* Examples
+******** Bit Manipulation Abstractions
+  #+BEGIN_EXAMPLE
+  # testbit(boi=14)
+  ldr r4,=0x12345678		//0x12345678 - target
+  ldr r2,=(1<<14)			//r2: 0x00004000 - mask
+  and r2,r4,r2			//r2: 0x12345678 - apply mask
 
- #setbit(boi=15)
- ldr r4, =0x12345678		//r4: 0x12345678
- ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
- orr r2,r4,r2			//r2: 0x12345678 - apply mask
- .
- .
- .
- Check Blackboard for more examples pdf file in this directory
- #+END_EXAMPLE
- [[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
-***** Mutator and Accessor
-****** Definitions
- | get | Accessor | function that retrieves a value from a private member variable                                                                |   |
- |-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
- | set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
+  #setbit(boi=15)
+  ldr r4, =0x12345678		//r4: 0x12345678
+  ldr r2,=(1<<15)			//r2: 0x00008000 - create mask
+  orr r2,r4,r2			//r2: 0x12345678 - apply mask
+  .
+  .
+  .
+  Check Blackboard for more examples pdf file in this directory
+  #+END_EXAMPLE
+  [[file:resources/BitManipulationAbstractions.pdf][More Examples Here]]
+****** Mutator and Accessor
+******* Definitions
+  | get | Accessor | function that retrieves a value from a private member variable                                                                |   |
+  |-----+----------+-------------------------------------------------------------------------------------------------------------------------------+---|
+  | set | Mutator  | a member function that stores a value in a private member variable, or changes its value in some way (setLength and setWidth) |   |
 
- *IMPORTANT* Accessors do not change an object's data, so they
- should be marked ~const~ (getLength and getWidth)
+  *IMPORTANT* Accessors do not change an object's data, so they
+  should be marked ~const~ (getLength and getWidth)
 
-***** Pointers and Arrays in Assembly
-****** Pointers
+****** Pointers and Arrays in Assembly
+******* Pointers
 
- [[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
- #+NAME: Pointer Example
- #+BEGIN_SRC asm
- .text
- // DEREFERENCING DATA
- ldr r0,=A //est. addr. to var. A in r0
- ldr r1,[r0,#0] // dereference data here
+  [[https://emacs.stackexchange.com/questions/9612/does-org-mode-has-a-assembly-highlight][Assembly Babel-support]]
+  #+NAME: Pointer Example
+  #+BEGIN_SRC asm
+  .text
+  // DEREFERENCING DATA
+  ldr r0,=A //est. addr. to var. A in r0
+  ldr r1,[r0,#0] // dereference data here
 
- // DEREFERENCING POINTERS (3-step process)
- ldr r0,=PA	// Load pointer
- ldr r1,[r0] // Load address the pointer contains
- ldr r2,[r1]	// use value at address referenced by PA
- //===========
- ldr r0,=PB
- ldr r1,[r0]
- ldrb r2,[r1]
- //===========
- ldr r0,=PC
- ldr r1,[r0]
- ldrb r2,[r1]
+  // DEREFERENCING POINTERS (3-step process)
+  ldr r0,=PA	// Load pointer
+  ldr r1,[r0] // Load address the pointer contains
+  ldr r2,[r1]	// use value at address referenced by PA
+  //===========
+  ldr r0,=PB
+  ldr r1,[r0]
+  ldrb r2,[r1]
+  //===========
+  ldr r0,=PC
+  ldr r1,[r0]
+  ldrb r2,[r1]
 
- .data
- A	.word	0x11111111
- PA:	.word	A	# This is a pointer to A
- B	.byte	0x11111111
- PB:	.word	B	# This is a pointer to B
- C	.short	0x11111111
- PC:	.word	C	# This is a pointer to C
- #+END_SRC
-****** Arrays
- #+NAME: Array example
- #+BEGIN_SRC asm
- .data
- ARRAY1: 	.word	1,2,3,4,5,6,7,8
- ARRAY_END: 	.word	1,2,3,4,5,6,7,8
+  .data
+  A	.word	0x11111111
+  PA:	.word	A	# This is a pointer to A
+  B	.byte	0x11111111
+  PB:	.word	B	# This is a pointer to B
+  C	.short	0x11111111
+  PC:	.word	C	# This is a pointer to C
+  #+END_SRC
+******* Arrays
+  #+NAME: Array example
+  #+BEGIN_SRC asm
+  .data
+  ARRAY1: 	.word	1,2,3,4,5,6,7,8
+  ARRAY_END: 	.word	1,2,3,4,5,6,7,8
 
- .equ ARRAY_SIZE,
-	 (ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
-							 //The size in bytes divided by 4 bytes gives us the size
- #+END_SRC
+  .equ ARRAY_SIZE,
+	  (ARRAY_END - ARRAY1)/4 	// a word is 4 bytes, for each elment in the array. 
+							  //The size in bytes divided by 4 bytes gives us the size
+  #+END_SRC
 
- #+NAME: Array examples ASCII
- #+BEGIN_SRC asm
- ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
- ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
- ARRAY3: 	.ascii	"broncos"
- ARRAY4: 	.string	"broncos" 						//makes a string
- ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
- #+END_SRC
-****** ASCII
-	   - ASCII - American Standard Coding Information Interchange
-******* DONE Put Ascii table on notecard for exam 2
-***** ADC (Analog to Digital Converter, also see DAC)
-****** DONE Read Prelecture slides
-	   DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-16 Tue>
-****** Notes
-******* SAR (Successive Approximation Register)
-		- Fast ADC implmentation
-		  - Uses binary search ( O(logn))
-******* Graunularity/Resolution
-		- Number of bits to represent input/output
-******* Equations (Memorize, or know when to use)
-		- Vres = (Vref)/2^n = Vlsb
-		  - Vref (aka range: bits 0 to 4)
-		  - n = num bits
-		  - Voltage of least sig. bit
-		- ADC = floor((Vin * 2^n)/Vref) = floor(Vin/Vres)
-		  - Vin is the input voltage (2.4v)
-		  - outputs a count (in binary, ex: 2 is 010)
-			- This coun represents volume magnitutde (level)
-		- Vadc = ADC * Vres 
-		  - Vin (analog input)
-		- Noise = Vin - Vadc 
-***** Interrupts - Enabler for the Modern Computer (Operating System)
-****** Exceptions
-******* Interrupts
-******** Hardware Interrupts
-******** Software Interrupts
-******* Faults
-		- Computer (program) crashes
+  #+NAME: Array examples ASCII
+  #+BEGIN_SRC asm
+  ARRAY1: 	.byte 	0x62, 0x72, 0x6F, 0x6E, 0x63,0x6F,0x73,0x00
+  ARRAY2: 	.byte 	'b','r','o','n','c','o','s','\0' //appending \0 makes a string
+  ARRAY3: 	.ascii	"broncos"
+  ARRAY4: 	.string	"broncos" 						//makes a string
+  ARRAY5: 	.asciz	"broncos"						//makes nul-terminated string
+  #+END_SRC
+******* ASCII
+		- ASCII - American Standard Coding Information Interchange
+******** DONE Put Ascii table on notecard for exam 2
+****** ADC (Analog to Digital Converter, also see DAC)
+******* DONE Read Prelecture slides
+		DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-16 Tue>
+******* Notes
+******** SAR (Successive Approximation Register)
+		 - Fast ADC implmentation
+		   - Uses binary search ( O(logn))
+******** Graunularity/Resolution
+		 - Number of bits to represent input/output
+******** Equations (Memorize, or know when to use)
+		 - Vres = (Vref)/2^n = Vlsb
+		   - Vref (aka range: bits 0 to 4)
+		   - n = num bits
+		   - Voltage of least sig. bit
+		 - ADC = floor((Vin * 2^n)/Vref) = floor(Vin/Vres)
+		   - Vin is the input voltage (2.4v)
+		   - outputs a count (in binary, ex: 2 is 010)
+			 - This coun represents volume magnitutde (level)
+		 - Vadc = ADC * Vres 
+		   - Vin (analog input)
+		 - Noise = Vin - Vadc 
+****** Interrupts - Enabler for the Modern Computer (Operating System)
+******* Exceptions
+******** Interrupts
+********* Hardware Interrupts
+********* Software Interrupts
+******** Faults
+		 - Computer (program) crashes
+***** C
+****** C-data types 
+| data type | bits | example                                  |
+|-----------+------+------------------------------------------|
+| char      |    8 | unsigned char, signed char(char) - ASCII |
+| short     |   16 | unsigned short, signed short             |
+| int       |   32 | unsigned int, signed int                 |
+
+#+NAME: Declaring the Variable
+#+BEGIN_SRC C
+	unsigned int c;
+			int c;//signed
+	signed int c;
+#+END_SRC
+****** C and GDB
+	 - when compiling a c program in this class
+	   - gcc -g -o prog prog.c
+	   - (gdb) break main
+		 - this puts a breakpoint for gdb
+	   - print /x - print hex
+	   - print /z - print hex, zero-padded
+
 **** Assignments
 ***** SUBMITTED Lesson 13 - Ch. 12 Problems (all)
       DEADLINE: <2018-10-02 Tue>
@@ -871,6 +894,13 @@ M^e^k	= M^t*lambda(n) + 1 mod n
 		 1^t (carmichael's thm)
 		= M
 #+END_EXAMPLE
+**** Socio-Technical Ethics & Morality (Donald Winecki)
+***** STEM are (not) /JUST/ Technical
+****** Algorithmic Bias in Criminal Justice
+******* Book: "Weapons of Math Destruction" - problems in security/algorithms
+******** Kathy O'Niel
+******* Book: "Raw Data is an oxymoron" 
+****** Socio-economic status valid predicter of race!?
 *** In-Class Examples/Practice
 #+NAME: Iterated Encryption
 #+BEGIN_SRC sage
@@ -1024,7 +1054,7 @@ and
 **** DONE Study for Quiz 2
 	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-23 Tue>
 	 *STUDY THESE TOPICS*
-****** TODO Place notes under topic outlines below for quick access on quiz
+****** DONE Place notes under topic outlines below for quick access on quiz
 	   SCHEDULED: <2018-10-24 Wed>
 	 - Encryption
 #+BEGIN_EXAMPLE 
@@ -1038,10 +1068,170 @@ E		= M^e mod n		- Ciphertext (encryption)
 	 - Decryption
 	 - Signing keys
 	 - Review common attacks
-****** TODO Create sage page with RSA functionality already installed
-****** TODO Include functions for different attacks
-**** TODO Homework 7
+****** DONE Create sage page with RSA functionality already installed
+****** DONE Include functions for different attacks
+**** INPROGRESS Homework 7
 	 DEADLINE: <2018-11-01 Thu> SCHEDULED: <2018-10-29 Mon>
+***** TODO Print off and Submit assignment to BB
+***** Description
+Foundations of Cryptology
+Assignment 7
+Five	of	the	employees	of	DigiCrime	Inc.	have	decided	to	supplement	their	pensions	by	doing	freelance	
+work	for	one	of	the	competitors,	CyberThievery,	of	DigiCrime.	Each	employee	of	DigiCrime has	a	
+public	RSA	key	for	confidential	communication.	Here	are	the	keys	of	the	five	employees	under	
+consideration:
+
+| Name           |                                                                       Encryption Modulus | Encryption Exponent |
+|----------------+------------------------------------------------------------------------------------------+---------------------|
+| BiggyBucks     |        138167915492481816745409346812614907970213601388948993432404324912548722779337539 |                   5 |
+| Dumas A Post   |           689234730968542058710415199123628060022111911748855188203650454001478717930441 |                   5 |
+| Penny Pinch    |           165927789907443292785652054606917804467309174081946624778696246358960638705571 |                   5 |
+| Sleezy Nickels | 9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667 |                   5 |
+| Dolly Dimes    | 9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591 |                   5 |
+
+The	Security	Department	of	DigiCrime Inc.	was	tipped	off	that	some	employees	are	not	as	loyal	to	the	
+company	as	desired,	and	decided	to	monitor	communication.	Their	handler	at	CyberThievery	sent	
+these	five	employees	a	message,	encrypted	for	each.	These	five	encrypted	versions	of	the	message	have	
+been	intercepted	by	the	security	department	of	DigiCrime.	These	are,	in	no	particular	order,
+
+M1=8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889
+M2=3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
+M3=1571157443614188818570414758920219335869445581270513124197983268054945711653
+M4=647456570985467791350694143163125775416153692645317710289110387858313344490925
+M5=17089298199140245689054146396696610382482599563869128220501355545433181167922449
+Decrypt	the	message
+
+***** Solution
+#+NAME: Homework 7 (Common Encryption Exponent)
+#+HEADER: :tangle ./src/sage/commonEncryptionExponentHmwk7.sage
+#+BEGIN_SRC sage
+########################################################################################
+# The ASCIIPad takes a string (plaintext) as an input and gives a number as an output. #
+# The number is represented in a ASCII like format that is padded.                     #
+########################################################################################
+def ASCIIPad(Message):
+    K = (map(ord,reversed(Message)))
+    le= len(K)
+    x = [100+K[i] for i in range(le)]
+    x = ZZ(x,1000)
+    return(x)
+#################################################################################################
+# The input is a number and the output is the original message. If the input is not padded ASCII#
+# version of a message it returns the value: "This is not a padded ASCII string"                #
+#################################################################################################
+def ASCIIDepad(Number):
+    ndigits=len(str(Number))
+    n = ndigits % 3
+    if (n > 0):
+        print("This is not a padded ASCII string\n")
+    else:
+        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)]
+        N = ""
+        for i in range(Number.ndigits()/3):
+            N = chr(L[i]) + N
+        return(N)
+
+def isASCIIPadded(Number):
+    N = ""
+    n = Number.ndigits() % 3
+    if (n > 0):
+        return False
+    L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)]
+    for i in range(Number.ndigits()/3):
+        if L[i] < 0:
+            return False
+        if L[i] > 255:
+            return False
+    return True
+#########################################################################
+
+
+# A list of tuples(each represents an employee) of dictionaries (representing employee info)
+# where public key is (n-encryption mod,e-encryption exponent)
+employees =[
+	({"Name":"BiggyBucks"}, {"n":138167915492481816745409346812614907970213601388948993432404324912548722779337539}, {"e": 5}),
+	({"Name":"Dumas A Post"}, {"n":689234730968542058710415199123628060022111911748855188203650454001478717930441}, {"e": 5}),
+	({"Name":"Penny Pinch"}, {"n":165927789907443292785652054606917804467309174081946624778696246358960638705571}, {"e": 5}),
+	({"Name":"Sleezy Nickels"}, {"n":9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667}, {"e": 5}),
+	({"Name":"Dolly Dimes"}, {"n":9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591}, {"e": 5})
+]
+
+n=[]
+for i in employees:
+	for j in i:
+		for key, ni in j.items():
+			if key=="n":
+				n.append(ni)
+
+# Common exponent
+e=5
+		
+# My logic follows the slides provided at: https://blackboard.boisestate.edu/bbcswebdav/pid-5733616-dt-content-rid-29297100_1/courses/1189-70632MATH307001/RSAattacksIPresentation.pdf
+# M=n1*n2*n3..... where ni is the encry modulus of the employees. So...
+M=1
+cnt=1
+for i in employees:
+	for j in i:
+		for key,val in j.items():
+			if key=="n":
+				cnt+=1
+				M*=val
+
+N=[]
+x=[]
+# REMEMBER: Ni = N/ni; xi = 1/Ni mod ni
+cnt=0
+for i in employees:
+	for j in i:
+		for key,ni in j.items():
+			if key=="n":
+				# Ni=M/ni
+				N.append(M/ni)
+				# xi=1/Ni mod ni
+				xi=(1/N[cnt])% ni
+				x.append(xi)
+				cnt += 1
+
+# (b)ase
+# (n)th root
+def nthRoot(b,n): 
+	return b**(1.0/n)
+
+# Encrypted Messages. Following slide-show notation for CRT. These are values for bi in random order
+b=[
+	647456570985467791350694143163125775416153692645317710289110387858313344490925,
+	3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873,
+	8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889, 
+	1571157443614188818570414758920219335869445581270513124197983268054945711653,
+	17089298199140245689054146396696610382482599563869128220501355545433181167922449
+]
+
+# Solve for system of equations
+# x = b1 mod n1
+# x = b2 mod n2
+# x = b3 mod n3
+# x = b4 mod n4
+# x = b5 mod n5
+
+# CRT suggests that there is an 'x' where x=b1*N1*x1 + b2*N2*x2 +.... which is congruent with some number and the encryption modulii (x _= b1 mod n1)
+#Try different combinations of X
+# N and x have the same array size
+X=0
+for i in range(len(N)):#TODO try differnt combinations of b[i]
+	X+=b[i]*N[i]*x[i]
+# Message will be the e-th root of X (By CRT)
+M=nthRoot(X,e)
+M=ASCIIDepad(M)
+M
+
+# Ei _= x mod ni holds true for all 1 <= i <= k
+#print(solve_mod(b[0] = X,))
+#M=X**(1/e)
+#+END_SRC
+
+#+RESULTS: Homework 7 (Common Encryption Exponent)
+: This is not a padded ASCII string
+
 ** CS253
 *** Lecture
 **** Structs
