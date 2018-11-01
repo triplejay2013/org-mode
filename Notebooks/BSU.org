@@ -351,6 +351,33 @@ _UNDERLINE_
 	  SCHEDULED: <2018-10-29 Mon> DEADLINE: <2018-10-31 Wed>
 ** Math307
 *** Lecture
+*Encryption CANNOT be larger than the modulus -- remember for Final*
+**** Key Exchange Protocol
+***** Notes
+Public INformation:
+	- P - Large Prime
+	- Q - (Random) number < P
+
+      | # | Alice                                 | Bob                                   |
+      |---+---------------------------------------+---------------------------------------|
+      | 1 | Choose a random number A (secret)     | Chooses a random number B (secret)    |
+      | 2 | Computes A*=Q^A mod p -> A* (public)  | Computes B* = Q^B mod p <-B* (public) |
+      | 3 | Computes (secret) DHSA = (B*)^A mod p | (Computes (secret) DHSB=(A*)^B mod p  |
+	  
+	  Claim: DHSA = DHSB
+	  Proof:
+	  	DHSA 	= (B*)^A mod p
+				= (Q^B mod p)^A mod p
+				= (Q^B)^A mod p
+				= (Q^A)^B mod p
+				= (Q^A mod p)^B mod p
+	  	    	= (A*)^B mod p = DHSB
+
+Why is this secure?
+It based on *Discrete Log Problem*: We don't know the powers (not related to factoring)
+DHS		= (B*)^A mod p, A=?
+DHS		= (A*)^B mod p, B=?
+
 **** RSA
 ***** Notes
 ****** Key Generation
@@ -738,6 +765,67 @@ Dd
 		 - Retain MSD (Most significant digit)
 		 - Split into different ways (every other digit, every 3rd digit)
 		 - Split into several parts
+****** CRT (Chinese Remainder Theorem)
+******* Notes
+M1= x mod n1
+M2= x mod n2
+M3= x mod n3
+M4= x mod n4
+M5= x mod n5
+
+M1,M2,M3,M4,M5 - cipher texts
+			M - plaintext
+			M - ?
+			x = M^e - not known
+To find x we will use the CRT
+When we find x we compute x^(1/e)
+******* Example
+#+NAME: CRT
+#+HEADER: :tangle ./src/sage/crt.sage
+#+BEGIN_SRC sage
+#################################################################################################
+# The input is a number and the output is the original message. If the input is not padded ASCII#
+# version of a message it returns the value: "This is not a padded ASCII string"                #
+#################################################################################################
+def ASCIIDepad(Number):
+    ndigits=len(str(Number))
+    n = ndigits % 3
+    if (n > 0):
+        print("This is not a padded ASCII string\n")
+    else:
+        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)]
+        N = ""
+        for i in range(Number.ndigits()/3):
+            N = chr(L[i]) + N
+        return(N)
+
+b=[
+17089298199140245689054146396696610382482599563869128220501355545433181167922449,
+647456570985467791350694143163125775416153692645317710289110387858313344490925,
+1571157443614188818570414758920219335869445581270513124197983268054945711653,
+8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889, 
+3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
+]
+# encryption canNOT be larger than the modulus
+n=[
+138167915492481816745409346812614907970213601388948993432404324912548722779337539,
+689234730968542058710415199123628060022111911748855188203650454001478717930441,
+165927789907443292785652054606917804467309174081946624778696246358960638705571,
+9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667,
+9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591
+]
+
+e=5
+x = crt(b,n); x
+M=x.nth_root(e)
+M=ASCIIDepad(M)
+M
+#+END_SRC
+
+#+RESULTS: CRT
+: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+: 'Next hack DigiCrime'
+
 ***** Examples
 ****** Attacks:COMMON MODULUS ATTACK (Directory ATTACK?)
 From Sage:
@@ -837,7 +925,17 @@ p
 : 196327349823794238791247612374689213649218736623
 : 196327349823794238791247612375150040954342600855043086369924757982661461133718474657040466537331025478920476913721120235676232217
 : nonefound
-
+**** El Gamal Public Key Cryptosystem
+***** Key Generation
+	  1) Choose a large prime ~p~ and number ~g < p~
+	  2) Choose a random number ~x~
+	  3) Compute ~b=g^x mod p~
+		 - Public Key: ~p,g,b~
+		 - Private Key: ~x~
+***** Encryption
+	  1) Choose a random number ~r < p~
+	  2) Compute ~u=g^r mod p~ and ~v=b^r mod p~
+	  3) Compute ~u-M*v mod p~ where M is (M)essage *NEXT TIME*
 **** Iterated Encryption
 ***** Iterated encryption security
 #+BEGIN_EXAMPLE 
@@ -1105,16 +1203,6 @@ Decrypt	the	message
 #+NAME: Homework 7 (Common Encryption Exponent)
 #+HEADER: :tangle ./src/sage/commonEncryptionExponentHmwk7.sage
 #+BEGIN_SRC sage
-########################################################################################
-# The ASCIIPad takes a string (plaintext) as an input and gives a number as an output. #
-# The number is represented in a ASCII like format that is padded.                     #
-########################################################################################
-def ASCIIPad(Message):
-    K = (map(ord,reversed(Message)))
-    le= len(K)
-    x = [100+K[i] for i in range(le)]
-    x = ZZ(x,1000)
-    return(x)
 #################################################################################################
 # The input is a number and the output is the original message. If the input is not padded ASCII#
 # version of a message it returns the value: "This is not a padded ASCII string"                #
@@ -1131,106 +1219,31 @@ def ASCIIDepad(Number):
             N = chr(L[i]) + N
         return(N)
 
-def isASCIIPadded(Number):
-    N = ""
-    n = Number.ndigits() % 3
-    if (n > 0):
-        return False
-    L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)]
-    for i in range(Number.ndigits()/3):
-        if L[i] < 0:
-            return False
-        if L[i] > 255:
-            return False
-    return True
-#########################################################################
-
-
-# A list of tuples(each represents an employee) of dictionaries (representing employee info)
-# where public key is (n-encryption mod,e-encryption exponent)
-employees =[
-	({"Name":"BiggyBucks"}, {"n":138167915492481816745409346812614907970213601388948993432404324912548722779337539}, {"e": 5}),
-	({"Name":"Dumas A Post"}, {"n":689234730968542058710415199123628060022111911748855188203650454001478717930441}, {"e": 5}),
-	({"Name":"Penny Pinch"}, {"n":165927789907443292785652054606917804467309174081946624778696246358960638705571}, {"e": 5}),
-	({"Name":"Sleezy Nickels"}, {"n":9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667}, {"e": 5}),
-	({"Name":"Dolly Dimes"}, {"n":9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591}, {"e": 5})
-]
-
-n=[]
-for i in employees:
-	for j in i:
-		for key, ni in j.items():
-			if key=="n":
-				n.append(ni)
-
-# Common exponent
-e=5
-		
-# My logic follows the slides provided at: https://blackboard.boisestate.edu/bbcswebdav/pid-5733616-dt-content-rid-29297100_1/courses/1189-70632MATH307001/RSAattacksIPresentation.pdf
-# M=n1*n2*n3..... where ni is the encry modulus of the employees. So...
-M=1
-cnt=1
-for i in employees:
-	for j in i:
-		for key,val in j.items():
-			if key=="n":
-				cnt+=1
-				M*=val
-
-N=[]
-x=[]
-# REMEMBER: Ni = N/ni; xi = 1/Ni mod ni
-cnt=0
-for i in employees:
-	for j in i:
-		for key,ni in j.items():
-			if key=="n":
-				# Ni=M/ni
-				N.append(M/ni)
-				# xi=1/Ni mod ni
-				xi=(1/N[cnt])% ni
-				x.append(xi)
-				cnt += 1
-
-# (b)ase
-# (n)th root
-def nthRoot(b,n): 
-	return b**(1.0/n)
-
-# Encrypted Messages. Following slide-show notation for CRT. These are values for bi in random order
 b=[
-	647456570985467791350694143163125775416153692645317710289110387858313344490925,
-	3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873,
-	8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889, 
-	1571157443614188818570414758920219335869445581270513124197983268054945711653,
-	17089298199140245689054146396696610382482599563869128220501355545433181167922449
+17089298199140245689054146396696610382482599563869128220501355545433181167922449,
+647456570985467791350694143163125775416153692645317710289110387858313344490925,
+1571157443614188818570414758920219335869445581270513124197983268054945711653,
+8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889, 
+3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
+]
+# encryption canNOT be larger than the modulus
+n=[
+138167915492481816745409346812614907970213601388948993432404324912548722779337539,
+689234730968542058710415199123628060022111911748855188203650454001478717930441,
+165927789907443292785652054606917804467309174081946624778696246358960638705571,
+9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667,
+9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591
 ]
 
-# Solve for system of equations
-# x = b1 mod n1
-# x = b2 mod n2
-# x = b3 mod n3
-# x = b4 mod n4
-# x = b5 mod n5
-
-# CRT suggests that there is an 'x' where x=b1*N1*x1 + b2*N2*x2 +.... which is congruent with some number and the encryption modulii (x _= b1 mod n1)
-#Try different combinations of X
-# N and x have the same array size
-X=0
-for i in range(len(N)):#TODO try differnt combinations of b[i]
-	X+=b[i]*N[i]*x[i]
-# Message will be the e-th root of X (By CRT)
-M=nthRoot(X,e)
-M=ASCIIDepad(M)
-M
-
-# Ei _= x mod ni holds true for all 1 <= i <= k
-#print(solve_mod(b[0] = X,))
-#M=X**(1/e)
+e=5
+x = crt(b,n); x
+M=x.nth_root(e)
+M=ASCIIDepad(M); M
 #+END_SRC
 
 #+RESULTS: Homework 7 (Common Encryption Exponent)
-: This is not a padded ASCII string
+: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+: 'Next hack DigiCrime'
 
 ** CS253
 *** Lecture
