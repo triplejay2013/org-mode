@@ -58,7 +58,9 @@ _UNDERLINE_
 	- and more! Start practicing!
 
 [[http://sachachua.com/blog/2007/12/emacs-getting-things-done-with-org-basic/][Agenda tips]]
-
+** Tables
+   - C-c | - creats table
+   - S-M-<right> - inserts column to the right
 * Accelerated Masters Application
   SCHEDULED: <2018-10-20 Sat> DEADLINE: <2018-12-08 Sat>
 
@@ -960,16 +962,98 @@ p
 : 196327349823794238791247612375150040954342600855043086369924757982661461133718474657040466537331025478920476913721120235676232217
 : nonefound
 **** El Gamal Public Key Cryptosystem
-***** Key Generation
-	  1) Choose a large prime ~p~ and number ~g < p~
-	  2) Choose a random number ~x~
-	  3) Compute ~b=g^x mod p~
-		 - Public Key: ~p,g,b~
-		 - Private Key: ~x~
-***** Encryption
-	  1) Choose a random number ~r < p~
-	  2) Compute ~u=g^r mod p~ and ~v=b^r mod p~
-	  3) Compute ~u-M*v mod p~ where M is (M)essage *NEXT TIME*
+***** About
+****** Key Generation
+	   1) Choose a large prime ~p~ and number ~g < p~
+	   2) Choose a random number ~x~
+	   3) Compute ~b=g^x mod p~
+		  - Public Key: ~p,g,b~
+		  - Private Key: ~x~
+****** Encryption
+	   1) Choose a random number ~r < p~
+	   2) Compute ~u=g^r mod p~ and ~v=b^r mod p~
+	   3) Compute ~u-M*v mod p~ where M is (M)essage *NEXT TIME*
+****** Signature
+	   1) Choose a random number r < p-1 and gcd(r,p-1) = 1
+	   2) Compute g^r mod p = y
+	   3) Compute
+		  S = (M-x*y)/r mod (p-1)
+		  *Signature on M is the pair y,s*
+****** Verification
+	   1) Compute
+		  - u = M/s mod p
+		  - v = y/s mod p
+	   2) Compute
+		  - N=g^u*s^v mod p
+	   3) If y = N, then signature is valid
+		
+***** Attacks on El Gamal
+****** Random Number Attack on El Gamal Signature
+	   1) Assume that ~r1=r2~ are used in signing two different messages ~M1, M2~
+
+          | Signing M1               | notes        | Signing M2               |
+          |--------------------------+--------------+--------------------------|
+          | g^r1 mod p = y           | r1=r2        | g^r2 mod p = y           |
+          | S1=(M1-x*y)/r1 mod (p-1) | S1!=S2;r1=r2 | S2=(M2-x*y)/r2 mod (p-1) |
+          |                          |              |                          |
+		  				\												   /
+						 \										   		  /
+							| Signing both M1, M2                       |
+							|-------------------------------------------|
+							| S1*r1=M1-x*y mod (p-1)                    |
+							| S2*r2=M2-x*y mod (p-1)                    |
+							| DENOTE r=r1=r2                            |
+							| S1*r=M1-x*y mod (p-1)                     |
+							| S2*r=M2-x*y mod (p-1)                     |
+							| r=(M1-x*y)/S1 mod (p-1)                   |
+							| r=(M2-x*y)/S2 mod (p-1)                   |
+							| (M1-x*y)/S1 = (M2-x*y)/S2 mod (p-1)       |
+							| (M2-x*y)*S1 = (M1-x*y)*S2 mod (p-1)       |
+							|                                           |
+							| S1-S2 = (M1-x*y)/r - (M2-x*y)/r mod (p-1) |
+							| S1-S2 = (M1-M2-x*y+x*y)/r mod (p-1)       |
+							| S1-S2 = (M1-M2)/r mod (p-1)               |
+							| r=((M1-M2)/(S1-S2) mod (p-1)              |
+		  1) P = prime number (public)
+
+		  2) S1,S2 (public)
+
+		  3) M1,M2 (public)
+
+		  4) r (secret)
+
+		  5) Eve will compute r by computing (m1-M2)/(S1-S2) mod (p-1)
+
+		  6) Solve for x (private key) by solving
+			 - S1=(M1-x*y)/r mod (p-1)
+		  	 - x=(M1-S1*r)/y mod (p-1)
+		  7) Note: Sometimes linear congruence has more than one solution
+			 - if gcd(S1-S2,p-1) = d >1, then the equation (S1-S2)*r = 1-M2 mod (p-1) has more than one solution (in fact it has d many solutions)
+			 - use ~g^ri mod p =y~ to find an ~r~ that satisfies the equation
+		  
+****** Covert Channel on El Gamal Signature
+	   1) Assume that the private key x is 160 bits long. (160 is the chosen standard for this example. Any standard  can be used)
+	   2) x^2 mod p = a
+	   3) We say that a is a quadratic residue (QR) of p if (2) has a solution
+		  - (a/p) = 1 if a is a QR of p
+		  - (a/p) = -1 otherwise
+		  - (a/p) is called the Legendre Function
+		  - (a/p)* = ((a/p) + 1)/2
+			- (a/p)* = 1 if a is a QR
+			- (a/p)* = 0 otherwise
+	   4) Public Key: b,g,p (b=g^x mod p)
+	   5) Private key: x
+	   6) p1,p2,p3,...,p13,p14 = primes
+	   7) Blocks
+		|----+----+-----+-----|
+		|    |    |     |     |
+		| B0 | B1 | ... | B15 |
+	   8) Bi = 10 bits
+	   9) P1,p2,...,P10 - leak the content of Bi
+		  - concat((y/p1)*, (y/p2)*,...,(y/p10)*) - represents binary number
+	   10) p11,p12,p13,p14 - leak the block number
+		   - concat((y/p11)*,(y/12)*, (y/13)*, (y/14)*) - represents binary number
+
 **** Iterated Encryption
 ***** Iterated encryption security
 #+BEGIN_EXAMPLE 
