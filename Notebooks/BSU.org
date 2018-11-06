@@ -321,6 +321,40 @@ _UNDERLINE_
 	   - print /x - print hex
 	   - print /z - print hex, zero-padded
 
+****** Basic C expressions and Statements
+******* Strings
+	   - char msg1[] "hello world";
+	   - sizeof(msg1)=12 - includes nul terminator
+	   - strln(msg1)=11 - does NOT include nul terminator
+******* Structs
+#+BEGIN_SRC C
+//Each member of the struct takes up space according to the data-type size
+struct gpio_port{
+	int a;
+	short b;
+	char c;
+};
+#+END_SRC
+******* Unions
+#+BEGIN_SRC C
+//Each member has the same size
+union xyz {
+	int x;
+	short y[2];
+	char z[4];
+}
+union xyz a;
+union xyz a ={0x12345678};
+#+END_SRC
+In memory, xyz looks like:
+|    Address | bytes               |
+|------------+---------------------|
+| 0x20000000 | 0x78 0x56 0x34 0x12 |
+x - would return the whole 32 bit value
+y[0] - would return short starting at index 0 (0x78 0x56)
+z[0] - would return a byte starting at index 0 (0x78)
+*The size of a union is the size of its largest member*
+
 **** Assignments
 ***** SUBMITTED Lesson 13 - Ch. 12 Problems (all)
       DEADLINE: <2018-10-02 Tue>
@@ -1168,7 +1202,7 @@ E		= M^e mod n		- Ciphertext (encryption)
 	 - Review common attacks
 ****** DONE Create sage page with RSA functionality already installed
 ****** DONE Include functions for different attacks
-**** INPROGRESS Homework 7
+**** DONE Homework 7
 	 DEADLINE: <2018-11-01 Thu> SCHEDULED: <2018-10-29 Mon>
 ***** TODO Print off and Submit assignment to BB
 ***** Description
@@ -1200,6 +1234,66 @@ M5=17089298199140245689054146396696610382482599563869128220501355545433181167922
 Decrypt	the	message
 
 ***** Solution
+****** Part 1 - How I solved it
+	   							Justin Johnson
+								   113088974
+									Math307
+
+Before the deadline was changed, I tried to write my own crt() method.
+Doing so wasn't too difficult, but seemed more work than normal for assignments
+given in this class. On Nov 1, 2018 we covered the CRT method in class and 
+showed the sage code in class. From that session I got the following results
+
+: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+: 'Next hack DigiCrime'
+
+To get to that point, I reviewed "Common Encryption Exponent Attack". I saw
+that this 'company' had written the SAME message to DIFFERENT employees using
+the same encryption exponent. Because of this case, we can invoke the CRT 
+(Chinese Remainder Theorem) to discover the original message.
+
+There  are a few things that are important to remember:
+
+E_1=M^e mod n_1	(Alice)
+E_2=M^e mod n_2	(Bob)
+
+Using CRT we can solve 
+	E_1=M^e mod n_1	
+	E_2=M^e mod n_2	
+ for M.
+ 
+ M is the unique solution of 
+	E_1=M^e mod n_1	
+	E_2=M^e mod n_2	
+ modulo n1*n2
+ 	M mod n1*n2 = M because M <n1,n2
+
+	*CHINESE REMAINDER THEOREM (CRT)*
+	let n1, n2, ... , nk be natural numbers such that for i,j distinct incices one
+	has gcd(ni,nj)=1
+
+	then the system of linear congruences has a solution which is unique modulo:
+		N=n1*n2*..*nk
+		
+    Solution: x=b1*N1*x1 + b2*N2*x2+...+bk*Nk*xk mod N
+    where Ni=N/ni and xi=(1/Ni) mod ni
+
+I had implemented the above separately, but in class we were introduced to 
+the sage method 'crt()' which is a cleaner implementation. My method than follows
+
+crt(list_of_ciphertext, list_of_modulii) calculates x=b1*n1*x1 + ... + bk*nk*xk
+this gives us some number, and the eth_root of that number should give us the 
+message, according to my notes above. The issue was the encrypted messages need
+to one-to-one correlate with their modulii, and that correlation was unkown.
+
+We were reminded that the modulus is akin to a box, and the encryption akin to
+a message (which it is). The message cannot be bigger than the box. using that idea
+I was able to properly sort the messages in proper order. After some guess and check
+I came up with:
+: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+: 'Next hack DigiCrime'
+
+****** Part 2 - Sage Code
 #+NAME: Homework 7 (Common Encryption Exponent)
 #+HEADER: :tangle ./src/sage/commonEncryptionExponentHmwk7.sage
 #+BEGIN_SRC sage
@@ -1466,6 +1560,59 @@ int main(){
 	  - COMMAND - executing program and arguments if available
 
 ****** fflush(stdout); - flushes a stream
+***** Threads in java
+****** Threads
+	   - a /thread/ is a sequence of instructions executed by a /processor/ core
+	   - A /single-threaded/ program has one threaed
+	   - many real-world programs are multi-threaded
+	   - In order to run multi threaded in my own program, I must request a thread.
+#+NAME: Java Single Threaded Example
+#+BEGIN_SRC java
+while(serverIsRunning){
+	request=queue.receiveNextRequest();
+	response=request.doWork();
+	response.send();
+	queue.remove(request);
+}
+#+END_SRC
+
+#+NAME: Threading in Java
+#+BEGIN_SRC java
+class ServerThread extends Thread{
+	.
+	.
+	void run(){
+		while(serverIsRunning){
+			request=queue.recieveNextRequest();
+			response=request.doWork();
+			response.send();
+			queue.remove(request);
+		}
+	}
+	
+	ServerThread thread1, thread2;
+	public static void main(String args){
+		.
+		.
+		thread1 = new ServerThread(...);
+		thread2 = new ServerThread(...);
+		thread1.start(); //JRE will invoke thread1's run()
+		thread2.start(); //JRE will invoke thread2's run()
+	}
+}
+#+END_SRC
+		- Race Condition
+		  - a /race condition/ arises when
+			- Two or mor threads access shared data
+			- And result depends upon the order in which the threads execute their machine instructions
+		- Critical Section
+		  - A sequence of machine instructions manipulating shared data
+		  - Results are non-deterministic
+		  - *Mutual Exclusion* - permit no more than one thread at a time (synchronized)
+			- Blockd thread - not currenlty executing
+			- Unblocked thread
+			  - another thread specifically unblocks it
+			  - A hardware event (interrupt) unblocks it
 *** In-Class Exercises
 #+NAME: Fork and Wait
 #+HEADER: :dir ./src/c/ :file forkAndWait.txt
