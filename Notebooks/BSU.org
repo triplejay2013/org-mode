@@ -961,6 +961,93 @@ p
 : 196327349823794238791247612374689213649218736623
 : 196327349823794238791247612375150040954342600855043086369924757982661461133718474657040466537331025478920476913721120235676232217
 : nonefound
+**** Dirichlet Algorithm
+#+NAME: DA
+#+BEGIN_SRC C
+def Dirichlet (q):
+    j=0
+    #for j in numpy.arange(0.10e1, infinity + 0.10e1, 0.10e1):
+    while True:
+        j+=1
+        p = 2 * j * q + 1
+        if is_prime(p) == True:
+            return(p)
+
+def findLargePrimitiveRoot(n,p):
+    n=n+1
+    eulerp = euler_phi(p)
+    Q = list(factor(eulerp))
+    while n<p:
+        found = True
+        for Q2 in Q:
+            q=Q2[0]
+            totest = power_mod(ZZ(n),ZZ(eulerp/q),ZZ(p)) 
+#            print(totest)
+            if totest==1:
+                found = False
+        if found:
+            return n
+        n+=1
+#+END_SRC
+**** Diffie-Hellman key exchange protocol
+***** Example
+#+NAME: Diffie-Hellman
+#+BEGIN_SRC sage
+def Dirichlet (q):
+    j=0
+    #for j in numpy.arange(0.10e1, infinity + 0.10e1, 0.10e1):
+    while True:
+        j+=1
+        p = 2 * j * q + 1
+        if is_prime(p) == True:
+            return(p)
+
+def findLargePrimitiveRoot(n,p):
+    n=n+1
+    eulerp = euler_phi(p)
+    Q = list(factor(eulerp))
+    while n<p:
+        found = True
+        for Q2 in Q:
+            q=Q2[0]
+            totest = power_mod(ZZ(n),ZZ(eulerp/q),ZZ(p)) 
+#            print(totest)
+            if totest==1:
+                found = False
+        if found:
+            return n
+        n+=1
+
+# (1) Choose a large prime p
+# REF: https://stackoverflow.com/a/34141119
+p=random_prime(10**150,10**160)
+p
+# (2) Choose a primitive root Q of P
+# 	- the smalles number k such that Q^k mod P = 1 is (p-1)
+# REF: http://doc.sagemath.org/html/en/prep/Quickstarts/Number-Theory.html
+#q=mod(primitive_root(p),p)
+#q
+
+#a=randint(1,p) # Alice's random number
+#b=randint(1,p) # Bob's random number
+#x=q**a; y=q**b
+#x; y; x**b; y**a
+
+#x=findLargePrimitiveRoot(10**10,p)
+#x
+x=mod(Dirichlet(p),p)
+x
+#+END_SRC
+
+#+RESULTS: Diffie-Hellman
+: 729997630957051815181242080946878121063643194794671653097237700984266810608325417858611624412093730804217338385338030978454365100508284340524035090477
+: 7
+: 472020484402767
+: 395319770560594
+: 249234316520562
+: 249234316520562
+: 10000000001
+
 **** El Gamal Public Key Cryptosystem
 ***** About
 ****** Key Generation
@@ -1032,6 +1119,7 @@ p
 			 - use ~g^ri mod p =y~ to find an ~r~ that satisfies the equation
 		  
 ****** Covert Channel on El Gamal Signature
+******* Notes
 	   1) Assume that the private key x is 160 bits long. (160 is the chosen standard for this example. Any standard  can be used)
 	   2) x^2 mod p = a
 	   3) We say that a is a quadratic residue (QR) of p if (2) has a solution
@@ -1053,6 +1141,171 @@ p
 		  - concat((y/p1)*, (y/p2)*,...,(y/p10)*) - represents binary number
 	   10) p11,p12,p13,p14 - leak the block number
 		   - concat((y/p11)*,(y/12)*, (y/13)*, (y/14)*) - represents binary number
+
+	   11) Key x is 160 bits
+	   12) Size of each block of x is 10 bits
+	   13) The number of blocks in x is 16
+
+******* Example
+#+NAME: Legendre Covert Channel
+#+BEGIN_SRC sage
+##############################################################################################################
+# We want to discover a private key of at most 160 bits from signatures using a Legendre-type covert channel.#
+# We have 14 covert primes, and 16 signatures which reveal 16 blocks of 10 bits each about the private key.  #
+##############################################################################################################
+def NewLegendre(a,p):
+    if is_prime(p):
+        return (1+kronecker(a,p))/2
+    else:
+        print "2nd argument has to be a prime"
+        
+def BlockNumber(y,primelist):
+    m=0
+    for i in xrange(0,4):
+        m = 2*m + NewLegendre(y,primelist[i+10])
+    return m+1
+
+def BlockContents(y,primelist):
+    k=0
+    for i in xrange(0,10):
+        k=10*k+NewLegendre(y,primelist[i])
+    return k
+
+def KeyDiscover(ylist,primelist):
+    c=10^10
+    k=0
+    for i in xrange(16):
+        d=16-BlockNumber(ylist[i],primelist)
+        k=k+(BlockContents(ylist[i],primelist))*(c^d)
+        #k=k+(BlockContents(ylist[i],primelist))*c^d
+    return int(str(k),2)
+
+y=[0]*17
+s=[0]*17
+p=[0]*15
+y[1]= 6355654156581339292380028178295946379397857230419335473049773634105011
+s[1]= 3560725073968654220540577725166322807481561312157414571860157629465222
+
+
+y[2]= 6157738735079726271974947267390448530039834693941568486254984166399169
+s[2]= 6291144800430142601833562065314744488661843993287483337500999473866049
+
+
+
+y[3]= 9335313663168312334842734241780762294755281133475486862667663109265693
+s[3]= 1031174004049088397035651840893708758323829943237917442328886035203304
+
+
+y[4]= 5666312454503499142803478855324287143700047631332918051757975784387852
+s[4]= 7474462038392337038267162594316747902979250709302501061852809955557686
+
+
+
+y[5]= 8609729555305475123927447895155480568383891784974360653476349663970219
+s[5]= 9392131610200414588504854275564189165850448855170937440564772246654800
+
+
+
+y[6]= 7365404439138911411864937298776875814102498525963049435105763372378772
+s[6]= 647447785466753660592038806991306978403341150904526358877367886003642
+
+
+
+y[7]= 5705440343386587753765002035968279773205391692599442025007820809081663
+s[7]= 7706884617942615865555527903233116366329368354497449630894822636431727
+
+
+
+y[8]= 9139181219517140532824520580591540432442737355121485514849816985670182
+s[8]= 9119886852416426951627821313728462871487106020439368341742027870361688
+
+
+y[9]= 3851953190357247351746340095276683473382065321260493360272121028908078
+s[9]= 5799995345355474114152639857813718721964327387996505577731360092639224
+
+
+
+y[10]= 8332119728236605996252741802820164399490394892793656670206410123540806
+s[10]= 3382049014239536347193207790839121703028337382022833734591171852421851
+
+
+y[11]= 1090916439028367923335435833686239225083325662650219511577614470087626
+s[11]= 784467849834343142005625314726078169629151138271180139914842146743784
+
+
+
+y[12]= 4044337428348522271547535017777415980322724356426081427629324943634693 
+s[12]= 875430208213556723165929030182187434842223658973047200347756281547097
+
+
+y[13]= 5047503978916103346914776520107614498353295441864520623517103573476005
+s[13]= 8856726072244904117515011381053001354515613401207356043353782820904450
+
+
+
+y[14]= 3079609686866100016134750688150613028636970390199280613932162055042282
+s[14]= 2910381948910080172894739786204355803866267753930250967405306509357624
+
+
+
+y[15]= 2507949926452818146783101167935559217583543852145717090862513023080430
+s[15]= 2448150721429647913194335461249415499372183912050199930744663457020240
+
+
+y[16]= 1137237284834714268920432440084126521105380025168123492652543171722168
+s[16]= 9770021075461804348672365094369599228327792685910556392116440254449953
+
+
+p[1]=2610874309742867231360502542308382199053675592825240788613991898567287
+p[2]=6881793749340807728335795394301261629479870548736450984003401594706373
+p[3]=8314906195914825136973281314862289454100745237769034410057080703111511
+p[4]=5127114594552921209928891515242515620324828055912854227507525717981667
+p[5]=7473570262981491527797413449568788992987500442157627511097882499376811
+p[6]=9062890227065912603127119521589474574157513825150650905007553408748219
+p[7]=2815984929359632269852681585809504709739738485231104248045693804710167
+p[8]=8302655538010818866476054310788175542136407374106205605523687223947057
+p[9]=5812242019121022573901665288968349097396414947780422731613987785640429
+p[10]=4198272844134050365811754869582636140810856859347877704841433599229643
+p[11]=8724880795485531802023255050614524952922474293642065329619154912668053
+p[12]=6069438450681407641506962917791070874166946435905950292905549552889463
+p[13]=4125842236067060541266621757734462223575905687273574099511410424381497
+p[14]=9501247275887974857856234450269247606386273485070460241146322057229349
+
+#################################################################################################
+# ylist - This is the list of y's from the signatures given in the form ylist =[y1,y2,....,y16] #
+# primelist - This is the list of coverts primes given in the order they appear in the program. #
+# It is given in the form primelist =[prime1,prime2,....,prime10,prime11,...,prime14]           #
+#################################################################################################
+
+
+ylist = [0]*16  #Steps down indexing from 1-16 down to 0-15.
+for i in xrange(16):
+    y[i]=y[i+1]
+    ylist[i]=y[i+1]
+    s[i]=s[i+1]
+print ylist
+
+primelist = [0]*14
+for i in xrange(14):
+    primelist[i]=p[i+1]
+for i in xrange(14):
+    p[i]=p[i+1]
+    primelist[i]=p[i+1]
+print primelist
+
+
+len(primelist)
+testout = KeyDiscover(y,p)
+print testout
+
+BlockNumber(y[0],p)
+
+BlockContents(ylist[0],p)
+
+for i in xrange(16):
+    bc = BlockContents(ylist[i],primelist)
+    print (BlockNumber(ylist[i],primelist),bc,)
+#+END_SRC
 
 **** Iterated Encryption
 ***** Iterated encryption security
