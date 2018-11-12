@@ -32,6 +32,12 @@
          "* TODO %?\n %i\n %a")
       ("n" "Note" entry (file+headline "~/.emacs.d/Notebooks/notes.org" "Note")
          "%?\n")
+      ("f" "Fincance" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Finances")
+       "* TODO %?\n%i\n%a")
+      ("m" "Misc" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Miscellaneous")
+       "* TODO %?\n%i\n%a")
+      ("w" "Work" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Work")
+       "* TODO %?\n%i\n%a")
       ; Following Inspired by: http://cachestocaches.com/2016/9/my-workflow-org-agenda/
       ; Journal - Inspired by the "Journal" template from Bernt Hansen's guide, I use this template for one-off and unscheduled personal tasks. This includes my daily lunch break or whenever I go get coffee with a friend. Unlike the other templates, this created heading is placed within the diary.org file, and beneath headings corresponding to the year-month-day. I typically just leave this open while I'm away from my desk, and it's rare that I look at these directly after they're created.
       ("j" "Journal" entry (file+datetree "~/.emacs.d/Notebooks/journal.org")

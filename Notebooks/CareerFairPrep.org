@@ -1,0 +1,58 @@
+* November 13, 2018 - 9:00 - 3pm Simplot Ballroom (SUB)
+** Employers Participating (listing only ones interested in CS)
+*** ASML
+*** ATS Inland
+*** Chief Architect Software
+*** Clearwater Analytics
+*** *CradlePoint*
+	- Downtown!
+	- Talk to!
+*** Econolite
+*** *Fast Enterprises*
+	- Looks interesting
+	- Find out more
+	- Career opportunities?
+*** FieldCore
+*** *Hewlett Packard Enterprise*
+	- Career opportunities
+	- Find out more about team
+*** Hill Air Force Base
+*** *Idaho Power*
+	- CS opportunities?
+*** Idaho National Laboratory - Battelle Energy Alliance
+*** Ingersoll Rand - TRANE
+*** *Micron Technology*
+	- career opportunities?
+	- what to do as junior CS to apply to micron
+	- bad location
+*** MotivePower
+	- bad location
+*** *Paylocity*
+**** About
+Make an impact in tech, right here in Boise and launch your future career with
+Paylocity. We work in small agile product-oriented teams where we innovate,
+collaborate and bring amazing products to market.
+
+Paylocity has a new technology office in downtown Boise and developed an
+internship program specifically designed for Computer Science juniors and seniors. 
+Be part of something great and get a jump start your career learning useful job
+skills you can apply right away.
+**** [[http://bit.ly/2019SummerTECHInterns][Job opportunity application]]
+**** [[https://www.paylocity.com/careers/][More career opportunities]]
+**** Located Downtown
+**** Dates: May 20 - August 9, 2019
+**** Questions to Ask
+	 - Job openings
+	 - Organization
+	   - Team collaboration? Individual? Growth?
+*** RuleTek
+	- Meridian
+*** *Shweitzer Engineering Laboratories*
+	- Chinden (like HP)
+	- Talk about opportunities
+	- Internships?
+*** *Scentsy*
+	- Bad location (EAGLE!)
+	- Ask about CS opportunities
+*** WH Pacific
+	- find out more
