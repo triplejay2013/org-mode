@@ -1,0 +1,48 @@
+MY PROJECTS  -*- mode: org; fill-column: 78 -*-
+
+* [[http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/][Planning with Org Mode]]
+** Step 1: Creation
+   - Just create tasks, don't worry about scheduling
+   - use C-cc to open the capture
+
+** Step 2: Filing tasks
+   - Schedule when I want to do tasks
+   - USE C-c C-x C-s to move file to archive
+   - Use C-c C-s to schedule
+   - Specify "+7" if I don't know when to schedule
+   - DEFERRED tasks have no scheduled time yet
+** Step 3: Breifly review upcoming week
+   - Jump to agenda view (C-c a a)
+   - C-c C-s to reschedule
+   - press "r" in agenda view to refresh the display
+   - press "q" to quitA
+   - press "." to go to current day
+   - press "d" to switch to daily view for selected day
+** Step 4: Getting ready for the day
+   - Org mode automatically reshedules overdue tasks with "Sched 2x ..."
+   - use the "," to set task priorities "space" to remove the priorities
+** Step 5: Doing the work
+   - 
+** Step 6: Moving on to the next step
+** Step 7: Archiving tasks
+   - C-c C-x C-s
+   - C-c a c will open all agenda files with "DONE" state for archiving
+
+
+* Tasks
+#+CATEGORY: Tasks
+
+* School
+#+CATEGORY: School
+* Health
+#+CATEGORY: Health
+* Finances
+#+CATEGORY: Finance
+* Miscellaneous
+#+CATEGORY: Misc
+
+* Startup
+#+STARTUP: content
+#+STARTUP: lognotestate
+#+SEQ_TODO: TODO STARTED WAITING DELEGATED APPT | DONE DEFERRED CANCELLED
+#+TAGS: { SCHOOL(s) WORK(w) } CALL(c) ERRAND(e)

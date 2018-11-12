@@ -7,6 +7,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+; add certain files to config
 (add-to-list 'load-path "~/.src/org-mode/lisp")
 
 ; adds contributed libraries not included in Emacs
@@ -146,10 +147,50 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
+ '(org-agenda-custom-commands
    (quote
-	("~/.emacs.d/Notebooks/LA.org" "~/.emacs.d/Notebooks/BSU.org" "~/.emacs.d/Notebooks/Personal.org" "~/.emacs.d/Notebooks/srcBlocks.org" "~/.emacs.d/Notebooks/Church.org")))
- '(package-selected-packages (quote (ob-sagemath sage-shell-mode auctex))))
+	(("d" todo "DELEGATED" nil)
+	 ("c" todo "DONE|DEFERRED|CANCELLED" nil)
+	 ("w" todo "WAITING" nil)
+	 ("W" agenda ""
+	  ((org-agenda-ndays 21)))
+	 ("A" agenda ""
+	  ((org-agenda-skip-function
+		(lambda nil
+		  (org-agenda-skip-entry-if
+		   (quote notregexp)
+		   "\\=.*\\[#A\\]")))
+	   (org-agenda-ndays 1)
+	   (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+	 ("u" alltodo ""
+	  ((org-agenda-skip-function
+		(lambda nil
+		  (org-agenda-skip-entry-if
+		   (quote scheduled)
+		   (quote deadline)
+		   (quote regexp)
+		   "
+]+>")))
+	   (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
+ '(org-agenda-files (quote ("~/.emacs.d/Notebooks/BSU.org")))
+ '(org-agenda-ndays 7)
+ '(org-agenda-show-all-dates t)
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-start-on-weekday nil)
+ '(org-deadline-warning-days 14)
+ '(org-default-notes-file "~/.emacs.d/Notebooks/notes.org")
+ '(org-fast-tag-selection-single-key (quote expert))
+ '(org-remember-store-without-prompt t)
+ '(org-remember-templates
+   (quote
+	((116 "* TODO %?
+  %u" "~/.emacs.d/Notebooks/todo.org" "Tasks")
+	 (110 "* %u %?" "~/.emacs.d/Notebooks/notes.org" "Notes"))))
+ '(org-reverse-note-order t)
+ '(package-selected-packages (quote (ob-sagemath sage-shell-mode auctex)))
+ '(remember-annotation-functions (quote (org-remember-annotation)))
+ '(remember-handler-functions (quote (org-remember-handler))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -184,3 +225,4 @@
 ; Hides emphasis markers (*,/,~, etc) used for formatting text
 ; REF: https://www.reddit.com/r/emacs/comments/6pxh92/how_to_change_font_colorcharacteristics_in_org/
 (setq org-hide-emphasis-markers t)
+

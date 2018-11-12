@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/.notes")
- (front-context-string . "** TODO \n   [201")
- (rear-context-string . "elative Rates]]\n")
- (position . 113))
+ (filename . "~/.emacs.d/Notebooks/todo.org")
+ (front-context-string . "** TODO I forgot")
+ (rear-context-string . "s/scratch.org]]\n")
+ (position . 146))
 )

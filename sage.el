@@ -12,8 +12,8 @@
 (setq org-babel-default-header-args:sage '((:session . t)
                                            (:results . "output")))
 ;; C-c c for asynchronous evaluating (only for SageMath code blocks).
-(with-eval-after-load "org"
-  (define-key org-mode-map (kbd "C-c c") 'ob-sagemath-execute-async))
+;(with-eval-after-load "org"
+;  (define-key org-mode-map (kbd "C-c c") 'ob-sagemath-execute-async))
 ;; Do not evaluate code blocks when exporting.
 (setq org-export-babel-evaluate nil)
 ;; Show images when opening a file.
