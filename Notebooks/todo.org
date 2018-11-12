@@ -29,7 +29,13 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** Step 7: Archiving tasks
    - C-c C-x C-s
    - C-c a c will open all agenda files with "DONE" state for archiving
+   - C-c [ will do somehting to fix agenda view when TODO's aren't showing
+   - in bash run "*.org_archive >> archive; rm *.org_archive" to append and remove archive files
 
+* Clocking
+  - C-c C-x C-i Clock into a task
+  - C-c C-x C-o Clock out of a task
+  - View clocked times C-c C-x C-c (q to exit)
 
 * Tasks
 :PROPERTIES:
@@ -37,29 +43,39 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :END: 
 ** TODO Prepare Final Lessons for Coding4youth
    SCHEDULED: <2018-11-15 Thu>
-** TODO Prepare for career fair
+   :LOGBOOK:
+   CLOCK: [2018-11-12 Mon 15:09]--[2018-11-12 Mon 15:10] =>  0:01
+   :END:
+** TODO [#B] Prepare for career fair
    SCHEDULED: <2018-11-12 Mon>
-*** TODO Update Resume
+*** TODO [#B] Update Resume
 	SCHEDULED: <2018-11-12 Mon>
-**** TODO Print off Resume
+**** TODO [#B] Print off Resume
 	 SCHEDULED: <2018-11-12 Mon>
-*** TODO Look up attending parties and compile list of questions
+*** TODO [#B] Look up attending parties and compile list of questions
 	SCHEDULED: <2018-11-12 Mon>
-** TODO Email Megan Rock (FHE)
+** TODO [#C] Email Megan Rock (FHE)
    SCHEDULED: <2018-11-12 Mon>
+** TODO Emails Catch up
+   SCHEDULED: <2018-11-12 Mon>
+ 
+  [[file:~/.emacs.d/Notebooks/scratch][file:~/.emacs.d/Notebooks/scratch]]
 * School
 :PROPERTIES:
 :CATEGORY: School
 :END: 
-** TODO Research for cs230 - Proprietary BackDoors
+** TODO [#A] Research for cs230 - Proprietary BackDoors
    SCHEDULED: <2018-11-12 Mon>
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** TODO ECE330 Homework
+** WAITING [#A] ECE330 Homework Lesson 25 (Ch. 21 Problems [all])
    DEADLINE: <2018-11-13 Tue> SCHEDULED: <2018-11-12 Mon>
+   - State "WAITING"    from "WAITING"    [2018-11-12 Mon 15:19] \\
+	 Compare answers with Tyler French. Otherwise this is ready for submission
 ** TODO CS 253 Smash 3
    DEADLINE: <2018-11-18 Sun> SCHEDULED: <2018-11-13 Tue>
 ** TODO ECE330/L - Finish Prelabs
    DEADLINE: <2018-11-14 Wed> SCHEDULED: <2018-11-13 Tue>
+  
 * Health
 :PROPERTIES:
 :CATEGORY: Health
@@ -72,4 +88,8 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: Misc
 :END:
-
+** TODO [[http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/][Integrate Gmail with Emacs]]
+*** [[http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/][Here is another resource]]
+* STARTUP
+#+STARTUP: content
+#+STARTUP: lognotestate

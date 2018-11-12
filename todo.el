@@ -1,9 +1,11 @@
 ; Fast access to TODO states
 ; REF: https://orgmode.org/manual/Fast-access-to-TODO-states.html#Fast-access-to-TODO-states
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "WAIT(n)" "|" "DONE(d)" "|" "CANCELED(c)") ; gen purpose
-      	(sequence "INPROGRESS(p)" "HELP(h)" "|" "SUBMITTED(s)") ; school
-      	(sequence "BUG(b)" "|" "FIXED(f)"))) ; work
+      '((sequence "TODO(t)" "WAITING(w@)" "STARTED(s@)" "|" "DONE(d!)" "|" "CANCELED(c@)") ; gen purpose
+      	(sequence "INPROGRESS(p)" "HELP(h@)" "|" "SUBMITTED(S!)") ; school
+      	(sequence "BUG(b@)" "|" "FIXED(f!)"))) ; work
+; Tracking TODO state Changes: https://www.gnu.org/software/emacs/manual/html_node/org/Tracking-TODO-state-changes.html
+; Essential, @ denotes note and timestamp '!' denotes timestamp
 
 
 (setq org-todo-keyword-faces 
@@ -22,16 +24,30 @@
 (define-key global-map "\C-cc" 'org-capture)
 
 ; Search Capture-templates
+; REF: https://orgmode.org/manual/Capture-templates.html
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Tasks")
-         "* TODO %?\n %i\n %a")
+         "* TODO %?\n%i\n %a\n" :clock-in t :clock-resume t)
       ("s" "School" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "School")
          "* TODO %?\n %i\n %a")
       ("n" "Note" entry (file+headline "~/.emacs.d/Notebooks/notes.org" "Note")
          "%?\n")
+      ; Following Inspired by: http://cachestocaches.com/2016/9/my-workflow-org-agenda/
+      ; Journal - Inspired by the "Journal" template from Bernt Hansen's guide, I use this template for one-off and unscheduled personal tasks. This includes my daily lunch break or whenever I go get coffee with a friend. Unlike the other templates, this created heading is placed within the diary.org file, and beneath headings corresponding to the year-month-day. I typically just leave this open while I'm away from my desk, and it's rare that I look at these directly after they're created.
+      ("j" "Journal" entry (file+datetree "~/.emacs.d/Notebooks/journal.org")
+       "* %?\n%U\n" :clock-in t :clock-resume t)
+      ; Idea - I often have random thoughts throughout the day that have nothing to do with what I'm currently working on and likely aren't time sensitive. Whenever I have one of these ideas (whether it be inspiration for a blog post, or an idea for my work), I use this capture template.
+      ("i" "Idea" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Ideas")
+       "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+      ; Next Task - Whenever I have something I quickly need to get done, including a one-off errand or responding to an email, I use this. It creates a heading with the NEXT keyword and (if that weren't enough) a deadline for the end of the day. I try to ensure that all of these are done before I go to bed if possible.
+      ("n" "Next Task" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Next")
+       "** NEXT %? \nDEADLINE: %t")
       ; Add other custom templates
       ))
 
+; Clocking REF: http://cachestocaches.com/2016/9/my-workflow-org-agenda/
+;; Set default column view headings: Task Total-Time Time-Stamp
+(setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
 
 ; REF: http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/
 ; Capture is based off of remember, these are remember configurations.

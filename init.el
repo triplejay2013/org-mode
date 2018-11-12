@@ -226,4 +226,3 @@
 ; Hides emphasis markers (*,/,~, etc) used for formatting text
 ; REF: https://www.reddit.com/r/emacs/comments/6pxh92/how_to_change_font_colorcharacteristics_in_org/
 (setq org-hide-emphasis-markers t)
-
