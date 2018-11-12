@@ -1,5 +1,7 @@
 MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 
+* Org-Fixes
+  - [[https://stackoverflow.com/a/48389250][Category markers on Agenda View]]
 * [[http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/][Planning with Org Mode]]
 ** Step 1: Creation
    - Just create tasks, don't worry about scheduling
@@ -30,19 +32,44 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 
 
 * Tasks
-#+CATEGORY: Tasks
-
+:PROPERTIES:
+:CATEGORY: Tasks
+:END: 
+** TODO Prepare Final Lessons for Coding4youth
+   SCHEDULED: <2018-11-15 Thu>
+** TODO Prepare for career fair
+   SCHEDULED: <2018-11-12 Mon>
+*** TODO Update Resume
+	SCHEDULED: <2018-11-12 Mon>
+**** TODO Print off Resume
+	 SCHEDULED: <2018-11-12 Mon>
+*** TODO Look up attending parties and compile list of questions
+	SCHEDULED: <2018-11-12 Mon>
+** TODO Email Megan Rock (FHE)
+   SCHEDULED: <2018-11-12 Mon>
 * School
-#+CATEGORY: School
+:PROPERTIES:
+:CATEGORY: School
+:END: 
+** TODO Research for cs230 - Proprietary BackDoors
+   SCHEDULED: <2018-11-12 Mon>
+   - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
+** TODO ECE330 Homework
+   DEADLINE: <2018-11-13 Tue> SCHEDULED: <2018-11-12 Mon>
+** TODO CS 253 Smash 3
+   DEADLINE: <2018-11-18 Sun> SCHEDULED: <2018-11-13 Tue>
+** TODO ECE330/L - Finish Prelabs
+   DEADLINE: <2018-11-14 Wed> SCHEDULED: <2018-11-13 Tue>
 * Health
-#+CATEGORY: Health
+:PROPERTIES:
+:CATEGORY: Health
+:END:
 * Finances
-#+CATEGORY: Finance
+ :PROPERTIES:
+:CATEGORY: Finances
+:END: 
 * Miscellaneous
-#+CATEGORY: Misc
+:PROPERTIES:
+:CATEGORY: Misc
+:END:
 
-* Startup
-#+STARTUP: content
-#+STARTUP: lognotestate
-#+SEQ_TODO: TODO STARTED WAITING DELEGATED APPT | DONE DEFERRED CANCELLED
-#+TAGS: { SCHOOL(s) WORK(w) } CALL(c) ERRAND(e)

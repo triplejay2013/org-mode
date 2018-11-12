@@ -24,9 +24,13 @@
 ; Search Capture-templates
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Tasks")
-         "* TODO %?\n %i\n %a"))
+         "* TODO %?\n %i\n %a")
+      ("s" "School" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "School")
+         "* TODO %?\n %i\n %a")
+      ("n" "Note" entry (file+headline "~/.emacs.d/Notebooks/notes.org" "Note")
+         "%?\n")
       ; Add other custom templates
-      )
+      ))
 
 
 ; REF: http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/

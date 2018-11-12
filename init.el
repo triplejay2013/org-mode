@@ -110,9 +110,8 @@
   (mapcar (lambda (x) (concat dir-where-you-store-org-files x))
 	  ; Add org files to TRACK here
 	  '("BSU.org" 
-	  "Personal.org" 
-	  "LA.org"
-	  "srcBlocks.org"
+    "todo.org"
+    "notes.org"
 	  "Church.org")))
 
 ; Exporting Config
@@ -172,7 +171,9 @@
 		   "
 ]+>")))
 	   (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
- '(org-agenda-files (quote ("~/.emacs.d/Notebooks/BSU.org")))
+ '(org-agenda-files
+   (quote
+	("~/.emacs.d/Notebooks/todo.org" "~/.emacs.d/Notebooks/BSU.org")))
  '(org-agenda-ndays 7)
  '(org-agenda-show-all-dates t)
  '(org-agenda-skip-deadline-if-done t)

@@ -13,18 +13,6 @@ _UNDERLINE_
    |--------+--------+---------+-----------+--------|
    | CS 481 | CS 488 | CS 421? | CS-HU 271 |        |
 ** Spring 2019 Plan
-*** INPROGRESS Consult Advisor to finalize Spring schedule
-	SCHEDULED: <2018-10-22 Mon 10:00>
-	| Course    | Description                         | Credits | Instructors            |
-	|-----------+-------------------------------------+---------+------------------------|
-	| UF 200    | Foundations of Ethics and Diversity |       3 |                        |
-	| CS 361    | Intro to Theory of Comp             |       3 |                        |
-	| CS 441    | Computer Architecture               |       3 |                        |
-	| CS 453    | Operating Systems                   |       3 | Shane Panter/Amit jain |
-	| CS-HU 271 | Agile Developement                  |       1 |                        |
-	| ***         | Work U                              |      3  |                        |
-	| ^         | Total:                              |      13 |                        |
-	#+TBLFM: $3=vsum(@2..@-1)
 ** Fall 2019 Plan
    | Course | Description          | Credit |
    |--------+----------------------+--------|
@@ -33,8 +21,6 @@ _UNDERLINE_
    |        |                      |        | **Accel. Masters Courses?
 
 * Misc Items
-** TODO update src and exmp insertion to have more infor like headers and names when hot-keyed
-** TODO Syncthing f**d things up....so missing most of my homework and recent updates
 * Need to know commands for emacs
 ** Quick Commands
 	- C-x C-q to disable read-only buffer
@@ -61,39 +47,6 @@ _UNDERLINE_
 ** Tables
    - C-c | - creats table
    - S-M-<right> - inserts column to the right
-* Accelerated Masters Application
-  SCHEDULED: <2018-10-20 Sat> DEADLINE: <2018-12-08 Sat>
-
-  [[http://coen.boisestate.edu/cs/undergraduates/accelerated-ms-cs/][Program Info]]
-
-** TODO Print off application
-   SCHEDULED: <2018-10-20 Sat>
-** DONE Look at graduate Catalog
-** TODO Contact and meet with falculty
-   SCHEDULED: <2018-10-18 Thu>
-	- [ ] Ask them what projects I might participate in that field of study
-	- [ ] what courses I should take if I pursue their emphasis
-*** Research areas of interest (in decsending order of interest)
-	*REF:* [[http://coen.boisestate.edu/cs/researchareas/][Research areas of interest]]
-	- *Software engineering*?
-	  - Jim Buffenbarger
-		- [[https://jimbuffenbarger.youcanbook.me/][book]]
-		- email first? Then book meeting
-	- *Bioinformatics*
-	  - No falculty advisor
-	- *Artificial Intelligence*
-	  - Casey Kennington
-		- [[https://caseykennington.youcanbook.me/][book]]
-		- email first, then book?
-	  - Tim Andersen (Artificial Neural Networks)
-		- [[https://timandersen.youcanbook.me/][book]]
-	- *Machine Learning*
-	  - Casey Kennington
-	  - Tim Andersen
-		- Contact Casey first, then tim?
-
-** TODO Spring Semester Planning
-   SCHEDULED: <2018-10-20 Sat>
 * Fall 2018
 ** ECE330
 *** Lecture
@@ -272,10 +225,7 @@ _UNDERLINE_
   #+END_SRC
 ******* ASCII
 		- ASCII - American Standard Coding Information Interchange
-******** DONE Put Ascii table on notecard for exam 2
 ****** ADC (Analog to Digital Converter, also see DAC)
-******* DONE Read Prelecture slides
-		DEADLINE: <2018-10-16 Tue> SCHEDULED: <2018-10-16 Tue>
 ******* Notes
 ******** SAR (Successive Approximation Register)
 		 - Fast ADC implmentation
@@ -383,8 +333,6 @@ z[0] - would return a byte starting at index 0 (0x78)
 *** Lab
 **** Notes
 **** Assignments
-***** Lab9 writeup
-	  SCHEDULED: <2018-10-29 Mon> DEADLINE: <2018-10-31 Wed>
 ** Math307
 *** Lecture
 *Encryption CANNOT be larger than the modulus -- remember for Final*
@@ -660,7 +608,6 @@ e=7
 		  4. DEFENSE: Choose p and q such that m is "large"
 		
 ********* Example
-********** TODO SAGE procedure on blackboard shows this defence
 ********** Misc
 		  1. Assumee that after k many iterations we find
 			 1. x=sqrt(n) +k and y=sqrt(x^2 -n)
@@ -1403,279 +1350,6 @@ E
 : 150598315159426420417362370315760759643687452249127260593893330249875774660837569082216166241764228321707042114
 
 *** Assignments
-**** DONE Homework 4 [2/2]
-     DEADLINE: <2018-10-03 Wed 11:16>
-
-	 - [X] part 1
-       - Describe how I found my solutions. Place answers in document
-	 - [X] part 2
-       - Place code for solving the two parts here
-
-**** DONE Homework 6
-	 DEADLINE: <2018-10-18 Thu> SCHEDULED: <2018-10-15 Mon>
-***** SUBMITTED Print off assignment
-	  SCHEDULED: <2018-10-17 Wed> DEADLINE: <2018-10-18 Thu>
-***** Solution
-#+NAME: Assignment 6: Fermat Attack
-#+BEGIN_SRC sage 
-# Function Definitions
-# REF: Blackboard Software (rsadecrypt)
-def ASCIIDepad(Number):
-    n = Number.ndigits() % 3;
-    if (n > 0):
-        print("This is not a padded ASCII string\n");
-    else:
-        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
-        N = "";
-        for i in range(Number.ndigits()/3):
-            N = chr(L[i]) + N;
-        return(N)
-
-def rsadecrypt(encr,decrexp,encrmod):
-    D = power_mod(encr,decrexp,encrmod);
-    N = ASCIIDepad(D);
-    return(N);
-
-
-# From Blackboard Software Sources (Fermat Attack)
-def isqrt(n):
-    return int(floor(sqrt(n)))
-
-def usqrt (n):
-    ur = isqrt(n)
-    if ur ** 2 < n:
-        ur = ur + 1
-    return(ur)
-
-def FermatAttack (n, rounds):
-    st = usqrt(n)
-    for x in range(st, st + rounds + 1):
-        #print (x-st)
-        sq = x ** 2 - n
-        y = isqrt(sq)
-        if y ** 2 == sq:
-            print "Factor found in round {0}".format(x-st+1)
-            return(x + y)
-    print "No factor found in {0} rounds".format(rounds)
-
-# Define Problem information into code
-# aliceKey=(R/n,e) where R or n is the modulos
-aliceKey=(3200909051105364201164693808053590029074088922158723491051061550603549823737458227601881401901569257978004143012923593331603179164497963879113975835000986070024699519343049991253001543465847139349037243656109687211847515003135028132545450689475582835433024130454351048493271288284326740872991312817737068756145723348616748658487242931184584005382638341 ,45938274932874982748938989492800101)
-n=aliceKey[0]
-e=aliceKey[1]
-bobM=1646965299225077453528764533325484870128106736546137408200095456059067040313170132659677309326733627254170824177278689792967869683703210102631692715251241388457103568881887427174337319839702934337074114069079964028787201219122008132800911350242389943062437915595376659222211331548822861710469042657218207369516502014847384607200570429591504554077212313
-
-# Try a Fermat Attack on bob's message
-p=FermatAttack(n,10)
-p
-# Find the prime factors of n
-q=aliceKey[0]/p
-phi=(p-1)*(q-1)
-
-# compute private key
-t=inverse_mod(e,phi)
-t
-	
-# Attempt to decrypt the message
-D=rsadecrypt(bobM, t, n)
-D
-
-print("\nSolutions:\n")
-print("The message is {}\n".format(D))
-print("The private key is {}\n".format(t))
-print("The value of phi(R) is {}\n".format(phi))
-print("Factors of R are {} and {}\n".format(p,q))
-
-#+END_SRC
-
-#+RESULTS: Assignment 6: Fermat Attack
-#+begin_example
-Factor found in round 1
-56576576876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237L
-3167863510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
-'Identity Based Cryptosystems'
-
-Solutions:
-
-The message is Identity Based Cryptosystems
-
-The private key is 31678635100347422376279971959287865831535123079371699895978
-289680588770172932509221001873473050763070043223846764972228111281137534246259
-214669398268821601951803037417521852736508417917178768950042449799637399934886
-946179941417737783176843426362008086463161204574100258418161422475043910801365
-01066088010574604519661347572707772349904352818684682371437
-
-The value of phi(R) is 32009090511053642011646938080535900290740889221587234910
-510615506035498237374582276018814019015692579780041430129235933316031791644979
-638791139758350009860700246995193430499911398483897120897639955259087470409875
-366598591373830615805779319239570083602972481544925330509176977531530358318061
-44466131249975602991969588856988898729867579653294934514074112
-
-Factors of R are 5657657687687868767675566745453434983759382793287598327598375
-938275928723756788798798090899878778676756564545453342342334324354657657687687
-9879879879878687675765644535434287237 
-and 
-565765768768786876767556674545343498375938279328759832759837593827592872375678
-879879809089987877867675656454545334234233432435465765768768798798798798786876
-75765644535434276993
-#+end_example
-
-**** DONE Study for Quiz 2
-	 DEADLINE: <2018-10-25 Thu> SCHEDULED: <2018-10-23 Tue>
-	 *STUDY THESE TOPICS*
-****** DONE Place notes under topic outlines below for quick access on quiz
-	   SCHEDULED: <2018-10-24 Wed>
-	 - Encryption
-#+BEGIN_EXAMPLE 
-RSA Encryption
-(n,e) 	- public key
-d 		- private key
-phi(n)	= (p-1)(q-1) 	- Euler's Totient
-n		= p*q		 	- RSA mod
-E		= M^e mod n		- Ciphertext (encryption)
-#+END_EXAMPLE
-	 - Decryption
-	 - Signing keys
-	 - Review common attacks
-****** DONE Create sage page with RSA functionality already installed
-****** DONE Include functions for different attacks
-**** DONE Homework 7
-	 DEADLINE: <2018-11-01 Thu> SCHEDULED: <2018-10-29 Mon>
-***** TODO Print off and Submit assignment to BB
-***** Description
-Foundations of Cryptology
-Assignment 7
-Five	of	the	employees	of	DigiCrime	Inc.	have	decided	to	supplement	their	pensions	by	doing	freelance	
-work	for	one	of	the	competitors,	CyberThievery,	of	DigiCrime.	Each	employee	of	DigiCrime has	a	
-public	RSA	key	for	confidential	communication.	Here	are	the	keys	of	the	five	employees	under	
-consideration:
-
-| Name           |                                                                       Encryption Modulus | Encryption Exponent |
-|----------------+------------------------------------------------------------------------------------------+---------------------|
-| BiggyBucks     |        138167915492481816745409346812614907970213601388948993432404324912548722779337539 |                   5 |
-| Dumas A Post   |           689234730968542058710415199123628060022111911748855188203650454001478717930441 |                   5 |
-| Penny Pinch    |           165927789907443292785652054606917804467309174081946624778696246358960638705571 |                   5 |
-| Sleezy Nickels | 9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667 |                   5 |
-| Dolly Dimes    | 9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591 |                   5 |
-
-The	Security	Department	of	DigiCrime Inc.	was	tipped	off	that	some	employees	are	not	as	loyal	to	the	
-company	as	desired,	and	decided	to	monitor	communication.	Their	handler	at	CyberThievery	sent	
-these	five	employees	a	message,	encrypted	for	each.	These	five	encrypted	versions	of	the	message	have	
-been	intercepted	by	the	security	department	of	DigiCrime.	These	are,	in	no	particular	order,
-
-M1=8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889
-M2=3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
-M3=1571157443614188818570414758920219335869445581270513124197983268054945711653
-M4=647456570985467791350694143163125775416153692645317710289110387858313344490925
-M5=17089298199140245689054146396696610382482599563869128220501355545433181167922449
-Decrypt	the	message
-
-***** Solution
-****** Part 1 - How I solved it
-	   							Justin Johnson
-								   113088974
-									Math307
-
-Before the deadline was changed, I tried to write my own crt() method.
-Doing so wasn't too difficult, but seemed more work than normal for assignments
-given in this class. On Nov 1, 2018 we covered the CRT method in class and 
-showed the sage code in class. From that session I got the following results
-
-: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
-: 'Next hack DigiCrime'
-
-To get to that point, I reviewed "Common Encryption Exponent Attack". I saw
-that this 'company' had written the SAME message to DIFFERENT employees using
-the same encryption exponent. Because of this case, we can invoke the CRT 
-(Chinese Remainder Theorem) to discover the original message.
-
-There  are a few things that are important to remember:
-
-E_1=M^e mod n_1	(Alice)
-E_2=M^e mod n_2	(Bob)
-
-Using CRT we can solve 
-	E_1=M^e mod n_1	
-	E_2=M^e mod n_2	
- for M.
- 
- M is the unique solution of 
-	E_1=M^e mod n_1	
-	E_2=M^e mod n_2	
- modulo n1*n2
- 	M mod n1*n2 = M because M <n1,n2
-
-	*CHINESE REMAINDER THEOREM (CRT)*
-	let n1, n2, ... , nk be natural numbers such that for i,j distinct incices one
-	has gcd(ni,nj)=1
-
-	then the system of linear congruences has a solution which is unique modulo:
-		N=n1*n2*..*nk
-		
-    Solution: x=b1*N1*x1 + b2*N2*x2+...+bk*Nk*xk mod N
-    where Ni=N/ni and xi=(1/Ni) mod ni
-
-I had implemented the above separately, but in class we were introduced to 
-the sage method 'crt()' which is a cleaner implementation. My method than follows
-
-crt(list_of_ciphertext, list_of_modulii) calculates x=b1*n1*x1 + ... + bk*nk*xk
-this gives us some number, and the eth_root of that number should give us the 
-message, according to my notes above. The issue was the encrypted messages need
-to one-to-one correlate with their modulii, and that correlation was unkown.
-
-We were reminded that the modulus is akin to a box, and the encryption akin to
-a message (which it is). The message cannot be bigger than the box. using that idea
-I was able to properly sort the messages in proper order. After some guess and check
-I came up with:
-: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
-: 'Next hack DigiCrime'
-
-****** Part 2 - Sage Code
-#+NAME: Homework 7 (Common Encryption Exponent)
-#+HEADER: :tangle ./src/sage/commonEncryptionExponentHmwk7.sage
-#+BEGIN_SRC sage
-#################################################################################################
-# The input is a number and the output is the original message. If the input is not padded ASCII#
-# version of a message it returns the value: "This is not a padded ASCII string"                #
-#################################################################################################
-def ASCIIDepad(Number):
-    ndigits=len(str(Number))
-    n = ndigits % 3
-    if (n > 0):
-        print("This is not a padded ASCII string\n")
-    else:
-        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)]
-        N = ""
-        for i in range(Number.ndigits()/3):
-            N = chr(L[i]) + N
-        return(N)
-
-b=[
-17089298199140245689054146396696610382482599563869128220501355545433181167922449,
-647456570985467791350694143163125775416153692645317710289110387858313344490925,
-1571157443614188818570414758920219335869445581270513124197983268054945711653,
-8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889, 
-3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
-]
-# encryption canNOT be larger than the modulus
-n=[
-138167915492481816745409346812614907970213601388948993432404324912548722779337539,
-689234730968542058710415199123628060022111911748855188203650454001478717930441,
-165927789907443292785652054606917804467309174081946624778696246358960638705571,
-9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667,
-9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591
-]
-
-e=5
-x = crt(b,n); x
-M=x.nth_root(e)
-M=ASCIIDepad(M); M
-#+END_SRC
-
-#+RESULTS: Homework 7 (Common Encryption Exponent)
-: 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
-: 'Next hack DigiCrime'
-
 ** CS253
 *** Lecture
 **** Structs
@@ -1990,39 +1664,8 @@ int main(){
 [[file:src/c/forkAndWait.txt]]
 
 *** Assignments
-**** DONE P4 - Smash Simplified Shell Assignment
-     DEADLINE: <2018-10-14 Sun>
-
-**** INPROGRESS P5 - Smash Simplified Shell
-	 DEADLINE: <2018-11-04 Sun>
 ** CS230
 *** Assignments
-**** DONE Sign up for exam2
-	 SCHEDULED: <2018-10-16 Tue>
-**** DONE Take IP-Quiz
-**** DONE update journal
-	 SCHEDULED: <2018-10-16 Tue>
-**** DONE Update Journal entry
-	 DEADLINE: <2018-10-10 Tue>
-	 - [X] include link to license webpage as a plus
-	 - [X] look up something related to privacy/cookies/confidentiality
-	 - [X] include personal notes into the file
-**** DONE Exam Review
-	 SCHEDULED: <2018-10-24 Wed>
-	 - Derivative Work (GPL License is example, gzip)
-	   - Something that uses software in its implementation
-	 - Permissive License (MIT, BSD, Apache)
-	 - Copy-left license (GPLv2)
-	   - derivative works are required to license their software under the same license
-	 - Trade Secret Definition
-	   - Vulnerabilities of Trade Secret
-		 - Guessable?
-	 - Copyrights
-	   - Automatic - no action is required
-	   - However some action can be taken to ensure the copyright
-	   - What are your rights with CopyRight?
-	 - NO ETHICAL CODE REVIEW
-
 *** Lecture
 **** Intellectual Property
 ***** Closed Source
@@ -2292,7 +1935,3 @@ print(hello())
 
 #+RESULTS:
 : None
-**** DONE Homework 6-Pair
-	 DEADLINE: <2018-10-17 Wed>
-**** DONE Study for quiz
-	 DEADLINE: <2018-10-16 Tue>
