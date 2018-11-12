@@ -46,19 +46,23 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    :LOGBOOK:
    CLOCK: [2018-11-12 Mon 15:09]--[2018-11-12 Mon 15:10] =>  0:01
    :END:
-** TODO [#B] Prepare for career fair
-   SCHEDULED: <2018-11-12 Mon>
-*** TODO [#B] Update Resume
+** STARTED Prepare for career fair
+   SCHEDULED: <2018-11-13 Tue>
+   - State "STARTED"    from "TODO"       [2018-11-12 Mon 16:53] \\
+	 Made notes on employers I want to talk with. Need to update resume
+*** TODO [#A] Update Resume
 	SCHEDULED: <2018-11-12 Mon>
 **** TODO [#B] Print off Resume
 	 SCHEDULED: <2018-11-12 Mon>
-*** TODO [#B] Look up attending parties and compile list of questions
+*** DONE [#B] Look up attending parties and compile list of questions
 	SCHEDULED: <2018-11-12 Mon>
-** TODO [#C] Email Megan Rock (FHE)
+	- State "DONE"       from "TODO"       [2018-11-12 Mon 16:54]
+** TODO [#B] Email Megan Rock (FHE)
    SCHEDULED: <2018-11-12 Mon>
-** TODO [#A] Emails Catch up
-   SCHEDULED: <2018-11-12 Mon>
+** DONE Emails Catch up
+   SCHEDULED: <2018-11-12 Mon ++1w>
  
+   - State "DONE"       from "TODO"       [2018-11-12 Mon 16:51]
   [[file:~/.emacs.d/Notebooks/scratch][file:~/.emacs.d/Notebooks/scratch]]
 * School
 :PROPERTIES:
@@ -69,8 +73,8 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** WAITING [#A] ECE330 Homework Lesson 25 (Ch. 21 Problems [all])
-   DEADLINE: <2018-11-13 Tue> SCHEDULED: <2018-11-12 Mon>
+** WAITING ECE330 Homework Lesson 25 (Ch. 21 Problems [all])
+   SCHEDULED: <2018-11-13 Tue> DEADLINE: <2018-11-13 Tue>
    - State "WAITING"    from "WAITING"    [2018-11-12 Mon 15:19] \\
 	 Compare answers with Tyler French. Otherwise this is ready for submission
 ** TODO CS 253 Smash 3
@@ -100,8 +104,8 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-15 Thu>
 
  [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*About][About]]
-** TODO Apply to Paylocity Internship!#+NAME: 
-   SCHEDULED: <2018-11-12 Mon>
+** TODO Apply to Paylocity Internship!
+   SCHEDULED: <2018-11-15 Thu>
 
  [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Questions%20to%20Ask][Questions to Ask]]
 * Health
