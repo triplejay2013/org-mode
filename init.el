@@ -235,3 +235,14 @@
 ; REF: http://www.offlineimap.org/
 ; See git repo: https://github.com/OfflineIMAP/offlineimap *Install under .src*
 
+; unscheduled TODO
+; REF: https://emacs.stackexchange.com/a/16561
+(setq org-agenda-custom-commands
+      '(("c" . "My Custom Agendas")
+        ("cu" "Unscheduled TODO"
+         ((todo ""
+                ((org-agenda-overriding-header "\nUnscheduled TODO")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled)))))
+         nil
+         nil)))
+
