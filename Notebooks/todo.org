@@ -46,19 +46,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    :LOGBOOK:
    CLOCK: [2018-11-12 Mon 15:09]--[2018-11-12 Mon 15:10] =>  0:01
    :END:
-** STARTED Prepare for career fair
-   SCHEDULED: <2018-11-13 Tue>
-   - State "STARTED"    from "TODO"       [2018-11-12 Mon 16:53] \\
-	 Made notes on employers I want to talk with. Need to update resume
-*** DONE [#A] Update Resume
-	SCHEDULED: <2018-11-12 Mon>
-	- State "DONE"       from "TODO"       [2018-11-13 Tue 09:34]
-**** TODO [#B] Print off Resume
-	 SCHEDULED: <2018-11-12 Mon>
-*** DONE [#B] Look up attending parties and compile list of questions
-	SCHEDULED: <2018-11-12 Mon>
-	- State "DONE"       from "TODO"       [2018-11-12 Mon 16:54]
-** WAITING [#B] Email Megan Rock (FHE)
+** WAITING Email Megan Rock (FHE)
    SCHEDULED: <2018-11-12 Mon>
    - State "WAITING"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Emailed with Rachel. Waiting for response
@@ -71,7 +59,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: School
 :END: 
-** WAITING [#A] Research for cs230 - Proprietary BackDoors
+** WAITING Research for cs230 - Proprietary BackDoors
    SCHEDULED: <2018-11-13 Tue>
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
@@ -93,13 +81,24 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    - State "STARTED"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Starting assignment 9
 ** TODO MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929185-dt-content-rid-30161761_1/courses/1189-70632MATH307001/Assignment_10.pdf][Assignment]] 10 (Review)
-   DEADLINE: <2018-11-15 Thu> SCHEDULED: <2018-11-13 Tue	>
+   SCHEDULED: <2018-11-20 Tue> DEADLINE: <2018-11-27 Tue>
 *** TODO Ask teacher if two assignments are /REALLY/ due on Thursday
 ** TODO CS253 Schedule Time to take final exam
    DEADLINE: <2018-11-26 Mon> SCHEDULED: <2018-11-17 Sat>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*School][School]]
-  
+** TODO Final Quiz 3
+   SCHEDULED: <2018-11-29 Thu>
+ 
+  [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
+** TODO Math307 Final Exam
+   SCHEDULED: <2018-12-06 Thu> DEADLINE: <2018-12-13 Thu 10:30>
+ 
+  [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
+** TODO Math307 Key Submission for Final Exam
+   SCHEDULED: <2018-11-27 Tue> DEADLINE: <2018-12-04 Tue>
+ 
+  [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work

@@ -927,7 +927,7 @@ p
 : 196327349823794238791247612374689213649218736623
 : 196327349823794238791247612375150040954342600855043086369924757982661461133718474657040466537331025478920476913721120235676232217
 : nonefound
-**** Dirichlet Algorithm
+**** Dirichlet Algorithm (Primitive Roots)
 #+NAME: DA
 #+BEGIN_SRC C
 def Dirichlet (q):
@@ -956,6 +956,7 @@ def findLargePrimitiveRoot(n,p):
         n+=1
 #+END_SRC
 **** Diffie-Hellman key exchange protocol
+***** Notes
 ***** Example
 #+NAME: Diffie-Hellman
 #+BEGIN_SRC sage
@@ -1024,8 +1025,16 @@ x
 		  - Private Key: ~x~
 ****** Encryption
 	   1) Choose a random number ~r < p~
-	   2) Compute ~u=g^r mod p~ and ~v=b^r mod p~
-	   3) Compute ~u-M*v mod p~ where M is (M)essage *NEXT TIME*
+	   2) Choose a primitive root 1 < g< p
+	   3) Choose a random number x
+	   4) Computer b = g^x mod p
+		  - public key: (g,b,p)
+		  - private key: x
+		  - pair (y1,y2) is the cipher text
+
+****** Decryption
+	   1) Compute D= y2*(y1)^-x mod p = M mod p
+	   2) see slides for proof
 ****** Signature
 	   1) Choose a random number r < p-1 and gcd(r,p-1) = 1
 	   2) Compute g^r mod p = y
@@ -1033,12 +1042,9 @@ x
 		  S = (M-x*y)/r mod (p-1)
 		  *Signature on M is the pair y,s*
 ****** Verification
-	   1) Compute
-		  - u = M/s mod p
-		  - v = y/s mod p
-	   2) Compute
-		  - N=g^u*s^v mod p
-	   3) If y = N, then signature is valid
+	   v1=y^s * b^y mod p
+	   v2=g^M mod p
+	   verified if v1==v2
 		
 ***** Attacks on El Gamal
 ****** Random Number Attack on El Gamal Signature
@@ -1630,54 +1636,78 @@ E
 
 **** Homework 9
 #+NAME: El Gamal Security
-#+HEADER: :tangle ./src/
+#+HEADER: :tangle ./src/sage/hmwk9.sage
 #+BEGIN_SRC sage
 
 ###########################
 # RSA & EL GAMAL Functions#
 ###########################
 def ASCIIPad(Message):
-    K = (map(ord,reversed(Message)));    
-    le= len(K);
-    x = [100+K[i] for i in range(le)];
-    x = ZZ(x,1000);
-    return(x);
+	K = (map(ord,reversed(Message)));    
+	le= len(K);
+	x = [100+K[i] for i in range(le)];
+	x = ZZ(x,1000);
+	return(x);
 	
 def ASCIIDepad(Number):
-    n = Number.ndigits() % 3;
-    if (n > 0):
-        print("This is not a padded ASCII string\n");
-    else:
-        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
-        N = "";
-        for i in range(Number.ndigits()/3):
-            N = chr(L[i]) + N;
-	return(N)
+	n = Number.ndigits() % 3;
+	if (n > 0):
+		print("This is not a padded ASCII string\n");
+	else:
+		L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+		N = "";
+		for i in range(Number.ndigits()/3):
+			N = chr(L[i]) + N;
+		return(N)
 		
 def rsaencrypt(Message, encrexp, encrmod):
-    A = ASCIIPad(Message);
-    E = power_mod(A,encrexp,encrmod);
-    return(E);
+	A = ASCIIPad(Message);
+	E = power_mod(A,encrexp,encrmod);
+	return(E);
 
 def rsadecrypt(encr,decrexp,encrmod):
-    D = power_mod(encr,decrexp,encrmod);
-    N = ASCIIDepad(D);
-    return(N);
+	D = power_mod(encr,decrexp,encrmod);
+	N = ASCIIDepad(D);
+	return(N);
 
+# key is: (p,g,b)
+# M in this case is the ciphertext E
+def egVerify(key, M, y, s):
+	v1=power_mod(y,s,key[0]) * power_mod(key[2],y,key[0])
+	v2=power_mod(key[1],M,key[0])
+	return v1==v2
+	
+def egSign(key, M, x):
+	r = randint(key[0]/15,key[0])
+	y = power_mod(key[1],r,key[0])
+	s = ((M-x*y)/r) % (key[0]-1)
+# TODO - Test my signing verification function
+comment="""
+	   1) Choose a random number r < p-1 and gcd(r,p-1) = 1
+	   2) Compute g^r mod p = y
+	   3) Compute
+		  S = (M-x*y)/r mod (p-1)
+		  *Signature on M is the pair y,s*
+		  """
 ###########################
+
+# IMPORTANT!!
+# RSA is used to encrypt the below messages, El Gamal to sign them
+# Alice and Bob  are secretly sharing Alice's private El-Gamal key to maintain a covert channel of communication
 
 ##############################################
 # Information given in assignment description#
 ##############################################
 # RSA KEYS
 # Alice's Key
-rsa_akey={'R':11739085287969531650666764880307069646178466406116413,'e':29}
+rsa_akey={'n':11739085287969531650666764880307069646178466406116413,'e':29}
 # Bob's key
-rsa_bkey={'R':46956341151878126602666849327932976850293104473816077, 'e':71}
+rsa_bkey={'n':46956341151878126602666849327932976850293104473816077, 'e':71}
 # Jack's key
-rsa_jkey={'R':105651767591725784856000289747489691397274520258086741,'e':113}
+rsa_jkey={'n':105651767591725784856000289747489691397274520258086741,'e':113}
 # Lucy's key
-rsa_lkey={'R':187825364607512506410666935319870481320981631530945317, 'e':173}
+rsa_lkey={'n':187825364607512506410666935319870481320981631530945317, 'e':173}
+rsa_keys=[rsa_akey,rsa_bkey,rsa_jkey,rsa_lkey]
 
 # El Gamal Keys
 # Alice's Key
@@ -1688,8 +1718,9 @@ eg_bkey={'p':46956341151878126602666849327932976850293104473818163, 'g':14646,'b
 eg_jkey={'p':105651767591725784856000289747489691397274520258105207,'g':1771562,'b':77714098443250567285634413412177559464041605041509476}
 # Lucy's key
 eg_lkey={'p':187825364607512506410666935319870481320981631530959327,'g':214358883,'b':14644041014569643811484259591673998237151900979559891}
+eg_keys=[eg_akey,eg_bkey,eg_jkey,eg_lkey]
 
-# Alice's private El Gamal Key
+# Alice's private El Gamal Key (x) - shared with bob for covert channel
 eg_apkey=7699542093548349244049573757501851670562589091966419
 
 # REVIEW EL GAMAL
@@ -1701,6 +1732,33 @@ unknown1={'E':115251811749469530248002415406523254651489743459017725,'y':1924061
 unknown2={'E':19659961695727243828141973694524447795978653272532149, 'y':50397128494149821593269937078000120329058172709578908,'s':47844269820223698406809962518912128051231159162499240}
 unknown4={'E':126624117419296887665831621310305588878545225870594430,'y':9352666161952933766287125798193970300698629396417740,'s':4002797869345137661356168947662543489885815101905269}
 unknown3={'E':1199064630279469528093193372862416429357320708704542,'y':105216848703587739343303886089914553038944537874501648,'s':139693573510952382531551260015801085872053556486585886}
+unknowns=[unknown1,unknown2, unknown3, unknown4]
+
+# Alice's message search
+rsa=(rsa_akey['n'],rsa_akey['e'])
+eg=(eg_akey['p'],eg_akey['g'],eg_akey['b'])
+x=eg_apkey
+print(len(str(rsa[0]))) # Compare to messages
+y=egVerify(eg,unknown3['E'],unknown3['y'],unknown3['s'])
+y
+
+# Bob's message search
+rsa=(rsa_bkey['n'],rsa_bkey['e'])
+eg=(eg_bkey['p'],eg_bkey['g'],eg_bkey['b'])
+print(len(str(rsa[0])))
+
+# Jack's message search
+rsa=(rsa_jkey['n'],rsa_jkey['e'])
+eg=(eg_jkey['p'],eg_jkey['g'],eg_jkey['b'])
+print(len(str(rsa[0])))
+
+# Lucy's message search
+rsa=(rsa_lkey['n'],rsa_lkey['e'])
+eg=(eg_lkey['p'],eg_lkey['g'],eg_lkey['b'])
+print(len(str(rsa[0])))
+
+for i in range(len(unknowns)):
+	print(str(i+1) + " " + str(len(str(unknowns[i]['E']))))
 ############################################
 
 # 1) Determine each Message
@@ -1709,14 +1767,24 @@ unknown3={'E':1199064630279469528093193372862416429357320708704542,'y':105216848
 # 4) Determine any messages Alice passed covertly to Bob through her El Gamal Signature
 #+END_SRC
 
-****** TODO Place this table under item 3 in code above when complete
-| Message | To Whom | From Whom |
-|---------+---------+-----------|
-|         |         |           |
-|         |         |           |
-|         |         |           |
-|         |         |           |
+#+RESULTS: El Gamal Security
+: 53
+: False
+: 53
+: 54
+: 54
+: 1 54
+: 2 53
+: 3 52
+: 4 54
 
+****** TODO Place this table under item 3 in code above when complete
+| Message  | To Whom | From Whom |
+|----------+---------+-----------|
+| Unknown1 | J or L  |           |
+| Unknown2 | B or A  |           |
+| Unknown3 | B or A  |           |
+| Unknown4 | J or L  |           |
 
 ** CS253
 *** Lecture
