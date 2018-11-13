@@ -5,31 +5,52 @@
 *** Chief Architect Software
 *** Clearwater Analytics
 *** *CradlePoint*
+
 	- Downtown!
 	- Talk to!
+Wifi on buses, infrastructure SAS
+
+Interview tomorrow
+Look up and research more
+
 *** Econolite
 *** *Fast Enterprises*
+
 	- Looks interesting
 	- Find out more
 	- Career opportunities?
+
+Will have to relocate (all paid for housing and transport).
+
+Work with taxes and other government functuons
+
 *** FieldCore
 *** *Hewlett Packard Enterprise*
+
 	- Career opportunities
 	- Find out more about team
+
 *** Hill Air Force Base
 *** *Idaho Power*
+
 	- CS opportunities?
+
 *** Idaho National Laboratory - Battelle Energy Alliance
 *** Ingersoll Rand - TRANE
 *** *Micron Technology*
+
 	- career opportunities?
 	- what to do as junior CS to apply to micron
 	- bad location
+
 *** MotivePower
+
 	- bad location
+
 *** *Paylocity*
 **** About
-Make an impact in tech, right here in Boise and launch your future career with
+
+8Make an impact in tech, right here in Boise and launch your future career with
 Paylocity. We work in small agile product-oriented teams where we innovate,
 collaborate and bring amazing products to market.
 
@@ -37,22 +58,66 @@ Paylocity has a new technology office in downtown Boise and developed an
 internship program specifically designed for Computer Science juniors and seniors. 
 Be part of something great and get a jump start your career learning useful job
 skills you can apply right away.
+
+
+Filling up fast. Apply online Soon! 
+Watch for email from amit.
+
+Have grad intern program to look out for next year
+
 **** [[http://bit.ly/2019SummerTECHInterns][Job opportunity application]]
 **** [[https://www.paylocity.com/careers/][More career opportunities]]
 **** Located Downtown
 **** Dates: May 20 - August 9, 2019
 **** Questions to Ask
+
 	 - Job openings
 	 - Organization
 	   - Team collaboration? Individual? Growth?
+
 *** RuleTek
+
 	- Meridian
+
 *** *Shweitzer Engineering Laboratories*
+
 	- Chinden (like HP)
 	- Talk about opportunities
 	- Internships?
+
+Internships come and go
+
+Apply on line if possible.
+Otherwise they will contact me
+
 *** *Scentsy*
+
 	- Bad location (EAGLE!)
 	- Ask about CS opportunities
+
+Gave resume.
+Looking to interview in January
+Hiring in may. Will contact me for internship
+
+Gave me business card.
+
+Web dev mainly but some java. .NET and C#
+
 *** WH Pacific
+
 	- find out more
+
+* Marvel
+SCHEDULED: <2018-11-13 Tue>
+
+Embedded systems (arm proccesor). Similar to ece330 course
+
+* Chief architect software
+SCHEDULED: <2018-11-13 Tue>
+
+Based in court d'alene
+Summer
+Designing houses
+They will help find housing
+Oop c++
+
