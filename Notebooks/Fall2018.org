@@ -8,17 +8,36 @@ _UNDERLINE_
 /ITALIC/
 
 * Spring2019 Registration Prep
-** Required Courses
-   | UF 200 | CS 361 | CS 441  | CS 453    | CS 471 |
-   |--------+--------+---------+-----------+--------|
-   | CS 481 | CS 488 | CS 421? | CS-HU 271 |        |
-** Spring 2019 Plan
-** Fall 2019 Plan
-   | Course | Description          | Credit |
-   |--------+----------------------+--------|
-   | CS 471 | Software Engineering |      3 |
-   | CS 421 | Algorithms           |      3 | **Covered by transfer?
-   |        |                      |        | **Accel. Masters Courses?
+** INPROGRESS Consult Advisor to finalize Spring schedule
+   SCHEDULED: <2018-10-22 Mon 10:00>
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2018-11-12 Mon 12:09
+   :ARCHIVE_FILE: ~/.emacs.d/Notebooks/BSU.org
+   :ARCHIVE_OLPATH: Spring2019 Registration Prep/Spring 2019 Plan
+   :ARCHIVE_CATEGORY: BSU
+   :ARCHIVE_TODO: INPROGRESS
+   :END:
+   | Course    | Description                         | Credits | Instructors            |
+   |-----------+-------------------------------------+---------+------------------------|
+   | UF 200    | Foundations of Ethics and Diversity |       3 |                        |
+   | CS 361    | Intro to Theory of Comp             |       3 |                        |
+   | CS 441    | Computer Architecture               |       3 |                        |
+   | CS 453    | Operating Systems                   |       3 | Shane Panter/Amit jain |
+   | CS-HU 271 | Agile Developement                  |       1 |                        |
+   | ***         | Work U                              |      3  |                        |
+   | ^         | Total:                              |      13 |                        |
+   #+TBLFM: $3=vsum(@2..@-1)
+*** Required Courses
+	| UF 200 | CS 361 | CS 441  | CS 453    | CS 471 |
+	|--------+--------+---------+-----------+--------|
+	| CS 481 | CS 488 | CS 421? | CS-HU 271 |        |
+*** Spring 2019 Plan
+*** Fall 2019 Plan
+	| Course | Description          | Credit |
+	|--------+----------------------+--------|
+	| CS 471 | Software Engineering |      3 |
+	| CS 421 | Algorithms           |      3 | **Covered by transfer?
+	|        |                      |        | **Accel. Masters Courses?
 
 * Misc Items
 * Need to know commands for emacs
@@ -1350,6 +1369,355 @@ E
 : 150598315159426420417362370315760759643687452249127260593893330249875774660837569082216166241764228321707042114
 
 *** Assignments
+**** Homework 6
+	 INE: <2018-10-18 Thu> SCHEDULED: <2018-10-15 Mon>
+	 ERTIES:
+	 IVE_TIME: 2018-11-12 Mon 12:14
+	 IVE_FILE: ~/.emacs.d/Notebooks/BSU.org
+	 IVE_OLPATH: Fall 2018/Math307/Assignments
+	 IVE_CATEGORY: BSU
+	 IVE_TODO: DONE
+	 
+*****ITTED Print off assignment
+	 DULED: <2018-10-17 Wed> DEADLINE: <2018-10-18 Thu>
+*****tion
+   #+ Assignment 6: Fermat Attack
+   #+_SRC sage 
+   # ion Definitions
+   # Blackboard Software (rsadecrypt)
+   deIIDepad(Number):
+      Number.ndigits() % 3;
+     (n > 0):
+      print("This is not a padded ASCII string\n");
+     e:
+      L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+      N = "";
+      for i in range(Number.ndigits()/3):
+          N = chr(L[i]) + N;
+      return(N)
+
+   dedecrypt(encr,decrexp,encrmod):
+      power_mod(encr,decrexp,encrmod);
+      ASCIIDepad(D);
+     urn(N);
+
+
+   # Blackboard Software Sources (Fermat Attack)
+   dert(n):
+     urn int(floor(sqrt(n)))
+
+   dert (n):
+     = isqrt(n)
+     ur ** 2 < n:
+      ur = ur + 1
+     urn(ur)
+
+   dematAttack (n, rounds):
+     = usqrt(n)
+      x in range(st, st + rounds + 1):
+      #print (x-st)
+      sq = x ** 2 - n
+      y = isqrt(sq)
+      if y ** 2 == sq:
+          print "Factor found in round {0}".format(x-st+1)
+          return(x + y)
+     nt "No factor found in {0} rounds".format(rounds)
+
+   # e Problem information into code
+   # Key=(R/n,e) where R or n is the modulos
+   aly=(3200909051105364201164693808053590029074088922158723491051061550603549823737458227601881401901569257978004143012923593331603179164497963879113975835000986070024699519343049991253001543465847139349037243656109687211847515003135028132545450689475582835433024130454351048493271288284326740872991312817737068756145723348616748658487242931184584005382638341 ,45938274932874982748938989492800101)
+   n=Key[0]
+   e=Key[1]
+   bo46965299225077453528764533325484870128106736546137408200095456059067040313170132659677309326733627254170824177278689792967869683703210102631692715251241388457103568881887427174337319839702934337074114069079964028787201219122008132800911350242389943062437915595376659222211331548822861710469042657218207369516502014847384607200570429591504554077212313
+
+   #  Fermat Attack on bob's message
+   p=tAttack(n,10)
+   p
+   # the prime factors of n
+   q=Key[0]/p
+   ph1)*(q-1)
+
+   # te private key
+   t=se_mod(e,phi)
+   t
+	
+   # pt to decrypt the message
+   D=crypt(bobM, t, n)
+   D
+
+   pr\nSolutions:\n")
+   prThe message is {}\n".format(D))
+   prThe private key is {}\n".format(t))
+   prThe value of phi(R) is {}\n".format(phi))
+   prFactors of R are {} and {}\n".format(p,q))
+
+   #+RC
+
+   #+TS: Assignment 6: Fermat Attack
+   #+_example
+   Fafound in round 1
+   566876878687676755667454534349837593827932875983275983759382759287237567887987980908998787786767565645454533423423343243546576576876879879879879878687675765644535434287237L
+   31510034742237627997195928786583153512307937169989597828968058877017293250922100187347305076307004322384676497222811128113753424625921466939826882160195180303741752185273650841791717876895004244979963739993488694617994141773778317684342636200808646316120457410025841816142247504391080136501066088010574604519661347572707772349904352818684682371437
+   'Ity Based Cryptosystems'
+
+   Sons:
+
+   Thsage is Identity Based Cryptosystems
+
+   Thvate key is 31678635100347422376279971959287865831535123079371699895978
+   2888770172932509221001873473050763070043223846764972228111281137534246259
+   2198268821601951803037417521852736508417917178768950042449799637399934886
+   9441417737783176843426362008086463161204574100258418161422475043910801365
+   018010574604519661347572707772349904352818684682371437
+
+   Thue of phi(R) is 32009090511053642011646938080535900290740889221587234910
+   5106035498237374582276018814019015692579780041430129235933316031791644979
+   6339758350009860700246995193430499911398483897120897639955259087470409875
+   3691373830615805779319239570083602972481544925330509176977531530358318061
+   441249975602991969588856988898729867579653294934514074112
+
+   Fa of R are 5657657687687868767675566745453434983759382793287598327598375
+   9328723756788798798090899878778676756564545453342342334324354657657687687
+   98879878687675765644535434287237 
+   an
+   5668768786876767556674545343498375938279328759832759837593827592872375678
+   8709089987877867675656454545334234233432435465765768768798798798798786876
+   754535434276993
+   #+xample
+
+**** Homework 7
+	 DEADLINE: <2018-11-01 Thu> SCHEDULED: <2018-10-29 Mon>
+	 :PROPERTIES:
+	 :ARCHIVE_TIME: 2018-11-12 Mon 12:14
+	 :ARCHIVE_FILE: ~/.emacs.d/Notebooks/BSU.org
+	 :ARCHIVE_OLPATH: Fall 2018/Math307/Assignments
+	 :ARCHIVE_CATEGORY: BSU
+	 :ARCHIVE_TODO: DONE
+	 :END:
+***** Description
+   Foundations of Cryptology
+   Assignment 7
+   Five	of	the	employees	of	DigiCrime	Inc.	have	decided	to	supplement	their	pensions	by	doing	freelance	
+   work	for	one	of	the	competitors,	CyberThievery,	of	DigiCrime.	Each	employee	of	DigiCrime has	a	
+   public	RSA	key	for	confidential	communication.	Here	are	the	keys	of	the	five	employees	under	
+   consideration:
+
+   | Name           |                                                                       Encryption Modulus | Encryption Exponent |
+   |----------------+------------------------------------------------------------------------------------------+---------------------|
+   | BiggyBucks     |        138167915492481816745409346812614907970213601388948993432404324912548722779337539 |                   5 |
+   | Dumas A Post   |           689234730968542058710415199123628060022111911748855188203650454001478717930441 |                   5 |
+   | Penny Pinch    |           165927789907443292785652054606917804467309174081946624778696246358960638705571 |                   5 |
+   | Sleezy Nickels | 9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667 |                   5 |
+   | Dolly Dimes    | 9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591 |                   5 |
+
+   The	Security	Department	of	DigiCrime Inc.	was	tipped	off	that	some	employees	are	not	as	loyal	to	the	
+   company	as	desired,	and	decided	to	monitor	communication.	Their	handler	at	CyberThievery	sent	
+   these	five	employees	a	message,	encrypted	for	each.	These	five	encrypted	versions	of	the	message	have	
+   been	intercepted	by	the	security	department	of	DigiCrime.	These	are,	in	no	particular	order,
+
+   M1=8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889
+   M2=3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
+   M3=1571157443614188818570414758920219335869445581270513124197983268054945711653
+   M4=647456570985467791350694143163125775416153692645317710289110387858313344490925
+   M5=17089298199140245689054146396696610382482599563869128220501355545433181167922449
+   Decrypt	the	message
+
+***** Solution
+****** Part 1 - How I solved it
+	   							   Justin Johnson
+									  113088974
+									   Math307
+
+   Before the deadline was changed, I tried to write my own crt() method.
+   Doing so wasn't too difficult, but seemed more work than normal for assignments
+   given in this class. On Nov 1, 2018 we covered the CRT method in class and 
+   showed the sage code in class. From that session I got the following results
+
+   : 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+   : 'Next hack DigiCrime'
+
+   To get to that point, I reviewed "Common Encryption Exponent Attack". I saw
+   that this 'company' had written the SAME message to DIFFERENT employees using
+   the same encryption exponent. Because of this case, we can invoke the CRT 
+   (Chinese Remainder Theorem) to discover the original message.
+
+   There  are a few things that are important to remember:
+
+   E_1=M^e mod n_1	(Alice)
+   E_2=M^e mod n_2	(Bob)
+
+   Using CRT we can solve 
+	   E_1=M^e mod n_1	
+	   E_2=M^e mod n_2	
+	for M.
+ 
+	M is the unique solution of 
+	   E_1=M^e mod n_1	
+	   E_2=M^e mod n_2	
+	modulo n1*n2
+ 	   M mod n1*n2 = M because M <n1,n2
+
+	   *CHINESE REMAINDER THEOREM (CRT)*
+	   let n1, n2, ... , nk be natural numbers such that for i,j distinct incices one
+	   has gcd(ni,nj)=1
+
+	   then the system of linear congruences has a solution which is unique modulo:
+		   N=n1*n2*..*nk
+		
+       Solution: x=b1*N1*x1 + b2*N2*x2+...+bk*Nk*xk mod N
+       where Ni=N/ni and xi=(1/Ni) mod ni
+
+   I had implemented the above separately, but in class we were introduced to 
+   the sage method 'crt()' which is a cleaner implementation. My method than follows
+
+   crt(list_of_ciphertext, list_of_modulii) calculates x=b1*n1*x1 + ... + bk*nk*xk
+   this gives us some number, and the eth_root of that number should give us the 
+   message, according to my notes above. The issue was the encrypted messages need
+   to one-to-one correlate with their modulii, and that correlation was unkown.
+
+   We were reminded that the modulus is akin to a box, and the encryption akin to
+   a message (which it is). The message cannot be bigger than the box. using that idea
+   I was able to properly sort the messages in proper order. After some guess and check
+   I came up with:
+   : 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+   : 'Next hack DigiCrime'
+
+****** Part 2 - Sage Code
+   #+NAME: Homework 7 (Common Encryption Exponent)
+   #+HEADER: :tangle ./src/sage/commonEncryptionExponentHmwk7.sage
+   #+BEGIN_SRC sage
+   #################################################################################################
+   # The input is a number and the output is the original message. If the input is not padded ASCII#
+   # version of a message it returns the value: "This is not a padded ASCII string"                #
+   #################################################################################################
+   def ASCIIDepad(Number):
+       ndigits=len(str(Number))
+       n = ndigits % 3
+       if (n > 0):
+           print("This is not a padded ASCII string\n")
+       else:
+           L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)]
+           N = ""
+           for i in range(Number.ndigits()/3):
+               N = chr(L[i]) + N
+           return(N)
+
+   b=[
+   17089298199140245689054146396696610382482599563869128220501355545433181167922449,
+   647456570985467791350694143163125775416153692645317710289110387858313344490925,
+   1571157443614188818570414758920219335869445581270513124197983268054945711653,
+   8680494616758492300153857128626182886244875669712992627620622363379875255673298873890889, 
+   3740176144174317705113182325751346003703203506734421120250951010374481407984708481673873
+   ]
+   # encryption canNOT be larger than the modulus
+   n=[
+   138167915492481816745409346812614907970213601388948993432404324912548722779337539,
+   689234730968542058710415199123628060022111911748855188203650454001478717930441,
+   165927789907443292785652054606917804467309174081946624778696246358960638705571,
+   9707030033411217539906954498964338207893718488045203990403325340285676761140144260245667,
+   9702513696679623002778707839853209062395283481756367743103770927153046936810417007760591
+   ]
+
+   e=5
+   x = crt(b,n); x
+   M=x.nth_root(e)
+   M=ASCIIDepad(M); M
+   #+END_SRC
+
+   #+RESULTS: Homework 7 (Common Encryption Exponent)
+   : 179702189046065030137840983877506282733808216772222487872385030013418159775151368010537808270369776111280249922696184622250812210618422156974500421843302635815511055022781078203555271102862470424542573876078160729973527171345068730365265430297970391004390643094550260335823552446001
+   : 'Next hack DigiCrime'
+
+**** Homework 9
+#+NAME: El Gamal Security
+#+HEADER: :tangle ./src/
+#+BEGIN_SRC sage
+
+###########################
+# RSA & EL GAMAL Functions#
+###########################
+def ASCIIPad(Message):
+    K = (map(ord,reversed(Message)));    
+    le= len(K);
+    x = [100+K[i] for i in range(le)];
+    x = ZZ(x,1000);
+    return(x);
+	
+def ASCIIDepad(Number):
+    n = Number.ndigits() % 3;
+    if (n > 0):
+        print("This is not a padded ASCII string\n");
+    else:
+        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+        N = "";
+        for i in range(Number.ndigits()/3):
+            N = chr(L[i]) + N;
+	return(N)
+		
+def rsaencrypt(Message, encrexp, encrmod):
+    A = ASCIIPad(Message);
+    E = power_mod(A,encrexp,encrmod);
+    return(E);
+
+def rsadecrypt(encr,decrexp,encrmod):
+    D = power_mod(encr,decrexp,encrmod);
+    N = ASCIIDepad(D);
+    return(N);
+
+###########################
+
+##############################################
+# Information given in assignment description#
+##############################################
+# RSA KEYS
+# Alice's Key
+rsa_akey={'R':11739085287969531650666764880307069646178466406116413,'e':29}
+# Bob's key
+rsa_bkey={'R':46956341151878126602666849327932976850293104473816077, 'e':71}
+# Jack's key
+rsa_jkey={'R':105651767591725784856000289747489691397274520258086741,'e':113}
+# Lucy's key
+rsa_lkey={'R':187825364607512506410666935319870481320981631530945317, 'e':173}
+
+# El Gamal Keys
+# Alice's Key
+eg_akey={'p':11739085287969531650666764880307069646178466406133747, 'g':122 ,'b':4559251933765135908042850372269050947311088678478407}
+# Bob's Key
+eg_bkey={'p':46956341151878126602666849327932976850293104473818163, 'g':14646,'b':41773094887790182197984303656431777160492104718067730}
+# Jack's Key
+eg_jkey={'p':105651767591725784856000289747489691397274520258105207,'g':1771562,'b':77714098443250567285634413412177559464041605041509476}
+# Lucy's key
+eg_lkey={'p':187825364607512506410666935319870481320981631530959327,'g':214358883,'b':14644041014569643811484259591673998237151900979559891}
+
+# Alice's private El Gamal Key
+eg_apkey=7699542093548349244049573757501851670562589091966419
+
+# REVIEW EL GAMAL
+# Public Key: (p,b,g) where p is a prime number, b=g^x mod p, g is a primitive root 1 < g < p of p
+# Private Key: (x) x is a random number
+
+# RSA Encrypted Message E | y=g^r mod p | s=(M-x*y)/r mod (p-1)
+unknown1={'E':115251811749469530248002415406523254651489743459017725,'y':19240616197970611747502124859803652312085074442112010,'s':32706719515423467589632843847126484468195520962513517}
+unknown2={'E':19659961695727243828141973694524447795978653272532149, 'y':50397128494149821593269937078000120329058172709578908,'s':47844269820223698406809962518912128051231159162499240}
+unknown4={'E':126624117419296887665831621310305588878545225870594430,'y':9352666161952933766287125798193970300698629396417740,'s':4002797869345137661356168947662543489885815101905269}
+unknown3={'E':1199064630279469528093193372862416429357320708704542,'y':105216848703587739343303886089914553038944537874501648,'s':139693573510952382531551260015801085872053556486585886}
+############################################
+
+# 1) Determine each Message
+# 2) Determine For whom each message was intended
+# 3) Determine from whom each message is, by verifying the corresponding El Gamal Signatures
+# 4) Determine any messages Alice passed covertly to Bob through her El Gamal Signature
+#+END_SRC
+
+****** TODO Place this table under item 3 in code above when complete
+| Message | To Whom | From Whom |
+|---------+---------+-----------|
+|         |         |           |
+|         |         |           |
+|         |         |           |
+|         |         |           |
+
+
 ** CS253
 *** Lecture
 **** Structs

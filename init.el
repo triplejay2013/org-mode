@@ -9,6 +9,7 @@
 
 ; add certain files to config
 (add-to-list 'load-path "~/.src/org-mode/lisp")
+(add-to-list 'load-path "/usr/bin/mu/")
 
 ; adds contributed libraries not included in Emacs
 (add-to-list 'load-path "~/.src/org-mode/contrib/lisp" t)
@@ -109,7 +110,7 @@
   org-agenda-files 
   (mapcar (lambda (x) (concat dir-where-you-store-org-files x))
 	  ; Add org files to TRACK here
-	  '("BSU.org" 
+	  '("Fall2018.org" 
     "todo.org"
     "notes.org"
 	  "Church.org")))
@@ -171,9 +172,7 @@
 		   "
 ]+>")))
 	   (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
- '(org-agenda-files
-   (quote
-	("~/.emacs.d/Notebooks/todo.org" "~/.emacs.d/Notebooks/BSU.org")))
+ '(org-agenda-files (quote ("~/.emacs.d/Notebooks/todo.org")))
  '(org-agenda-ndays 7)
  '(org-agenda-show-all-dates t)
  '(org-agenda-skip-deadline-if-done t)
@@ -226,3 +225,13 @@
 ; Hides emphasis markers (*,/,~, etc) used for formatting text
 ; REF: https://www.reddit.com/r/emacs/comments/6pxh92/how_to_change_font_colorcharacteristics_in_org/
 (setq org-hide-emphasis-markers t)
+
+; mu4e set up
+; sudo apt install mu4e
+; REF: http://www.djcbsoftware.nl/code/mu/
+
+
+; OFFLINEIMAP
+; REF: http://www.offlineimap.org/
+; See git repo: https://github.com/OfflineIMAP/offlineimap *Install under .src*
+

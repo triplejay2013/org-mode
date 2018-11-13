@@ -50,15 +50,18 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-13 Tue>
    - State "STARTED"    from "TODO"       [2018-11-12 Mon 16:53] \\
 	 Made notes on employers I want to talk with. Need to update resume
-*** TODO [#A] Update Resume
+*** DONE [#A] Update Resume
 	SCHEDULED: <2018-11-12 Mon>
+	- State "DONE"       from "TODO"       [2018-11-13 Tue 09:34]
 **** TODO [#B] Print off Resume
 	 SCHEDULED: <2018-11-12 Mon>
 *** DONE [#B] Look up attending parties and compile list of questions
 	SCHEDULED: <2018-11-12 Mon>
 	- State "DONE"       from "TODO"       [2018-11-12 Mon 16:54]
-** TODO [#B] Email Megan Rock (FHE)
+** WAITING [#B] Email Megan Rock (FHE)
    SCHEDULED: <2018-11-12 Mon>
+   - State "WAITING"    from "TODO"       [2018-11-13 Tue 09:34] \\
+	 Emailed with Rachel. Waiting for response
 ** DONE Emails Catch up
    SCHEDULED: <2018-11-12 Mon ++1w>
  
@@ -82,9 +85,16 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** TODO ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
    DEADLINE: <2018-11-14 Wed> SCHEDULED: <2018-11-13 Tue>
   
-** TODO MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929199-dt-content-rid-30162008_1/courses/1189-70632MATH307001/Assignment%20_9.pdf][Assignment]] 9 (EL Gamal Signatures) 
+** STARTED MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929199-dt-content-rid-30162008_1/courses/1189-70632MATH307001/Assignment%20_9.pdf][Assignment]] 9 (EL Gamal Signatures) 
+   SCHEDULED: <2018-11-13 Tue> DEADLINE: <2018-11-15 Thu>
+   :LOGBOOK:
+   CLOCK: [2018-11-13 Tue 09:34]
+   :END:
+   - State "STARTED"    from "TODO"       [2018-11-13 Tue 09:34] \\
+	 Starting assignment 9
 ** TODO MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929185-dt-content-rid-30161761_1/courses/1189-70632MATH307001/Assignment_10.pdf][Assignment]] 10 (Review)
-   DEADLINE: <2018-11-15 Thu> SCHEDULED: <2018-11-13 Tue>
+   DEADLINE: <2018-11-15 Thu> SCHEDULED: <2018-11-13 Tue	>
+*** TODO Ask teacher if two assignments are /REALLY/ due on Thursday
 ** TODO CS253 Schedule Time to take final exam
    DEADLINE: <2018-11-26 Mon> SCHEDULED: <2018-11-17 Sat>
  
