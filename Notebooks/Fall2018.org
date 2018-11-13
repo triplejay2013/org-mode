@@ -1761,13 +1761,55 @@ print("Alice's Message Search Results")
 rsa=(rsa_akey['n'],rsa_akey['e'])
 eg=(eg_akey['p'],eg_akey['g'],eg_akey['b'])
 x=eg_apkey
-#print(len(str(rsa[0]))) # Compare to messages
-#S=egSign(eg, 123456123456123456123456, x) # These two lines show my sign method works
-#y=egVerify(eg, 123456123456123456123456, S[0],S[1]) # See above comment
-y=egVerify(eg,unknown1['E'],unknown1['y'],unknown1['s']); y
-y=egVerify(eg,unknown2['E'],unknown2['y'],unknown2['s']); y
-y=egVerify(eg,unknown3['E'],unknown3['y'],unknown3['s']); y
-y=egVerify(eg,unknown4['E'],unknown4['y'],unknown4['s']); y
+
+# El Gamal Signature Verification
+M=ASCIIPad("Done!")
+S=egVerify(eg,M,unknown4['y'],unknown4['s']); S
+
+# Fermat Attack Attempt
+n=rsa[0]
+e=rsa[1]
+p=FermatAttack(n,10); p
+q=n/p; q
+phi=(p-1)*(q-1)
+d=inverse_mod(e, phi)
+
+# Bob's message search
+print("Bob's Message Search Results")
+rsa=(rsa_bkey['n'],rsa_bkey['e'])
+eg=(eg_bkey['p'],eg_bkey['g'],eg_bkey['b'])
+
+# Fermat Attack Attempt
+n=rsa[0]
+e=rsa[1]
+p=FermatAttack(n,10); p
+q=n/p; q
+phi=(p-1)*(q-1)
+d=inverse_mod(e, phi)
+M=rsadecrypt(unknown2['E'], d, n); M
+M=rsadecrypt(unknown3['E'], d, n); M
+
+# El Gamal Signature Verification
+M=ASCIIPad("Buy IBM")
+S=egVerify(eg,M,unknown1['y'],unknown1['s']); S
+
+# Jack's message search
+print("Jack's Message Search Results")
+rsa=(rsa_jkey['n'],rsa_jkey['e'])
+eg=(eg_jkey['p'],eg_jkey['g'],eg_jkey['b'])
+
+# El Gamal Signature Verification
+M=ASCIIPad("Sell AT&T")
+S=egVerify(eg,M,unknown2['y'],unknown2['s']); S
+
+# Lucy's message search
+print("Lucy's Message Search Results")
+rsa=(rsa_lkey['n'],rsa_lkey['e'])
+eg=(eg_lkey['p'],eg_lkey['g'],eg_lkey['b'])
+
+# El Gamal Signature Verification
+M=ASCIIPad("Sell all")
+S=egVerify(eg,M,unknown3['y'],unknown3['s']); S
 
 # Fermat Attack Attempt
 n=rsa[0]
@@ -1777,82 +1819,59 @@ q=n/p; q
 phi=(p-1)*(q-1)
 d=inverse_mod(e, phi)
 M=rsadecrypt(unknown1['E'], d, n); M
-M=rsadecrypt(unknown2['E'], d, n); M
-#M=rsadecrypt(unknown3['E'], d, n); M
 M=rsadecrypt(unknown4['E'], d, n); M
-
-# Bob's message search
-print("Bob's Message Search Results")
-rsa=(rsa_bkey['n'],rsa_bkey['e'])
-eg=(eg_bkey['p'],eg_bkey['g'],eg_bkey['b'])
-#print(len(str(rsa[0])))
-y=egVerify(eg,unknown1['E'],unknown1['y'],unknown1['s']); y
-y=egVerify(eg,unknown2['E'],unknown2['y'],unknown2['s']); y
-y=egVerify(eg,unknown3['E'],unknown3['y'],unknown3['s']); y
-y=egVerify(eg,unknown4['E'],unknown4['y'],unknown4['s']); y
-
-# Fermat Attack Attempt
-n=rsa[0]
-p=FermatAttack(rsa[0],10)
-p
-q=n/p
-q
-
-
-# Jack's message search
-print("Jack's Message Search Results")
-rsa=(rsa_jkey['n'],rsa_jkey['e'])
-eg=(eg_jkey['p'],eg_jkey['g'],eg_jkey['b'])
-#print(len(str(rsa[0])))
-y=egVerify(eg,unknown1['E'],unknown1['y'],unknown1['s']); y
-y=egVerify(eg,unknown2['E'],unknown2['y'],unknown2['s']); y
-y=egVerify(eg,unknown3['E'],unknown3['y'],unknown3['s']); y
-y=egVerify(eg,unknown4['E'],unknown4['y'],unknown4['s']); y
-
-# Fermat Attack Attempt
-n=rsa[0]
-p=FermatAttack(rsa[0],10)
-p
-q=n/p
-q
-
-# Lucy's message search
-print("Lucy's Message Search Results")
-rsa=(rsa_lkey['n'],rsa_lkey['e'])
-eg=(eg_lkey['p'],eg_lkey['g'],eg_lkey['b'])
-#print(len(str(rsa[0])))
-y=egVerify(eg,unknown1['E'],unknown1['y'],unknown1['s']); y
-y=egVerify(eg,unknown2['E'],unknown2['y'],unknown2['s']); y
-y=egVerify(eg,unknown3['E'],unknown3['y'],unknown3['s']); y
-y=egVerify(eg,unknown4['E'],unknown4['y'],unknown4['s']); y
-
-# Fermat Attack Attempt
-n=rsa[0]
-p=FermatAttack(rsa[0],10)
-p
-q=n/p
-q
-
-#for i in range(len(unknowns)):
-	#print(str(i+1) + " " + str(len(str(unknowns[i]['E']))))
-	#print(len(str(rsa[i])))
 ############################################
 
 # 1) Determine each Message
 # 2) Determine For whom each message was intended
 # 3) Determine from whom each message is, by verifying the corresponding El Gamal Signatures
+oneThruThree="""
+| Message     | To Whom                        | From Whom               |
+|-------------+--------------------------------+-------------------------|
+| Fermat      | Decrypted using private key of | verifying El Gamal Sigs |
+|-------------+--------------------------------+-------------------------|
+| "Buy IBM"   | Lucy                           | Bob                     |
+| "Sell AT&T" | Bob                            | Jack                    |
+| "Sell all"  | Bob                            | Lucy                    |
+| "Done!"     | Lucy                           | Alice                   |
+"""
 # 4) Determine any messages Alice passed covertly to Bob through her El Gamal Signature
 #+END_SRC
 
 #+RESULTS: El Gamal Security
+#+begin_example
+Alice's Message Search Results
+True
+Factor found in round 1
+108347059433883722041831309L
+108347059433883722041830257
+Bob's Message Search Results
+Factor found in round 1
+216694118867767444083661603L
+216694118867767444083660559
+'Sell AT&T'
+'Sell all'
+True
+Jack's Message Search Results
+True
+Lucy's Message Search Results
+True
+Factor found in round 1
+433388237735534888167322147L
+433388237735534888167321111
+'Buy IBM'
+'Done!'
+#+end_example
 
 ****** TODO Place this table under item 3 in code above when complete
-| Message  | To Whom | From Whom |
-|----------+---------+-----------|
-| Unknown1 | J or L  |           |
-| Unknown2 | B or A  |           |
-| Unknown3 | B or A  |           |
-| Unknown4 | J or L  |           |
+| Message     | To Whom                        | From Whom               |
+|-------------+--------------------------------+-------------------------|
+| Fermat      | Decrypted using private key of | verifying El Gamal Sigs |
+|-------------+--------------------------------+-------------------------|
+| "Buy IBM"   | Lucy                           | Bob                     |
+| "Sell AT&T" | Bob                            | Jack                    |
+| "Sell all"  | Bob                            | Lucy                    |
+| "Done!"     | Lucy                           | Alice                   |
 
 ** CS253
 *** Lecture
