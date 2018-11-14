@@ -1678,6 +1678,8 @@ def rsadecrypt(encr,decrexp,encrmod):
 # key is: (p,g,b)
 # M in this case is the ciphertext E
 def egVerify(key, M, y, s):
+	#v1=y^s * b^y mod p
+	#v2=g^M mod p
 	v1=(power_mod(y,s,key[0]) * power_mod(key[2],y,key[0])) % key[0]
 	v2=power_mod(key[1],M,key[0])
 	return v1==v2
@@ -1711,6 +1713,8 @@ def FermatAttack (n, rounds):
 			return(x + y)
 	print "No factor found in {0} rounds".format(rounds)
 	return 0
+	
+
 ###########################
 
 # IMPORTANT!!
@@ -1744,10 +1748,6 @@ eg_keys=[eg_akey,eg_bkey,eg_jkey,eg_lkey]
 
 # Alice's private El Gamal Key (x) - shared with bob for covert channel
 eg_apkey=7699542093548349244049573757501851670562589091966419
-
-# REVIEW EL GAMAL
-# Public Key: (p,b,g) where p is a prime number, b=g^x mod p, g is a primitive root 1 < g < p of p
-# Private Key: (x) x is a random number
 
 # RSA Encrypted Message E | y=g^r mod p | s=(M-x*y)/r mod (p-1)
 unknown1={'E':115251811749469530248002415406523254651489743459017725,'y':19240616197970611747502124859803652312085074442112010,'s':32706719515423467589632843847126484468195520962513517}
@@ -1785,7 +1785,7 @@ e=rsa[1]
 p=FermatAttack(n,10); p
 q=n/p; q
 phi=(p-1)*(q-1)
-d=inverse_mod(e, phi)
+d=inverse_mod(e, phi); d
 M=rsadecrypt(unknown2['E'], d, n); M
 M=rsadecrypt(unknown3['E'], d, n); M
 
@@ -1804,7 +1804,7 @@ S=egVerify(eg,M,unknown2['y'],unknown2['s']); S
 
 # Lucy's message search
 print("Lucy's Message Search Results")
-rsa=(rsa_lkey['n'],rsa_lkey['e'])
+rsa=(rsa_lkey['n'],rsa_lkey['e']) 
 eg=(eg_lkey['p'],eg_lkey['g'],eg_lkey['b'])
 
 # El Gamal Signature Verification
@@ -1836,6 +1836,9 @@ oneThruThree="""
 | "Done!"     | Lucy                           | Alice                   |
 """
 # 4) Determine any messages Alice passed covertly to Bob through her El Gamal Signature
+x=eg_apkey
+M=(ASCIIPad("Buy IBM")-x*unknown4['y']) % (eg_bkey['p']-1) 
+M=ASCIIDepad(M); M
 #+END_SRC
 
 #+RESULTS: El Gamal Security
@@ -1849,6 +1852,7 @@ Bob's Message Search Results
 Factor found in round 1
 216694118867767444083661603L
 216694118867767444083660559
+5290855341056690321427250579667012858000925781013399
 'Sell AT&T'
 'Sell all'
 True
@@ -1861,6 +1865,7 @@ Factor found in round 1
 433388237735534888167321111
 'Buy IBM'
 'Done!'
+This is not a padded ASCII string
 #+end_example
 
 ****** TODO Place this table under item 3 in code above when complete
