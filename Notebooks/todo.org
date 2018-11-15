@@ -78,6 +78,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    - State "WAITING"    from "INPROGRESS" [2018-11-15 Thu 00:43] \\
 	 Rescheduled for class on Thursday. I figured out the solution to the final part of the homework. I just need to pretty up the assignment for submission tomorrow. Will do that in class.
    :LOGBOOK:
+   CLOCK: [2018-11-15 Thu 09:05]
    CLOCK: [2018-11-15 Thu 00:07]--[2018-11-15 Thu 00:43] =>  0:36
    :END:
    - State "WAITING"    from "STARTED"    [2018-11-13 Tue 15:46] \\

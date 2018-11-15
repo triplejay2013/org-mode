@@ -1,0 +1,129 @@
+							________________
+
+								    BSU
+
+                  Hmwk9
+							 Justin Johnson
+                 113088974
+                   Math307
+                  part1.txt
+							________________
+
+
+ASSIGNMENT DESCRIPTION
+Alice, Bob, Lucy and Jack correspond using the RSA system to encrypt messages, and the El-Gamal system to sign
+them. Alice is a financial analyst at Cyberplanes, a spacecraft manufacturer, and Bob is a prominent broker. Alice and
+Bob are secretly sharing Alice's private El-Gamal key to maintain a covert channel of communication.
+
+Their RSA keys are as follows:
+Name R e
+Alice 11739085287969531650666764880307069646178466406116413 29
+Bob 46956341151878126602666849327932976850293104473816077 71
+Jack 105651767591725784856000289747489691397274520258086741 113
+Lucy 187825364607512506410666935319870481320981631530945317 173
+
+Their public El-Gamal keys are as follows:
+
+Name p g b
+Alice 11739085287969531650666764880307069646178466406133747 122 4559251933765135908042850372269050947311088678478407
+Bob 46956341151878126602666849327932976850293104473818163 14646 41773094887790182197984303656431777160492104718067730
+Jack 105651767591725784856000289747489691397274520258105207 1771562 77714098443250567285634413412177559464041605041509476
+Lucy 187825364607512506410666935319870481320981631530959327 214358883 14644041014569643811484259591673998237151900979559891
+
+Also, Bob knows that Alice's private El-Gamal key is 7699542093548349244049573757501851670562589091966419.
+
+
+The following RSA-encrypted messages, E, accompanied by the El-Gamal signatures (y,s), appeared on a Bulletin board
+posted on the Internet.
+RSA-encrypted message E y = gr mod p s = (M-x*y)/r mod (p-1)
+115251811749469530248002415406523254651489743459017725
+19240616197970611747502124859803652312085074442112010
+32706719515423467589632843847126484468195520962513517
+19659961695727243828141973694524447795978653272532149
+50397128494149821593269937078000120329058172709578908
+47844269820223698406809962518912128051231159162499240
+1199064630279469528093193372862416429357320708704542
+105216848703587739343303886089914553038944537874501648
+139693573510952382531551260015801085872053556486585886
+126624117419296887665831621310305588878545225870594430
+9352666161952933766287125798193970300698629396417740
+4002797869345137661356168947662543489885815101905269
+1) Determine each message.
+2) Determine for whom each message is intended.
+3) Determine from whom each message is, by verifying the corresponding El-Gamal signatures.
+4) Determine any messages Alice passed covertly to Bob through her El-Gamal signature.
+
+SOLUTIONS
+
+The answers for 1-3 are shown in the table below
+the second row denotes the method of discovery
+
+| Message     | To Whom                        | From Whom               |
+|-------------+--------------------------------+-------------------------|
+| Fermat      | Decrypted using private key of | verifying El Gamal Sigs |
+|-------------+--------------------------------+-------------------------| 
+| "Buy IBM"   | Lucy                           | Bob                     |
+| "Sell AT&T" | Bob                            | Jack                    |
+| "Sell all"  | Bob                            | Lucy                    |
+| "Done!"     | Lucy                           | Alice                   |
+
+4) "Downsizing" - using M2="Done!"
+
+DESCRIPTION
+1) I first decided to see if I could discover the private keys of the
+public  keys posted (rsa modulos and encryption exponent). I discovered that
+the Fermat Attack method was able to discover a prime factor of 'R'. With the
+prime number it was simple math to generate each persons private keys and it
+was fairly simple to decrypt the 'E' Messages.
+I simple tried all 4 unknowns with each private key to see which produced
+readable messages. This is how I generated the first column in the table shown
+above.
+
+2) Determining to whom the message was sent was discovered as soon as
+   I decrypted the message. My thought process was this: If I could decrypt
+a message using someone's private key, they must be the inteneded recipient of
+the message. This is how I generated the second column in the table above
+
+3) Determining from whom took a little more work. From the notes on blackboard
+   and in class, we remember that El Gamal signature verification happens like
+this:
+
+v1=y^s * b^y mod p
+v2=g^M mod p
+verified if v1==v2
+
+I wrote a simple function egSign() to verify a given message with the key of
+the sender and their signature. I had to create an egSign method to test my
+signing method. And after some trial and error I was able to create and verify
+a signature. After I had written this function it was simple game of 
+guess and check to discover who sent what message based off of the 
+signatures attached to each encrypted ciphertext. And this is how I 
+generated the third column in the table above.
+
+4) This question had me stumped for a while. I tried several methods including
+   the notes from this link (From the Math307 blackboard lecture slides):
+
+https://blackboard.boisestate.edu/bbcswebdav/pid-5733616-dt-content-rid-30155831_1/courses/1189-70632MATH307001/El%20Gamal%20Covert%20Channel.pdf
+
+I tried every possible combination to find the covert message. I would try
+using the Encrypted messages as M2, then the ASCIIPadded version of the
+unencrypted messages. I would decrypt using ASCIIDepad and then with
+rsadecrypt. Nothing produced the covert message. I did some searching online
+and found this link from another BSU section or class:
+
+https://math.boisestate.edu/~liljanab/ISAS/course_materials/CovertChannel.pdf
+
+This clarified what needed to be done (the slide posted on blackboard is
+possibly incorrect?). With the updated formula I tried the same combinations
+from above and was able to successfully generate the expected message. This was
+done using the knowledge that:
+
+(M2-x*y)/s mod (p-1) == M1
+
+where M2 is a method used for covert communication and M1 is the covert
+message. x is the shared key, and (y,s) are the sender's (Alice) signature on
+the message using M1 instead of r (random number) in the signature process.
+Also, the sender's public key is used for decryption, that fact wasn't clear
+from the notes but I figured that out through trial and error. Thinking about
+this after the fact it makes sense, since the message generation used nothing
+of the receiver.
