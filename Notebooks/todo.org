@@ -41,7 +41,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: Tasks
 :END: 
-** TODO Prepare Final Lessons for Coding4youth
+** TODO [#A] Prepare Final Lessons for Coding4youth
    SCHEDULED: <2018-11-15 Thu>
    :LOGBOOK:
    CLOCK: [2018-11-12 Mon 15:09]--[2018-11-12 Mon 15:10] =>  0:01
@@ -59,25 +59,29 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: School
 :END: 
-** WAITING Research for cs230 - Proprietary BackDoors
+** WAITING [#B] Research for cs230 - Proprietary BackDoors
    SCHEDULED: <2018-11-15 Thu>
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** TODO [#B] CS 253 Smash 3
+** TODO [#A] CS 253 Smash 3
    SCHEDULED: <2018-11-14 Wed> DEADLINE: <2018-11-18 Sun>
 ** WAITING [#A] ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
-   DEADLINE: <2018-11-14 Wed> SCHEDULED: <2018-11-13 Tue>
+   DEADLINE: <2018-12-05 Wed> SCHEDULED: <2018-11-28 Wed>
    - State "WAITING"    from "INPROGRESS" [2018-11-13 Tue 23:37] \\
 	 Going to ask Tyler F. for some help on final question. Then this needs to be submitted
    :LOGBOOK:
    CLOCK: [2018-11-13 Tue 22:41]--[2018-11-13 Tue 23:37] =>  0:56
    :END:
-** WAITING [#A] MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929199-dt-content-rid-30162008_1/courses/1189-70632MATH307001/Assignment%20_9.pdf][Assignment]] 9 (EL Gamal Signatures) 
+** SUBMITTED MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929199-dt-content-rid-30162008_1/courses/1189-70632MATH307001/Assignment%20_9.pdf][Assignment]] 9 (EL Gamal Signatures) 
    SCHEDULED: <2018-11-15 Thu> DEADLINE: <2018-11-15 Thu>
+   - State "SUBMITTED"  from "STARTED"    [2018-11-15 Thu 09:36]
+   - State "STARTED"    from "WAITING"    [2018-11-15 Thu 09:35] \\
+	 Finished part1.txt and part2.sage for homework 9. Need to print off
    - State "WAITING"    from "INPROGRESS" [2018-11-15 Thu 00:43] \\
 	 Rescheduled for class on Thursday. I figured out the solution to the final part of the homework. I just need to pretty up the assignment for submission tomorrow. Will do that in class.
    :LOGBOOK:
+   CLOCK: [2018-11-15 Thu 09:35]--[2018-11-15 Thu 09:35] =>  0:00
    CLOCK: [2018-11-15 Thu 09:05]
    CLOCK: [2018-11-15 Thu 00:07]--[2018-11-15 Thu 00:43] =>  0:36
    :END:
@@ -109,7 +113,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :END:
 ** TODO Schedule Time to Observe another LA
    DEADLINE: <2018-11-21 Wed> SCHEDULED: <2018-11-16 Fri>
-** TODO [#B] Profile Project review and fix for abby and naomi
+** TODO [#A] Profile Project review and fix for abby and naomi
    SCHEDULED: <2018-11-14 Wed> DEADLINE: <2018-11-14 Wed>
 
  [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*About][About]]
