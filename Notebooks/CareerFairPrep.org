@@ -107,17 +107,13 @@ Web dev mainly but some java. .NET and C#
 
 	- find out more
 
-* Marvel
-SCHEDULED: <2018-11-13 Tue>
-
-Embedded systems (arm proccesor). Similar to ece330 course
-
-* Chief architect software
-SCHEDULED: <2018-11-13 Tue>
-
-Based in court d'alene
-Summer
-Designing houses
-They will help find housing
-Oop c++
+*** Marvel
+	  Embedded systems (arm proccesor). Similar to ece330 course
+	  
+**** Chief architect software
+	   Based in court d'alene
+	   Summer
+	   Designing houses
+	   They will help find housing
+	   Oop c++
 

@@ -47,7 +47,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    CLOCK: [2018-11-12 Mon 15:09]--[2018-11-12 Mon 15:10] =>  0:01
    :END:
 ** WAITING Email Megan Rock (FHE)
-   SCHEDULED: <2018-11-12 Mon>
+   SCHEDULED: <2018-11-19 Mon>
    - State "WAITING"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Emailed with Rachel. Waiting for response
 ** DONE Emails Catch up
@@ -78,9 +78,6 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-14 Wed> DEADLINE: <2018-11-15 Thu>
    - State "WAITING"    from "STARTED"    [2018-11-13 Tue 15:46] \\
 	 Got a huge lead on the assignment. I will meet up wiith Ian tomorrow to review it and complete it
-   :LOGBOOK:
-   CLOCK: [2018-11-13 Tue 09:34]
-   :END:
    - State "STARTED"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Starting assignment 9
 ** TODO MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929185-dt-content-rid-30161761_1/courses/1189-70632MATH307001/Assignment_10.pdf][Assignment]] 10 (Review)
