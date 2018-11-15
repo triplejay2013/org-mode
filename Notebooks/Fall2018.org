@@ -1379,6 +1379,126 @@ E
 #+RESULTS: Iterated Encryption
 : 150598315159426420417362370315760759643687452249127260593893330249875774660837569082216166241764228321707042114
 
+#+NAME: Hellman Pohlig Silver Attack
+#+BEGIN_SRC sage
+import itertools
+def HPSonP (Generator, Target, P):
+    Unknown = 0
+    N = P - 1
+    K = factor(N)
+    K = list(K)
+    #print K
+    for pk in K:
+        #print pk
+        primes =pk[0]
+        #Maple code to convert
+        #primes = op(1, op(1, op(i, K)))
+        #if len(K[i]) == 1:
+        #if len(op(i, K)) == 1:
+        #    powers = 1
+        #else:
+        #    powers = op(2, op(i, K))
+        powers = pk[1]
+        Z = N / primes
+        chi = power_mod(int(Generator), int(Z),int(P))
+        n = 0
+        t = [0]*powers
+        a = [0]*powers
+        d = [0]*powers
+        for j in xrange(0, powers):
+            #print j
+            if j == 0:
+                a[j - 1] = Target
+            else:
+                Z2 = (d[j - 1 - 1] * power_mod(int(primes),int(j - 1),int(N))) % N
+                Pt = power_mod(int(Generator), int(Z2),int(P))# % P
+                a[j-1] = (a[j - 1 - 1] / Pt) % P
+            y = Z / primes ** j
+            t[j-1] = power_mod(int(a[j - 1]),int(y),int(P))# % P
+            s = 1
+            for k in itertools.count(1):
+                #print "k",k
+                if t[j - 1] == s:
+                    d[j - 1] = k
+                    break
+                s = (s * chi) % P
+            n = (n + d[j - 1] * primes ** j) % N
+        NN = N / primes ** powers
+        X = (1 / NN) % primes ** powers
+        Unknown = (Unknown + NN * n * X) % N
+    #unassign(t)
+    return(Unknown)
+
+
+
+def Dirichlet (q):
+    j=0
+    
+    #for j in numpy.arange(0.10e1, infinity + 0.10e1, 0.10e1):
+    while True:
+        j+=1
+        p = 2 * j * q + 1
+        if is_prime(p) == True:
+            return(p)
+        
+def findLargePrimitiveRoot(n,p):
+    n=n+1
+    eulerp = euler_phi(p)
+    Q = list(factor(eulerp))
+    while n<p:
+        found = True
+        for Q2 in Q:
+            q=Q2[0]
+            totest = power_mod(ZZ(n),ZZ(eulerp/q),ZZ(p)) 
+#            print(totest)
+            if totest==1:
+                found = False
+        if found:
+            return n
+        n+=1
+		
+#(1) Choose a large prime q
+q=random_prime(10**15,10**20)
+#(2) p=Dirichlet(q)
+p=Dirichlet(q)
+is_prime(p)
+f=factor(p-1); f
+#(3) Find primitive root of p
+g=findLargePrimitiveRoot(random_prime(10**15,10**20),p); g
+#(4) Choose
+#  c0 < p1
+#  c1 < p2
+#  ...
+#  ck = q-1
+c=[1]
+p=[]
+for i in range(len(f)):
+	c.append(f[i][0])
+	p.append(f[i][0])
+
+for i in p:
+	print(i)
+for i in c:
+	print(i)
+#crt(c,p)
+#+END_SRC
+
+#+RESULTS: Hellman Pohlig Silver Attack
+#+begin_example
+True
+2^2 * 3 * 5 * 610459946299339
+579995556223154
+2
+3
+5
+610459946299339
+1
+2
+3
+5
+610459946299339
+#+end_example
+
 *** Assignments
 **** Homework 6
 	 INE: <2018-10-18 Thu> SCHEDULED: <2018-10-15 Mon>
