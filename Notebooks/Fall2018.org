@@ -1975,6 +1975,16 @@ D=ASCIIDepad(D); D
 : 'Downsizing'
 
 **** Homework 10
+	 
+#+BEGIN_EXAMPLE 
+Part1 Prep
+
+* Looked for common y to see if I could dicern the random number 'r', no common y's were found
+* Used Initial Segment attack to find (p-1) of Alice's public EG key
+* Attempted Fermat Attack for Lucy's public RSA key - Failed
+* Attempted One Line factoring method to discover public RSA key - Success!
+#+END_EXAMPLE
+
 *USEFUL LINKS FOR REFERENCE*
 [[https://blackboard.boisestate.edu/bbcswebdav/pid-5733616-dt-content-rid-30155838_1/courses/1189-70632MATH307001/CommonRendom%20Number.PDF][El Gamal Sig and Random Number Schema]]
 [[https://blackboard.boisestate.edu/bbcswebdav/pid-5733616-dt-content-rid-30155832_1/courses/1189-70632MATH307001/Legendre%20Covert%20Channel.pdf][Legendre type covert Channel]]
@@ -1986,6 +1996,120 @@ D=ASCIIDepad(D); D
 #+NAME: Homework 10 Solutions (Legendre Function)
 #+HEADER: :tangle ./src/sage/hmwk10/legendre.sage
 #+BEGIN_SRC sage
+######################
+#Function definitions#
+######################
+def ASCIIDepad(Number):
+    n = Number.ndigits() % 3;
+    if (n > 0):
+        print("This is not a padded ASCII string\n");
+    else:
+        L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+        N = "";
+        for i in range(Number.ndigits()/3):
+            N = chr(L[i]) + N;
+    return(N);
+
+def ASCIIPad(Message):
+    K = (map(ord,reversed(Message)));
+    le= len(K);
+    x = [100+K[i] for i in range(le)];
+    x = ZZ(x,1000);
+    return(x);
+
+def rsadecrypt(encr,decrexp,encrmod):
+    D = power_mod(encr,decrexp,encrmod);
+    N = ASCIIDepad(D);
+    return(N);
+
+def rsaencrypt(Message, encrexp, encrmod):
+    A = ASCIIPad(Message);
+    E = power_mod(A,encrexp,encrmod);
+    return(E);
+
+def ISAttack (R):
+    n = R.ndigits()
+    for j in range(1, n + 1):
+        x=(R-(R % 10^j))/10^j
+        p = gcd(x, R)
+        if ((1 < p)and (p<R)):
+            return(p)
+    print "nonefound"
+	
+def NewLegendre(a,p):
+    if is_prime(p):
+        return (1+kronecker(a,p))/2
+    else:
+        print "2nd argument has to be a prime"
+        
+def BlockNumber(y,primelist):
+    m=0
+    for i in xrange(0,4):
+        m = 2*m + NewLegendre(y,primelist[i+10])
+    return m+1
+
+def BlockContents(y,primelist):
+    k=0
+    for i in xrange(0,10):
+        k=10*k+NewLegendre(y,primelist[i])
+    return k
+
+def KeyDiscover(ylist,primelist):
+    c=10^10
+    k=0
+    for i in xrange(16):
+        d=16-BlockNumber(ylist[i],primelist)
+        k=k+(BlockContents(ylist[i],primelist))*(c^d)
+    return int(str(k),2)
+	
+def isquare (n):
+    if isqrt(n) ** 2 == n:
+        return(True)
+    return(False)
+
+def isqrt(n):
+    return int(floor(sqrt(n)))
+
+def usqrt (n):
+    ur = isqrt(n)
+    if ur ** 2 < n:
+        ur = ur + 1
+    return(ur)
+
+def OneLine (n, iter):
+    for x in range(1, iter + 1):
+        sq = usqrt(x * n)
+        y = sq ** 2 % n
+        if isquare(y) == True:
+            t = isqrt(y)
+            u = gcd(n, sq - t)
+            print("Factor found in round {0} rounds".format(x))
+            return(u)
+    print("No factors found")
+
+# key is: (p,g,b)
+# M in this case is the ciphertext E
+def egVerify(key, M, y, s):
+    v1=(power_mod(y,s,key[0]) * power_mod(key[2],y,key[0])) % key[0]
+    v2=power_mod(key[1],M,key[0])
+    return v1==v2
+	
+def egSign(key, M, x):
+    r = randint(1,key[0])
+    while gcd(r,key[0]-1) != 1:
+        r+=1
+	#print("gcd(r:{},(p-1):{})={}".format(r,key[0]-1,gcd(r,key[0]-1)))
+    y = power_mod(key[1],r,key[0])
+    s = ((M-(x*y))/r) % (key[0]-1)
+    return (y,s)
+	
+#Finds random number used in El Gamal signature
+# Remember
+# r=(M2-x*y)/s mod (p-1) **gcd(s,p-1) must equal 1**
+def rDiscover(M,x,y,s,p):
+	return ((M-x*y)/s) % (p-1)
+######################
+
 description="""
 Foundations of Cryptology
 Assignment 10
@@ -1997,7 +2121,7 @@ leak these ten bits prime 1 leaks bit 1, prime 2 leaks bit 2, and so on.
 Alice bought one of these chips and installed it in her computer. Here are the 14 covert prime
 numbers planted in her chip:"""
 
-p=		[2610874309742867231360502542308382199053675592825240788613991898567287,
+primelist=	[2610874309742867231360502542308382199053675592825240788613991898567287,
 		6881793749340807728335795394301261629479870548736450984003401594706373,
 		8314906195914825136973281314862289454100745237769034410057080703111511,
 		5127114594552921209928891515242515620324828055912854227507525717981667,
@@ -2016,9 +2140,21 @@ description="""
 Alice regularly corresponds with Lucy using the following protocol. They encrypt messages for
 each other using the RSA crypto-system, and sign these messages using the El-Gamal system.
 Lucy's RSA public key is as follows:"""
-rsa_lkey={'n':1380329510951197510100010724038844435804781490991185453524669, 'e':431452543435309613375031056399003408107128387827408402715967}
+rsa_lkey={'n':1380329510951197510100010724038844435804781490991185453524669, 'e':431452543435309613375031056399003408107128387827408402715967, 't':0}
+n=rsa_lkey['n']
+e=rsa_lkey['e']
+p=OneLine(n,10) # Private RSA key
+q=n/p
+phi=(p-1)*(q-1)
+t=inverse_mod(e,phi)
+rsa_lkey['t']=t; t
+
 #Alice's El-Gamal signature key is as follows:
 eg_akey={'p':10000000000000000000000000000000000000000000000000000000000000000005707, 'g':2, 'b':5829711445814756593150837441577049879646826835967016234521362166032923}
+#p-1 == p
+n=eg_akey['p']-1
+p=ISAttack(n)
+q=n/p
 
 description="""
 Here are sixteen messages from Alice to Lucy which have been collected by the Cyber Forensics
@@ -2043,15 +2179,90 @@ M14={'E':1138109602667405943072422513690232405305131283131822608386662,'y':30796
 M15={'E':648551792358033195908225921930717188912777934403051076101283,'y':2507949926452818146783101167935559217583543852145717090862513023080430, 's':1876892947883839710552556001755856886960301874237874824837728826983258}
 M16={'E':1108329618226979748565921595052080391831955721135843401833413,'y':1137237284834714268920432440084126521105380025168123492652543171722168, 's':4974270349376072715089518021560121124590346430908794289954437585093573}
 M=[M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12,M13,M14,M15,M16]
+y=[i['y'] for i in M]
+p=primelist
+
+
+#The following replicates info from Blackboard:Software:Legendre-CoCalc
+#This discovers 'x'? - verify somehow
+#x=KeyDiscover(y,p); testout # Takes about 20s to compute
+#1290003348882681184907543014445365590610205625395L
+
+#Example Usage of Block leakage
+#BlockNumber(y[0],p) #Quick computation
+#BlockContents(y[0],p)
+for i in range(16):
+	bc = BlockContents(y[i], p)
+	print (BlockNumber(y[i],p), bc)
+	
+# Decrypt messages sent to Lucy using Lucy's private key:
+for i in M:
+	mi=rsadecrypt(i['E'],rsa_lkey['t'], rsa_lkey['n']); mi
+
+# Remember r = (M-x*y)/s mod (p-1); use rDiscover(M,x,y,s,p), to find each random number
 
 #From this information determine:
 #1. Lucy's private RSA key;
+	#361305388410523
 #2. Alice's private El-Gamal key;
+	#x=1290003348882681184907543014445365590610205625395L
 #3. All the messages from Alice to Lucy;
+	'Trust the OTB!'
+	'I trust them.'
+	'They make chips'
+	'for signatures.'
+	'Did you get it?'
+	'I may visit.'
+	'Perhaps not.'
+	'Stay cool.'
+	'Say nothing.'
+	'Good move!'
+	'Change keys.'
+	'Bob cracked it'
+	'Maybe also Jack'
+	'Mine are safe.'
+	'Uh-oh...'
+	'They are not?'
 #4. All the random numbers used by Alice during signature generation.
 #+END_SRC
 
 #+RESULTS: Homework 10 Solutions (Legendre Function)
+#+begin_example
+Factor found in round 3 rounds
+361305388410523
+(3, 1100)
+(9, 110011001)
+(10, 100100101)
+(13, 1011111110)
+(5, 11000100)
+(15, 1010010011)
+(11, 111110011)
+(16, 110011)
+(14, 1100110001)
+(8, 1100111010)
+(7, 111100111)
+(4, 1011100010)
+(12, 10100110)
+(2, 1101011100)
+(6, 1001011)
+(1, 1110000111)
+'Trust the OTB!'
+'I trust them.'
+'They make chips'
+'for signatures.'
+'Did you get it?'
+'I may visit.'
+'Perhaps not.'
+'Stay cool.'
+'Say nothing.'
+'Good move!'
+'Change keys.'
+'Bob cracked it'
+'Maybe also Jack'
+'Mine are safe.'
+'Uh-oh...'
+'They are not?'
+#+end_example
 
 ** CS253
 *** Lecture
