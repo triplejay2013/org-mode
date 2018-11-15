@@ -74,9 +74,11 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    CLOCK: [2018-11-13 Tue 22:41]--[2018-11-13 Tue 23:37] =>  0:56
    :END:
 ** WAITING [#A] MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929199-dt-content-rid-30162008_1/courses/1189-70632MATH307001/Assignment%20_9.pdf][Assignment]] 9 (EL Gamal Signatures) 
-   SCHEDULED: <2018-11-14 Wed> DEADLINE: <2018-11-15 Thu>
+   SCHEDULED: <2018-11-15 Thu> DEADLINE: <2018-11-15 Thu>
+   - State "WAITING"    from "INPROGRESS" [2018-11-15 Thu 00:43] \\
+	 Rescheduled for class on Thursday. I figured out the solution to the final part of the homework. I just need to pretty up the assignment for submission tomorrow. Will do that in class.
    :LOGBOOK:
-   CLOCK: [2018-11-14 Wed 13:03]--[2018-11-14 Wed 13:03] =>  0:00
+   CLOCK: [2018-11-15 Thu 00:07]--[2018-11-15 Thu 00:43] =>  0:36
    :END:
    - State "WAITING"    from "STARTED"    [2018-11-13 Tue 15:46] \\
 	 Got a huge lead on the assignment. I will meet up wiith Ian tomorrow to review it and complete it

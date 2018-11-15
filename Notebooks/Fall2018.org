@@ -1678,8 +1678,6 @@ def rsadecrypt(encr,decrexp,encrmod):
 # key is: (p,g,b)
 # M in this case is the ciphertext E
 def egVerify(key, M, y, s):
-	#v1=y^s * b^y mod p
-	#v2=g^M mod p
 	v1=(power_mod(y,s,key[0]) * power_mod(key[2],y,key[0])) % key[0]
 	v2=power_mod(key[1],M,key[0])
 	return v1==v2
@@ -1713,8 +1711,6 @@ def FermatAttack (n, rounds):
 			return(x + y)
 	print "No factor found in {0} rounds".format(rounds)
 	return 0
-	
-
 ###########################
 
 # IMPORTANT!!
@@ -1749,6 +1745,10 @@ eg_keys=[eg_akey,eg_bkey,eg_jkey,eg_lkey]
 # Alice's private El Gamal Key (x) - shared with bob for covert channel
 eg_apkey=7699542093548349244049573757501851670562589091966419
 
+# REVIEW EL GAMAL
+# Public Key: (p,b,g) where p is a prime number, b=g^x mod p, g is a primitive root 1 < g < p of p
+# Private Key: (x) x is a random number
+
 # RSA Encrypted Message E | y=g^r mod p | s=(M-x*y)/r mod (p-1)
 unknown1={'E':115251811749469530248002415406523254651489743459017725,'y':19240616197970611747502124859803652312085074442112010,'s':32706719515423467589632843847126484468195520962513517}
 unknown2={'E':19659961695727243828141973694524447795978653272532149, 'y':50397128494149821593269937078000120329058172709578908,'s':47844269820223698406809962518912128051231159162499240}
@@ -1757,69 +1757,71 @@ unknown3={'E':1199064630279469528093193372862416429357320708704542,'y':105216848
 unknowns=[unknown1,unknown2, unknown3, unknown4]
 
 # Alice's message search
-print("Alice's Message Search Results")
+#print("Alice's Message Search Results")
 rsa=(rsa_akey['n'],rsa_akey['e'])
 eg=(eg_akey['p'],eg_akey['g'],eg_akey['b'])
 x=eg_apkey
 
 # El Gamal Signature Verification
 M=ASCIIPad("Done!")
-S=egVerify(eg,M,unknown4['y'],unknown4['s']); S
+S=egVerify(eg,M,unknown4['y'],unknown4['s'])
 
 # Fermat Attack Attempt
 n=rsa[0]
 e=rsa[1]
-p=FermatAttack(n,10); p
-q=n/p; q
+p=FermatAttack(n,10)
+q=n/p
 phi=(p-1)*(q-1)
 d=inverse_mod(e, phi)
 
 # Bob's message search
-print("Bob's Message Search Results")
+#print("Bob's Message Search Results")
 rsa=(rsa_bkey['n'],rsa_bkey['e'])
 eg=(eg_bkey['p'],eg_bkey['g'],eg_bkey['b'])
 
 # Fermat Attack Attempt
 n=rsa[0]
 e=rsa[1]
-p=FermatAttack(n,10); p
-q=n/p; q
+p=FermatAttack(n,10)
+q=n/p
 phi=(p-1)*(q-1)
-d=inverse_mod(e, phi); d
-M=rsadecrypt(unknown2['E'], d, n); M
-M=rsadecrypt(unknown3['E'], d, n); M
+d=inverse_mod(e, phi)
+bt=d
+bn=n
+M=rsadecrypt(unknown2['E'], d, n)
+M=rsadecrypt(unknown3['E'], d, n)
 
 # El Gamal Signature Verification
 M=ASCIIPad("Buy IBM")
-S=egVerify(eg,M,unknown1['y'],unknown1['s']); S
+S=egVerify(eg,M,unknown1['y'],unknown1['s'])
 
 # Jack's message search
-print("Jack's Message Search Results")
+#print("Jack's Message Search Results")
 rsa=(rsa_jkey['n'],rsa_jkey['e'])
 eg=(eg_jkey['p'],eg_jkey['g'],eg_jkey['b'])
 
 # El Gamal Signature Verification
 M=ASCIIPad("Sell AT&T")
-S=egVerify(eg,M,unknown2['y'],unknown2['s']); S
+S=egVerify(eg,M,unknown2['y'],unknown2['s'])
 
 # Lucy's message search
-print("Lucy's Message Search Results")
-rsa=(rsa_lkey['n'],rsa_lkey['e']) 
+#print("Lucy's Message Search Results")
+rsa=(rsa_lkey['n'],rsa_lkey['e'])
 eg=(eg_lkey['p'],eg_lkey['g'],eg_lkey['b'])
 
 # El Gamal Signature Verification
 M=ASCIIPad("Sell all")
-S=egVerify(eg,M,unknown3['y'],unknown3['s']); S
+S=egVerify(eg,M,unknown3['y'],unknown3['s'])
 
 # Fermat Attack Attempt
 n=rsa[0]
 e=rsa[1]
-p=FermatAttack(n,10); p
-q=n/p; q
+p=FermatAttack(n,10)
+q=n/p
 phi=(p-1)*(q-1)
 d=inverse_mod(e, phi)
-M=rsadecrypt(unknown1['E'], d, n); M
-M=rsadecrypt(unknown4['E'], d, n); M
+M=rsadecrypt(unknown1['E'], d, n)
+M=rsadecrypt(unknown4['E'], d, n)
 ############################################
 
 # 1) Determine each Message
@@ -1836,47 +1838,21 @@ oneThruThree="""
 | "Done!"     | Lucy                           | Alice                   |
 """
 # 4) Determine any messages Alice passed covertly to Bob through her El Gamal Signature
-x=eg_apkey
-M=(ASCIIPad("Buy IBM")-x*unknown4['y']) % (eg_bkey['p']-1) 
-M=ASCIIDepad(M); M
+#M2=unknown1['E']
+M2=ASCIIPad("Done!")
+y=unknown4['y']
+s=unknown4['s']
+p=eg_akey['p']-1
+D=((M2-(x*y))/s) % p
+#D=rsadecrypt(D, bt, bn); D
+D=ASCIIDepad(D); D
 #+END_SRC
 
 #+RESULTS: El Gamal Security
-#+begin_example
-Alice's Message Search Results
-True
-Factor found in round 1
-108347059433883722041831309L
-108347059433883722041830257
-Bob's Message Search Results
-Factor found in round 1
-216694118867767444083661603L
-216694118867767444083660559
-5290855341056690321427250579667012858000925781013399
-'Sell AT&T'
-'Sell all'
-True
-Jack's Message Search Results
-True
-Lucy's Message Search Results
-True
-Factor found in round 1
-433388237735534888167322147L
-433388237735534888167321111
-'Buy IBM'
-'Done!'
-This is not a padded ASCII string
-#+end_example
-
-****** TODO Place this table under item 3 in code above when complete
-| Message     | To Whom                        | From Whom               |
-|-------------+--------------------------------+-------------------------|
-| Fermat      | Decrypted using private key of | verifying El Gamal Sigs |
-|-------------+--------------------------------+-------------------------|
-| "Buy IBM"   | Lucy                           | Bob                     |
-| "Sell AT&T" | Bob                            | Jack                    |
-| "Sell all"  | Bob                            | Lucy                    |
-| "Done!"     | Lucy                           | Alice                   |
+: Factor found in round 1
+: Factor found in round 1
+: Factor found in round 1
+: 'Downsizing'
 
 ** CS253
 *** Lecture
