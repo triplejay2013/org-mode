@@ -110,6 +110,10 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-19 Mon> DEADLINE: <2018-11-27 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::*Homework%209][Homework 9]]
+** TODO ECE330 take quiz over break
+   DEADLINE: <2018-11-22 Thu> SCHEDULED: <2018-11-19 Mon>
+ 
+  [[file:~/.emacs.d/Notebooks/todo.org::*Tasks][Tasks]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work
