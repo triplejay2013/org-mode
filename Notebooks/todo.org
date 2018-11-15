@@ -106,6 +106,10 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-27 Tue> DEADLINE: <2018-12-04 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
+** TODO Homework 10 - Legendre Function?
+   SCHEDULED: <2018-11-19 Mon> DEADLINE: <2018-11-27 Tue>
+ 
+  [[file:~/.emacs.d/Notebooks/Fall2018.org::*Homework%209][Homework 9]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work
