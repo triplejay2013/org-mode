@@ -64,8 +64,10 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** TODO [#A] CS 253 Smash 3
-   SCHEDULED: <2018-11-14 Wed> DEADLINE: <2018-11-18 Sun>
+** STARTED [#A] CS 253 Smash 3
+   SCHEDULED: <2018-11-17 Sat> DEADLINE: <2018-11-18 Sun>
+   - State "STARTED"    from "TODO"       [2018-11-16 Fri 13:08] \\
+	 Made some good progress. Need to finish and pretty up for submission
 ** WAITING [#A] ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
    DEADLINE: <2018-12-05 Wed> SCHEDULED: <2018-11-28 Wed>
    - State "WAITING"    from "INPROGRESS" [2018-11-13 Tue 23:37] \\
@@ -121,7 +123,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** TODO Schedule Time to Observe another LA
    DEADLINE: <2018-11-21 Wed> SCHEDULED: <2018-11-16 Fri>
 ** TODO [#A] Profile Project review and fix for abby and naomi
-   SCHEDULED: <2018-11-14 Wed> DEADLINE: <2018-11-14 Wed>
+   DEADLINE: <2018-11-16 Fri> SCHEDULED: <2018-11-15 Thu>
 
  [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*About][About]]
 ** TODO Plan Final Lesson for C4Y
@@ -165,6 +167,9 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** TODO Backup Windows Files
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Step%207:%20Archiving%20tasks][Step 7: Archiving tasks]]
+** TODO Pay tithing
+** TODO Organize Google Bookmarks
+** TODO Order new personal card from MACU
 * STARTUP
 #+STARTUP: content
 #+STARTUP: lognotestate
