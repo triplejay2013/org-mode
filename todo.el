@@ -32,6 +32,8 @@
          "* TODO %?\n %i\n %a")
       ("n" "Note" entry (file+headline "~/.emacs.d/Notebooks/notes.org" "Note")
          "%?\n")
+      ("c" "Church" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Church")
+       "* TODO %?\n%i\n%a")
       ("f" "Fincance" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Finances")
        "* TODO %?\n%i\n%a")
       ("m" "Misc" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Miscellaneous")

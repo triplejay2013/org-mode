@@ -41,13 +41,10 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: Tasks
 :END: 
-** TODO [#A] Prepare Final Lessons for Coding4youth
-   SCHEDULED: <2018-11-15 Thu>
-   :LOGBOOK:
-   CLOCK: [2018-11-12 Mon 15:09]--[2018-11-12 Mon 15:10] =>  0:01
-   :END:
 ** WAITING Email Megan Rock (FHE)
-   SCHEDULED: <2018-11-19 Mon>
+   SCHEDULED: <2018-11-21 Wed>
+   - State "WAITING"    from "WAITING"    [2018-11-19 Mon 15:34] \\
+	 Set up time to meet on wednesday. Going to finalize some things
    - State "WAITING"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Emailed with Rachel. Waiting for response
 ** DONE Emails Catch up
@@ -59,13 +56,14 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: School
 :END: 
-** WAITING [#B] Research for cs230 - Proprietary BackDoors
-   SCHEDULED: <2018-11-15 Thu>
+** WAITING [#C] Research for cs230 - Proprietary BackDoors
+   SCHEDULED: <2018-11-13 Tue>
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** STARTED [#A] CS 253 Smash 3
+** SUBMITTED CS 253 Smash 3
    SCHEDULED: <2018-11-17 Sat> DEADLINE: <2018-11-18 Sun>
+   - State "SUBMITTED"  from "STARTED"    [2018-11-19 Mon 15:33]
    - State "STARTED"    from "TODO"       [2018-11-16 Fri 13:08] \\
 	 Made some good progress. Need to finish and pretty up for submission
 ** WAITING [#A] ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
@@ -92,8 +90,8 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 	 Starting assignment 9
 ** TODO MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929185-dt-content-rid-30161761_1/courses/1189-70632MATH307001/Assignment_10.pdf][Assignment]] 10 (Review)
    SCHEDULED: <2018-11-20 Tue> DEADLINE: <2018-11-27 Tue>
-** TODO CS253 Schedule Time to take final exam
-   DEADLINE: <2018-11-26 Mon> SCHEDULED: <2018-11-17 Sat>
+** TODO [#A] CS253 Schedule Time to take final exam
+   SCHEDULED: <2018-11-19 Mon> DEADLINE: <2018-11-26 Mon>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*School][School]]
 ** TODO Final Quiz 3
@@ -109,35 +107,33 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
 ** TODO Homework 10 - Legendre Function?
-   SCHEDULED: <2018-11-19 Mon> DEADLINE: <2018-11-27 Tue>
+   SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-27 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::*Homework%209][Homework 9]]
 ** TODO ECE330 take quiz over break
-   DEADLINE: <2018-11-22 Thu> SCHEDULED: <2018-11-19 Mon>
+   SCHEDULED: <2018-11-20 Tue> DEADLINE: <2018-11-22 Thu>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*Tasks][Tasks]]
+** TODO Follow up with Graduate application (see emails)
+ 
+  [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work
 :END:
-** TODO Schedule Time to Observe another LA
-   DEADLINE: <2018-11-21 Wed> SCHEDULED: <2018-11-16 Fri>
-** TODO [#A] Profile Project review and fix for abby and naomi
-   DEADLINE: <2018-11-16 Fri> SCHEDULED: <2018-11-15 Thu>
-
- [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*About][About]]
-** TODO Plan Final Lesson for C4Y
-   SCHEDULED: <2018-11-15 Thu>
-
- [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*About][About]]
-** TODO Apply to Paylocity Internship!
-   SCHEDULED: <2018-11-15 Thu>
+** TODO [#C] Schedule Time to Observe another LA
+   SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-21 Wed>
+** TODO [#A] Apply to Paylocity Internship!
+   DEADLINE: <2018-11-19 Mon> SCHEDULED: <2018-11-15 Thu>
 
  [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Questions%20to%20Ask][Questions to Ask]]
-** TODO Review Career fair papers. Apply to several sites!
+** TODO [#A] Review Career fair papers. Apply to several sites!
    SCHEDULED: <2018-11-15 Thu>
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Step%203:%20Breifly%20review%20upcoming%20week][Step 3: Breifly review upcoming week]]
+** TODO Apply to 'Age of Aincrad' - see tyler's messenger comments
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
 * Health
 :PROPERTIES:
 :CATEGORY: Health
@@ -170,6 +166,29 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** TODO Pay tithing
 ** TODO Organize Google Bookmarks
 ** TODO Order new personal card from MACU
+** TODO Transfer 'Zubits' to work-out shoes
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
+** TODO Organize Google bookmarks
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
+** TODO Set up Android Studio on Laptop
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
 * STARTUP
 #+STARTUP: content
 #+STARTUP: lognotestate
+* Ideas
+**  Allowance App - Simulate what I keep on a post-it note already     :IDEA: 
+   :LOGBOOK:
+   CLOCK: [2018-11-19 Mon 15:37]--[2018-11-19 Mon 15:37] =>  0:00
+   :END:
+ <2018-11-19 Mon>
+
+* Church
+:PROPERTIES:
+:CATEGORY: Tasks
+:END: 
+** TODO Contact Ministering Families and companion
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
