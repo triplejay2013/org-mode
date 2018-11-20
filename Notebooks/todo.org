@@ -134,6 +134,12 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** TODO Apply to 'Age of Aincrad' - see tyler's messenger comments
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
+** TODO Notify C4Y of John's decision concerning the last class time for CS105
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
+** TODO Apply to Xylem internship. Like MDU, looks like a good opportunity. I think I have the necessary skill set for this internship. Give it a shot!
+*** [[https://jobs.jobvite.com/xylem/job/oWeA8fwC/apply][Xylem - application]]
+
 * Health
 :PROPERTIES:
 :CATEGORY: Health
