@@ -2,7 +2,7 @@
 ; REF: https://orgmode.org/manual/Fast-access-to-TODO-states.html#Fast-access-to-TODO-states
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAITING(w@)" "STARTED(s@)" "|" "DONE(d!)" "|" "CANCELED(c@)") ; gen purpose
-      	(sequence "INPROGRESS(p)" "HELP(h@)" "|" "SUBMITTED(S!)") ; school
+      	(sequence "INPROGRESS(i)" "HELP(h@)" "|" "SUBMITTED(S!)") ; school
       	(sequence "BUG(b@)" "|" "FIXED(f!)"))) ; work
 ; Tracking TODO state Changes: https://www.gnu.org/software/emacs/manual/html_node/org/Tracking-TODO-state-changes.html
 ; Essential, @ denotes note and timestamp '!' denotes timestamp

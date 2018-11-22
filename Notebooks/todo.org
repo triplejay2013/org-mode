@@ -42,7 +42,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: Tasks
 :END: 
 ** WAITING Email Megan Rock (FHE)
-   SCHEDULED: <2018-11-21 Wed>
+   SCHEDULED: <2018-11-23 Fri>
    - State "WAITING"    from "WAITING"    [2018-11-19 Mon 15:34] \\
 	 Set up time to meet on wednesday. Going to finalize some things
    - State "WAITING"    from "TODO"       [2018-11-13 Tue 09:34] \\
@@ -57,15 +57,10 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: School
 :END: 
 ** WAITING [#C] Research for cs230 - Proprietary BackDoors
-   SCHEDULED: <2018-11-13 Tue>
+   SCHEDULED: <2018-11-15 Thu>
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** SUBMITTED CS 253 Smash 3
-   SCHEDULED: <2018-11-17 Sat> DEADLINE: <2018-11-18 Sun>
-   - State "SUBMITTED"  from "STARTED"    [2018-11-19 Mon 15:33]
-   - State "STARTED"    from "TODO"       [2018-11-16 Fri 13:08] \\
-	 Made some good progress. Need to finish and pretty up for submission
 ** WAITING [#A] ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
    DEADLINE: <2018-12-05 Wed> SCHEDULED: <2018-11-28 Wed>
    - State "WAITING"    from "INPROGRESS" [2018-11-13 Tue 23:37] \\
@@ -88,13 +83,11 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 	 Got a huge lead on the assignment. I will meet up wiith Ian tomorrow to review it and complete it
    - State "STARTED"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Starting assignment 9
-** TODO MATH307 - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5929185-dt-content-rid-30161761_1/courses/1189-70632MATH307001/Assignment_10.pdf][Assignment]] 10 (Review)
-   SCHEDULED: <2018-11-20 Tue> DEADLINE: <2018-11-27 Tue>
 ** TODO [#A] CS253 Schedule Time to take final exam
-   SCHEDULED: <2018-11-19 Mon> DEADLINE: <2018-11-26 Mon>
+   SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-26 Mon>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*School][School]]
-** TODO Final Quiz 3
+** TODO Final Math307Quiz 3
    SCHEDULED: <2018-11-29 Thu>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
@@ -106,40 +99,34 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-27 Tue> DEADLINE: <2018-12-04 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
-** TODO Homework 10 - Legendre Function?
+** INPROGRESS Homework 10 - Legendre Function?
    SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-27 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::*Homework%209][Homework 9]]
-** TODO ECE330 take quiz over break
-   SCHEDULED: <2018-11-20 Tue> DEADLINE: <2018-11-22 Thu>
+** TODO [#B] ECE330 take quiz over break
+   SCHEDULED: <2018-11-23 Fri> DEADLINE: <2018-11-22 Thu>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*Tasks][Tasks]]
-** TODO Follow up with Graduate application (see emails)
+** INPROGRESS Follow up with Graduate application (see emails)
+   SCHEDULED: <2018-11-28 Wed>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
+** TODO [[file:~/.emacs.d/Notebooks/todo.org::*Apply%20to%20'Age%20of%20Aincrad'%20-%20see%20tyler's%20messenger%20comments][Apply to 'Age of Aincrad' - see tyler's messenger comments]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work
 :END:
 ** TODO [#C] Schedule Time to Observe another LA
    SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-21 Wed>
-** TODO [#A] Apply to Paylocity Internship!
-   DEADLINE: <2018-11-19 Mon> SCHEDULED: <2018-11-15 Thu>
 
- [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Questions%20to%20Ask][Questions to Ask]]
-** TODO [#A] Review Career fair papers. Apply to several sites!
-   SCHEDULED: <2018-11-15 Thu>
-
- [[file:~/.emacs.d/Notebooks/todo.org::*Step%203:%20Breifly%20review%20upcoming%20week][Step 3: Breifly review upcoming week]]
-** TODO Apply to 'Age of Aincrad' - see tyler's messenger comments
-
- [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
-** TODO Notify C4Y of John's decision concerning the last class time for CS105
-
- [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
-** TODO Apply to Xylem internship. Like MDU, looks like a good opportunity. I think I have the necessary skill set for this internship. Give it a shot!
+** DONE [#A] Apply to Xylem internship. Like MDU, looks like a good opportunity. I think I have the necessary skill set for this internship. Give it a shot!
+   SCHEDULED: <2018-11-21 Wed>
+   - State "DONE"       from "TODO"       [2018-11-21 Wed 13:58]
 *** [[https://jobs.jobvite.com/xylem/job/oWeA8fwC/apply][Xylem - application]]
+** TODO test
 
+
+ [[file:~/.emacs.d/Notebooks/todo.org::*ECE330%20take%20quiz%20over%20break][ECE330 take quiz over break]]
 * Health
 :PROPERTIES:
 :CATEGORY: Health
@@ -160,27 +147,15 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: Misc
 :END:
-** TODO [[http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/][Integrate Gmail with Emacs]]
+** TODO [#C] [[http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/][Integrate Gmail with Emacs]]
 *** [[http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/][Here is another resource]]
-** TODO Health And Safety Check
-   SCHEDULED: <2018-11-21 Wed>
-
- [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Employers%20Participating%20(listing%20only%20ones%20interested%20in%20CS)][Employers Participating (listing only ones interested in CS)]]
-** TODO Backup Windows Files
+** TODO [#B] Backup Windows Files
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Step%207:%20Archiving%20tasks][Step 7: Archiving tasks]]
-** TODO Pay tithing
-** TODO Organize Google Bookmarks
-** TODO Order new personal card from MACU
-** TODO Transfer 'Zubits' to work-out shoes
-
- [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
-** TODO Organize Google bookmarks
-
- [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
-** TODO Set up Android Studio on Laptop
-
- [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
+** TODO [#A] Pay tithing
+   SCHEDULED: <2018-11-24 Sat>
+** TODO [#B] Organize Google Bookmarks
+** TODO [#B] Order new personal card from MACU
 * STARTUP
 #+STARTUP: content
 #+STARTUP: lognotestate
@@ -195,6 +170,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :PROPERTIES:
 :CATEGORY: Tasks
 :END: 
-** TODO Contact Ministering Families and companion
+** TODO [#A] Contact Ministering Families and companion
+   SCHEDULED: <2018-11-21 Wed>
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
