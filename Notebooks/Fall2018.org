@@ -1979,10 +1979,10 @@ D=ASCIIDepad(D); D
 #+BEGIN_EXAMPLE 
 Part1 Prep
 
-* Looked for common y to see if I could dicern the random number 'r', no common y's were found
-* Used Initial Segment attack to find (p-1) of Alice's public EG key
-* Attempted Fermat Attack for Lucy's public RSA key - Failed
-* Attempted One Line factoring method to discover public RSA key - Success!
+- Looked for common y to see if I could dicern the random number 'r', no common y's were found
+- Used Initial Segment attack to find (p-1) of Alice's public EG key
+- Attempted Fermat Attack for Lucy's public RSA key - Failed
+- Attempted One Line factoring method to discover public RSA key - Success!
 #+END_EXAMPLE
 
 *USEFUL LINKS FOR REFERENCE*
