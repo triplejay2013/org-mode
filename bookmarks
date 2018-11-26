@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/.emacs.d/Notebooks/todo.org")
- (front-context-string . "** TODO test\n\n\n ")
- (rear-context-string . "- application]]\n")
- (position . 5934))
+ (front-context-string . "** TODO MATH307 ")
+ (rear-context-string . "2018-11-27 Tue>\n")
+ (position . 5616))
 )

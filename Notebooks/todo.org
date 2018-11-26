@@ -42,7 +42,9 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: Tasks
 :END: 
 ** WAITING Email Megan Rock (FHE)
-   SCHEDULED: <2018-11-23 Fri>
+   SCHEDULED: <2018-11-29 Thu>
+   - State "WAITING"    from "WAITING"    [2018-11-26 Mon 13:24] \\
+	 Calling on Thursday. Take notes of anything extranneous
    - State "WAITING"    from "WAITING"    [2018-11-19 Mon 15:34] \\
 	 Set up time to meet on wednesday. Going to finalize some things
    - State "WAITING"    from "TODO"       [2018-11-13 Tue 09:34] \\
@@ -103,15 +105,19 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-27 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::*Homework%209][Homework 9]]
-** TODO [#B] ECE330 take quiz over break
-   SCHEDULED: <2018-11-23 Fri> DEADLINE: <2018-11-22 Thu>
- 
-  [[file:~/.emacs.d/Notebooks/todo.org::*Tasks][Tasks]]
 ** INPROGRESS Follow up with Graduate application (see emails)
    SCHEDULED: <2018-11-28 Wed>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
-** TODO [[file:~/.emacs.d/Notebooks/todo.org::*Apply%20to%20'Age%20of%20Aincrad'%20-%20see%20tyler's%20messenger%20comments][Apply to 'Age of Aincrad' - see tyler's messenger comments]]
+** WAITING [[file:~/.emacs.d/Notebooks/todo.org::*Apply%20to%20'Age%20of%20Aincrad'%20-%20see%20tyler's%20messenger%20comments][Apply to 'Age of Aincrad' - see tyler's messenger comments]]
+   - State "WAITING"    from "TODO"       [2018-11-26 Mon 13:25] \\
+	 Submitted Resume. Waiting for response
+** TODO ECE 330 Homework
+   SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-27 Tue>
+** TODO MATH307 Homework 10 Finish
+   DEADLINE: <2018-11-27 Tue> SCHEDULED: <2018-11-26 Mon>
+ 
+  [[file:~/.emacs.d/Notebooks/todo.org::*Clocking][Clocking]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work
@@ -135,14 +141,8 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
  :PROPERTIES:
 :CATEGORY: Finances
 :END: 
-** TODO Rent due ($727)
-   SCHEDULED: <2018-11-23 Fri> DEADLINE: <2018-11-25 Sun>
 ** TODO Tution and Fees due ($3,947)
    SCHEDULED: <2019-01-04 Fri> DEADLINE: <2019-01-10 Thu>
-** TODO Progressive car insurance payment
-   DEADLINE: <2018-11-30 Fri> SCHEDULED: <2018-11-26 Mon>
-
- [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Questions%20to%20Ask][Questions to Ask]]
 * Miscellaneous
 :PROPERTIES:
 :CATEGORY: Misc
@@ -152,9 +152,6 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 ** TODO [#B] Backup Windows Files
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Step%207:%20Archiving%20tasks][Step 7: Archiving tasks]]
-** TODO [#A] Pay tithing
-   SCHEDULED: <2018-11-24 Sat>
-** TODO [#B] Organize Google Bookmarks
 ** TODO [#B] Order new personal card from MACU
 * STARTUP
 #+STARTUP: content
@@ -171,6 +168,6 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: Tasks
 :END: 
 ** TODO [#A] Contact Ministering Families and companion
-   SCHEDULED: <2018-11-21 Wed>
+   SCHEDULED: <2018-12-01 Sat>
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]

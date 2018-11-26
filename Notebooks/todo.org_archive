@@ -143,3 +143,61 @@ Archived entries from file /home/triplejay2013/.emacs.d/Notebooks/todo.org
 
   - State "DONE"       from "TODO"       [2018-11-21 Wed 19:56]
 [[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Employers%20Participating%20(listing%20only%20ones%20interested%20in%20CS)][Employers Participating (listing only ones interested in CS)]]
+
+* DONE [#A] Pay tithing
+  SCHEDULED: <2018-11-24 Sat>
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-26 Mon 13:24
+  :ARCHIVE_FILE: ~/.emacs.d/Notebooks/todo.org
+  :ARCHIVE_OLPATH: Miscellaneous
+  :ARCHIVE_CATEGORY: Misc
+  :ARCHIVE_TODO: DONE
+  :END:
+  - State "DONE"       from "TODO"       [2018-11-26 Mon 13:24]
+
+* DONE [#B] ECE330 take quiz over break
+  SCHEDULED: <2018-11-23 Fri> DEADLINE: <2018-11-22 Thu>
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-26 Mon 13:25
+  :ARCHIVE_FILE: ~/.emacs.d/Notebooks/todo.org
+  :ARCHIVE_OLPATH: School
+  :ARCHIVE_CATEGORY: School
+  :ARCHIVE_TODO: DONE
+  :END:
+ 
+  - State "DONE"       from "TODO"       [2018-11-26 Mon 13:25]
+ [[file:~/.emacs.d/Notebooks/todo.org::*Tasks][Tasks]]
+
+* SUBMITTED Rent due ($727)
+  SCHEDULED: <2018-11-23 Fri> DEADLINE: <2018-11-25 Sun>
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-26 Mon 13:25
+  :ARCHIVE_FILE: ~/.emacs.d/Notebooks/todo.org
+  :ARCHIVE_OLPATH: Finances
+  :ARCHIVE_CATEGORY: Finances
+  :ARCHIVE_TODO: SUBMITTED
+  :END:
+  - State "SUBMITTED"  from "TODO"       [2018-11-26 Mon 13:25]
+
+* DONE Progressive car insurance payment
+  DEADLINE: <2018-11-30 Fri> SCHEDULED: <2018-11-26 Mon>
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-26 Mon 13:25
+  :ARCHIVE_FILE: ~/.emacs.d/Notebooks/todo.org
+  :ARCHIVE_OLPATH: Finances
+  :ARCHIVE_CATEGORY: Finances
+  :ARCHIVE_TODO: DONE
+  :END:
+
+  - State "DONE"       from "TODO"       [2018-11-26 Mon 13:25]
+[[file:~/.emacs.d/Notebooks/CareerFairPrep.org::*Questions%20to%20Ask][Questions to Ask]]
+
+* DONE [#B] Organize Google Bookmarks
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-26 Mon 13:26
+  :ARCHIVE_FILE: ~/.emacs.d/Notebooks/todo.org
+  :ARCHIVE_OLPATH: Miscellaneous
+  :ARCHIVE_CATEGORY: Misc
+  :ARCHIVE_TODO: DONE
+  :END:
+  - State "DONE"       from "TODO"       [2018-11-26 Mon 13:25]
