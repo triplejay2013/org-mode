@@ -2575,10 +2575,13 @@ class ServerThread extends Thread{
 			- Unblocked thread
 			  - another thread specifically unblocks it
 			  - A hardware event (interrupt) unblocks it
+***** Threads in C
+	  - POSIX Threads
+	  - Each process has one thread
+	  - THat thread starts in /main/
+	  - Memory in other processes is normally inaccessible
 *** In-Class Exercises
 #+NAME: Fork and Wait
-#+HEADER: :dir ./src/c/ :file forkAndWait.txt
-#+HEADER: :tangle ./src/c/forkAndWait.c
 #+HEADER: :exports results
 #+HEADER: :main no
 #+BEGIN_SRC C :includes '(<stdio.h> <stdlib.h> <unistd.h> <sys/types.h> <sys/wait.h>)
@@ -2610,9 +2613,126 @@ int main(){
 	return 0;
 }
 #+END_SRC
-
 #+RESULTS: Fork and Wait
 [[file:src/c/forkAndWait.txt]]
+
+#+NAME: Example1 Threading
+#+HEADER :results output
+#+HEADER: :main no
+#+HEADER: :tangle ./src/c/ex1.c
+#+BEGIN_SRC C :includes '(<stdio.h> <stdlib.h> <pthread.h> <sys/time.h>)
+//I want to take advantage of GNU features
+#define _GNU_SOURCE
+
+//Define functions implemented below
+void *theThread(void *);
+void printStuff(char *, int);
+void cpuSmoke(int);
+
+int main(void) {
+
+  //Automatic variables (these are private the the thread invoking main)
+  pthread_t posixThreadId;
+  int result;
+  int threadExitStatus;
+  void *pThreadExitStatus = &threadExitStatus;
+
+  //Create and start the new thread with default (NULL) attributes
+  result = pthread_create(&posixThreadId, NULL, theThread, NULL);
+  if (result!=0) printf("pthread_create failed, error=%d\n",result);
+
+  //Print some stuff to stdout
+  printStuff("main", 1000);
+
+  //Wait for the child thread to exit
+  result = pthread_join(posixThreadId,pThreadExitStatus);
+  if (result!=0) printf("pthread_join failed, error=%d\n",result);
+  printf("threadExitStatus=%d\n",threadExitStatus);
+
+  //Finished
+  return 0;
+}
+
+void *theThread(void *arg) {
+
+  //Print a bunch of stuff to stdout
+  printStuff("thread",1000);
+
+  pthread_exit((void *) 0);
+}
+
+void printStuff(char *id, int count) {
+  int i;              //This is an automatic variable on the thread's private stack
+  for(i=1;i<=count;i++) {
+    printf("%s i=%d\n",id,i);
+    //printf("%s ",id);  fflush(stdout);  cpuSmoke(100);  printf("i=%d\n",i);
+    fflush(stdout);   //Force the buffer to be written
+    //pthread_yield();  //Manually yield the CPU core
+    cpuSmoke(1000);
+  }
+}
+
+void cpuSmoke(int uSec) {
+  struct timeval t1;     //Starting time
+  struct timeval t2;     //Current time
+  long long now;
+
+  //Get the start time in uSeconds
+  gettimeofday(&t1,NULL);  //What time are we starting
+  unsigned long long start= t1.tv_sec*1000000L + t1.tv_usec;  //Microseconds since epoch
+
+  //Loop stalls the CPU core until uSec have elapsed
+  do {
+    gettimeofday(&t2,NULL);  //Current time
+    now = t2.tv_sec*1000000L + t2.tv_usec;
+  } while (now < start+uSec);
+}
+#+END_SRC
+
+#+RESULTS:
+
+#+NAME: Threads
+#+HEADER :results output
+#+HEADER: :main no
+#+HEADER: :tangle ./src/c/threadsInClass.c
+#+BEGIN_SRC C :includes '(<stdio.h> <stdlib.h> <pthread.h> <sys/time.h>)
+#define _GNU_SOURCE
+long counter = 0;
+int n = 20;
+
+void *increment(void *arg){
+	for(int i = 0; i < n; ++i){
+		++counter;
+	}
+	pthread_exit((void *) 0);
+}
+
+void decrement(){
+	for(int i = 0; i < n; ++i){
+		--counter;
+	}
+}
+
+int main(void){
+	pthread_t posixThreadId;
+	int result;
+	int threadExitStatus;
+	void *pThreadExitStatus = &threadExitStatus;
+	
+	decrement();
+
+	result = pthread_create(&posixThreadId, NULL, increment, NULL);
+	if (result != 0) printf("pthread_create failed, error=%d\n", result);
+	result = pthread_join(posixThreadId,pThreadExitStatus);
+	if (result != 0) printf("Pthread_join failed, error=%d\n", result);
+	
+	printf("Counter: %ld\n", counter);
+
+	return 0;
+}
+#+END_SRC
+
+#+RESULTS:
 
 *** Assignments
 ** CS230
