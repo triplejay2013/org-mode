@@ -97,7 +97,7 @@ _UNDERLINE_
 ** Tables
    - C-c | - creats table
    - S-M-<right> - inserts column to the right
-* Fall 2018
+* Fall 2018 Courses
 ** ECE330
 *** Lecture
 **** Notes
@@ -362,6 +362,27 @@ z[0] - would return a byte starting at index 0 (0x78)
 	  - backtrace: frames - r7 - "frame Pointer"
 	  - break main, main: all_done, #<line#>, function_name
 	  - info locals - prints out variabls known in current frame
+***** Serial Communication
+	  - Parallel versus Serial communication
+		- Serial communication takes less connections and other resources
+		- Serial Communication is now fast, reliable, and ubiquitous
+		- Serial communiaction has become standard for controllers and complex peripheral devices
+		- Parallel communication is multiple bits transmit to multpile recievers
+		- Serial communication, a bit string is transmitted to a reciever (1 bit at a time)
+	  - Syncronus vs. Asynchronous Communication
+		- _Syncrhonous communication requries a common clock signal !_
+		- Synchronous - SPI (SCLK), 12C (SCL), USART (used with a clock)
+		- Asynchronous - UART
+		  - UART Signal Names (2+ ground)
+			- TX - transmit
+			- RX - receive
+			- (Ground Wire)
+		  - Data Framing (with optional paritiy bit)
+			- Start bit, when clock is low for whole bit cycle, we know transmission has begun
+			- Bits are transmitted (8 at a time)
+			- The Parity is default to clock-high. Checks for errors (does not correct). Makes num high/low bits odd or even. Parity is set to make it so
+			- Stop bit set high
+
 **** Assignments
 ***** SUBMITTED Lesson 13 - Ch. 12 Problems (all)
       DEADLINE: <2018-10-02 Tue>
