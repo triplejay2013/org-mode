@@ -118,6 +118,9 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    DEADLINE: <2018-11-27 Tue> SCHEDULED: <2018-11-26 Mon>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*Clocking][Clocking]]
+** TODO Drop UF200 til following semester? Reduce total number of credits?
+ 
+  [[file:~/.emacs.d/Notebooks/Fall2018.org::*Consult%20Advisor%20to%20finalize%20Spring%20schedule][Consult Advisor to finalize Spring schedule]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work

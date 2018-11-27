@@ -7,37 +7,68 @@ _UNDERLINE_
 ~CODE~
 /ITALIC/
 
-* Spring2019 Registration Prep
-** INPROGRESS Consult Advisor to finalize Spring schedule
-   SCHEDULED: <2018-10-22 Mon 10:00>
-   :PROPERTIES:
-   :ARCHIVE_TIME: 2018-11-12 Mon 12:09
-   :ARCHIVE_FILE: ~/.emacs.d/Notebooks/BSU.org
-   :ARCHIVE_OLPATH: Spring2019 Registration Prep/Spring 2019 Plan
-   :ARCHIVE_CATEGORY: BSU
-   :ARCHIVE_TODO: INPROGRESS
-   :END:
-   | Course    | Description                         | Credits | Instructors            |
-   |-----------+-------------------------------------+---------+------------------------|
-   | UF 200    | Foundations of Ethics and Diversity |       3 |                        |
-   | CS 361    | Intro to Theory of Comp             |       3 |                        |
-   | CS 441    | Computer Architecture               |       3 |                        |
-   | CS 453    | Operating Systems                   |       3 | Shane Panter/Amit jain |
-   | CS-HU 271 | Agile Developement                  |       1 |                        |
-   | ***         | Work U                              |      3  |                        |
-   | ^         | Total:                              |      13 |                        |
+* Grad Plan
+** TODO Check credit amount for each course, Verify correctness
+	| Course ID     | Course Name                          | Credits |
+	|---------------+--------------------------------------+---------|
+	| *Fall 2019*     |                                      |         |
+	| CS 533        | Intro to Data Science                |       3 |
+	| *Spring 2020*   |                                      |         |
+	| CS 534        | Machine Learning                     |       3 |
+	| *Fall 2020*     |                                      |         |
+	| CS 557        | Artificial Intelligence              |       3 |
+	| CS 564        | Visualization Techniques             |       3 |
+	| CS 539        | Social Media Mining                  |       3 |
+	| CS 591 or 593 | Project or thesis                    |       3 |
+	| *Spring 2021*   |                                      |         |
+	| CS 550        | Programming Lang. Translation        |       3 |
+	| CS 536 or 546 | Nat. Lang. proc OR Computer Secuirty |       3 |
+	| ^             | Total:                               |      24 |
+	#+TBLFM: $3=vsum(@2..@-1)
+
+* Courses Required to Take
+  - CS 453 Operating Systems
+  - CS 471 Software Engineering
+  - CS 481 Senior Project
+  - CS 488 Outcome Assessment
+  - CS 441 (elective & changed catalog (see Amit's email))
+  - CS 402 (elective)
+  - CS 361
+  - CS 421 Algorithms
+  - UF 200
+  - Graduate Course (3 credits - elective) Fall
+  - Graduate Course (3 credits - elective) Spring
+  - items marked '?' are electives also consider  CS 332 and CS 333 (hacking and network security)
+
+* Spring2020 Registration Prep
+   | Course  | Description       | Credits |
+   |---------+-------------------+---------|
+   | CS 534  | Machine Learning  |       3 |
+   | CS 488  | Outcome Assesment |       0 |
+   | CS 481  | Senior Project    |       3 |
+   | CS 410? | Databases         |       3 |
+   | UF 200  | Ethics and stuff  |       3 |
+   | ^       | Total:            |      12 |
    #+TBLFM: $3=vsum(@2..@-1)
-*** Required Courses
-	| UF 200 | CS 361 | CS 441  | CS 453    | CS 471 |
-	|--------+--------+---------+-----------+--------|
-	| CS 481 | CS 488 | CS 421? | CS-HU 271 |        |
-*** Spring 2019 Plan
-*** Fall 2019 Plan
-	| Course | Description          | Credit |
-	|--------+----------------------+--------|
-	| CS 471 | Software Engineering |      3 |
-	| CS 421 | Algorithms           |      3 | **Covered by transfer?
-	|        |                      |        | **Accel. Masters Courses?
+* Fall2019 Registration Prep
+   | Course  | Description           | Credits |
+   |---------+-----------------------+---------|
+   | CS 453  | Operating Systems     |       3 |
+   | CS 471  | Software Engineering  |       3 |
+   | CS 533  | Intro to Data Science |       3 |
+   | CS 401? | Intro to Web Dev      |       3 |
+   | ^       | Total:                |      12 |
+   #+TBLFM: $3=vsum(@2..@-1)
+* Spring2019 Registration Prep
+   | Course    | Description                   | Credits | 
+   |-----------+-------------------------------+---------+
+   | CS 361    | Intro to Theory of Comp       |       3 | 
+   | CS 441    | Computer Architecture         |       3 | 
+   | CS 421    | Algorithms                    |       3 | 
+   | CS-HU 271 | Agile Developement            |       1 | 
+   | CS 402    | Mobile Developement (Android) |       3 | 
+   | ^         | Total:                        |      13 | 
+   #+TBLFM: $3=vsum(@2..@-1)
 
 * Misc Items
 * Need to know commands for emacs
@@ -360,6 +391,7 @@ z[0] - would return a byte starting at index 0 (0x78)
 ** Math307
 *** Lecture
 *Encryption CANNOT be larger than the modulus -- remember for Final*
+**** HPS Attack on El Gamal Signature/ Encryption key
 **** Key Exchange Protocol
 ***** Notes
 Public INformation:
@@ -1348,6 +1380,185 @@ M^e^k	= M^t*lambda(n) + 1 mod n
 ******* Book: "Raw Data is an oxymoron" 
 ****** Socio-economic status valid predicter of race!?
 *** In-Class Examples/Practice
+	
+
+#+NAME: Hellman Pohling Silver Method
+#+BEGIN_SRC sage
+import itertools
+def HPSonP (Generator, Target, P):
+    Unknown = 0
+    N = P - 1
+    K = factor(N)
+    K = list(K)
+    #print K
+    for pk in K:
+        #print pk
+        primes =pk[0]
+        #Maple code to convert
+        #primes = op(1, op(1, op(i, K)))
+        #if len(K[i]) == 1:
+        #if len(op(i, K)) == 1:
+        #    powers = 1
+        #else:
+        #    powers = op(2, op(i, K))
+        powers = pk[1]
+        Z = N / primes
+        chi = power_mod(int(Generator), int(Z),int(P))
+        n = 0
+        t = [0]*powers
+        a = [0]*powers
+        d = [0]*powers
+        for j in xrange(0, powers):
+            #print j
+            if j == 0:
+                a[j - 1] = Target
+            else:
+                Z2 = (d[j - 1 - 1] * power_mod(int(primes),int(j - 1),int(N))) % N
+                Pt = power_mod(int(Generator), int(Z2),int(P))# % P
+                a[j-1] = (a[j - 1 - 1] / Pt) % P
+            y = Z / primes ** j
+            t[j-1] = power_mod(int(a[j - 1]),int(y),int(P))# % P
+            s = 1
+            for k in itertools.count(1):
+                #print "k",k
+                if t[j - 1] == s:
+                    d[j - 1] = k
+                    break
+                s = (s * chi) % P
+            n = (n + d[j - 1] * primes ** j) % N
+        NN = N / primes ** powers
+        X = (1 / NN) % primes ** powers
+        Unknown = (Unknown + NN * n * X) % N
+    #unassign(t)
+    return(Unknown)
+
+
+
+def Dirichlet (q):
+    j=0
+    
+    #for j in numpy.arange(0.10e1, infinity + 0.10e1, 0.10e1):
+    while True:
+        j+=1
+        p = 2 * j * q + 1
+        if is_prime(p) == True:
+            return(p)
+        
+def findLargePrimitiveRoot(n,p):
+    n=n+1
+    eulerp = euler_phi(p)
+    Q = list(factor(eulerp))
+    while n<p:
+        found = True
+        for Q2 in Q:
+            q=Q2[0]
+            totest = power_mod(ZZ(n),ZZ(eulerp/q),ZZ(p)) 
+#            print(totest)
+            if totest==1:
+                found = False
+        if found:
+            return n
+        n+=1
+#Constructing El Gamal key resistant against Hellman Pohlig Silver attack
+#Choose a large prime number q
+q=next_prime(283743928792183019830289149837287463847938240218302198308921094832985743875834);
+#Use the Dirichlet procedure to find a prime number p such that (p-1) has q as one of its prime factors
+p=Dirichlet(q);
+p
+factor(p-1);
+#Choose random numbers c_i<q_i where g_i are the prime factors of (p-1). Note that all c_i can be small except one which is (q-1).
+c1=1
+c2=2
+c3=3
+c4=q-1
+#Use the Chinese Remainder Theorem to generate the private key.
+x=crt([c1,c2,c3,c4],[2,3,25,q])
+x
+#Choose primitive root modulu p
+g=primitive_root(p);
+g
+#Compute g^x mod p.
+b=power_mod(g,x,p)
+b
+
+# Weak Key
+p1=106002814064480269794952513002373002485048157919343771910410171578387417756790292317777351363
+p1
+g1=10038748923785
+g1
+b1=76871742130979314778314404545706060673310122744275546975332059870805519009266628675037686656
+b1
+z=HPSonP(g1,b1,p1)
+z
+factor(p1-1)
+z %2; z %59; z %898328932749832794872478923748923749873289473892743829749238742189723879294832985743875859
+
+#Constructing a signature key that is resistant to the HPSonP attacks
+
+q1 = next_prime(37493278489327498732487398498393879480898493287489732974921094832985743875834)
+p1 = Dirichlet(q1)
+fL1=list(factor(p1-1))
+for test in fL1:
+    print test
+c11 = 1
+c21 = 100
+c31 = 374932784893274987324873984983938794808984932874897329749210948329857438758
+x1 = crt([c11,c21,c31],[fL1[0][0],fL1[1][0],fL1[2][0]])
+x1
+g1=findLargePrimitiveRoot(10038748923784,p1)
+g1
+b1 = power_mod(g1,x1,p1)
+b1
+q2 = next_prime(89324793827492374982748732402938332894798230912830912921094832985743875834)
+p2 = Dirichlet(q2)
+fL2=list(factor(p2-1))
+c12 = 1
+c22 = 30
+c32 = 8932479382749237498274873240293833289479823091283091292109483298574387616
+x2 = crt([c12,c22,c32],[fL2[0][0],fL2[1][0],fL2[2][0]])
+x2
+g2=findLargePrimitiveRoot(10038748923784,p2)
+g2
+b2 = power_mod(g2,x2,p2)
+b2
+
+q3 = next_prime(898328932749832794872478923748923749873289473892743829749238742189723879294832985743875834)
+p3 = Dirichlet(q3)
+fL3=list(factor(p3-1))
+c13 = 1
+c23 = 50
+c33 = 898328932749832794872478923748923749873289473892743829749238742189723879294832985743875859
+x3 = crt([c13,c23,c33],[fL3[0][0],fL3[1][0],fL3[2][0]])
+x3
+#+END_SRC
+
+#+RESULTS: Hellman Pohling Silver Method
+#+begin_example
+42561589318827452974543372475593119577190736032745329746338164224947861581513551
+2 * 3 * 5^2 * 283743928792183019830289149837287463847938240218302198308921094832985743876757
+20429562873037177427780818788284697397051553295717758278242318827974973559126503
+6
+41054398887059433371371700431713125794349681710867297304558452883444515434344919
+106002814064480269794952513002373002485048157919343771910410171578387417756790292317777351363
+10038748923785
+76871742130979314778314404545706060673310122744275546975332059870805519009266628675037686656
+1796657865499665589744957847497847499746578947785487659498477484379447758589665971487751807
+2 * 59 * 898328932749832794872478923748923749873289473892743829749238742189723879294832985743875859
+1
+51
+89
+(2, 1)
+(113, 1)
+(37493278489327498732487398498393879480898493287489732974921094832985743875881, 1)
+8061429807990305502472115551139668027187985041743167486937784600040264790753173
+10038748923786
+6156089434541705029559508896034912822846473392122022710870417979600647684748946
+5100445727549814611514952620207778808292978985122645127794514963485975329249
+10038748923785
+946731983399710512555195230311934479072009381576909000168330179607867912495
+67374669956237459615435919281169281240496710541955787231192905664229290947112473930790689425
+#+end_example
+
 #+NAME: Iterated Encryption
 #+BEGIN_SRC sage
 
