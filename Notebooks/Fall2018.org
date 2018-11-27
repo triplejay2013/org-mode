@@ -2107,7 +2107,10 @@ def egSign(key, M, x):
 # Remember
 # r=(M2-x*y)/s mod (p-1) **gcd(s,p-1) must equal 1**
 def rDiscover(M,x,y,s,p):
-	return ((M-x*y)/s) % (p-1)
+	if gcd(s,p-1) == 1:
+		return ((M-x*y)/s) % (p-1)
+	else:
+		print("No 'r' could be found")
 ######################
 
 description="""
@@ -2207,23 +2210,30 @@ for i in M:
 #2. Alice's private El-Gamal key;
 	#x=1290003348882681184907543014445365590610205625395L
 #3. All the messages from Alice to Lucy;
-	'Trust the OTB!'
-	'I trust them.'
-	'They make chips'
-	'for signatures.'
-	'Did you get it?'
-	'I may visit.'
-	'Perhaps not.'
-	'Stay cool.'
-	'Say nothing.'
-	'Good move!'
-	'Change keys.'
-	'Bob cracked it'
-	'Maybe also Jack'
-	'Mine are safe.'
-	'Uh-oh...'
-	'They are not?'
+mes=[
+	'Trust the OTB!',
+	'I trust them.',
+	'They make chips',
+	'for signatures.',
+	'Did you get it?',
+	'I may visit.',
+	'Perhaps not.',
+	'Stay cool.',
+	'Say nothing.',
+	'Good move!',
+	'Change keys.',
+	'Bob cracked it',
+	'Maybe also Jack',
+	'Mine are safe.',
+	'Uh-oh...',
+	'They are not?']
 #4. All the random numbers used by Alice during signature generation.
+#rDiscover(M,x,y,s,p):
+cnt=0
+x=2
+for i in M:
+	print(rDiscover(ASCIIPad(mes[cnt]),x,i['y'],i['s'], eg_akey['p']))
+	cnt+=1
 #+END_SRC
 
 #+RESULTS: Homework 10 Solutions (Legendre Function)
