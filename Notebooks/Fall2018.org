@@ -2107,7 +2107,10 @@ def egSign(key, M, x):
 # Remember
 # r=(M2-x*y)/s mod (p-1) **gcd(s,p-1) must equal 1**
 def rDiscover(M,x,y,s,p):
-	return ((M-x*y)/s) % (p-1)
+	if gcd(s,p-1) == 1:
+		return ((M-x*y)/s) % (p-1)
+	print("Value for 'r' Could not be found")
+	return 0
 ######################
 
 description="""
@@ -2180,24 +2183,26 @@ M15={'E':648551792358033195908225921930717188912777934403051076101283,'y':250794
 M16={'E':1108329618226979748565921595052080391831955721135843401833413,'y':1137237284834714268920432440084126521105380025168123492652543171722168, 's':4974270349376072715089518021560121124590346430908794289954437585093573}
 M=[M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12,M13,M14,M15,M16]
 y=[i['y'] for i in M]
+s=[i['s'] for i in M]
+E=[i['E'] for i in M]
 p=primelist
 
 
 #The following replicates info from Blackboard:Software:Legendre-CoCalc
 #This discovers 'x'? - verify somehow
-#x=KeyDiscover(y,p); testout # Takes about 20s to compute
+x=KeyDiscover(y,p); x # Takes about 20s to compute
 #1290003348882681184907543014445365590610205625395L
 
 #Example Usage of Block leakage
 #BlockNumber(y[0],p) #Quick computation
 #BlockContents(y[0],p)
-for i in range(16):
-	bc = BlockContents(y[i], p)
-	print (BlockNumber(y[i],p), bc)
+#for i in range(16):
+#	bc = BlockContents(y[i], p)
+#	print (BlockNumber(y[i],p), bc)
 	
 # Decrypt messages sent to Lucy using Lucy's private key:
-for i in M:
-	mi=rsadecrypt(i['E'],rsa_lkey['t'], rsa_lkey['n']); mi
+#for i in M:
+#	mi=rsadecrypt(i['E'],rsa_lkey['t'], rsa_lkey['n']); mi
 
 # Remember r = (M-x*y)/s mod (p-1); use rDiscover(M,x,y,s,p), to find each random number
 
@@ -2207,61 +2212,93 @@ for i in M:
 #2. Alice's private El-Gamal key;
 	#x=1290003348882681184907543014445365590610205625395L
 #3. All the messages from Alice to Lucy;
-	'Trust the OTB!'
-	'I trust them.'
-	'They make chips'
-	'for signatures.'
-	'Did you get it?'
-	'I may visit.'
-	'Perhaps not.'
-	'Stay cool.'
-	'Say nothing.'
-	'Good move!'
-	'Change keys.'
-	'Bob cracked it'
-	'Maybe also Jack'
-	'Mine are safe.'
-	'Uh-oh...'
-	'They are not?'
+mes=[
+	'Trust the OTB!',
+	'I trust them.',
+	'They make chips',
+	'for signatures.',
+	'Did you get it?',
+	'I may visit.',
+	'Perhaps not.',
+	'Stay cool.',
+	'Say nothing.',
+	'Good move!',
+	'Change keys.',
+	'Bob cracked it',
+	'Maybe also Jack',
+	'Mine are safe.',
+	'Uh-oh...',
+	'They are not?']
 #4. All the random numbers used by Alice during signature generation.
+#rDiscover(M,x,y,s,p):
+r=[]
+for i in range(len(mes)):
+	r.append(rDiscover(ASCIIPad(mes[i]), x, y[i],s[i], eg_akey['p']))
+	print(str(i+1) + ". " + str(r[i]))
+randomNumbers="""
+1. 0
+2. 279609980683956300275566144892650827765370570419
+Value for 'r' Could not be found
+3. 0
+Value for 'r' Could not be found
+4. 0
+Value for 'r' Could not be found
+5. 0
+Value for 'r' Could not be found
+6. 0
+7. 561632179750555610745205884336981428558537921825
+Value for 'r' Could not be found
+8. 0
+Value for 'r' Could not be found
+9. 0
+10. 660302497351884884272183075684764705268237246717
+Value for 'r' Could not be found
+11. 0
+12. 424540208662980822891917406935720503852329046165
+Value for 'r' Could not be found
+13. 0
+Value for 'r' Could not be found
+14. 0
+Value for 'r' Could not be found
+15. 0
+16. 1304740743478692639491729486909033636608504466639
+"""
+s=((ASCIIPad(mes[1])-x*y[1])/r[1]) % (eg_akey['p']-1); s #This is the correct 'r'
 #+END_SRC
 
 #+RESULTS: Homework 10 Solutions (Legendre Function)
 #+begin_example
 Factor found in round 3 rounds
 361305388410523
-(3, 1100)
-(9, 110011001)
-(10, 100100101)
-(13, 1011111110)
-(5, 11000100)
-(15, 1010010011)
-(11, 111110011)
-(16, 110011)
-(14, 1100110001)
-(8, 1100111010)
-(7, 111100111)
-(4, 1011100010)
-(12, 10100110)
-(2, 1101011100)
-(6, 1001011)
-(1, 1110000111)
-'Trust the OTB!'
-'I trust them.'
-'They make chips'
-'for signatures.'
-'Did you get it?'
-'I may visit.'
-'Perhaps not.'
-'Stay cool.'
-'Say nothing.'
-'Good move!'
-'Change keys.'
-'Bob cracked it'
-'Maybe also Jack'
-'Mine are safe.'
-'Uh-oh...'
-'They are not?'
+1290003348882681184907543014445365590610205625395L
+Value for 'r' Could not be found
+1. 0
+2. 279609980683956300275566144892650827765370570419
+Value for 'r' Could not be found
+3. 0
+Value for 'r' Could not be found
+4. 0
+Value for 'r' Could not be found
+5. 0
+Value for 'r' Could not be found
+6. 0
+7. 561632179750555610745205884336981428558537921825
+Value for 'r' Could not be found
+8. 0
+Value for 'r' Could not be found
+9. 0
+10. 660302497351884884272183075684764705268237246717
+Value for 'r' Could not be found
+11. 0
+12. 424540208662980822891917406935720503852329046165
+Value for 'r' Could not be found
+13. 0
+Value for 'r' Could not be found
+14. 0
+Value for 'r' Could not be found
+15. 0
+16. 1304740743478692639491729486909033636608504466639
+7580596732923277682277308429550458486421120322969733810425808677713063
 #+end_example
 
 ** CS253
