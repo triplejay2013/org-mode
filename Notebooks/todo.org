@@ -136,6 +136,10 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 
 
  [[file:~/.emacs.d/Notebooks/todo.org::*ECE330%20take%20quiz%20over%20break][ECE330 take quiz over break]]
+** TODO Apply to scentsy/Check on applicatoin
+   SCHEDULED: <2018-11-30 Fri>
+
+ [[file:~/.emacs.d/Notebooks/Fall2018.org::*Check%20LA%20availability%20for%20next%20semester,%20notify%20Kate%20of%20any%20major%20changes][Check LA availability for next semester, notify Kate of any major changes]]
 * Health
 :PROPERTIES:
 :CATEGORY: Health

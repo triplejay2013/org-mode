@@ -71,6 +71,19 @@ _UNDERLINE_
    #+TBLFM: $3=vsum(@2..@-1)
 
 * Misc Items
+* LA Notes
+  - November 28, 2018
+	- Dead Week
+	  - Sessions are optional
+	  - Let Kate & Students know ahead of time (before Dead Week)
+		- Hold Monday session, cancel Saturday? (probs not, though an option)
+	- Finals Week
+	  - NO LA ACTIVITY! Focus on me
+	- TED Talk - Baby Boomers
+	  - "google search can provide answers, a sage mentor can provide just the right question"
+	  - 
+** TODO Check LA availability for next semester, notify Kate of any major changes
+   SCHEDULED: <2018-11-29 Thu>
 * Need to know commands for emacs
 ** Quick Commands
 	- C-x C-q to disable read-only buffer
