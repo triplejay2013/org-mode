@@ -42,7 +42,7 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: Tasks
 :END: 
 ** WAITING Email Megan Rock (FHE)
-   SCHEDULED: <2018-11-29 Thu>
+   SCHEDULED: <2018-12-24 Mon>
    - State "WAITING"    from "WAITING"    [2018-11-26 Mon 13:24] \\
 	 Calling on Thursday. Take notes of anything extranneous
    - State "WAITING"    from "WAITING"    [2018-11-19 Mon 15:34] \\
@@ -63,8 +63,9 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    - State "WAITING"    from "TODO"       [2018-11-12 Mon 15:40] \\
 	 Added some links. Waiting for my partners to work on it as well. I will work on it again tomorrow
    - [[https://www.gnu.org/proprietary/proprietary-back-doors.en.html][Backdoors]]
-** WAITING [#A] ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
+** DONE [#A] ECE330/L - [[https://blackboard.boisestate.edu/bbcswebdav/pid-5576738-dt-content-rid-28417450_1/courses/1189-72216ECE330L003/ECE330_S18_Lab12_Prelab%281%29.pdf][Final Prelab]]
    DEADLINE: <2018-12-05 Wed> SCHEDULED: <2018-11-28 Wed>
+   - State "DONE"       from "WAITING"    [2018-12-01 Sat 18:00]
    - State "WAITING"    from "INPROGRESS" [2018-11-13 Tue 23:37] \\
 	 Going to ask Tyler F. for some help on final question. Then this needs to be submitted
    :LOGBOOK:
@@ -85,42 +86,61 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 	 Got a huge lead on the assignment. I will meet up wiith Ian tomorrow to review it and complete it
    - State "STARTED"    from "TODO"       [2018-11-13 Tue 09:34] \\
 	 Starting assignment 9
-** TODO [#A] CS253 Schedule Time to take final exam
+** DONE CS253 Schedule Time to take final exam
    SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-26 Mon>
  
+   - State "DONE"       from "TODO"       [2018-12-01 Sat 17:59]
   [[file:~/.emacs.d/Notebooks/todo.org::*School][School]]
-** TODO Final Math307Quiz 3
+** DONE Final Math307Quiz 3
    SCHEDULED: <2018-11-29 Thu>
  
+   - State "DONE"       from "TODO"       [2018-12-01 Sat 18:01]
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
-** TODO Math307 Final Exam
+** TODO [#B] Math307 Final Exam
    SCHEDULED: <2018-12-06 Thu> DEADLINE: <2018-12-13 Thu 10:30>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
-** TODO Math307 Key Submission for Final Exam
-   SCHEDULED: <2018-11-27 Tue> DEADLINE: <2018-12-04 Tue>
+** TODO [#B] Math307 Key Submission for Final Exam
+   SCHEDULED: <2018-12-03 Mon> DEADLINE: <2018-12-04 Tue>
  
   [[file:~/.emacs.d/Notebooks/Fall2018.org::El%20Gamal%20Security][El Gamal Security]]
-** INPROGRESS Homework 10 - Legendre Function?
+** SUBMITTED Homework 10 - Legendre Function?
    SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-27 Tue>
  
+   - State "SUBMITTED"  from "INPROGRESS" [2018-12-01 Sat 18:00]
   [[file:~/.emacs.d/Notebooks/Fall2018.org::*Homework%209][Homework 9]]
-** INPROGRESS Follow up with Graduate application (see emails)
+** INPROGRESS [#C] Follow up with Graduate application (see emails)
    SCHEDULED: <2018-11-28 Wed>
  
   [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
 ** WAITING [[file:~/.emacs.d/Notebooks/todo.org::*Apply%20to%20'Age%20of%20Aincrad'%20-%20see%20tyler's%20messenger%20comments][Apply to 'Age of Aincrad' - see tyler's messenger comments]]
+   SCHEDULED: <2018-12-07 Fri>
+   - State "WAITING"    from "WAITING"    [2018-12-01 Sat 17:59] \\
+	 Submited resume. Set up interview for the 7th
    - State "WAITING"    from "TODO"       [2018-11-26 Mon 13:25] \\
 	 Submitted Resume. Waiting for response
-** TODO ECE 330 Homework
+** SUBMITTED ECE 330 Homework
    SCHEDULED: <2018-11-26 Mon> DEADLINE: <2018-11-27 Tue>
-** TODO MATH307 Homework 10 Finish
+   - State "SUBMITTED"  from "INPROGRESS" [2018-12-01 Sat 18:02]
+** SUBMITTED MATH307 Homework 10 Finish
    DEADLINE: <2018-11-27 Tue> SCHEDULED: <2018-11-26 Mon>
  
+   - State "SUBMITTED"  from "TODO"       [2018-12-01 Sat 18:01]
   [[file:~/.emacs.d/Notebooks/todo.org::*Clocking][Clocking]]
-** TODO Drop UF200 til following semester? Reduce total number of credits?
+** WAITING Drop UF200 til following semester? Reduce total number of credits?
+   SCHEDULED: <2018-12-18 Tue>
  
+   - State "WAITING"    from "TODO"       [2018-12-01 Sat 17:57] \\
+	 Pushing off til Fall/Spring semester of senior year. Still need to drop class. I am fairly certain this is the route I want to take.
   [[file:~/.emacs.d/Notebooks/Fall2018.org::*Consult%20Advisor%20to%20finalize%20Spring%20schedule][Consult Advisor to finalize Spring schedule]]
+** TODO [#A] CS230 Research Essay
+   DEADLINE: <2018-12-04 Tue> SCHEDULED: <2018-12-01 Sat>
+** INPROGRESS [#A] CS253 Smash 4. Pipes
+   DEADLINE: <2018-12-06 Thu> SCHEDULED: <2018-12-01 Sat>
+** TODO Check Grades on blackboard
+   SCHEDULED: <2018-12-02 Sun>
+ 
+  [[file:~/.emacs.d/Notebooks/todo.org::*CS230%20Research%20Essay][CS230 Research Essay]]
 * Work
 :PROPERTIES:
 :CATEGORY: Work
@@ -132,12 +152,11 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
    SCHEDULED: <2018-11-21 Wed>
    - State "DONE"       from "TODO"       [2018-11-21 Wed 13:58]
 *** [[https://jobs.jobvite.com/xylem/job/oWeA8fwC/apply][Xylem - application]]
-** TODO test
 
 
  [[file:~/.emacs.d/Notebooks/todo.org::*ECE330%20take%20quiz%20over%20break][ECE330 take quiz over break]]
 ** TODO Apply to scentsy/Check on applicatoin
-   SCHEDULED: <2018-11-30 Fri>
+   SCHEDULED: <2018-12-03 Mon>
 
  [[file:~/.emacs.d/Notebooks/Fall2018.org::*Check%20LA%20availability%20for%20next%20semester,%20notify%20Kate%20of%20any%20major%20changes][Check LA availability for next semester, notify Kate of any major changes]]
 * Health
@@ -155,11 +174,14 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: Misc
 :END:
 ** TODO [#C] [[http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/][Integrate Gmail with Emacs]]
+   SCHEDULED: <2018-12-15 Sat>
 *** [[http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/][Here is another resource]]
 ** TODO [#B] Backup Windows Files
+   SCHEDULED: <2018-12-15 Sat>
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Step%207:%20Archiving%20tasks][Step 7: Archiving tasks]]
 ** TODO [#B] Order new personal card from MACU
+   SCHEDULED: <2018-12-17 Mon>
 * STARTUP
 #+STARTUP: content
 #+STARTUP: lognotestate
@@ -175,6 +197,6 @@ MY PROJECTS  -*- mode: org; fill-column: 78 -*-
 :CATEGORY: Tasks
 :END: 
 ** TODO [#A] Contact Ministering Families and companion
-   SCHEDULED: <2018-12-01 Sat>
+   SCHEDULED: <2018-12-02 Sun>
 
  [[file:~/.emacs.d/Notebooks/todo.org::*Health][Health]]
