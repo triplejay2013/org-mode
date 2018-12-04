@@ -2825,6 +2825,40 @@ class ServerThread extends Thread{
 	  - Each process has one thread
 	  - THat thread starts in /main/
 	  - Memory in other processes is normally inaccessible
+**** Final Prep
+***** TODO Allowed a page of notes (type it up:))
+***** TODO In-class Review - construct review sheet by filling in info about these topics
+	  - Questions will be similar to what appears in quizzes/piazza (list here:)
+	  - fork
+	  - wait
+	  - zombies
+	  - exec
+	  - threads
+		- concurrency topics (go through notes, look up terms in /italics/
+		- mutex
+		- critical section
+	  - C Prog
+		- functions
+		- types of variables (extern, param, auto)
+		- structs
+		- malloc
+		- free
+		- strings
+		- arrays
+		- pointers
+		- Control Flow (for, while, if, etc.)
+		- expressions
+		- I/O - low level (open, read, write, close, dup, fopen, fscanf, fclose)
+		- "pass by value"
+		- signal
+		- kill
+		- signals
+		  - segment violation
+		  - Ctrl-c
+		  - timer
+		- How can two processes share data (figure out before final)
+		- sizeof(..)
+	  - Pipes - producer consumer problem solution
 *** In-Class Exercises
 #+NAME: Fork and Wait
 #+HEADER: :exports results
