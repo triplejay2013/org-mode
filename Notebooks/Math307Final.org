@@ -1,0 +1,161 @@
+#+TITLE: MATH307 Final
+#+AUTHOR: Justin Johnson
+
+_In Class Final Prep_
+Two questions on the exam:
+1) Test Number, Plaintext
+2) RSA, El Gamal questions
+
+_Final Description_
+The final exam starts on December 6, 10:30 a.m. and ends on December 13, 10:30 a.m. 
+The due date for sending public keys is  _December 4, 11:59 p.m._ To participate in the 
+examination you must submit a personal  RSA  public key. The specifications are
+
+Prime numbers *p* and *q*:  exactly *101* digits each.
+Send by e-mail in text form (No SAGE/MAPLE attachments, and no rich formatted text) the following:
+Name
+    - public modulus
+    - public encryption exponent 
+
+1. The last date for submitting personal  RSA  keys: December 4,  11:59 p.m. Failure to submit a valid key will result in 
+	forfeiting both the key-security point and the points for Question 1.
+
+2. The examination is due on December 13, 10:30 a.m. 
+
+3. There is a list of tests. You are responsible for exactly one of these. To determine which one you are responsible for, 
+	do the following: The first question of these examinations has been encrypted with submitted RSA keys. 
+	The examination whose first question is decryptable with your private key is the one you are responsible for. 
+	Once you have identified the number of the test you are responsible for, advance to the grid of numbers, and click 
+	on the number for your test. This will present you with the remaining problems from your test.
+
+4. The examination is worth 200 points, of which 180 points are for correctly answering posed problems, and 20 points are for key-security.
+
+5. Any student who during the week of the final successfully determines the private key of a classmate and is among 
+	the first two to sufficiently report this accomplishment, will earn 10 points extra credit.
+
+6. If you succeed in decrypting the first question on some-one else's test, then to submit a claim for extra credit points 
+	you should be one of the first two successful attackers for that specific examination who reported the crack 
+	with accompanying substantiating computational evidence; your own name; the number of the test you cracked; the 
+	private key and the name of the key-owner whose final had been defeated.
+
+7. Any participant's examination is vulnerable for only the 20 security points for successful attacks against it.
+
+8. For each examination only the first two successful reports will receive extra credit.
+
+9. In the MAPLE/SAGE/Java/C/C++/etc -  free part of the submitted files you must state the final answers 
+	to the problems; fully substantiate answers with a clear description of the various mathematical steps 
+	needed and followed in solving the problems. Neither of these two items suffices as adequate answer without 
+	the other. You must also submit separately the computational evidence of work done to complete the examination.
+
+10. ONLY HARD COPIES OF THE EXAM  SUBMITTED BY THE DEADLINE ARE ACCEPTABLE. You should turn in your hard copy 
+	in the Math Department office (MB 235) and ask for a time stamp.
+
+11. Please report any verified errors immediately to liljanababinkostova@boisestate.edu.
+	
+#+NAME: Key Generation (Use Once for final key!)
+#+BEGIN_SRC sage
+p=[]
+for i in range(101):
+	p.append(randint(1,9))
+s=''.join(str(x) for x in p)
+print(len(s))
+p=int(s)
+print(int(p))
+s="39619327755284552583169972525123433531653656267552646695985724366157448998987496723173996644919564813"
+print(len(s))
+#+END_SRC
+
+#+RESULTS: Key Generation (Use Once for final key!)
+: 101
+: 69428174168919997196671971411265863877379665945184619432198817211348591379916332369673219147379944795
+: 101
+
+#+NAME: Key Generation and Prep
+#+BEGIN_SRC sage
+###########################
+# RSA & EL GAMAL Functions#
+###########################
+def ASCIIPad(Message):
+	K = (map(ord,reversed(Message)));    
+	le= len(K);
+	x = [100+K[i] for i in range(le)];
+	x = ZZ(x,1000);
+	return(x);
+	
+def ASCIIDepad(Number):
+	n = Number.ndigits() % 3;
+	if (n > 0):
+		print("This is not a padded ASCII string\n");
+	else:
+		L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+		N = "";
+		for i in range(Number.ndigits()/3):
+			N = chr(L[i]) + N;
+		return(N)
+		
+def rsaencrypt(Message, encrexp, encrmod):
+	A = ASCIIPad(Message);
+	E = power_mod(A,encrexp,encrmod);
+	return(E);
+
+def rsadecrypt(encr,decrexp,encrmod):
+	D = power_mod(encr,decrexp,encrmod);
+	N = ASCIIDepad(D);
+	return(N);
+
+# key is: (p,g,b)
+# M in this case is the ciphertext E
+def egVerify(key, M, y, s):
+	v1=(power_mod(y,s,key[0]) * power_mod(key[2],y,key[0])) % key[0]
+	v2=power_mod(key[1],M,key[0])
+	return v1==v2
+	
+def egSign(key, M, x):
+	r = randint(1,key[0])
+	while gcd(r,key[0]-1) != 1:
+		r+=1
+	#print("gcd(r:{},(p-1):{})={}".format(r,key[0]-1,gcd(r,key[0]-1)))
+	y = power_mod(key[1],r,key[0])
+	s = ((M-(x*y))/r) % (key[0]-1)
+	return (y,s)
+	
+def isqrt(n):
+    return int(floor(sqrt(n)))
+
+def usqrt (n):
+    ur = isqrt(n)
+    if ur ** 2 < n:
+        ur = ur + 1
+    return(ur)
+
+def FermatAttack (n, rounds):
+	st = usqrt(n)
+	for x in range(st, st + rounds + 1):
+		#print (x-st)
+		sq = x ** 2 - n
+		y = isqrt(sq)
+		if y ** 2 == sq: 
+			print "Factor found in round {0}".format(x-st+1)
+			return(x + y)
+	print "No factor found in {0} rounds".format(rounds)
+	return 0
+
+# DO NOT CHANGE AFTER DEC, 4th!
+p=39619327755284552583169972525123433531653656267552646695985724366157448998987496723173996644919564813
+#print(len(str(p))) #first prime is 101 digits long
+q=69428174168919997196671971411265863877379665945184619432198817211348591379916332369673219147379944795
+#print(len(str(p))) # second prime is 101 digits long
+n=p*q
+phi=(p-1)*(q-1)
+e=719263569019850219850927987987981213562135976912875362375018433
+d=inverse_mod(e,phi)
+
+# Practice encrypting and decrypting
+M="Here is my first Message to encrypt. Yay!"
+M=rsaencrypt(M,e,n); M
+
+###########################
+#+END_SRC
+
+#+RESULTS: Key Generation and Prep
+: 1047221176751210599786979019264150906099038886198434256715204543106253688005183451404962383168771832342054372556411413056069547646178319486331577353079570726213925605851114156382224610486123821212350833

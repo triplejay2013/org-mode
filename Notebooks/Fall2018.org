@@ -1420,14 +1420,14 @@ M^e^k	= M^t*lambda(n) + 1 mod n
 #+BEGIN_SRC sage
 import itertools
 def HPSonP (Generator, Target, P):
-    Unknown = 0
-    N = P - 1
-    K = factor(N)
-    K = list(K)
+	Unknown = 0
+	N = P - 1
+	K = factor(N)
+	K = list(K)
     #print K
-    for pk in K:
+	for pk in K:
         #print pk
-        primes =pk[0]
+		primes =pk[0]
         #Maple code to convert
         #primes = op(1, op(1, op(i, K)))
         #if len(K[i]) == 1:
@@ -1435,38 +1435,36 @@ def HPSonP (Generator, Target, P):
         #    powers = 1
         #else:
         #    powers = op(2, op(i, K))
-        powers = pk[1]
-        Z = N / primes
-        chi = power_mod(int(Generator), int(Z),int(P))
-        n = 0
-        t = [0]*powers
-        a = [0]*powers
-        d = [0]*powers
-        for j in xrange(0, powers):
+		powers = pk[1]
+		Z = N / primes
+		chi = power_mod(int(Generator), int(Z),int(P))
+		n = 0
+		t = [0]*powers
+		a = [0]*powers
+		d = [0]*powers
+		for j in xrange(0, powers):
             #print j
-            if j == 0:
-                a[j - 1] = Target
-            else:
-                Z2 = (d[j - 1 - 1] * power_mod(int(primes),int(j - 1),int(N))) % N
-                Pt = power_mod(int(Generator), int(Z2),int(P))# % P
-                a[j-1] = (a[j - 1 - 1] / Pt) % P
-            y = Z / primes ** j
-            t[j-1] = power_mod(int(a[j - 1]),int(y),int(P))# % P
-            s = 1
-            for k in itertools.count(1):
+			if j == 0:
+				a[j - 1] = Target
+			else:
+				Z2 = (d[j - 1 - 1] * power_mod(int(primes),int(j - 1),int(N))) % N
+				Pt = power_mod(int(Generator), int(Z2),int(P))# % P
+				a[j-1] = (a[j - 1 - 1] / Pt) % P
+			y = Z / primes ** j
+			t[j-1] = power_mod(int(a[j - 1]),int(y),int(P))# % P
+			s = 1
+			for k in itertools.count(1):
                 #print "k",k
-                if t[j - 1] == s:
-                    d[j - 1] = k
-                    break
-                s = (s * chi) % P
-            n = (n + d[j - 1] * primes ** j) % N
-        NN = N / primes ** powers
-        X = (1 / NN) % primes ** powers
-        Unknown = (Unknown + NN * n * X) % N
+				if t[j - 1] == s:
+					d[j - 1] = k
+					break
+				s = (s * chi) % P
+			n = (n + d[j - 1] * primes ** j) % N
+		NN = N / primes ** powers
+		X = (1 / NN) % primes ** powers
+		Unknown = (Unknown + NN * n * X) % N
     #unassign(t)
-    return(Unknown)
-
-
+	return(Unknown)
 
 def Dirichlet (q):
     j=0
@@ -2546,6 +2544,279 @@ Value for 'r' Could not be found
 7580596732923277682277308429550458486421120322969733810425808677713063
 #+end_example
 
+**** Review Assignment
+#+NAME: Review Assignment
+#+BEGIN_SRC sage
+###########################
+# RSA & EL GAMAL Functions#
+###########################
+def ASCIIPad(Message):
+	K = (map(ord,reversed(Message)));    
+	le= len(K);
+	x = [100+K[i] for i in range(le)];
+	x = ZZ(x,1000);
+	return(x);
+	
+def ASCIIDepad(Number):
+	n = Number.ndigits() % 3;
+	if (n > 0):
+		print("This is not a padded ASCII string\n");
+	else:
+		L = [((Number - (Number % (1000^i)))/1000^i)%1000 - 100 for i in range(Number.ndigits()/3)];
+		N = "";
+		for i in range(Number.ndigits()/3):
+			N = chr(L[i]) + N;
+		return(N)
+		
+def rsaencrypt(Message, encrexp, encrmod):
+	A = ASCIIPad(Message);
+	E = power_mod(A,encrexp,encrmod);
+	return(E);
+
+def rsadecrypt(encr,decrexp,encrmod):
+	D = power_mod(encr,decrexp,encrmod);
+	N = ASCIIDepad(D);
+	return(N);
+
+# key is: (p,g,b)
+# M in this case is the ciphertext E
+def egVerify(key, M, y, s):
+	v1=(power_mod(y,s,key[0]) * power_mod(key[2],y,key[0])) % key[0]
+	v2=power_mod(key[1],M,key[0])
+	return v1==v2
+	
+def egSign(key, M, x):
+	r = randint(1,key[0])
+	while gcd(r,key[0]-1) != 1:
+		r+=1
+	#print("gcd(r:{},(p-1):{})={}".format(r,key[0]-1,gcd(r,key[0]-1)))
+	y = power_mod(key[1],r,key[0])
+	s = ((M-(x*y))/r) % (key[0]-1)
+	return (y,s)
+	
+def isquare (n):
+    if isqrt(n) ** 2 == n:
+        return(True)
+    return(False)
+	
+def isqrt(n):
+    return int(floor(sqrt(n)))
+
+def usqrt (n):
+    ur = isqrt(n)
+    if ur ** 2 < n:
+        ur = ur + 1
+    return(ur)
+
+def FermatAttack (n, rounds):
+	st = usqrt(n)
+	for x in range(st, st + rounds + 1):
+		#print (x-st)
+		sq = x ** 2 - n
+		y = isqrt(sq)
+		if y ** 2 == sq: 
+			print "Factor found in round {0}".format(x-st+1)
+			return(x + y)
+	print "No factor found in {0} rounds".format(rounds)
+	return 0
+	
+import itertools
+def HPSonP (Generator, Target, P):
+	Unknown = 0
+	N = P - 1
+	K = factor(N)
+	K = list(K)
+	for pk in K:
+		primes =pk[0]
+		powers = pk[1]
+		Z = N / primes
+		chi = power_mod(int(Generator), int(Z),int(P))
+		n = 0
+		t = [0]*powers
+		a = [0]*powers
+		d = [0]*powers
+		for j in xrange(0, powers):
+            #print j
+			if j == 0:
+				a[j - 1] = Target
+			else:
+				Z2 = (d[j - 1 - 1] * power_mod(int(primes),int(j - 1),int(N))) % N
+				Pt = power_mod(int(Generator), int(Z2),int(P))# % P
+				a[j-1] = (a[j - 1 - 1] / Pt) % P
+			y = Z / primes ** j
+			t[j-1] = power_mod(int(a[j - 1]),int(y),int(P))# % P
+			s = 1
+			for k in itertools.count(1):
+                #print "k",k
+				if t[j - 1] == s:
+					d[j - 1] = k
+					break
+				s = (s * chi) % P
+				n = (n + d[j - 1] * primes ** j) % N
+		NN = N / primes ** powers
+		X = (1 / NN) % primes ** powers
+		Unknown = (Unknown + NN * n * X) % N
+    #unassign(t)
+	return(Unknown)
+
+
+
+def Dirichlet (q):
+	j=0
+    
+    #for j in numpy.arange(0.10e1, infinity + 0.10e1, 0.10e1):
+	while True:
+		j+=1
+		p = 2 * j * q + 1
+		if is_prime(p) == True:
+			return(p)
+        
+def findLargePrimitiveRoot(n,p):
+	n=n+1
+	eulerp = euler_phi(p)
+	Q = list(factor(eulerp))
+	while n<p:
+		found = True
+		for Q2 in Q:
+			q=Q2[0]
+			totest = power_mod(ZZ(n),ZZ(eulerp/q),ZZ(p)) 
+#            print(totest)
+			if totest==1:
+				found = False
+		if found:
+			return n
+		n+=1
+
+def OneLine (n, iter):
+    for x in range(1, iter + 1):
+        sq = usqrt(x * n)
+        y = sq ** 2 % n
+        if isquare(y) == True:
+            t = isqrt(y)
+            u = gcd(n, sq - t)
+            print("Factor found in round {0} rounds".format(x))
+            return(u)
+    print("No factors found")
+
+def ISAttack (R):
+    n = R.ndigits()
+    #n = len(R)
+    for j in range(1, n + 1):
+        x=(R-(R % 10^j))/10^j
+        p = gcd(x, R)
+        if ((1 < p)and (p<R)):
+            return(p)
+    print "nonefound"
+	
+def BSGB(g,b,p):
+	N=p-1
+	m=floor(sqrt(N))+1
+	B=[]
+	G=[]
+	B.append(g)
+	for j in xrange(1,m):
+		B.append(mod(g^j,p))
+	p2=B[m-1]
+	G.append(p2)
+	for j in xrange(1,m-1):
+		G.append( mod(b*(p2^(-j)),p))
+	for i in xrange(1,m-1):
+		for j in xrange(1,m-1):
+			if B[i]==G[j]:
+				L=mod(i+j*m,N)
+				return L
+###########################
+
+#El-Gamal signature keys:         
+
+#p: the El-Gamal prime number.         
+#g: a primitive root of p.         
+#b: the public key value of the private key.   
+#RSA encryption keys:     
+
+#n: The RSA encryption modulus.         
+#e: The RSA encryption exponent.
+
+#ALICE
+pA= 8995892669207211070241288987157604115146483396300958785031851
+gA= 4177248169415654
+bA= 958665996408143455768993375720175895115048779432241827780539
+nA= 13553676458109679022254425485888305691558105057331965076678666148254401509616789728553600476483045919733088423826623431561198396059
+eA= 881
+
+q=nA/pA
+if is_prime(q): 
+	print("YES")
+	print(q)
+#z=HPSonP(gA,bA,pA); z
+#z=FermatAttack(nA, 1000); z
+#z=OneLine(nA, 1000); z
+#p=ISAttack(nA)
+#z=BSGB(gA,bA,pA); z
+
+
+#FRANCIS
+pF= 8995892669207211070241288987157604115146483396300958785031851
+gF= 4177248169415654
+bF= 3039095112425952730057119379031137673205940630725261611478711
+nF= 1983100340400013554518643466936056468679114217950213528931536003076059050734111933997668559508769408803398758525047121581303
+eF= 883
+p=ISAttack(nF); p
+q=nF/p
+phiF=(p-1)*(q-1)
+dF=inverse_mod(eF,phiF); dF
+#z=BSGB(gA,bA,pA); z
+
+
+#BOB
+pB= 51675109361171873009228648742693003230147111656432711736930071397545699
+gB= 11
+bB= 34683629513728463180685570172970561419272482978839193840985538752446461
+nB= 396758612378337968271701518623637695177228039942820895155785882268327490757979319380069204139669643799362162603119459
+eB= 86188892262164944079042642656008094231588973030078631801528291580314313506531829020544835661458861781427881914850391
+
+q=nB/pB
+if is_prime(q): print("YES")
+# Directory Attacks
+#z=gcd(nA,nF); z
+#z=gcd(nA,nB); z
+#z=gcd(nF,nB); z
+
+
+#Ciphertexts  M[i] and corresponding signatures (y[i],s[i])
+
+# Sent to Alice
+M1= 9974506219469264727110595204452776496890387759317095126810899473877710862716257337859263705665754034564804783216331990260081319108
+y1=9533396844311760552738291028231649954176193844551503128470544801392495
+s1=8536400455838177024603960239468158538385514790611477914876196102528446
+
+# Sent to Francis
+M2= 936601369934880652535205540810396738898024003404608126252525377393422726366087814643441982769747195540057119933049086552815
+y2=9533396844311760552738291028231649954176193844551503128470544801392495
+s2=6386738752335364856015355124750454088909164194119893386494117923810147 
+
+D=rsadecrypt(M2, dF, nF); D
+D=ASCIIPad(D)
+keyA=(pA,gA,bA)
+keyB=(pB,gB,bB)
+keyF=(pF,gF,bF)
+v=egVerify(keyB, D, y2, s2); v
+# key is: (p,g,b)
+#egVerify(key, M, y, s):
+
+# Discover
+# 1. Private Keys
+# 2. Decrypt the messages (encrypted and signed, or signed and encrypted)
+# 3. Sender = ?, Receiver = ?
+# 4. Weaknesses=?
+#+END_SRC
+
+#+RESULTS: Review Assignment
+: 11267615570454622468855928789409411753858603511080758687111
+: 1868561136141349124982459076433520930850535707060676847192402630294344817730648791836888005389023236178049160783261623927227
+: 'Sell Lucent'
+: True
+
 ** CS253
 *** Lecture
 **** Structs
@@ -2969,6 +3240,8 @@ void cpuSmoke(int uSec) {
 #+END_SRC
 
 #+RESULTS:
+: 11267615570454622468855928789409411753858603511080758687111
+: TEST
 
 #+NAME: Threads
 #+HEADER :results output
