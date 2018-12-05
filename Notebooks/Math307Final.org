@@ -119,6 +119,11 @@ def egSign(key, M, x):
 	s = ((M-(x*y))/r) % (key[0]-1)
 	return (y,s)
 	
+def isquare (n):
+    if isqrt(n) ** 2 == n:
+        return(True)
+    return(False)
+	
 def isqrt(n):
     return int(floor(sqrt(n)))
 
@@ -139,6 +144,113 @@ def FermatAttack (n, rounds):
 			return(x + y)
 	print "No factor found in {0} rounds".format(rounds)
 	return 0
+	
+import itertools
+def HPSonP (Generator, Target, P):
+	Unknown = 0
+	N = P - 1
+	K = factor(N)
+	K = list(K)
+	for pk in K:
+		primes =pk[0]
+		powers = pk[1]
+		Z = N / primes
+		chi = power_mod(int(Generator), int(Z),int(P))
+		n = 0
+		t = [0]*powers
+		a = [0]*powers
+		d = [0]*powers
+		for j in xrange(0, powers):
+            #print j
+			if j == 0:
+				a[j - 1] = Target
+			else:
+				Z2 = (d[j - 1 - 1] * power_mod(int(primes),int(j - 1),int(N))) % N
+				Pt = power_mod(int(Generator), int(Z2),int(P))# % P
+				a[j-1] = (a[j - 1 - 1] / Pt) % P
+			y = Z / primes ** j
+			t[j-1] = power_mod(int(a[j - 1]),int(y),int(P))# % P
+			s = 1
+			for k in itertools.count(1):
+                #print "k",k
+				if t[j - 1] == s:
+					d[j - 1] = k
+					break
+				s = (s * chi) % P
+				n = (n + d[j - 1] * primes ** j) % N
+		NN = N / primes ** powers
+		X = (1 / NN) % primes ** powers
+		Unknown = (Unknown + NN * n * X) % N
+    #unassign(t)
+	return(Unknown)
+
+
+
+def Dirichlet (q):
+	j=0
+    
+    #for j in numpy.arange(0.10e1, infinity + 0.10e1, 0.10e1):
+	while True:
+		j+=1
+		p = 2 * j * q + 1
+		if is_prime(p) == True:
+			return(p)
+        
+def findLargePrimitiveRoot(n,p):
+	n=n+1
+	eulerp = euler_phi(p)
+	Q = list(factor(eulerp))
+	while n<p:
+		found = True
+		for Q2 in Q:
+			q=Q2[0]
+			totest = power_mod(ZZ(n),ZZ(eulerp/q),ZZ(p)) 
+#            print(totest)
+			if totest==1:
+				found = False
+		if found:
+			return n
+		n+=1
+
+def OneLine (n, iter):
+    for x in range(1, iter + 1):
+        sq = usqrt(x * n)
+        y = sq ** 2 % n
+        if isquare(y) == True:
+            t = isqrt(y)
+            u = gcd(n, sq - t)
+            print("Factor found in round {0} rounds".format(x))
+            return(u)
+    print("No factors found")
+
+def ISAttack (R):
+    n = R.ndigits()
+    #n = len(R)
+    for j in range(1, n + 1):
+        x=(R-(R % 10^j))/10^j
+        p = gcd(x, R)
+        if ((1 < p)and (p<R)):
+            return(p)
+    print "nonefound"
+	
+def BSGB(g,b,p):
+	N=p-1
+	m=floor(sqrt(N))+1
+	B=[]
+	G=[]
+	B.append(g)
+	for j in xrange(1,m):
+		B.append(mod(g^j,p))
+	p2=B[m-1]
+	G.append(p2)
+	for j in xrange(1,m-1):
+		G.append( mod(b*(p2^(-j)),p))
+	for i in xrange(1,m-1):
+		for j in xrange(1,m-1):
+			if B[i]==G[j]:
+				L=mod(i+j*m,N)
+				return L
+###########################
 
 # DO NOT CHANGE AFTER DEC, 4th!
 p=39619327755284552583169972525123433531653656267552646695985724366157448998987496723173996644919564813
@@ -153,8 +265,7 @@ d=inverse_mod(e,phi)
 # Practice encrypting and decrypting
 M="Here is my first Message to encrypt. Yay!"
 M=rsaencrypt(M,e,n); M
-
-###########################
+D=rsadecrypt(M,d,n); D
 #+END_SRC
 
 #+RESULTS: Key Generation and Prep
