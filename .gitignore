@@ -1,6 +1,8 @@
-evil/
+!*/evil/
 .stfolder
 .emacs.desktop
 .git/
 *.pdf
 *.gif
+!*/Notebooks/
+!*/powerline/
