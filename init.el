@@ -110,10 +110,11 @@
   org-agenda-files 
   (mapcar (lambda (x) (concat dir-where-you-store-org-files x))
 	  ; Add org files to TRACK here
-	  '("Fall2018.org" 
-    "todo.org"
-    "notes.org"
-	  "Church.org")))
+	  '( 
+    "todo.org" ; holds most items
+    "notes.org"; used by org-mode in some cases
+    ; Dir/FileName.org relative location to Notebooks
+	  )))
 
 ; Exporting Config
 ; REF: https://orgmode.org/manual/Project-alist.html
@@ -246,3 +247,17 @@
          nil
          nil)))
 
+; Fill Paragraph
+; REF: https://www.emacswiki.org/emacs/FillParagraph
+(setq-default fill-column 75)
+; Autofill
+; REF: https://www.emacswiki.org/emacs/AutoFillMode
+; Asks when buffer is opened, to turn on auto-fill mode
+;(add-hook 'text-mode-hook
+;          (lambda ()
+;            (when (y-or-n-p "Auto Fill mode? ")
+;              (turn-on-auto-fill))))
+; Toggle on/off auto fill mode
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
+; By default have auto fill turned on
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
