@@ -92,7 +92,7 @@
     (C . t)
     (sh . t)
     (latex . t)
-    (shell . t)
+    ; (shell . t)
     ; (asm-mode . t) ; Assembly not supported?
     (java . t)))
 
@@ -261,3 +261,18 @@
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 ; By default have auto fill turned on
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+; Handle DOS to Linux line ending conversions
+; REF: https://www.emacswiki.org/emacs/EndOfLineTips
+(defun no-junk-please-were-unixish ()
+    (let ((coding-str (symbol-name buffer-file-coding-system)))
+          (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+                  (set-buffer-file-coding-system 'unix))))
+
+(add-hook 'find-file-hooks 'no-junk-please-were-unixish)
+
+(defun dos2unix ()
+  "Not exactly but it's easier to remember"
+  (interactive)
+  (set-buffer-file-coding-system 'unix 't) )
+
