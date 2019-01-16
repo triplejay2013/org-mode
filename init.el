@@ -109,10 +109,13 @@
 (setq 
   org-agenda-files 
   (mapcar (lambda (x) (concat dir-where-you-store-org-files x))
-	  ; Add org files to TRACK here
+	  ; TODO Add org files to TRACK here
 	  '( 
     "todo.org" ; holds most items
     "notes.org"; used by org-mode in some cases
+    ; BSU class files all found in School/TermYear/File.org
+    "School/Fall2018/Fall2018.org"
+    "School/Spring2019/Spring2019.org"
     ; Dir/FileName.org relative location to Notebooks
 	  )))
 
@@ -134,9 +137,12 @@
 
 ; Tell org mode to use chrome
 ; REF: http://ergoemacs.org/emacs/emacs_set_default_browser.html
-(setq browse-url-browser-function 'browse-url-chromium)
+;(setq browse-url-browser-function 'browse-url-chromium)
 ; REF: https://lists.gnu.org/archive/html/emacs-orgmode/2010-07/msg00879.html
-(setq browse-url-generic-program "chromium-browser")
+;(setq browse-url-generic-program "chromium-browser")
+; REF: https://stackoverflow.com/a/4506458
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "chromium-browser")
 
 ; LaTeX setup
 ; Sets up embedded latex fragments
