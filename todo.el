@@ -30,6 +30,8 @@
          "* TODO %?\n%i\n %a\n" :clock-in t :clock-resume t)
         ("s" "School" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "School")
            "* TODO %?\n %i\n %a")
+        ("p" "Personal" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Personal")
+          "* TODO %?\n %i\n %a")
         ("n" "Note" entry (file+headline "~/.emacs.d/Notebooks/notes.org" "Note")
            "%?\n")
         ("c" "Church" entry (file+headline "~/.emacs.d/Notebooks/todo.org" "Church")
